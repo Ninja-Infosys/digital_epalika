@@ -542,6 +542,102 @@
             </div>
         </fieldset>
         <fieldset>
+            <legend class="title text-primary fs-4 fw-bolder">जग्गा विवरण</legend>
+            <div class="row">
+                <div class="col-md-4 mb-1">
+                    <label for="land_area" class="form-label"> जग्गाधनि दर्ता प्रमाण पूर्जाको क्षेत्रफल<span
+                            class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <input class="form-control @error('form.land_area') is-invalid @enderror" type="text" step="any"
+                            id="land_area" wire:model="form.land_area"
+                            placeholder="जग्गाधनि दर्ता प्रमाण पूर्जाको क्षेत्रफल">
+                        @error('form.land_area')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4 mb-1">
+                    <label for="field_land_area" class="form-label"> फिल्ड नाप अनुसार (भोगमा रहेको) जग्गाको वास्तविक
+                        क्षेत्रफल<span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <input class="form-control @error('form.field_land_area') is-invalid @enderror" type="text"
+                            step="any" id="field_land_area" wire:model="form.field_land_area"
+                            placeholder="फिल्ड नाप अनुसार (भोगमा रहेको) जग्गाको वास्तविक क्षेत्रफल">
+                        @error('form.field_land_area')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-1">
+                    <label for="plot_no" class="form-label"> निर्माण भएको जग्गाको कित्ता नं.</label>
+                    <div class="input-group">
+                        <input class="form-control @error('form.plot_no') is-invalid @enderror" type="text" step="any"
+                            id="plot_no" wire:model="form.plot_no" placeholder="जग्गाको कित्ता नं.">
+                        @error('form.plot_no')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-1">
+                    <label for="land_detail" class="form-label"> जग्गा विवरण</label>
+                    <div class="input-group">
+                        <input class="form-control @error('form.land_detail') is-invalid @enderror" type="text"
+                            step="any" id="land_detail" wire:model="form.land_detail" placeholder="जग्गा विवरण">
+                        @error('form.land_detail')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4 mb-1">
+                    <label for="land_ward_no" class="form-label"> वार्ड नं.</label>
+                    <div class="input-group">
+                        <input class="form-control @error('form.land_ward_no') is-invalid @enderror" type="number"
+                            step="any" id="land_ward_no" wire:model="form.land_ward_no"
+                            placeholder="जग्गाको हाल वार्ड नं.">
+                        @error('form.land_ward_no')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4 mb-1">
+                    <label for="land_tole" class="form-label"> टोल</label>
+                    <div class="input-group">
+                        <input class="form-control @error('form.land_tole') is-invalid @enderror" type="number"
+                            step="any" id="land_tole" wire:model="form.land_tole"
+                            placeholder="टोल">
+                        @error('form.land_tole')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-1">
+                    <label for="former_local_body" class="form-label"> साविक पालिका</label>
+                    <div class="input-group">
+                        <input class="form-control @error('form.former_local_body') is-invalid @enderror" type="text"
+                            step="any" id="former_local_body" wire:model="form.former_local_body"
+                            placeholder="साविक पालिका">
+                        @error('form.former_local_body')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4 mb-1">
+                    <label for="former_ward_no" class="form-label">साविक वाड नं.</label>
+                    <div class="input-group">
+                        <input class="form-control @error('form.former_ward_no') is-invalid @enderror" type="text"
+                            step="any" id="former_ward_no" wire:model="form.former_ward_no" placeholder="साबिक वडा नं">
+                        @error('form.former_ward_no')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+            </div>
+        </fieldset>
+        <fieldset>
             <legend class="title text-primary fs-4 fw-bolder">
                 जग्गा धनीको विवरण
             </legend>
@@ -589,8 +685,9 @@
                 </div>
                 <div class="col-md-4 mb-2 pr-0">
                     <label class="form-label" for="citizenship_issue_date">१.६ नागरिकता लिएको मिति</label>
-                    <input class="form-control form-control-sm" type="text" id="citizenship_issue_date"
-                        wire:model="buildingLandOwner.citizenship_issue_date" placeholder="yyyy/mm/dd">
+                    <input class="form-control @error('buildingLandOwner.citizenship_issue_date') is-invalid @enderror"
+                        type="text" id="buildingLandOwner.citizenship_issue_date"
+                        wire:model="buildingLandOwner.citizenship_issue_date" placeholder="जारि मिति">
                     @error('buildingLandOwner.citizenship_issue_date')
                     <p class="text-danger">{{ $message }}</p>
                     @enderror
@@ -673,25 +770,10 @@
                             <label for="buildingLandOwner.tole" class="form-label">गाउँ/टोल</label>
                             <input name="buildingLandOwner.tole"
                                 class="form-control @error('buildingLandOwner.tole') is-invalid @enderror" type="text"
-                                id="buildingLandOwner.tole" placeholder="गाउँ/टोल" wire:model="form.tole" />
-                            @error('buildingLandOwner.tole')
+                                id="buildingLandOwner.tole" placeholder="गाउँ/टोल"
+                                wire:model="buildingLandOwner.tole" />
+                            @error('form.tole')
                             <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-4 mb-2 pr-0">
-                            <label class="form-label" for="buildingLandOwner.local_body">१.९ पालिका</label>
-                            <input class="form-control form-control-sm" type="text" id="buildingLandOwner.local_body"
-                                wire:model="buildingLandOwner.local_body" placeholder="पालिका">
-                            @error('buildingLandOwner.local_body')
-                            <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="col-md-4 mb-2 pr-0">
-                            <label class="form-label" for="buildingLandOwner.ward_no">१.१० वडा नं.</label>
-                            <input class="form-control form-control-sm" type="number" id="buildingLandOwner.ward_no"
-                                wire:model="buildingLandOwner.ward_no" min="0" placeholder="वडा नं.">
-                            @error('buildingLandOwner.ward_no')
-                            <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -705,445 +787,283 @@
             </legend>
             <div class="d-flex align-items-center gap-2 mb-3">
                 <label for="detail_check">के घर धनीको विवरण र जग्गाधनीको विवरण एउटै हो ?</label>
-                <button wire:click.prevent="checkSameAsbuildingLandOwner" type="button"
-                    class="btn btn-link btn-sm border-none" id="detail_check">
+                <button wire:click.prevent="checkSameAsLandOwner" type="button" class="btn btn-link btn-sm border-none"
+                    id="detail_check">
                     <i class="fa fa-toggle-{{ $same_as_land_owner ? 'on' : 'off' }} fa-2x"></i>
                 </button>
             </div>
             <div class="row">
                 <div class="col-md-4 mb-2 pr-0">
-                    <label class="form-label" for="houseOwner.name">१.१ जग्गा धनीको नाम </label>
-                    <input class="form-control form-control-sm" type="text" id="houseOwner.name"
-                        wire:model="houseOwner.name" placeholder=" जग्गा धनीको नाम">
-                    @error('houseOwner.name')
+                    <label class="form-label" for="name">१.१ घर धनीको नाम </label>
+                    <input class="form-control form-control-sm" type="text" id="name"
+                        wire:model="buildingHouseOwner.name" placeholder=" घर धनीको नाम">
+                    @error('buildingHouseOwner.name')
                     <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label" for="houseOwner.phone">१.२ फोन नं.</label>
-                    <input class="form-control form-control-sm" type="text" id="houseOwner.phone"
-                        wire:model="houseOwner.phone" placeholder="फोन नं.">
-                    @error('houseOwner.phone')
+                <div class="col-md-4 mb-2 pr-0">
+                    <label class="form-label" for="phone">१.२ फोन नं.</label>
+                    <input class="form-control form-control-sm" type="text" id="phone"
+                        wire:model="buildingHouseOwner.phone" placeholder="फोन नं.">
+                    @error('buildingHouseOwner.phone')
                     <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label" for="houseOwner.father_name">१.३ बुवाको नाम</label>
-                    <input class="form-control form-control-sm" type="text" id="houseOwner.father_name"
-                        wire:model="houseOwner.father_name" placeholder="बुवाको नाम">
-                    @error('houseOwner.father_name')
+                <div class="col-md-4 mb-2 pr-0">
+                    <label class="form-label" for="father_name">१.३ बुवाको नाम</label>
+                    <input class="form-control form-control-sm" type="text" id="father_name"
+                        wire:model="buildingHouseOwner.father_name" placeholder="बुवाको नाम">
+                    @error('buildingHouseOwner.father_name')
                     <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label" for="houseOwner.grandfather_name">१.४ हजुरबुबाको नाम</label>
-                    <input class="form-control form-control-sm" type="text" id="houseOwner.grandfather_name"
-                        wire:model="houseOwner.grandfather_name" placeholder="हजुरबुबाको नाम">
-                    @error('houseOwner.grandfather_name')
+                <div class="col-md-4 mb-2 pr-0">
+                    <label class="form-label" for="buildingHouseOwner.grandfather_name">१.४ हजुरबुबाको नाम</label>
+                    <input class="form-control form-control-sm" type="text" id="buildingHouseOwner.grandfather_name"
+                        wire:model="buildingHouseOwner.grandfather_name" placeholder="हजुरबुबाको नाम">
+                    @error('buildingHouseOwner.grandfather_name')
                     <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label" for="houseOwner.citizenship_no">१.५ नागरिकता नम्बर</label>
-                    <input class="form-control form-control-sm" type="text" id="houseOwner.citizenship_no"
-                        wire:model="houseOwner.citizenship_no" placeholder="नागरिकता नम्बर">
-                    @error('houseOwner.citizenship_no')
+                <div class="col-md-4 mb-2 pr-0">
+                    <label class="form-label" for="citizenship_no">१.५ नागरिकता नम्बर</label>
+                    <input class="form-control form-control-sm" type="text" id="citizenship_no"
+                        wire:model="buildingHouseOwner.citizenship_no" placeholder="नागरिकता नम्बर">
+                    @error('buildingHouseOwner.citizenship_no')
                     <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label" for="houseOwner.citizenship_issue_date">१.६ नागरिकता लिएको मिति</label>
-                    <input class="form-control form-control-sm" type="text" id="houseOwner.citizenship_issue_date"
-                        wire:model="houseOwner.citizenship_issue_date" placeholder="yyyy/mm/dd">
-                    @error('houseOwner.citizenship_issue_date')
+                <div class="col-md-4 mb-2 pr-0">
+                    <label class="form-label" for="citizenship_issue_date">१.६ नागरिकता लिएको मिति</label>
+                    <input class="form-control form-control-sm" type="text" id="citizenship_issue_date"
+                        wire:model="buildingHouseOwner.citizenship_issue_date" placeholder="yyyy/mm/dd">
+                    @error('buildingHouseOwner.citizenship_issue_date')
                     <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label" for="houseOwner.citizenship_issue_district_id">१.७ नागरिकता लिएको
+                <div class="col-md-4 mb-2 pr-0">
+                    <label class="form-label" for="buildingHouseOwner.citizenship_issue_district_id">१.७ नागरिकता लिएको
                         जिल्ला</label>
-                    <select class="form-select form-select-sm" wire:model="houseOwner.citizenship_issue_district_id"
-                        id="houseOwner.citizenship_issue_district_id">
+                    <select class="form-select form-select-sm"
+                        wire:model="buildingHouseOwner.citizenship_issue_district_id"
+                        id="buildingHouseOwner.citizenship_issue_district_id">
                         <option value="">--- जिल्ला छान्नुहोस् ---</option>
-                        @foreach ($allDistricts as $district)
+                        @foreach ($districts as $district)
                         <option value="{{ $district->id }}">
                             {{ $district->district }}
                         </option>
                         @endforeach
                     </select>
-                    @error('houseOwner.citizenship_issue_district_id')
+                    @error('buildingHouseOwner.citizenship_issue_district_id')
                     <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label" for="houseOwner.address">१.८ ठेगाना</label>
-                    <input class="form-control form-control-sm" type="text" id="houseOwner.address"
-                        wire:model="houseOwner.address" placeholder="ठेगाना">
-                    @error('houseOwner.address')
-                    <p class="text-danger">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label" for="houseOwner.local_body">१.९ पालिका</label>
-                    <input class="form-control form-control-sm" type="text" id="houseOwner.local_body"
-                        wire:model="houseOwner.local_body" placeholder="पालिका">
-                    @error('houseOwner.local_body')
-                    <p class="text-danger">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label" for="houseOwner.ward_no">१.१० वडा नं.</label>
-                    <input class="form-control form-control-sm" type="number" id="houseOwner.ward_no"
-                        wire:model="houseOwner.ward_no" min="0" placeholder="वडा नं.">
-                    @error('houseOwner.ward_no')
-                    <p class="text-danger">{{ $message }}</p>
-                    @enderror
-                </div>
+                <fieldset>
+                    <legend class="title text-primary fs-4 fw-bolder">ठेगाना</legend>
+                    <div class="row">
+                        <div class="col-md-4 mb-1">
+                            <label for="buildingHouseOwner.province_id" class="form-label">प्रदेश</label>
+                            <select class="form-select @error('buildingHouseOwner.province_id') is-invalid @enderror"
+                                id="buildingHouseOwner.province_id" wire:model="buildingHouseOwner.province_id">
+                                <option value="">---प्रदेश छान्नुहोस् ----</option>
+                                @foreach ($provinces as $province)
+                                <option value="{{ $province->id ?? '' }}">{{ $province->province ?? '' }}
+                                </option>
+                                @endforeach
+                            </select>
+                            @error('buildingHouseOwner.province_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-1">
+                            <label for="buildingHouseOwner.district_id" class="form-label">जिल्ला</label>
+                            <select class="form-select @error('buildingHouseOwner.district_id') is-invalid @enderror"
+                                id="buildingHouseOwner.district_id" wire:model="buildingHouseOwner.district_id">
+                                <option value="">---जिल्ला छान्नुहोस् ----</option>
+                                @foreach ($districts as $district)
+                                <option value="{{ $district->id }}">{{ $district->district }}</option>
+                                @endforeach
+                            </select>
+                            @error('buildingHouseOwner.district_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-1">
+                            <label for="buildingHouseOwner.local_body_id" class="form-label">पालिका</label>
+                            <select class="form-select @error('buildingHouseOwner.local_body_id') is-invalid @enderror"
+                                id="buildingHouseOwner.local_body_id" wire:model="buildingHouseOwner.local_body_id">
+                                <option value="">---पालिका छान्नुहोस् ----</option>
+                                @foreach ($localBodies as $localBody)
+                                <option value="{{ $localBody->id }}">{{ $localBody->local_body }}</option>
+                                @endforeach
+                            </select>
+                            @error('buildingHouseOwner.local_body_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-1">
+                            <label for="ward_no" class="form-label">वार्ड न:</label>
+                            <select class="form-select @error('buildingHouseOwner.ward_no') is-invalid @enderror"
+                                id="ward_no" wire:model="buildingHouseOwner.ward_no">
+                                <option value="">---वडा छान्नुहोस् ----</option>
+                                @foreach ($wards as $ward)
+                                <option value="{{ $ward }}">{{ $ward }}</option>
+                                @endforeach
+                            </select>
+                            @error('buildingHouseOwner.ward_no')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-4 mb-1">
+                            <label for="buildingHouseOwner.tole" class="form-label">गाउँ/टोल</label>
+                            <input name="buildingHouseOwner.tole"
+                                class="form-control @error('buildingHouseOwner.tole') is-invalid @enderror" type="text"
+                                id="buildingHouseOwner.tole" placeholder="गाउँ/टोल"
+                                wire:model="buildingHouseOwner.tole" />
+                            @error('form.tole')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </fieldset>
+
             </div>
         </fieldset>
-</div>
-{{--<div class="card p-4 mb-4">
-    <legend>
-        <h5>५. निवेदकको विवरण</h5>
-    </legend>
-    <div class="mb-3">
-        <label class="form-label fw-bolder">५.१ निवेदकको प्रकार </label>
-        <div class="col">
-            @foreach (\Modules\EMap\Enums\ApplicantTypeEnum::cases() as $applicantType)
-            <div class="form-check form-check-inline">
-                <input type="radio" id="{{ $applicantType->name }}" wire:model="applicantDetail.applicant_type"
-                    value="{{ $applicantType->value }}" class="form-check-input">
-                <label class="form-check-label" for="{{ $applicantType->name }}">{{ $applicantType->label() }}</label>
-            </div>
-            @endforeach
-            @error('applicantDetail.applicant_type')
-            <p class="text-danger">{{ $message }}</p>
-            @enderror
-        </div>
-    </div>
-    <div class="mb-3">
-        <label class="form-label fw-bolder">५.२ घरधनी सँगको सम्बन्ध</label>
-        <div class="col">
-            @foreach (\Modules\EMap\Enums\RelationEnum::cases() as $relation)
-            <div class="form-check form-check-inline">
-                <input type="radio" id="{{ $relation->name }}" wire:model="applicantDetail.relation_with_owner"
-                    value="{{ $relation->value }}" class="form-check-input">
-                <label class="form-check-label" for="{{ $relation->name }}">{{ $relation->label() }}</label>
-            </div>
-            @endforeach
-            @error('applicantDetail.relation_with_owner')
-            <p class="text-danger">{{ $message }}</p>
-            @enderror
-        </div>
-    </div>
-    <div class="row">
-        <label class="form-label fw-bolder">जग्गाधनी वा घरधनी भन्दा फरक भएमा</label>
-        <div class="col-md-4 mb-3">
-            <label class="form-label" for="applicantDetail.name">१.१ नाम</label>
-            <input class="form-control form-control-sm" type="text" id="applicantDetail.name"
-                wire:model="applicantDetail.name" placeholder="नाम">
-            @error('applicantDetail.name')
-            <p class="text-danger">{{ $message }}</p>
-            @enderror
-        </div>
-        <div class="col-md-4 mb-3">
-            <label class="form-label" for="applicantDetail.phone">१.२ फोन नं.</label>
-            <input class="form-control form-control-sm" type="text" id="applicantDetail.phone"
-                wire:model="applicantDetail.phone" placeholder="फोन नं.">
-            @error('applicantDetail.phone')
-            <p class="text-danger">{{ $message }}</p>
-            @enderror
-        </div>
-        <div class="col-md-4 mb-3">
-            <label class="form-label" for="applicantDetail.father_name">१.३ बुवाको नाम</label>
-            <input class="form-control form-control-sm" type="text" id="applicantDetail.father_name"
-                wire:model="applicantDetail.father_name" placeholder="बुवाको नाम">
-            @error('applicantDetail.father_name')
-            <p class="text-danger">{{ $message }}</p>
-            @enderror
-        </div>
-        <div class="col-md-4 mb-3">
-
-            <label class="form-label" for="applicantDetail.citizenship_no">१.४ नागरिकत नम्बर</label <input
-                class="form-control form-control-sm" type="text" id="applicantDetail.citizenship_no"
-                wire:model="applicantDetail.citizenship_no" placeholder="नागरिकत नम्बर">
-            @error('applicantDetail.citizenship_no')
-            <p class="text-danger">{{ $message }}</p>
-            @enderror
-        </div>
-        <div class="col-md-4 mb-4">
-            <label class="form-label" for="applicantDetail.citizenship_issue_date">१.५ नागरिकता लिएको मिति</label>
-            <input class="form-control form-control-sm" type="text" id="applicantDetail.citizenship_issue_date"
-                wire:model="applicantDetail.citizenship_issue_date" placeholder="yyyy/mm/dd">
-            @error('applicantDetail.citizenship_issue_date')
-            <p class="text-danger">{{ $message }}</p>
-            @enderror
-        </div>
-        <div class="col-md-4 mb-3">
-            <label class="form-label" for="applicantDetail.citizenship_issue_district_id">१.६ नागरिकता लिएको
-                जिल्ला</label>
-            <select class="form-select form-select-sm" wire:model="applicantDetail.citizenship_issue_district_id">
-                <option value="">--- जिल्ला छान्नुहोस् ---</option>
-                @foreach ($allDistricts as $district)
-                <option value="{{ $district->id }}">
-                    {{ $district->district }}
-                </option>
-                @endforeach
-            </select>
-            @error('applicantDetail.citizenship_issue_district_id')
-            <p class="text-danger">{{ $message }}</p>
-            @enderror
-        </div>
-    </div>
-
-</div>
-<div class="d-flex justify-content-between mt-3">
-    <div class="col-3">
-        <label class="form-label fw-bolder" for="application_date">निबेदनको मिति <span
-                class="text-danger">*</span></label>
-        <input type="text" id="application_date" wire:model="applicantDetail.application_date"
-            class="form-control form-control-sm" placeholder="yyyy/mm/dd">
-        @error('applicantDetail.application_date')
-        <p class="text-danger">{{ $message }}</p>
-        @enderror
-    </div>
-    <div class="col-3">
-        <label class="form-label fw-bolder" for="applicant_signature">निवेदकको सहि</label>
-        <input type="file" id="applicant_signature" wire:model="applicantDetail.signature"
-            class="form-control form-control-sm">
-        @error('applicantDetail.signature')
-        <p class="text-danger">{{ $message }}</p>
-        @enderror
-    </div>
-</div>
-</fieldset>
-<fieldset>
-    <legend class="title text-primary fs-4 fw-bolder"> जग्गाको विवरण</legend>
-    <div class="row">
-        <div class="col-md-4 mb-1">
-            <label for="land_area" class="form-label"> जग्गा क्षेत्रफल<span class="text-danger">*</span></label>
-            <div class="input-group">
-                <input class="form-control @error('form.land_area') is-invalid @enderror" type="text" step="any"
-                    id="land_area" wire:model="form.land_area" placeholder="जग्गा क्षेत्रफल">
-                @error('form.land_area')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-
-        <div class="col-md-4 mb-1">
-            <label for="plot_no" class="form-label"> जग्गाको कित्ता नं.</label>
-            <div class="input-group">
-                <input class="form-control @error('form.plot_no') is-invalid @enderror" type="text" step="any"
-                    id="plot_no" wire:model="form.plot_no" placeholder="जग्गाको कित्ता नं.">
-                @error('form.plot_no')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-        <div class="col-md-4 mb-1">
-            <label for="road_jurisdiction" class="form-label"> सडक अधिकार क्षेत्र</label>
-            <div class="input-group">
-                <input class="form-control @error('form.road_jurisdiction') is-invalid @enderror" type="text" step="any"
-                    id="road_jurisdiction" wire:model="form.road_jurisdiction" placeholder="सडक अधिकार क्षेत्र">
-                @error('form.road_jurisdiction')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-        <div class="col-md-4 mb-1">
-            <label for="land_detail" class="form-label"> जग्गा विवरण</label>
-            <div class="input-group">
-                <input class="form-control @error('form.land_detail') is-invalid @enderror" type="text" step="any"
-                    id="land_detail" wire:model="form.land_detail" placeholder="जग्गा विवरण">
-                @error('form.land_detail')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-        <div class="col-md-4 mb-1">
-            <label for="land_ward_no" class="form-label"> वार्ड नं.</label>
-            <div class="input-group">
-                <input class="form-control @error('form.land_ward_no') is-invalid @enderror" type="number" step="any"
-                    id="land_ward_no" wire:model="form.land_ward_no" placeholder="जग्गाको हाल वार्ड नं.">
-                @error('form.land_ward_no')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-        <div class="col-md-4 mb-1">
-            <label for="former_district" class="form-label">साविक जिल्ला </label>
-            <div class="input-group">
-                <input class="form-control @error('form.former_district') is-invalid @enderror" type="text" step="any"
-                    id="former_district" wire:model="form.former_district" placeholder="साविक जिल्ला ">
-                @error('form.former_district')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-        <div class="col-md-4 mb-1">
-            <label for="former_local_body" class="form-label"> साविक पालिका</label>
-            <div class="input-group">
-                <input class="form-control @error('form.former_local_body') is-invalid @enderror" type="text" step="any"
-                    id="former_local_body" wire:model="form.former_local_body" placeholder="साविक पालिका">
-                @error('form.former_local_body')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-        <div class="col-md-4 mb-1">
-            <label for="former_ward_no" class="form-label">साविक वार्ड नं.</label>
-            <div class="input-group">
-                <input class="form-control @error('form.former_ward_no') is-invalid @enderror" type="text" step="any"
-                    id="former_ward_no" wire:model="form.former_ward_no" placeholder="साबिक वडा नं">
-                @error('form.former_ward_no')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-
-    </div>
-</fieldset>
-<fieldset>
-    <legend class="title text-primary fs-4 fw-bolder">जग्गाधनि/घरधनिको विवरण</legend>
-    <div class="row">
-        <div class="col-md-4 mb-2 pr-0">
-            <label for="house_owner_name" class="form-label">घरधनिको नाम <span class="text-danger">*</span></label>
-            <input class="form-control @error('form.house_owner_name') is-invalid @enderror" type="text"
-                id="house_owner_name" wire:model="form.house_owner_name" placeholder="घरधनिको नाम">
-            @error('form.house_owner_name')
-            <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div class="col-md-4 mb-2 pr-0">
-            <label for="phone" class="form-label">सम्पर्क नं <span class="text-danger">*</span></label>
-            <input class="form-control @error('form.phone') is-invalid @enderror" type="text" id="phone"
-                wire:model="form.phone" placeholder="सम्पर्क नं">
-            @error('form.phone')
-            <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-        <div class="col-md-4 mb-2 pr-0">
-            <label for="citizenship_no" class="form-label">ना.प्र नं <span class="text-danger">*</span></label>
-            <input class="form-control @error('form.citizenship_no') is-invalid @enderror" type="text"
-                id="citizenship_no" wire:model="form.citizenship_no" placeholder="ना.प्र नं">
-            @error('form.citizenship_no')
-            <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div class="col-md-4 mb-1">
-            <label for="applicant_former_district" class="form-label">साविक जिल्ला </label>
-            <div class="input-group">
-                <input class="form-control @error('form.applicant_former_district') is-invalid @enderror" type="text"
-                    step="any" id="applicant_former_district" wire:model="form.applicant_former_district"
-                    placeholder="साविक जिल्ला ">
-                @error('form.applicant_former_district')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-        <div class="col-md-4 mb-1">
-            <label for="applicant_former_local_body" class="form-label"> साविक पालिका</label>
-            <div class="input-group">
-                <input class="form-control @error('form.applicant_former_local_body') is-invalid @enderror" type="text"
-                    step="any" id="applicant_former_local_body" wire:model="form.applicant_former_local_body"
-                    placeholder=" साविक पालिका">
-                @error('form.applicant_former_local_body')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-        <div class="col-md-4 mb-1">
-            <label for="applicant_former_ward_no" class="form-label">साविक वार्ड नं.</label>
-            <div class="input-group">
-                <input class="form-control @error('form.applicant_former_ward_no') is-invalid @enderror" type="text"
-                    step="any" id="applicant_former_ward_no" wire:model="form.applicant_former_ward_no"
-                    placeholder="साबिक वडा नं">
-                @error('form.applicant_former_ward_no')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-
         <fieldset>
-            <legend class="title text-primary fs-4 fw-bolder">ठेगाना</legend>
-            <div class="row">
-                <div class="col-md-4 mb-1">
-                    <label for="form.province_id" class="form-label">प्रदेश</label>
-                    <select class="form-select @error('form.province_id') is-invalid @enderror" id="form.province_id"
-                        wire:model="form.province_id">
-                        <option value="">---प्रदेश छान्नुहोस् ----</option>
-                        @foreach ($provinces as $province)
-                        <option value="{{ $province->id ?? '' }}">{{ $province->province ?? '' }}
-                        </option>
-                        @endforeach
-                    </select>
-                    @error('form.province_id')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="col-md-4 mb-1">
-                    <label for="form.district_id" class="form-label">जिल्ला</label>
-                    <select class="form-select @error('form.district_id') is-invalid @enderror" id="form.district_id"
-                        wire:model="form.district_id">
-                        <option value="">---जिल्ला छान्नुहोस् ----</option>
-                        @foreach ($districts as $district)
-                        <option value="{{ $district->id }}">{{ $district->district }}</option>
-                        @endforeach
-                    </select>
-                    @error('form.district_id')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="col-md-4 mb-1">
-                    <label for="form.local_body_id" class="form-label">पालिका</label>
-                    <select class="form-select @error('form.local_body_id') is-invalid @enderror"
-                        id="form.local_body_id" wire:model="form.local_body_id">
-                        <option value="">---पालिका छान्नुहोस् ----</option>
-                        @foreach ($localBodies as $localBody)
-                        <option value="{{ $localBody->id }}">{{ $localBody->local_body }}</option>
-                        @endforeach
-                    </select>
-                    @error('form.local_body_id')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="col-md-4 mb-1">
-                    <label for="ward_no" class="form-label">वार्ड न:</label>
-                    <select class="form-select @error('form.ward_no') is-invalid @enderror" id="ward_no"
-                        wire:model="form.ward_no">
-                        <option value="">---वडा छान्नुहोस् ----</option>
-                        @foreach ($wards as $ward)
-                        <option value="{{ $ward }}">{{ $ward }}</option>
-                        @endforeach
-                    </select>
-                    @error('form.ward_no')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
+            <legend class="title text-primary fs-4 fw-bolder"> निवेदकको विवरण</h5>
+            </legend>
 
-                <div class="col-md-4 mb-1">
-                    <label for="form.tole" class="form-label">गाउँ/टोल</label>
-                    <input name="form.tole" class="form-control @error('form.tole') is-invalid @enderror" type="text"
-                        id="form.tole" placeholder="गाउँ/टोल" wire:model="form.tole" />
-                    @error('form.tole')
-                    <div class="invalid-feedback">{{ $message }}</div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label class="form-label" for="form.applicant_name">१.१ नाम</label>
+                    <input class="form-control form-control-sm" type="text" id="form.applicant_name"
+                        wire:model="form.applicant_name" placeholder="निवेदकको नाम">
+                    @error('form.applicant_name')
+                    <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label" for="form.applicant_phone_no">१.२ फोन नं.</label>
+                    <input class="form-control form-control-sm" type="text" id="form.applicant_phone_no"
+                        wire:model="form.applicant_phone_no" placeholder="फोन नं.">
+                    @error('form.applicant_phone_no')
+                    <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label" for="form.applicant_age">१.२ उमेर</label>
+                    <input class="form-control form-control-sm" type="number" id="form.applicant_age"
+                        wire:model="form.applicant_age" placeholder="उमेर">
+                    @error('form.applicant_age')
+                    <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                </div>
+                <fieldset>
+                    <legend class="title text-primary fs-4 fw-bolder">ठेगाना</legend>
+                    <div class="row">
+                        <div class="col-md-4 mb-1">
+                            <label for="form.province_id" class="form-label">प्रदेश</label>
+                            <select class="form-select @error('form.province_id') is-invalid @enderror"
+                                id="form.province_id" wire:model="form.province_id">
+                                <option value="">---प्रदेश छान्नुहोस् ----</option>
+                                @foreach ($provinces as $province)
+                                <option value="{{ $province->id ?? '' }}">{{ $province->province ?? '' }}
+                                </option>
+                                @endforeach
+                            </select>
+                            @error('form.province_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-1">
+                            <label for="form.district_id" class="form-label">जिल्ला</label>
+                            <select class="form-select @error('form.district_id') is-invalid @enderror"
+                                id="form.district_id" wire:model="form.district_id">
+                                <option value="">---जिल्ला छान्नुहोस् ----</option>
+                                @foreach ($districts as $district)
+                                <option value="{{ $district->id }}">{{ $district->district }}</option>
+                                @endforeach
+                            </select>
+                            @error('form.district_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-1">
+                            <label for="form.local_body_id" class="form-label">पालिका</label>
+                            <select class="form-select @error('form.local_body_id') is-invalid @enderror"
+                                id="form.local_body_id" wire:model="form.local_body_id">
+                                <option value="">---पालिका छान्नुहोस् ----</option>
+                                @foreach ($localBodies as $localBody)
+                                <option value="{{ $localBody->id }}">{{ $localBody->local_body }}</option>
+                                @endforeach
+                            </select>
+                            @error('form.local_body_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-1">
+                            <label for="applicant_ward_no" class="form-label">वार्ड न:</label>
+                            <select class="form-select @error('form.applicant_ward_no') is-invalid @enderror"
+                                id="applicant_ward_no" wire:model="form.applicant_ward_no">
+                                <option value="">---वडा छान्नुहोस् ----</option>
+                                @foreach ($wards as $ward)
+                                <option value="{{ $ward }}">{{ $ward }}</option>
+                                @endforeach
+                            </select>
+                            @error('form.applicant_ward_no')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-4 mb-1">
+                            <label for="form.applicant_tole" class="form-label">गाउँ/टोल</label>
+                            <input name="form.applicant_tole"
+                                class="form-control @error('form.applicant_tole') is-invalid @enderror" type="text"
+                                id="form.applicant_tole" placeholder="गाउँ/टोल" wire:model="form.applicant_tole" />
+                            @error('form.applicant_tole')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </fieldset>
+
+
             </div>
         </fieldset>
-</fieldset> --}}
-<ul class="list-inline wizard mt-3">
-    <li class="next d-flex justify-content-end">
-        <button type="button" wire:click.prevent="nextStep(2)" class="btn btn-primary fs-5">
-            अर्को <i class="fa fa-arrow-circle-right"></i>
-        </button>
-    </li>
-</ul>
-@endswitch
-</form>
+
+
+        <div class="d-flex justify-content-between mt-3">
+            <div class="col-3">
+                <label class="form-label fw-bolder" for="application_date">निबेदनको मिति <span
+                        class="text-danger">*</span></label>
+                <input type="text" id="application_date" wire:model="form.application_date"
+                    class="form-control form-control-sm" placeholder="yyyy/mm/dd">
+                @error('form.application_date')
+                <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="col-3">
+                <label class="form-label fw-bolder" for="applicant_signature">निवेदकको सहि</label>
+                <input type="file" id="applicant_signature" wire:model="form.applicant_signature"
+                    class="form-control form-control-sm">
+                @error('form.applicant_signature')
+                <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+        </fieldset>
+
+
+        <ul class="list-inline wizard mt-3">
+            <li class="next d-flex justify-content-end">
+                <button type="button" wire:click.prevent="nextStep(2)" class="btn btn-primary fs-5">
+                    अर्को <i class="fa fa-arrow-circle-right"></i>
+                </button>
+            </li>
+        </ul>
+        @endswitch
+    </form>
 </div>
 <style>
     .nav-link {

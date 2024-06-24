@@ -35,6 +35,8 @@ class BuildingDocumentationLivewire extends Component
 
     public $neighbours = [];
 
+    public bool $same_as_land_owner = false;
+
     public $buildingStoreyDetails = [];
     public $buildingDescriptions = [];
 
@@ -102,7 +104,6 @@ class BuildingDocumentationLivewire extends Component
         'local_body' => null,
         'ward_no' => null,
         'status' => null,
-        'document' => [],
         'photo' => null,
         'province_id' => null,
         'district_id' => null,
@@ -146,7 +147,7 @@ class BuildingDocumentationLivewire extends Component
     {
 
         $this->provinces = get_provinces();
-
+        $this->districts = get_districts();
         if (!empty($buildingDocumentation)) {
             $this->buildingDocumentation = $buildingDocumentation;
 
@@ -158,12 +159,11 @@ class BuildingDocumentationLivewire extends Component
             $this->buildingDescriptionArrayIncrement();
             $this->contractorDetailArrayIncrement();
         }
-
     }
 
     private function assignBuildingDocumentationData()
     {
-        foreach (Arr::except($this->form, ['neighbours', 'buildingStoreyDetails',' buildingDescriptions','contractorDetails','files']) as $key => $data) {
+        foreach (Arr::except($this->form, ['neighbours', 'buildingStoreyDetails', ' buildingDescriptions', 'contractorDetails', 'files']) as $key => $data) {
             $this->form[$key] = $this->buildingDocumentation[$key];
         }
 
@@ -256,7 +256,7 @@ class BuildingDocumentationLivewire extends Component
             'form.field_land_area' => ['nullable', 'string'],
             'form.house_built_year' => ['required', 'string'],
             'form.applicant_name' => ['required', 'string'],
-            'form.applicant_signature' => ['required','image'],
+            'form.applicant_signature' => ['required', 'image'],
             'form.province_id' => ['required', 'integer', 'exists:provinces,id'],
             'form.district_id' => ['required', 'integer', 'exists:districts,id'],
             'form.local_body_id' => ['required', 'integer', 'exists:local_bodies,id'],
@@ -295,24 +295,24 @@ class BuildingDocumentationLivewire extends Component
             'buildingLandOwner.local_body_id' => ['nullable'],
             'buildingLandOwner.tole' => ['nullable'],
             'buildingLandOwner.signature' => ['nullable'],
-            'buildingHouseOwner.name' => ['required'],
-            'buildingHouseOwner.phone' => ['required'],
-            'buildingHouseOwner.father_name' => ['required'],
-            'buildingHouseOwner.grandfather_name' => ['required'],
+            'buildingHouseOwner.name' => ['nullable'],
+            'buildingHouseOwner.phone' => ['nullable'],
+            'buildingHouseOwner.father_name' => ['nullable'],
+            'buildingHouseOwner.grandfather_name' => ['nullable'],
             'buildingHouseOwner.citizenship_issue_district_id' => ['nullable'],
             'buildingHouseOwner.citizenship_issue_date' => ['nullable'],
-            'buildingHouseOwner.citizenship_no' => ['required'],
-            'buildingHouseOwner.address' => ['required'],
-            'buildingHouseOwner.local_body' => ['required'],
-            'buildingHouseOwner.ward_no' => ['required'],
-            'buildingHouseOwner.status' => ['required'],
-            'buildingHouseOwner.document' => ['required'],
-            'buildingHouseOwner.photo' => ['required'],
-            'buildingHouseOwner.province_id' => ['required'],
-            'buildingHouseOwner.district_id' => ['required'],
-            'buildingHouseOwner.local_body_id' => ['required'],
-            'buildingHouseOwner.tole' => ['required'],
-            'buildingHouseOwner.signature' => ['required'],
+            'buildingHouseOwner.citizenship_no' => ['nullable'],
+            'buildingHouseOwner.address' => ['nullable'],
+            'buildingHouseOwner.local_body' => ['nullable'],
+            'buildingHouseOwner.ward_no' => ['nullable'],
+            'buildingHouseOwner.status' => ['nullable'],
+            'buildingHouseOwner.document' => ['nullable'],
+            'buildingHouseOwner.photo' => ['nullable'],
+            'buildingHouseOwner.province_id' => ['nullable'],
+            'buildingHouseOwner.district_id' => ['nullable'],
+            'buildingHouseOwner.local_body_id' => ['nullable'],
+            'buildingHouseOwner.tole' => ['nullable'],
+            'buildingHouseOwner.signature' => ['nullable'],
 
 
         ];
@@ -608,6 +608,24 @@ class BuildingDocumentationLivewire extends Component
 
     public function render(): Factory|View|Application
     {
+        if (!empty($this->buildingLandOwner['province_id'])) {
+            $this->districts = get_districts($this->buildingLandOwner['province_id']);
+        }
+        if (!empty($this->buildingLandOwner['district_id'])) {
+            $this->localBodies = get_local_bodies($this->buildingLandOwner['district_id']);
+        }
+        if (!empty($this->buildingLandOwner['local_body_id'])) {
+            $this->wards = get_local_bodies(localBodyId: $this->buildingLandOwner['local_body_id'])->ward_no;
+        }
+        if (!empty($this->buildingHouseOwner['province_id'])) {
+            $this->districts = get_districts($this->buildingHouseOwner['province_id']);
+        }
+        if (!empty($this->buildingHouseOwner['district_id'])) {
+            $this->localBodies = get_local_bodies($this->buildingHouseOwner['district_id']);
+        }
+        if (!empty($this->buildingHouseOwner['local_body_id'])) {
+            $this->wards = get_local_bodies(localBodyId: $this->buildingHouseOwner['local_body_id'])->ward_no;
+        }
         if (!empty($this->form['province_id'])) {
             $this->districts = get_districts($this->form['province_id']);
         }
@@ -680,5 +698,48 @@ class BuildingDocumentationLivewire extends Component
 
 
         ];
+    }
+
+    public function checkSameAsLandOwner(): void
+    {
+        $this->same_as_land_owner = !$this->same_as_land_owner;
+        if ($this->same_as_land_owner) {
+            $this->buildingHouseOwner = [
+                'name' => $this->buildingLandOwner['name'] ?? null,
+                'phone' => $this->buildingLandOwner['phone'] ?? null,
+                'father_name' => $this->buildingLandOwner['father_name'] ?? null,
+                'grandfather_name' => $this->buildingLandOwner['grandfather_name'] ?? null,
+                'photo' => $this->buildingLandOwner['photo'] ?? null,
+                'signature' => $this->buildingLandOwner['signature'] ?? null,
+                'citizenship_issue_district_id' => $this->buildingLandOwner['citizenship_issue_district_id'] ?? null,
+                'citizenship_no' => $this->buildingLandOwner['citizenship_no'] ?? null,
+                'citizenship_issue_date' => $this->buildingLandOwner['citizenship_issue_date'] ?? null,
+                'province_id' => $this->buildingLandOwner['province_id'] ?? null,
+                'district_id' => $this->buildingLandOwner['district_id'] ?? null,
+                'local_body_id' => $this->buildingLandOwner['local_body_id'] ?? null,
+                'tole' => $this->buildingLandOwner['tole'] ?? null,
+                'ward_no' => $this->buildingLandOwner['ward_no'] ?? null,
+
+            ];
+        } else {
+            $this->buildingHouseOwner = [
+                'name' => null,
+                'phone' => null,
+                'father_name' => null,
+                'grandfather_name' => null,
+                'photo' => null,
+                'signature' => null,
+                'citizenship_issue_district_id' => null,
+                'citizenship_no' => null,
+                'citizenship_issue_date' => [],
+                'province_id' => null,
+                'district_id' => null,
+                'local_body_id'  => null,
+                'tole' => null,
+                'address' => null,
+                'ward_no' => null,
+
+            ];
+        }
     }
 }
