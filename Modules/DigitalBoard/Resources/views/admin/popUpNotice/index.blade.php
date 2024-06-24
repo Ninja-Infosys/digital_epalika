@@ -72,9 +72,9 @@
 
                                         <td>
                                             @if ($popUpNotice->is_displayed == 1)
-                                                <i class="fa-solid fa-circle-check fa-2x" style="color:green"></i>
+                                            <i class="fa fa-check-circle fa-lg" aria-hidden="true"></i>
                                             @else
-                                                <i class="fa-solid fa-circle-xmark fa-2x" style="color:red"></i>
+                                            <i class="fa fa-times-circle fa-lg" aria-hidden="true"></i>
                                             @endif
                                         </td>
 
@@ -126,7 +126,7 @@
                         </table>
                     </div>
                     <div class="mt-2">
-                        {{-- {{ $notices->onEachSide(config('app.pagination_count'))->links() }} --}}
+                        {{-- {{ $popUpNotices->onEachSide(config('app.pagination_count'))->links() }} --}}
                     </div>
                 </div>
             </div>

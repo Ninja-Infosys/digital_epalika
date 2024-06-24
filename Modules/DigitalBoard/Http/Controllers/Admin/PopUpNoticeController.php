@@ -21,39 +21,14 @@ class PopUpNoticeController extends Controller
                 $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
             }
         })
-            ->get();
+            ->paginate(10);
 
         return view('digitalboard::admin.popUpNotice.index', compact('popUpNotices'));
     }
-    public function create( PopUpNotice $popUpNotice)
+    public function create(PopUpNotice $popUpNotice)
     {
-        return view('digitalboard::admin.popUpNotice.create',compact('popUpNotice'));
+        return view('digitalboard::admin.popUpNotice.create', compact('popUpNotice'));
     }
-
-    // public function store(StorePopUpNoticeRequest $request)
-    // {
-    //     $popUpNotice = PopUpNotice::where(function ($q) {
-    //         if (!empty(auth()->user()->ward_no)) {
-    //             $q->where('ward', auth()->user()->ward_no);
-    //         } else {
-    //             $q->whereNull('ward');
-    //         }
-    //     })
-    //         ->get();
-
-    //     if (!empty($popUpNotice)) {
-    //         if ($request->hasFile('image') && $popUpNotice->image) {
-    //             $this->deleteFile($popUpNotice->image);
-    //         }
-
-
-    //     }
-    //         PopUpNotice::create($request->validated() + ['ward' => auth()->user()->ward_no]);
-
-    //     toast('पपअप सफलतापूर्वक अद्यावधिक गरियो', 'success');
-
-    //     return redirect(route('admin.digitalBoard.popUpNotice.index'));
-    // }
 
     public function store(StorePopUpNoticeRequest $request)
     {
@@ -81,14 +56,39 @@ class PopUpNoticeController extends Controller
     }
     public function edit(PopUpNotice $popUpNotice)
     {
-        return view('digitalboard::admin.popUpNotice.edit',compact('popUpNotice'));
+        return view('digitalboard::admin.popUpNotice.edit', compact('popUpNotice'));
     }
-    public function update(UpdatePopUpNotice $request, PopUpNotice $popUpNotice)
+
+    public function update(UpdatePopUpNotice $request, $id)
     {
-        $popUpNotice->update($request->validated());
-        toast('पपअप सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return redirect(route('admin.digitalBoard.popUpNotice.index'));
+        DB::transaction(function () use ($request, $id) {
+
+            $popUpNotice = PopUpNotice::findOrFail($id);
+            $popUpNotice->update($request->validated() + ['user_id' => auth()->id()]);
+
+            $popUpNotice->popupActivations()->delete();
+
+
+            if (!empty($request->input('ward'))) {
+                foreach ($request->input('ward') as $ward) {
+                    $popUpNotice->popupActivations()->create([
+                        'is_active' => 1,
+                        'ward' => $ward
+                    ]);
+                }
+            } else {
+                $popUpNotice->popupActivations()->create([
+                    'is_active' => 1,
+                    'ward' => auth()->user()->ward_no
+                ]);
+            }
+        });
+
+        toast('PopUp सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
+        return back();
     }
+
     public function updateStatus(PopUpNotice $popUpNotice)
     {
 
