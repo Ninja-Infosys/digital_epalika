@@ -324,7 +324,7 @@
 
         <legend>
             <strong>
-                तल्ला विवरण
+               साविक भवन/निर्माण तला र क्षेत्रफल सम्बन्धित विवरण
             </strong>
         </legend>
         <div class="col-md-12 mb-2">
@@ -360,19 +360,19 @@
                             <div class="col-md-4 mb-2">
                                 <label for="form.buildingStoreyDetails.{{ $key }}.area_of_former_construction"
                                     class="form-label">
-                                    साविक निर्माण भइसकेको क्षेत्रफल*</label>
+                                    निर्माणको क्षेत्रफल फिट/मिटर*</label>
                                 <input
                                     class="form-control @error('form.buildingStoreyDetails.' . $key . '.area_of_former_construction') is-invalid @enderror"
                                     type="text" id="form.buildingStoreyDetails.{{ $key }}.area_of_former_construction"
                                     wire:model="form.buildingStoreyDetails.{{ $key }}.area_of_former_construction"
-                                    placeholder=" साविक निर्माण भइसकेको क्षेत्रफल">
+                                    placeholder="   निर्माणको क्षेत्रफल">
                                 @error("form.buildingStoreyDetails.$key.area_of_former_construction")
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
                                 <label for="form.buildingStoreyDetails.{{ $key }}.land_area" class="form-label">
-                                    जग्गाको क्षेत्रफल*</label>
+                                    निर्माण भैसकेको जम्मा क्षेत्रफल वर्ग/मिटर फिट/मिटर*</label>
                                 <input
                                     class="form-control @error('form.buildingStoreyDetails.' . $key . '.land_area') is-invalid @enderror"
                                     type="text" id="form.buildingStoreyDetails.{{ $key }}.land_area"
@@ -397,6 +397,200 @@
                             <div class="col-md-1 mb-2">
                                 <button type="button" class="btn btn-sm btn-outline-danger"
                                     wire:click.prevent="buildingStoreyDetailArrayDecrement({{ $key }})">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        @endforeach
+
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <legend>
+            <strong>
+                भवनको बाहिरि पर्खाल र सिमानासम्माको दुरीको विवरण
+            </strong>
+        </legend>
+        <div class="col-md-12 mb-2">
+            <div class="d-flex align-items-center justify-content-end mb-1">
+                <label for="buildingDescription" class="form-label fw-bold"> </label>
+                <button type="button" class="btn btn-xs btn-outline-info"
+                    wire:click.prevent="buildingDescriptionArrayIncrement" data-toggle="add-more">
+                    <i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्
+                </button>
+            </div>
+            <fieldset class="bg-soft-secondary">
+                <div id="documents">
+                    <div class="col-md-12 main">
+                        @foreach ($form['buildingDescriptions'] as $key => $file)
+                        <div class="row border-bottom mb-2">
+                            <div class="col-md-4 mb-2">
+                                <label for="form.buildingDescriptions.{{ $key }}.direction" class="form-label">
+                                    दिशा*</label>
+                                <select
+                                    class="form-select @error('form.buildingDescriptions.' . $key . '.direction') is-invalid @enderror"
+                                    id="form.buildingDescriptions.{{ $key }}.direction"
+                                    wire:model="form.buildingDescriptions.{{ $key }}.direction">
+                                    <option value="">---छान्नुहोस् ----</option>
+                                    @foreach (\Modules\EMap\Enums\NeighbourTypeEnum::cases() as $case)
+                                    <option value="{{ $case->value ?? '' }}">{{ $case->label() ?? '' }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                @error("form.buildingDescriptions.$key.direction")
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="form.buildingDescriptions.{{ $key }}.has_road"
+                                    class="form-label">
+                                    सडक छ, छैन</label>
+                                <input
+                                    class="form-control @error('form.buildingDescriptions.' . $key . '.has_road') is-invalid @enderror"
+                                    type="text" id="form.buildingDescriptions.{{ $key }}.has_road"
+                                    wire:model="form.buildingDescriptions.{{ $key }}.has_road"
+                                    placeholder="  सडक छ, छैन">
+                                @error("form.buildingDescriptions.$key.has_road")
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="form.buildingDescriptions.{{ $key }}.has_window" class="form-label">
+                                झ्याल ढोका छ, छैन ? भए सोको विवरण</label>
+                                <input
+                                    class="form-control @error('form.buildingDescriptions.' . $key . '.has_window') is-invalid @enderror"
+                                    type="text" id="form.buildingDescriptions.{{ $key }}.has_window"
+                                    wire:model="form.buildingDescriptions.{{ $key }}.has_window"
+                                    placeholder=" झ्याल ढोका छ, छैन ? भए सोको विवरण">
+                                @error("form.buildingDescriptions.$key.has_window")
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="form.buildingDescriptions.{{ $key }}.minimum_distance_to_leave" class="form-label">
+                                न्यूनतम छाड्नु पर्ने</label>
+                                <input
+                                    class="form-control @error('form.buildingDescriptions.' . $key . '.minimum_distance_to_leave') is-invalid @enderror"
+                                    type="text" id="form.buildingDescriptions.{{ $key }}.minimum_distance_to_leave"
+                                    wire:model="form.buildingDescriptions.{{ $key }}.minimum_distance_to_leave"
+                                    placeholder="   न्यूनतम छाड्नु पर्ने">
+                                @error("form.buildingDescriptions.$key.minimum_distance_to_leave")
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="form.buildingDescriptions.{{ $key }}.leave" class="form-label">
+                                छाडिएको</label>
+                                <input
+                                    class="form-control @error('form.buildingDescriptions.' . $key . '.leave') is-invalid @enderror"
+                                    type="text" id="form.buildingDescriptions.{{ $key }}.leave"
+                                    wire:model="form.buildingDescriptions.{{ $key }}.leave"
+                                    placeholder=" छाडिएको">
+                                @error("form.buildingDescriptions.$key.leave")
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="form.buildingDescriptions.{{ $key }}.remarks" class="form-label">
+                                    कैफियत</label>
+                                <input
+                                    class="form-control @error('form.buildingDescriptions.' . $key . '.remarks') is-invalid @enderror"
+                                    type="text" id="form.buildingDescriptions.{{ $key }}.remarks"
+                                    wire:model="form.buildingDescriptions.{{ $key }}.remarks" placeholder="कैफियत">
+                                @error("form.buildingDescriptions.$key.remarks")
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-1 mb-2">
+                                <button type="button" class="btn btn-sm btn-outline-danger"
+                                    wire:click.prevent="buildingDescriptionArrayDecrement({{ $key }})">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        @endforeach
+
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <legend>
+            <strong>
+              ठेकेदारको विवरण
+            </strong>
+        </legend>
+        <div class="col-md-12 mb-2">
+            <div class="d-flex align-items-center justify-content-end mb-1">
+                <label for="contractorDetail" class="form-label fw-bold"> </label>
+                <button type="button" class="btn btn-xs btn-outline-info"
+                    wire:click.prevent="contractorDetailArrayIncrement" data-toggle="add-more">
+                    <i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्
+                </button>
+            </div>
+            <fieldset class="bg-soft-secondary">
+                <div id="documents">
+                    <div class="col-md-12 main">
+                        @foreach ($form['contractorDetails'] as $key => $file)
+                        <div class="row border-bottom mb-2">
+                            <div class="col-md-4 mb-2">
+                                <label for="form.contractorDetails.{{ $key }}.storey" class="form-label">
+                                    तल्ला*</label>
+                                <select
+                                    class="form-select @error('form.contractorDetails.' . $key . '.storey') is-invalid @enderror"
+                                    id="form.contractorDetails.{{ $key }}.storey"
+                                    wire:model="form.contractorDetails.{{ $key }}.storey">
+                                    <option value="">---छान्नुहोस् ----</option>
+                                    @foreach (\Modules\EMap\Enums\StoreyTypeEnum::cases() as $case)
+                                    <option value="{{ $case->value ?? '' }}">{{ $case->label() ?? '' }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                @error("form.contractorDetails.$key.storey")
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="form.contractorDetails.{{ $key }}.area_of_former_construction"
+                                    class="form-label">
+                                    साविक निर्माण भइसकेको क्षेत्रफल*</label>
+                                <input
+                                    class="form-control @error('form.contractorDetails.' . $key . '.area_of_former_construction') is-invalid @enderror"
+                                    type="text" id="form.contractorDetails.{{ $key }}.area_of_former_construction"
+                                    wire:model="form.contractorDetails.{{ $key }}.area_of_former_construction"
+                                    placeholder=" साविक निर्माण भइसकेको क्षेत्रफल">
+                                @error("form.contractorDetails.$key.area_of_former_construction")
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="form.contractorDetails.{{ $key }}.land_area" class="form-label">
+                                    जग्गाको क्षेत्रफल*</label>
+                                <input
+                                    class="form-control @error('form.contractorDetails.' . $key . '.land_area') is-invalid @enderror"
+                                    type="text" id="form.contractorDetails.{{ $key }}.land_area"
+                                    wire:model="form.contractorDetails.{{ $key }}.land_area"
+                                    placeholder="जग्गाको क्षेत्रफल">
+                                @error("form.contractorDetails.$key.land_area")
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="form.contractorDetails.{{ $key }}.remarks" class="form-label">
+                                    कैफियत</label>
+                                <input
+                                    class="form-control @error('form.contractorDetails.' . $key . '.remarks') is-invalid @enderror"
+                                    type="text" id="form.contractorDetails.{{ $key }}.remarks"
+                                    wire:model="form.contractorDetails.{{ $key }}.remarks" placeholder="कैफियत">
+                                @error("form.contractorDetails.$key.remarks")
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-1 mb-2">
+                                <button type="button" class="btn btn-sm btn-outline-danger"
+                                    wire:click.prevent="contractorDetailArrayDecrement({{ $key }})">
                                     <i class="fa fa-times"></i>
                                 </button>
                             </div>

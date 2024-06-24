@@ -337,6 +337,14 @@ class BuildingDocumentationLivewire extends Component
                 'form.buildingDescriptions.*.minimum_distance_to_leave' => ['required', 'string'],
                 'form.buildingDescriptions.*.leave' => ['required', 'string'],
                 'form.buildingDescriptions.*.remarks' => ['required', 'string'],
+                'form.contractorDetails' => ['nullable', 'array'],
+                'form.contractorDetails.*.contractor_name' => ['nullable', 'string'],
+                'form.contractorDetails.*.contractor_signature' => ['nullable', 'image'],
+                'form.contractorDetails.*.province_id' => ['nullable', 'string'],
+                'form.contractorDetails.*.district_id' => ['nullable', 'string'],
+                'form.contractorDetails.*.local_body_id' => ['nullable', 'string'],
+                'form.contractorDetails.*.tole' => ['nullable', 'string'],
+                'form.contractorDetails.*.ward_no' => ['nullable', 'integer'],
             ])
             : array_merge($this->secondStepValidations, [
                 'form.neighbours.*.neighbour_name' => ['nullable', 'string'],
@@ -353,6 +361,14 @@ class BuildingDocumentationLivewire extends Component
                 'form.buildingDescriptions.*.minimum_distance_to_leave' => ['nullable', 'string'],
                 'form.buildingDescriptions.*.leave' => ['nullable', 'string'],
                 'form.buildingDescriptions.*.remarks' => ['nullable', 'string'],
+                'form.contractorDetails' => ['nullable', 'array'],
+                'form.contractorDetails.*.contractor_name' => ['nullable', 'string'],
+                'form.contractorDetails.*.contractor_signature' => ['nullable', 'image'],
+                'form.contractorDetails.*.province_id' => ['nullable', 'string'],
+                'form.contractorDetails.*.district_id' => ['nullable', 'string'],
+                'form.contractorDetails.*.local_body_id' => ['nullable', 'string'],
+                'form.contractorDetails.*.tole' => ['nullable', 'string'],
+                'form.contractorDetails.*.ward_no' => ['nullable', 'integer'],
             ]);
     }
 
