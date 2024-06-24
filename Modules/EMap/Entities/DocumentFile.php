@@ -42,6 +42,6 @@ class DocumentFile extends Model
 
     public function getDocumentUrlAttribute()
     {
-        return $this->attributes['document'] ? Storage::disk('public/buildingDocumentation')->url($this->attributes['document']) : '';
+        return $this->attributes['document'] ? Storage::disk('public')->url($this->attributes['document']) : '';
     }
 }

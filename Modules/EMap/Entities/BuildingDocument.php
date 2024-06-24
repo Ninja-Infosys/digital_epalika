@@ -43,7 +43,7 @@ class BuildingDocument extends Model
         'can_edit'
     ];
 
-    protected $with = ['appliedBuildingDocumentStatuses'];
+    protected $with = ['documentStatuses'];
     public function getCanEditAttribute(): bool
     {
         return match ($this->attributes['status']) {

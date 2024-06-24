@@ -32,7 +32,8 @@
 
                     </div>
                 </div>
-                <livewire:emap::building-documentation-livewire />
+                @livewire('emap::building-documentation-livewire')
+
 
             </div>
         </div>

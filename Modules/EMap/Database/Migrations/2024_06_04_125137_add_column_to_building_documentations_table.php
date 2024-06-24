@@ -14,7 +14,6 @@ return new class extends Migration
     public function up()
     {
         Schema::table('building_documentations', function (Blueprint $table) {
-            $table->string('land_ward_no')->nullable()->comment('जग्गाको वडा नं');
 
         });
     }

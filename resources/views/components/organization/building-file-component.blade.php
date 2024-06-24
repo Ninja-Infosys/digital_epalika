@@ -22,7 +22,7 @@
             <div class="card-body">
                 @if (count($buildingDocumentation->buildingDocuments->where('form_data_id', $buildingFormDataType->id)) == 0)
                     <form
-                        action="{{ route('organization.admin.buildingDocument.store', [$buildingDocumentation, $form, $buildingFormDataType]) }}"
+                        action="{{ route('organization.admin.documentApplied.store', [$buildingDocumentation, $form, $buildingFormDataType]) }}"
                         method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
@@ -46,7 +46,7 @@
                     </form>
                 @else
                     <form
-                        action="{{ route('organization.admin.appliedDocument.update', [$buildingDocumentation,$form,$buildingFormDataType,$buildingDocumentation->buildingDocuments->where('building_documentation_step_id', $form->id)->sortByDesc('created_at')?->first()?->id]) }}"
+                        action="{{ route('organization.admin.documentApplied.update', [$buildingDocumentation,$form,$buildingFormDataType,$buildingDocumentation->buildingDocuments->where('building_documentation_step_id', $form->id)->sortByDesc('created_at')?->first()?->id]) }}"
                         method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
