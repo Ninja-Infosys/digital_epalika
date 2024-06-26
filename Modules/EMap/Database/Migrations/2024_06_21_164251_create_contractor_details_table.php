@@ -13,9 +13,7 @@ return new class extends Migration
             $table->foreignId('building_documentation_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('contractor_name')->nullable()->comment('ठेकेदारको नाम');
             $table->string('contractor_signature')->nullable()->comment('ठेकेदारको नाम');
-            $table->foreignId('province_id')->nullable()->comment('ठेकेदारको प्रदेश')->constrained();
-            $table->foreignId('district_id')->nullable()->comment('ठेकेदारको जिल्ला')->constrained();
-            $table->foreignId('local_body_id')->nullable()->comment('ठेकेदारको पालिका')->constrained();
+            $table->string('address')->nullable()->comment('ठेकेदारको ठेगाना');
             $table->string('ward_no')->nullable()->comment('ठेकेदारको वडा नं');
             $table->string('tole')->nullable()->comment('ठेकेदारको गाउ/टोल');
             $table->timestamps();

@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('building_documentations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('organization_id')->nullable()->constrained()->nullOnDelete();
             $table->string('submission_no')->nullable()->comment('सबमिशन नम्बर');
             $table->foreignId('fiscal_year_id')->nullable()->comment('आर्थिक बर्ष')->constrained()->nullOnDelete();
             $table->string('registration_no')->nullable()->comment('दर्ता नम्बर');
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->string('land_tole')->nullable()->comment('जग्गाको रहेको टोल');
             $table->string('house_built_year')->nullable()->comment('घर निर्माण गर्न सुरु गरेको वर्ष');
             $table->string('applicant_name')->nullable()->comment('निवेदकको नाम');
+            $table->string('applicant_type')->nullable()->comment('निवेदकको प्रकार');
             $table->string('applicant_signature')->nullable()->comment('निवेदकको हस्ताक्षर');
             $table->foreignId('province_id')->nullable()->comment('निवेदकको प्रदेश')->constrained();
             $table->foreignId('district_id')->nullable()->comment('निवेदकको जिल्ला')->constrained();

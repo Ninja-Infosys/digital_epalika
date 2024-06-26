@@ -1,4 +1,7 @@
 @extends('emap::organization.layouts.master')
+@push('styles')
+    @vite(['resources/vue/main.js'])
+@endpush
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -33,7 +36,6 @@
                     </div>
                 </div>
                 @livewire('emap::building-documentation-livewire')
-
 
             </div>
         </div>

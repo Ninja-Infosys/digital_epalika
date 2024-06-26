@@ -19,3 +19,20 @@ export const useSettingStore = defineStore('setting', {
         }
     }
 })
+export const useBuildingSettingStore = defineStore('buildingSetting', {
+    state: () => ({
+        eBuildingSetting: {}
+
+    }),
+    actions: {
+        getBuildingSetting() {
+            return axios.get(`${baseUrl}/ebps/api/v1/buildingApplicationSetting`)
+                .then((res) => {
+                    this.eBuildingSetting = res.data;
+                })
+                .catch((err) => {
+                    showErrors(err);
+                })
+        }
+    }
+})

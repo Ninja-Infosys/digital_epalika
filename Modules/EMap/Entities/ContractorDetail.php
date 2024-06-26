@@ -27,9 +27,7 @@ class ContractorDetail extends Model
         'building_documentation_id',
         'contractor_name',
         'contractor_signature',
-        'province_id',
-        'district_id',
-        'local_body_id',
+        'address',
         'ward_no',
         'tole',
 
@@ -40,20 +38,7 @@ class ContractorDetail extends Model
         return $this->belongsTo(BuildingDocumentation::class);
     }
 
-    public function province(): BelongsTo
-    {
-        return $this->belongsTo(Province::class);
-    }
-
-    public function district(): BelongsTo
-    {
-        return $this->belongsTo(District::class);
-    }
-
-    public function localBody(): BelongsTo
-    {
-        return $this->belongsTo(LocalBody::class);
-    }
+  
 
 
     public function setContractorSignatureAttribute($value): void

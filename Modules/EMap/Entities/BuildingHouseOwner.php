@@ -40,7 +40,6 @@ class BuildingHouseOwner extends Model
         'address',
         'local_body',
         'ward_no',
-        'status',
         'document',
         'photo',
         'province_id',

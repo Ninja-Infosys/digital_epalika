@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use Modules\EMap\Enums\ApplicantTypeEnum;
 use Modules\EMap\Enums\BuildingDocumentationStatusEnum;
 use Modules\EMap\Enums\BuildingTypeEnum;
 
@@ -56,6 +57,7 @@ class BuildingDocumentation extends Model
         'application_date',
         'building_usage',
         'field_land_area',
+        'applicant_type',
         'plinth_area',
         'other_construction_area_new',
         'other_construction_area_old',
@@ -81,6 +83,7 @@ class BuildingDocumentation extends Model
     protected $casts = [
         'building_category' => BuildingTypeEnum::class,
         'status' => BuildingDocumentationStatusEnum::class,
+        'applicant_type' => ApplicantTypeEnum::class,
     ];
 
     public function requiredDocument(): HasOne
@@ -130,11 +133,11 @@ class BuildingDocumentation extends Model
 
         return $now > $oneWeekLater;
     }
-    public function landReport(): HasOne
-    {
-        return $this->hasOne(LandReport::class);
-    }
 
+    public function organization(): BelongsTo
+    {
+        return $this->belongsTo(Organization::class);
+    }
 
     public function buildingStoreyDetails(): HasMany
     {

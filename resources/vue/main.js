@@ -17,6 +17,8 @@ import myPlugins from "./plugins/my-plugins";
 //pages
 import MapApplication from "./pages/e-map/MapApplication.vue";
 import EditApplications from "./pages/e-map/organizaion/EditApplications.vue";
+import BuildingApplication from "./pages/e-map/BuildingApplication.vue";
+import EditBuildingApplications from "./pages/e-map/organizaion/EditBuildingApplications.vue";
 
 createApp({})
     .use(createPinia())
@@ -30,4 +32,7 @@ createApp({})
     .component('VFileUpload', VFileUpload)
     .component('map-application',MapApplication)
     .component('edit-applications',EditApplications)
+    .component('building-application',BuildingApplication)
+    .component('edit-building-applications',EditBuildingApplications)
     .mount('#map-app')
+    .mount('#building-app')

@@ -108,6 +108,10 @@ class Organization extends Authenticatable
     {
         return $this->hasMany(MapApply::class);
     }
+    public function buildingDocumentations(): HasMany
+    {
+        return $this->hasMany(BuildingDocumentation::class);
+    }
 
     // public function canWorkUntilDate($validityDurationInDays): string
     // {
