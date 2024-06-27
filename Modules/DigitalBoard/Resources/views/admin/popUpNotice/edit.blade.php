@@ -110,16 +110,18 @@
                                     @enderror
                                 </div>
 
+
                                 <div class="col-md-4 mb-2">
                                     <input type="checkbox" name="is_displayed" value="1"
                                            class="form-check-input @error('is_displayed') is-invalid @enderror"
-                                           id="is_displayed" {{ old('is_displayed',$popUpNotice->is_displayed) ? 'checked' : '' }} />
+                                           id="is_displayed" @if (!empty(auth()->user()->ward_no)) disabled @else checked @endif  />
                                     <label for="is_displayed" class="form-label">पालिकामा पनि देखाउनु होस्</label>
 
                                     @error('is_displayed')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+
 
                             </div>
                         </fieldset>

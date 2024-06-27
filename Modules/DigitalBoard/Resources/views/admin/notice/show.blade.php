@@ -85,7 +85,7 @@
                                             <iframe src="{{$document->file_url}}" frameborder="0" width="100%"></iframe>
                                         @elseif(($document->extension ==='png') or ($document->extension ==='jpg') or ($document->extension ==='jpeg'))
                                             <img src="{{ $document->file_url }}" class="card-image" alt="Image"
-                                                 height=150px;" width="100%">
+                                                 height="150px;" width="100%">
                                         @endif
                                     </div>
                                 </div>
