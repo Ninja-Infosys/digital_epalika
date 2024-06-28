@@ -21,6 +21,15 @@ class BuildingFormDataType extends Model
     {
         parent::boot();
 
+        static::creating(static function ($model) {
+            $model->model_type = $model->type->class();
+        });
+
+        static::updating(static function ($model) {
+            if ($model->isDirty('type')) {
+                $model->model_type = $model->type->class();
+            }
+        });
 
     }
 
@@ -53,5 +62,8 @@ class BuildingFormDataType extends Model
         return $this->morphTo();
     }
 
-
+    public function buildingDocuments(): MorphMany
+    {
+        return $this->morphMany(BuildingDocument::class, 'form_data');
+    }
 }

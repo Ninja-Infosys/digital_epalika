@@ -92,9 +92,9 @@
                     <td>
                         <select id="type" name="type" wire:model="form.buildingFormDataType.{{$index}}.type" wire:key="form.buildingFormDataType.{{$index}}.type" wire:change="changeData({{$index}})" class="form-select" required>
                             <option value="">-- छान्नुहोस् --</option>
-                            @foreach(\Modules\EMap\Enums\FormTypeEnum::cases() as $formType)
+                            @foreach(\Modules\EMap\Enums\FormTypeEnum::getSpecificStatuses() as $formType)
                             <option value="{{$formType->value}}">{{$formType->label()}}</option>
-                            @endforeach
+                        @endforeach
                         </select>
                         @error('form.buildingFormDataType.'.$index.'.type')
                         <div class="invalid-feedback">{{ $message }}</div>

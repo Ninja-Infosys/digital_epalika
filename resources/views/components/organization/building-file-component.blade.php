@@ -1,18 +1,18 @@
-@props(['form-data-type', 'map-apply', 'form'])
+@props(['building-form-data-type', 'building-documentation', 'form'])
 <div class="row">
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    <h4 class="header-title">{{ $formDataType->model?->title }}
+                    <h4 class="header-title">{{ $buildingFormDataType->model?->title }}
                         थप्नुहोस्</h4>
                     <div class="d-flex justify-content-between">
                         <a href="javascript:void(0)"
-                            route_action="{{ route('organization.admin.printTemplate', [$mapApply, $form, $formDataType]) }}"
+                            route_action="{{ route('organization.admin.templatePrint', [$buildingDocumentation, $form, $buildingFormDataType]) }}"
                             class="btn btn-primary btn-sm printDetail">
                             <i class="fa fa-print"></i> प्रिन्ट गर्नुहोस
                         </a>
-                        <a href="{{ route('organization.admin.editTemplate', [$mapApply, $form, $formDataType]) }}"
+                        <a href="{{ route('organization.admin.templateEdit', [$buildingDocumentation, $form, $buildingFormDataType]) }}"
                             class="btn btn-success btn-sm">
                             <i class="fa fa-pen"></i>
                         </a>
@@ -20,10 +20,9 @@
                 </div>
             </div>
             <div class="card-body">
-                {{ route('organization.admin.appliedDocument.store', [$mapApply, $form, $formDataType]) }}
-                @if (count($mapApply->appliedDocuments->where('form_data_id', $formDataType->id)) == 0)
+                @if (count($buildingDocumentation->buildingDocuments->where('form_data_id', $buildingFormDataType->id)) == 0)
                     <form
-                        action="{{ route('organization.admin.appliedDocument.store', [$mapApply, $form, $formDataType]) }}"
+                        action="{{ route('organization.admin.documentApplied.store', [$buildingDocumentation, $form, $buildingFormDataType]) }}"
                         method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
@@ -47,7 +46,7 @@
                     </form>
                 @else
                     <form
-                        action="{{ route('organization.admin.appliedDocument.update', [$mapApply,$form,$formDataType,$mapApply->appliedDocuments->where('form_id', $form->id)->sortByDesc('created_at')?->first()?->id]) }}"
+                        action="{{ route('organization.admin.documentApplied.update', [$buildingDocumentation,$form,$buildingFormDataType,$buildingDocumentation->buildingDocuments->where('building_documentation_step_id', $form->id)->sortByDesc('created_at')?->first()?->id]) }}"
                         method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -80,7 +79,7 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <h4 class="header-title">
-                        {{ $formDataType->model?->title }} विवरण
+                        {{ $buildingFormDataType->model?->title }} विवरण
                     </h4>
                 </div>
             </div>
@@ -97,23 +96,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($mapApply->appliedDocuments?->load('appliedMapFiles', 'appliedDocumentStatuses')?->where('form_data_id', $formDataType->id) as $appliedDocument)
+                            @foreach ($buildingDocumentation->buildingDocuments?->load('documentFiles', 'documentStatuses')?->where('form_data_id', $buildingFormDataType->id) as $buildingDocument)
                                 <tr>
                                     <td>{{ get_nepali_number($loop->iteration) }}</td>
                                     <td>
 
-                                        @foreach ($appliedDocument->appliedMapFiles as $appliedMapFile)
+                                        @foreach ($buildingDocument->documentFiles as $documentFile)
                                             <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                                                data-bs-target="#view_file{{ $appliedMapFile->id }}">
+                                                data-bs-target="#view_file{{ $documentFile->id }}">
                                                 <i class="fa fa-eye"></i>
                                             </button>
                                             <!-- view file model pass url dynamically in the model-->
-                                            <div class="modal fade" id="view_file{{ $appliedMapFile->id }}"
+                                            <div class="modal fade" id="view_file{{ $documentFile->id }}"
                                                 tabindex="-1" aria-labelledby="fileLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-body">
-                                                            <iframe src="{{ $appliedMapFile->document_url }}"
+                                                            <iframe src="{{ $documentFile->document_url }}"
                                                                 class="img-fluid"
                                                                 style="height: 100%; width:100%;"></iframe>
                                                         </div>
@@ -126,16 +125,16 @@
                                             </div>
                                         @endforeach
                                     </td>
-                                    <td>{{ $appliedDocument->status->label() }}</td>
-                                    <td>{{ $appliedDocument->created_at->toDateString() }}</td>
+                                    <td>{{ $buildingDocument->status->label() }}</td>
+                                    <td>{{ $buildingDocument->created_at->toDateString() }}</td>
 
                                 </tr>
 
-                                @foreach ($appliedDocument->appliedDocumentStatuses?->load('appliedMapFiles') as $status)
+                                @foreach ($buildingDocument->documentStatuses?->load('documentFiles') as $status)
                                     <tr style="background-color: #e8e5e5;">
                                         <td style="font-weight: bold;">{{ get_nepali_number($loop->iteration) }}</td>
                                         <td>
-                                            @foreach ($status->appliedMapFiles as $statusFile)
+                                            @foreach ($status->documentFiles as $statusFile)
                                                 <button type="button" class="btn btn-info" data-bs-toggle="modal"
                                                     data-bs-target="#view_file_org{{ $statusFile->id }}">
                                                     <i class="fa fa-eye"></i>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\EMap\Http\Controllers\AttachDocumentController;
 use Modules\EMap\Http\Controllers\Clients\BuildingDocumentationController;
+use Modules\EMap\Http\Controllers\Clients\BuildingDocumentationStepController;
 use Modules\EMap\Http\Controllers\Clients\MapApplyController;
 use Modules\EMap\Http\Controllers\OrganizationNotificationController;
 
@@ -51,7 +52,11 @@ Route::put('paymentStore/{paymentStore}/updatePaymentStoreStatus', [AttachDocume
 Route::prefix('buildingDocumentation')->group(function () {
 
     Route::resource('buildingDocumentation', BuildingDocumentationController::class);
-    Route::get('buildingDocumentation/{buildingDocumentation}/buildingDocumentationList', [BuildingDocumentationController::class, 'buildingDocumentationList'])->name('buildingDocumentationList');
+    Route::get('buildingDocumentation/{buildingDocumentation}/buildingDocumentationList', [BuildingDocumentationStepController::class, 'buildingDocumentationList'])->name('buildingDocumentationList');
+    Route::get('buildingDocumentation/{buildingDocumentation}/form/{form}/documentDetail', [BuildingDocumentationStepController::class, 'documentDetail'])->name('documentDetail');
+    Route::get('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFormDataType/{buildingFormDataType}/templatePrint', [BuildingDocumentationStepController::class, 'templatePrint'])->name('templatePrint');
+    Route::get('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFormDataType/{buildingFormDataType}/templateEdit', [BuildingDocumentationStepController::class, 'templateEdit'])->name('templateEdit');
+    Route::resource('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFormDataType/{buildingFormDataType}/documentApplied', BuildingDocumentationStepController::class);
 
 
 });
