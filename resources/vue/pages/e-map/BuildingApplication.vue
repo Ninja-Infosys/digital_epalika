@@ -403,7 +403,7 @@
 </template>
 <script setup>
 import { onMounted, reactive, ref, watch } from "vue";
-import { useBuildingSettingStore } from "../../stores/setting";
+import { useBuildingSettingStore } from "../../stores/buildingSetting";
 import { useBuildingApplicationStore } from "../../stores/e-map/buildingApplication";
 import { storeToRefs } from "pinia";
 import showErrors from "../../utils/showErrors";
@@ -413,14 +413,14 @@ import Swal from "sweetalert2";
 import { useFileUpload } from "../../utils/fileUpload";
 import { useAddressStore } from "../../stores/address";
 
-const settingStore = useBuildingSettingStore();
+const buildingSettingStore = useBuildingSettingStore();
 const houseOwnerAddressStore = useAddressStore();
 const landOwnerAddressStore = useAddressStore();
 const applicantDetailAddressStore = useAddressStore();
 const buildingApplicationStore = useBuildingApplicationStore();
 const { onFileSelected, fileDetail } = useFileUpload();
 
-const { eBuildingSetting } = storeToRefs(settingStore);
+const { eBuildingSetting } = storeToRefs(buildingSettingStore);
 const {
     provinces: buildingHouseOwnerProvinces,
     districts: buildingHouseOwnerDistricts,
@@ -442,7 +442,7 @@ const {
 } = storeToRefs(applicantDetailAddressStore);
 
 onMounted(() => {
-    settingStore.getBuildingSetting();
+    buildingSettingStore.getBuildingSetting();
     houseOwnerAddressStore.getProvinces();
     landOwnerAddressStore.getProvinces();
     applicantDetailAddressStore.getProvinces();
@@ -661,6 +661,7 @@ const validations = object({
 const { errors, validateField, validateForm } = useYup(form, validations);
 
 const registerBuildingApplication = async () => {
+    console.log('Starting registration process');
     let validated = await validateForm(validations, form);
     if (validated) {
         isSubmitting.value = true;

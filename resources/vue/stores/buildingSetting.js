@@ -3,15 +3,17 @@ import axios from "axios";
 import showErrors from "../utils/showErrors";
 const baseUrl=`${window.location.origin}`
 
-export const useSettingStore = defineStore('setting', {
+
+export const useBuildingSettingStore = defineStore('buildingSetting', {
     state: () => ({
-        eMapSetting: {}
+        eBuildingSetting: {}
+
     }),
     actions: {
-        getEMapSetting() {
-            return axios.get(`${baseUrl}/ebps/api/v1/mapApplySetting`)
+        getBuildingSetting() {
+            return axios.get(`${baseUrl}/ebps/api/v1/buildingApplicationSetting`)
                 .then((res) => {
-                    this.eMapSetting = res.data;
+                    this.eBuildingSetting = res.data;
                 })
                 .catch((err) => {
                     showErrors(err);
@@ -19,4 +21,3 @@ export const useSettingStore = defineStore('setting', {
         }
     }
 })
-

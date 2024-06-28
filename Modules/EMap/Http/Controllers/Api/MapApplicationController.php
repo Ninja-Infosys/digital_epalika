@@ -21,6 +21,7 @@ class MapApplicationController extends Controller
 {
     public function registerApplication(MapApplicationRequest $request)
     {
+
         $mapApply = DB::transaction(function () use ($request) {
             $mapApply = MapApply::create($request->validated() + [
                     'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
