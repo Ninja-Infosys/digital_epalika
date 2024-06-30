@@ -30,4 +30,6 @@
             </div>
         </section>
     </main>
+    <x-frontend.popup-notice-component :ward="request('ward')"/>
+
 @endsection

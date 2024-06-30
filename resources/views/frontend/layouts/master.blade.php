@@ -47,7 +47,6 @@
 @else
     @include('frontend.partials.digital_board_footer')
 @endif
- <x-frontend.popup-notice-component :ward="request('ward')"/>
 
 <script src="{{ asset('assets/frontend/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/frontend/js/bootstrap.min.js') }}"></script>
