@@ -31,11 +31,13 @@ class BuildingDocumentation extends Model
         'created_at',
         'updated_at',
         'deleted_at',
+        'sent_to_admin_at',
     ];
 
     protected $fillable = [
         'submission_no',
         'fiscal_year_id',
+        'organization_id',
         'registration_no',
         'registration_date',
         'former_local_body',

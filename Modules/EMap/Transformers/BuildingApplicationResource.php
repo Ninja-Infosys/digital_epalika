@@ -16,7 +16,7 @@ class BuildingApplicationResource extends JsonResource
     {
         return [
             'id' => $this->id ?? '',
-            'submission_no ' => $this->submission_id ?? '',
+            'submission_no ' => $this->submission_no ?? '',
         ];
     }
 }

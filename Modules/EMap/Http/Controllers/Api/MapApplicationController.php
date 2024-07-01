@@ -38,7 +38,6 @@ class MapApplicationController extends Controller
             $mapApply->applicantDetail()->create($request->validated('applicantDetail'));
 
             Notification::send($mapApply->organization, new MapApplyNotification($mapApply));
-
             return $mapApply;
         });
         return response()->json([
