@@ -4,7 +4,6 @@ namespace Modules\EMap\Http\Controllers\Api;
 
 use App\Models\Settings\OfficeSetting;
 use App\Notifications\BuildingApplicationNotification;
-use App\Notifications\BuildingDocumentationNotification;
 use App\Notifications\MapApplyNotification;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
@@ -49,21 +48,21 @@ class MapApplicationController extends Controller
     }
     public function registerBuildingApplication(BuildingApplicationRequest $request)
     {
-        dd($request);
+
         $buildingDocumentation = DB::transaction(function () use ($request) {
             $buildingDocumentation = BuildingDocumentation::create($request->validated() + [
                     'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
                     'sent_to_organization' => 'pending'
                 ]);
 
-
             $buildingDocumentation->buildingHouseOwner()->create($request->validated('buildingHouseOwner'));
 
-            $buildingDocumentation->buildingLandOwner()->create($request->validated(' buildingLandOwner'));
+
+            $buildingDocumentation->buildingLandOwner()->create($request->validated('buildingLandOwner'));
 
 
-
-            Notification::send($buildingDocumentation->organization, new BuildingApplicationNotification($buildingDocumentation));
+// dd($buildingDocumentation);
+            // Notification::send($buildingDocumentation->organization, new BuildingApplicationNotification($buildingDocumentation));
 
             return $buildingDocumentation;
         });
