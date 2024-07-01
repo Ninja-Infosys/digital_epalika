@@ -31367,3 +31367,4 @@ xu({})
     .component("map-application", JV)
     .component("edit-applications", y3)
     .mount("#map-app");
+
