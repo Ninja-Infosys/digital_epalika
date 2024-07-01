@@ -380,3 +380,16 @@
         </form>
     </div>
 </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        window.addEventListener('alert_message', event => {
+            Swal.fire({
+                icon: event.detail.type,
+                title: event.detail.title,
+                text: event.detail.text,
+            });
+        });
+    });
+</script>
