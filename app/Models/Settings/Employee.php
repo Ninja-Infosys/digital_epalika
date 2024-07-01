@@ -7,6 +7,7 @@ use App\Models\File;
 use App\Models\User;
 use App\Models\UserManagement\Role;
 use App\Traits\EventObserveTrait;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -92,6 +93,10 @@ class Employee extends Model
         return $this->attributes['photo']
             ? Storage::disk('public')->url($this->attributes['photo'])
             : asset('images/user_icon.jpg');
+    }
+    public function scopeMainPageDisplay(Builder $builder, bool $display = true): void
+    {
+        $builder->where('is_displayed', $display);
     }
 
     public function setPhotoAttribute($value): void

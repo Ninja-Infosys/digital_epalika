@@ -2,14 +2,31 @@
 
 namespace Modules\EMap\Http\Controllers\Clients;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Address\District;
+use App\Models\Address\LocalBody;
+use App\Models\Address\Province;
+use App\Notifications\BuildingStepNotification;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\View;
 use Modules\EMap\Entities\BuildingDocumentation;
+use Modules\EMap\Entities\BuildingDocumentationStep;
+use Modules\EMap\Entities\BuildingFormDataType;
+use Modules\EMap\Entities\BuildingTemplateStore;
+use Modules\EMap\Traits\TemplateTrait;
+use Illuminate\Support\Str;
+use Modules\EMap\Entities\Organization;
+use Modules\EMap\Enums\DocumentStatusEnum;
+use Modules\EMap\Enums\FormTypeEnum;
 
 class BuildingDocumentationController extends Controller
 {
+    use NepaliDateConverter;
+    use TemplateTrait;
     public function index()
     {
         $buildingDocumentations = BuildingDocumentation::with('requiredDocument', 'neighbours', 'localBody')->where(function (Builder $q) {
@@ -34,7 +51,9 @@ class BuildingDocumentationController extends Controller
 
     public function create()
     {
-        return view('emap::organization.application-form.create');
+        $allDistricts = District::all();
+        $buildingDocumentation = BuildingDocumentation::all();
+        return view('emap::organization.application-form.create', compact('buildingDocumentation','allDistricts'));
     }
 
     public function show(BuildingDocumentation $buildingDocumentation)
@@ -47,9 +66,5 @@ class BuildingDocumentationController extends Controller
         return view('emap::organization.application-form.edit', compact('buildingDocumentation'));
     }
 
-    public function buildingDocumentationList(BuildingDocumentation $buildingDocumentation)
-    {
-        [$forms, $order] = $this->listForms($buildingDocumentation);
-        return view('emap::organization.attach-document.index', compact('buildingDocumentation', 'forms', 'order'));
-    }
+
 }

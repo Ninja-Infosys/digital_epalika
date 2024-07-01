@@ -4,7 +4,9 @@ namespace Modules\EMap\Traits;
 
 use Illuminate\Support\Facades\View;
 use Modules\EMap\Entities\AppliedDocument;
+use Modules\EMap\Entities\BuildingDocument;
 use Modules\EMap\Entities\BuildingDocumentation;
+use Modules\EMap\Entities\BuildingDocumentationStep;
 use Modules\EMap\Entities\Form;
 use Modules\EMap\Entities\FormStore;
 use Modules\EMap\Entities\MapApply;
@@ -377,9 +379,11 @@ trait TemplateTrait
             ->map(function ($form, $key) use ($documents, &$order, &$allApproved) {
                 $status = $documents->where('form_id', $form->id)->pluck('status');
 
-                if ($allApproved && $status->count() >= $form->form_data_types_count
+                if (
+                    $allApproved && $status->count() >= $form->form_data_types_count
                     && $status->unique()->count() == 1
-                    && $status->unique()->filter(fn ($status) => $status == DocumentStatusEnum::APPROVED->value)->isNotEmpty()) {
+                    && $status->unique()->filter(fn ($status) => $status == DocumentStatusEnum::APPROVED->value)->isNotEmpty()
+                ) {
                     $order = $form->order + 1;
                     $allApproved = true;
                 } elseif ($key == 0) {
@@ -394,11 +398,9 @@ trait TemplateTrait
                     $mapStatus = DocumentStatusEnum::MODIFY;
                 } elseif ($status->contains(DocumentStatusEnum::PENDING->value)) {
                     $mapStatus = DocumentStatusEnum::PENDING;
-                }
-               elseif ($status->contains(DocumentStatusEnum::SENT_TO_CHECKER->value)) {
+                } elseif ($status->contains(DocumentStatusEnum::SENT_TO_CHECKER->value)) {
                     $mapStatus = DocumentStatusEnum::SENT_TO_CHECKER;
-                }
-               elseif ($status->contains(DocumentStatusEnum::SENT_TO_APPROVER->value)) {
+                } elseif ($status->contains(DocumentStatusEnum::SENT_TO_APPROVER->value)) {
                     $mapStatus = DocumentStatusEnum::SENT_TO_APPROVER;
                 } else {
                     $mapStatus = DocumentStatusEnum::NOT_APPLIED;
@@ -410,18 +412,19 @@ trait TemplateTrait
 
         return [$forms, $order];
     }
-    public function listBuildingDocumentationForms(BuildingDocumentation $buildingDocumentation): array
+
+    public function buildingDocumentationForms(BuildingDocumentation $buildingDocumentation): array
     {
-        $documentTypeModels = collect([AppliedDocument::class, FormStore::class, PaymentStore::class]);
+        $documentTypeModels = collect([BuildingDocument::class]);
 
         $documents = collect([]);
 
         foreach ($documentTypeModels as $documentModel) {
-            $typeDocuments = $documentModel::selectRaw('id,status,form_id')->where('map_apply_id', $mapApply->id)->get();
+            $typeDocuments = $documentModel::selectRaw('id,status,building_documentation_step_id')->where('building_documentation_id', $buildingDocumentation->id)->get();
             foreach ($typeDocuments as $document) {
                 $documents->push([
                     'document_type' => class_basename($documentModel),
-                    'form_id' => $document->form_id,
+                    'building_documentation_step_id' => $document->building_documentation_step_id,
                     'status' => $document->status?->value,
                 ]);
             }
@@ -429,15 +432,17 @@ trait TemplateTrait
 
         $order = 0;
         $allApproved = true;
-        $forms = Form::withCount('formDataTypes')
+        $forms = BuildingDocumentationStep::withCount('buildingFormDataTypes')
             ->orderBy('order')
             ->get()
             ->map(function ($form, $key) use ($documents, &$order, &$allApproved) {
-                $status = $documents->where('form_id', $form->id)->pluck('status');
+                $status = $documents->where('building_documentation_step_id', $form->id)->pluck('status');
 
-                if ($allApproved && $status->count() >= $form->form_data_types_count
+                if (
+                    $allApproved && $status->count() >= $form->building_form_data_types_count
                     && $status->unique()->count() == 1
-                    && $status->unique()->filter(fn ($status) => $status == DocumentStatusEnum::APPROVED->value)->isNotEmpty()) {
+                    && $status->unique()->filter(fn ($status) => $status == DocumentStatusEnum::APPROVED->value)->isNotEmpty()
+                ) {
                     $order = $form->order + 1;
                     $allApproved = true;
                 } elseif ($key == 0) {
@@ -452,11 +457,9 @@ trait TemplateTrait
                     $mapStatus = DocumentStatusEnum::MODIFY;
                 } elseif ($status->contains(DocumentStatusEnum::PENDING->value)) {
                     $mapStatus = DocumentStatusEnum::PENDING;
-                }
-               elseif ($status->contains(DocumentStatusEnum::SENT_TO_CHECKER->value)) {
+                } elseif ($status->contains(DocumentStatusEnum::SENT_TO_CHECKER->value)) {
                     $mapStatus = DocumentStatusEnum::SENT_TO_CHECKER;
-                }
-               elseif ($status->contains(DocumentStatusEnum::SENT_TO_APPROVER->value)) {
+                } elseif ($status->contains(DocumentStatusEnum::SENT_TO_APPROVER->value)) {
                     $mapStatus = DocumentStatusEnum::SENT_TO_APPROVER;
                 } else {
                     $mapStatus = DocumentStatusEnum::NOT_APPLIED;

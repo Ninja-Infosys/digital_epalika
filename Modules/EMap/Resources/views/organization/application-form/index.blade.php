@@ -44,8 +44,7 @@
                             <thead class="align-middle text-nowrap text-center">
                                 <tr>
                                     <th rowspan="2">क्र.स</th>
-                                    <th rowspan="2">दर्ता नं</th>
-                                    <th rowspan="2">दर्ता मिति</th>
+                                    <th rowspan="2">सब्मिसन आइडी</th>
                                     <th rowspan="2">घरधनिको नाम</th>
                                     <th rowspan="2">ठेगाना</th>
                                     <th rowspan="2">#</th>
@@ -56,8 +55,7 @@
                                 @forelse($buildingDocumentations as $buildingDocumentation)
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
-                                        <td>{{ get_nepali_number($buildingDocumentation->registration_no ?? '') }}</td>
-                                        <td>{{ get_nepali_number($buildingDocumentation->bill_date_bs ?? '') }}</td>
+                                        <td>{{ get_nepali_number($buildingDocumentation->submission_no ?? '') }}</td>
                                         <td>{{ $buildingDocumentation->house_owner_name ?? '' }}</td>
                                         <td>
                                             <span>{{ $buildingDocumentation->localBody->local_body ?? '' }}
@@ -90,9 +88,9 @@
                                             </form>
 
                                             <a data-bs-type="show" class="btn me-1 btn-xs btn-outline-warning"
-                                            href="{{ route('organization.admin.buildingDocumentationList'), $buildingDocumentation) }}"
+                                            href="{{ route('organization.admin.buildingDocumentationList', $buildingDocumentation) }}"
                                             data-bs-toggle="tooltip" data-bs-placement="top" title="हेर्नुहोस">
-                                            <i class="fa fa-eye"></i>
+                                            <i class="fa fa-list"></i>
                                         </a>
 
 

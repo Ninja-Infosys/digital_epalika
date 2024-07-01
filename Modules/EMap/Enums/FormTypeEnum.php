@@ -38,4 +38,12 @@ enum FormTypeEnum: string
             self::PAYMENT => null
         };
     }
+
+    public static function getSpecificStatuses(): array
+    {
+        // Return an array of enum cases directly
+        return [
+            self::FILE,
+        ];
+    }
 }
