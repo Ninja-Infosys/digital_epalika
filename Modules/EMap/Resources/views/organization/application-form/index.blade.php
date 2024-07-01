@@ -56,7 +56,7 @@
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td>{{ get_nepali_number($buildingDocumentation->submission_no ?? '') }}</td>
-                                        <td>{{ $buildingDocumentation->house_owner_name ?? '' }}</td>
+                                        <td>{{ $buildingDocumentation->buildingHouseOwner->name ?? '' }}</td>
                                         <td>
                                             <span>{{ $buildingDocumentation->localBody->local_body ?? '' }}
                                                 - {{ get_nepali_number($buildingDocumentation->land_ward_no ?? '') }}
@@ -64,7 +64,7 @@
                                         </td>
                                         <td class="d-flex gap-1">
                                             <form
-                                                action="{{ route('organization.admin.buildingDocumentation.edit', $buildingDocumentation) }}"
+                                                action="{{ route('organization.admin.buildingDocumentation.show', $buildingDocumentation) }}"
                                                 method="get" class="d-inline">
                                                 <button type="submit"
                                                     class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
@@ -106,7 +106,6 @@
                                 @endforelse
                             </tbody>
                         </table>
-                        {{ $buildingDocumentations->links() }}
                     </div>
 
                 </div>

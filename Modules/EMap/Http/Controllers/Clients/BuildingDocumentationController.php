@@ -29,22 +29,21 @@ class BuildingDocumentationController extends Controller
     use TemplateTrait;
     public function index()
     {
-        $buildingDocumentations = BuildingDocumentation::with('requiredDocument', 'neighbours', 'localBody')->where(function (Builder $q) {
+        $buildingDocumentations = BuildingDocumentation::with('requiredDocument', 'neighbours', 'localBody','buildingHouseOwner')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
-                $q->whereLike(['house_owner_name', 'submission_no', 'registration_no'], request('search'));
-            }
-            if (!empty(request('to_date'))) {
-                $q->whereDate('registration_date_ne', '>=', request('to_date'));
-            }
-            if (!empty(request('from_date'))) {
-                $q->whereDate('registration_date_ne', '<=', request('from_date'));
-            }
-            if (!empty(request('registration_no'))) {
-                $q->where('registration_no', request('registration_no'));
+                $q->whereLike(['buildingHouseOwner.name', 'submission_no', 'registration_no'], request('search'));
             }
 
-        })->latest()
-            ->paginate(15);
+
+        }) ->where('organization_id', auth('organization')->user()->id)->latest()
+        ->get();
+
+        //     $mapApplies = MapApply::with('houseOwner')
+        //     ->where('organization_id', auth('organization')->user()->id)
+        //     ->latest()
+        //     ->get();
+
+        // return view('emap::organization.map-applies.index', compact('mapApplies'));
 
         return view('emap::organization.application-form.index', compact('buildingDocumentations'));
     }

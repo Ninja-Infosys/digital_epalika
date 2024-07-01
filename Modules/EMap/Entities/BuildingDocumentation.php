@@ -172,7 +172,7 @@ class BuildingDocumentation extends Model
 
     public function getApplicantSignatureUrlAttribute($value): string
     {
-        return $this->attributes['applicant_signature'] && Storage::disk('public')->exists($this->attributes['applicant_signature']) ? Storage::disk('public')->url($this->attributes['photo']) : '';
+        return $this->attributes['applicant_signature'] && Storage::disk('public')->exists($this->attributes['applicant_signature']) ? Storage::disk('public')->url($this->attributes['applicant_signature']) : '';
 
     }
     public function setConsultantEngineerSignatureAttribute($value): void

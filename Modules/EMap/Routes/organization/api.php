@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\EMap\Http\Controllers\Clients\Api\OrganizationApplicationsController;
+use Modules\EMap\Http\Controllers\Clients\Api\OrganizationBuildingController;
 
 Route::controller(OrganizationApplicationsController::class)->group(function () {
     Route::put('mapApply/{mapApply}/update-detail', 'updateMapApplication')->name('mapApply.update-detail');
@@ -24,4 +25,8 @@ Route::controller(OrganizationApplicationsController::class)->group(function () 
     Route::get('mapApply/{mapApply}/building-details', 'buildingDetails')->name('mapApply.building-details');
     Route::post('mapApply/{mapApply}/update-building-detail', 'updateBuildingDetail')->name('mapApply.update-building-detail');
     Route::post('mapApply/{mapApply}/update-consultancy-detail', 'updateConsultancyDetail')->name('mapApply.update-consultancy-detail');
+});
+Route::controller(OrganizationBuildingController::class)->group(function () {
+    Route::put('buildingDocumentation/{buildingDocumentation}/update-detail', 'updateBuildingApplication')->name('buildingDocumentation.update-detail');
+
 });
