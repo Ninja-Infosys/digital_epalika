@@ -38,12 +38,6 @@ class BuildingDocumentationController extends Controller
         }) ->where('organization_id', auth('organization')->user()->id)->latest()
         ->get();
 
-        //     $mapApplies = MapApply::with('houseOwner')
-        //     ->where('organization_id', auth('organization')->user()->id)
-        //     ->latest()
-        //     ->get();
-
-        // return view('emap::organization.map-applies.index', compact('mapApplies'));
 
         return view('emap::organization.application-form.index', compact('buildingDocumentations'));
     }
@@ -57,6 +51,7 @@ class BuildingDocumentationController extends Controller
 
     public function show(BuildingDocumentation $buildingDocumentation)
     {
+
         return view('emap::organization.application-form.show', compact('buildingDocumentation'));
     }
 

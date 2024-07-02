@@ -64,7 +64,7 @@ class BuildingDocumentation extends Model
         'other_construction_area_new',
         'other_construction_area_old',
         'total_area',
-        'storey',
+        'current_storey',
         'height',
         'building_category',
         'roof_category',

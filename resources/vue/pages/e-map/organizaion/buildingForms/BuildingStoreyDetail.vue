@@ -13,19 +13,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(storey,index) in buildingStoreyDetails" :key="storey.id">
+                <tr v-for="(buildingStorey,index) in buildingStoreyDetails" :key="buildingStorey.id">
                     <td>
-                        {{ storey.storey || 'उपलब्ध छैन' }}
+                        {{ buildingStorey.storey || 'उपलब्ध छैन' }}
                     </td>
 
                     <td>
-                        {{ storey.area_of_former_construction || '-' }}
+                        {{ buildingStorey.area_of_former_construction || '-' }}
                     </td>
                     <td>
-                        {{ storey.land_area || 'उपलब्ध छैन' }}
+                        {{ buildingStorey.land_area || 'उपलब्ध छैन' }}
                     </td>
                     <td>
-                        {{ storey.remarks || 'उपलब्ध छैन' }}
+                        {{ buildingStorey.remarks || 'उपलब्ध छैन' }}
                     </td>
 
                     <td>
@@ -34,8 +34,8 @@
                                     @click.prevent="openEditForm(index)"><i
                                 class="fa fa-pen"></i>
                             </button>
-                            <button v-if="storey.id" type="button" class="btn btn-outline-danger btn-xs"
-                                    @click.prevent="deleteStoreyDetail(buildingDocumentation.id,storey.id)"><i
+                            <button v-if="buildingStorey.id" type="button" class="btn btn-outline-danger btn-xs"
+                                    @click.prevent="deleteStoreyDetail(buildingDocumentation.id,buildingStorey.id)"><i
                                 class="fa fa-trash"></i>
                             </button>
                         </div>
@@ -63,6 +63,7 @@
                             :error="errors.storey"
                         />
                     </div>
+
 
                     <div class="col-md-6 mb-2">
                         <VInput
@@ -151,11 +152,11 @@ onMounted(() => {
 const getBuildingStoreyDetails = async () => {
     buildingStoreyDetails.value = [];
     await buildingApplicationStore.getBuildingStoreyDetails(props.buildingDocumentation.id);
-    storeyDetailsData.value.data.forEach((storey) => {
-        buildingStoreyDetails.value.push(storey);
+    buildingStoreyDetailsData.value.data.forEach((buildingStorey) => {
+        buildingStoreyDetails.value.push(buildingStorey);
     })
-    if (storeyDetailsData.value.storey_details_count < storeyDetailsData.value.storey) {
-        for (let i = storeyDetailsData.value.storey_details_count; i < storeyDetailsData.value.storey; i++) {
+    if (buildingStoreyDetailsData.value.storey_details_count < buildingStoreyDetailsData.value.current_storey) {
+        for (let i = buildingStoreyDetailsData.value.storey_details_count; i < buildingStoreyDetailsData.value.current_storey; i++) {
             buildingStoreyDetails.value.push({
                 storey: '',
                 area_of_former_construction: '',

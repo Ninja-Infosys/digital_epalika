@@ -21,6 +21,9 @@
                             {{type.label}}
                         </label>
                     </div>
+
+
+
                 </div>
                 <p v-if="errors.building_category" class="text-danger">
                     {{errors.building_category}}
@@ -35,11 +38,11 @@
                                @change="validateField('building_usage')"
                                v-model="form.building_usage"
                                :disabled="!editFormOpened"
-                               :id="building_usage.value"
-                               :value="building_usage.value">
+                               :id="usage.value"
+                               :value="usage.value">
                         <label class="form-check-label"
-                               :for="building_usage.value">
-                            {{building_usage.label}}
+                               :for="usage.value">
+                            {{usage.label}}
                         </label>
                     </div>
                 </div>
@@ -86,12 +89,12 @@
                     <div class="col-md-4 mb-3">
                         <VInput
                             input-type="number"
-                            id="storey"
-                            v-model="form.storey"
-                            @validate="validateField('storey')"
+                            id="current_storey"
+                            v-model="form.current_storey"
+                            @validate="validateField('current_storey')"
                             label="भवनको तल्ला संख्या"
                             :disabled="!editFormOpened"
-                            :error="errors.storey"
+                            :error="errors.current_storey"
                         />
                     </div>
                     <div class="col-md-4 mb-3">
@@ -204,7 +207,7 @@ const initialState={
     building_usage:'',
     roof_category:'',
     house_built_year:'',
-    storey:'',
+    current_storey:'',
     room:'',
     plinth_area:'',
     other_construction_area_new:'',
@@ -226,11 +229,11 @@ const isSubmitting=ref(false);
 
 
 const validations = object({
-    building_category: string().required('निर्माण कार्यको किसिम अनिवार्य छ |'),
-    building_usage: string().required('प्रयोजन अनिवार्य छ |'),
-    roof_category: string().required('भवनको छानाको किसिम अनिवार्य छ |'),
+    building_category: string().nullable('निर्माण कार्यको किसिम अनिवार्य छ |'),
+    building_usage: string().nullable('प्रयोजन अनिवार्य छ |'),
+    roof_category: string().nullable('भवनको छानाको किसिम अनिवार्य छ |'),
     house_built_year: string().required('भवन निर्माण भएको वर्ष अनिवार्य छ |'),
-    storey: string().required('भवनको तल्ला संख्या अनिवार्य छ |'),
+    current_storey: string().required('भवनको तल्ला संख्या अनिवार्य छ |'),
     room: string().required('भवनको कोठा संख्या अनिवार्य छ |'),
     plinth_area: string().required('भवनको प्लिनथको क्षेत्रफल अनिवार्य छ |'),
     other_construction_area_new: string().required('अन्य निर्माण (भवन बाहेक जस्तै ः कम्पाउणडवाल, टहरा)ले ढाकेको क्षेत्रफल अनिवार्य छ |'),

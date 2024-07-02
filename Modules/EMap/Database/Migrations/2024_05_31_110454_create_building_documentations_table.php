@@ -39,7 +39,7 @@ return new class extends Migration
             $table->string('other_construction_area_new')->nullable()->comment('ढाकेको क्षेत्रफल');
             $table->string('other_construction_area_old')->nullable()->comment('ढाकिसकेको क्षेत्रफल');
             $table->string('total_area')->nullable()->comment('जम्मा क्षेत्रफल');
-            $table->string('storey')->nullable()->comment('भवनको तल्ला');
+            $table->string('current_storey')->nullable()->comment('भवनको तल्ला');
             $table->string('height')->nullable()->comment('भवनको उचाइ');
             $table->string('building_category')->nullable()->comment('निर्माणको किसिम');
             $table->string('roof_category')->nullable()->comment('छानाको किसिम');

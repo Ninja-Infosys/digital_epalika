@@ -16,7 +16,7 @@
         संहिता भित्र रही निर्माण कार्य गर्नेछु/छौं। यस दरखास्त फाराममा लेखिएको व्यहोरा ठीक साँचो छ,
         झुठ्ठा ठहरे कानून बमोजिम सहुँला बुझाउँला।
     </p>
-    <div id="building-app">
+    <div id="map-app">
         <edit-building-applications :building-documentation="{{json_encode($buildingDocumentation)}}"></edit-building-applications>
     </div>
 </div>

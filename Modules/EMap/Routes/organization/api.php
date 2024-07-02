@@ -31,4 +31,12 @@ Route::controller(OrganizationBuildingController::class)->group(function () {
     Route::get('buildingDocumentation/{buildingDocumentation}/building-storey-details', 'buildingStoreyDetails')->name('buildingDocumentation.building-storey-details');
     Route::post('buildingDocumentation/{buildingDocumentation}/update-building-storey-detail', 'updateBuildingStoreyDetail')->name('buildingDocumentation.update-building-storey-detail');
     Route::delete('buildingDocumentation/{buildingDocumentation}/buildingStoreyDetail/{buildingStoreyDetail}', 'deleteBuildingStoreyDetail')->name('buildingDocumentation.delete-building-storey-detail');
+    Route::put('buildingDocumentation/{buildingDocumentation}/update-building-land-detail', 'updateBuildingLandDetail')->name('buildingDocumentation.update-building-land-detail');
+    Route::get('buildingDocumentation/{buildingDocumentation}/building-land-owner', 'buildingLandOwnerDetail')->name('buildingDocumentation.building-land-owner');
+    Route::post('buildingDocumentation/{buildingDocumentation}/update-building-land-owner', 'updateBuildingLandOwner')->name('buildingDocumentation.update-building-land-owner');
+    Route::get('buildingDocumentation/{buildingDocumentation}/building-house-owner', 'buildingHouseOwnerDetail')->name('buildingDocumentation.building-house-owner');
+    Route::post('buildingDocumentation/{buildingDocumentation}/update-building-house-owner', 'updateBuildingHouseOwner')->name('buildingDocumentation.update-building-house-owner');
+
+
+
 });

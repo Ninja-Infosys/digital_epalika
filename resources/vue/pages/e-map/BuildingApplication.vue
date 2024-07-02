@@ -46,12 +46,12 @@
           <div class="col-md-3 mb-3">
             <VInput
               input-type="number"
-              id="storey"
-              v-model="form.storey"
+              id="current_storey"
+              v-model="form.current_storey"
               placeholder="तल्ला संख्या"
               label="१.३ तल्ला संख्या"
-              @validate="validateField('storey')"
-              :error="errors.storey"
+              @validate="validateField('current_storey')"
+              :error="errors.current_storey"
             />
           </div>
 
@@ -663,7 +663,7 @@ const initialState = {
   plinth_area: "",
   house_built_year: "",
   room: "",
-  storey: "",
+  current_storey: "",
   former_local_body: "",
   former_ward_no: "",
   land_ward_no: "",
@@ -813,7 +813,7 @@ const validations = object({
   plinth_area: string().required("अनिवार्य छ"),
   house_built_year: string().required("भवन बनेको साल अनिवार्य छ |"),
   room: string().required("कोठा संख्या अनिवार्य छ|"),
-  storey: string().required("तल्ला संख्या अनिवार्य छ|"),
+  current_storey: string().required("तल्ला संख्या अनिवार्य छ|"),
   former_local_body: string().nullable(),
   former_ward_no: string().nullable(),
   land_ward_no: string().required("अनिवार्य छ"),
