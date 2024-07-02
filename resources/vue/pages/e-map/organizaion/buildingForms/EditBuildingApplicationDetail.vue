@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="saveFormData(mapApply.id)" class="mb-2">
+    <form @submit.prevent="saveFormData(buildingDocumentation.id)" class="mb-2">
         <fieldset>
             <legend>१. प्रस्तावित भवनको विवरण</legend>
             <button type="button" class="btn btn-xs float-end btn-outline-primary waves-effect waves-light"
@@ -177,40 +177,39 @@
 
 import {onMounted, reactive, ref, watch} from "vue";
 import {storeToRefs} from "pinia";
-import {useSettingStore} from "../../../../stores/setting";
+import {useBuildingSettingStore} from "../../../../stores/buildingSetting";
 import {object, string} from "yup";
 import {useYup} from "../../../../utils/yup";
 import showErrors from "../../../../utils/showErrors";
 import {toast} from "../../../../utils/toast";
-import {useApplicationStore} from "../../../../stores/e-map/organization/application";
+import {useBuildingApplicationStore} from "../../../../stores/e-map/organization/buildingDocument";
 
 const props=defineProps({
-    mapApply:{
+    buildingDocumentation:{
         required:true,
         type:Object
     }
 })
 
-const settingStore=useSettingStore();
-const applicationStore=useApplicationStore();
+const buildingSettingStore=useBuildingSettingStore();
+const buildingApplicationStore=useBuildingApplicationStore();
 
 const editFormOpened=ref(false);
 
-const {eBuildingSetting}=storeToRefs(settingStore);
+const {eBuildingSetting}=storeToRefs(buildingSettingStore);
 
-const has_other_structure_type=ref(false);
 
 const initialState={
     building_category:'',
-    usage:'',
-    building_category:'',
-    structure_type:'',
-    structure_type_id:'',
-    current_storey:'',
-    area_of_plinth:'',
-    future_storey:'',
-    length:'',
-    breadth:'',
+    building_usage:'',
+    roof_category:'',
+    house_built_year:'',
+    storey:'',
+    room:'',
+    plinth_area:'',
+    other_construction_area_new:'',
+    other_construction_area_old:'',
+    total_area:'',
     height:'',
 }
 
@@ -218,48 +217,38 @@ const form = reactive({...initialState});
 
 onMounted(()=>{
     Object.keys(form).forEach(key => {
-        form[key] = props.mapApply[key]??'';
+        form[key] = props.buildingDocumentation[key]??'';
     })
 })
 
 const isSubmitting=ref(false);
 
-watch(()=>has_other_structure_type.value,(has_other_type)=>{
-    if(has_other_type){
-        form.structure_type_id='';
-    }
-})
 
-watch(()=>form.structure_type_id,(type_id)=>{
-    if(type_id){
-        has_other_structure_type.value=false;
-    }
-})
 
 const validations = object({
     building_category: string().required('निर्माण कार्यको किसिम अनिवार्य छ |'),
-    usage: string().required('प्रयोजन अनिवार्य छ |'),
-    building_category: string().required('प्रयोजन अनिवार्य छ |'),
-    structure_type_id: string().nullable(),
-    current_storey: string().required('तल्ला संख्या अनिवार्य छ |'),
-    area_of_plinth: string().required('क्षेत्रफल अनिवार्य छ |'),
-    future_storey: string().required('तल्ला संख्या अनिवार्य छ |'),
-    length: string().required('भवनको लम्बाई अनिवार्य छ |'),
-    breadth: string().required('भवनको चौडाई अनिवार्य छ |'),
-    height: string().required('भवनको उचाई अनिवार्य छ |'),
+    building_usage: string().required('प्रयोजन अनिवार्य छ |'),
+    roof_category: string().required('भवनको छानाको किसिम अनिवार्य छ |'),
+    house_built_year: string().required('भवन निर्माण भएको वर्ष अनिवार्य छ |'),
+    storey: string().required('भवनको तल्ला संख्या अनिवार्य छ |'),
+    room: string().required('भवनको कोठा संख्या अनिवार्य छ |'),
+    plinth_area: string().required('भवनको प्लिनथको क्षेत्रफल अनिवार्य छ |'),
+    other_construction_area_new: string().required('अन्य निर्माण (भवन बाहेक जस्तै ः कम्पाउणडवाल, टहरा)ले ढाकेको क्षेत्रफल अनिवार्य छ |'),
+    other_construction_area_old: string().required('अन्य निर्माण (भवन बाहेक जस्तै ः कम्पाउणडवाल, टहरा)ले ढाकी सकेको क्षेत्रफल अनिवार्य छ |'),
+    total_area: string().required('भवन निर्माण र साबिक भवन निर्माणले ढाक्ने जम्मा क्षेत्रफल अनिवार्य छ |'),
+    height: string().required('भवनको कुल उचाई जमिनको सतहबाट अनिवार्य छ |'),
 });
 
 const {errors, validateField, validateForm} = useYup(form, validations);
 
-const saveFormData=async (map_apply_id) => {
+const saveFormData=async (building_documentation_id) => {
     let validated = await validateForm(validations, form)
     if (validated) {
         isSubmitting.value = true;
         try {
-            let res = await applicationStore.updateApplicationDetail(map_apply_id,form);
+            let res = await buildingApplicationStore.updateApplicationDetail(building_documentation_id,form);
             toast(res.status,res.data.message);
             editFormOpened.value=false;
-            form.structure_type='';
         }catch (e) {
             showErrors(e);
         }finally {

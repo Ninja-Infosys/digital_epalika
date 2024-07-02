@@ -18,7 +18,6 @@ class UpdateBuildingApplicationRequest extends FormRequest
     public function rules(): array
     {
         return [
-
             'plinth_area' => ['required', 'string'],
             'house_built_year' => ['required', 'string'],
             'room' => ['required','integer'],

@@ -518,7 +518,7 @@
 
         <div class="col-md-4 mb-3">
           <VFileUpload
-            id="applicant-signature"
+            id="applicant_signature"
             v-model="form.applicant_signature"
             label="घर धनीको सहि"
             :show-preview-image="false"
@@ -890,7 +890,7 @@ const registerBuildingApplication = async () => {
 const toastMessage = (data) => {
   Swal.fire({
     title: "धन्यबाद!!!",
-    text: `तपाईंको फारम सफलतापूर्वक पेश भएको छ, तपाईंको सबमिशन नं. ${data?.unique_id} हो। कृपया भविष्यमा प्रयोगको लागि सबमिशन नं. सुरक्षित राख्नुहोस् ।`,
+    text: `तपाईंको फारम सफलतापूर्वक पेश भएको छ, तपाईंको सबमिशन नं. ${data['submission_no']} हो। कृपया भविष्यमा प्रयोगको लागि सबमिशन नं. सुरक्षित राख्नुहोस् ।`,
     icon: "success",
   });
 };

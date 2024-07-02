@@ -17,6 +17,6 @@
         झुठ्ठा ठहरे कानून बमोजिम सहुँला बुझाउँला।
     </p>
     <div id="building-app">
-        <edit-building-applications :building-app="{{json_encode($buildingDocumentation)}}"></edit-building-applications>
+        <edit-building-applications :building-documentation="{{json_encode($buildingDocumentation)}}"></edit-building-applications>
     </div>
 </div>

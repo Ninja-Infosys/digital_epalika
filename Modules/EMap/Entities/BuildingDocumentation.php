@@ -145,6 +145,10 @@ class BuildingDocumentation extends Model
     {
         return $this->hasMany(BuildingStoreyDetail::class);
     }
+    public function buildingDescriptions(): HasMany
+    {
+        return $this->hasMany(BuildingDescription::class);
+    }
 
     public function buildingDocuments(): HasMany
     {

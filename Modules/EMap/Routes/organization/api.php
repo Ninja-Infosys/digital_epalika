@@ -27,6 +27,8 @@ Route::controller(OrganizationApplicationsController::class)->group(function () 
     Route::post('mapApply/{mapApply}/update-consultancy-detail', 'updateConsultancyDetail')->name('mapApply.update-consultancy-detail');
 });
 Route::controller(OrganizationBuildingController::class)->group(function () {
-    Route::put('buildingDocumentation/{buildingDocumentation}/update-detail', 'updateBuildingApplication')->name('buildingDocumentation.update-detail');
-
+    Route::put('buildingDocumentation/{buildingDocumentation}/update-building-documentation-detail', 'updateBuildingApplication')->name('buildingDocumentation.update-building-documentation-detail');
+    Route::get('buildingDocumentation/{buildingDocumentation}/building-storey-details', 'buildingStoreyDetails')->name('buildingDocumentation.building-storey-details');
+    Route::post('buildingDocumentation/{buildingDocumentation}/update-building-storey-detail', 'updateBuildingStoreyDetail')->name('buildingDocumentation.update-building-storey-detail');
+    Route::delete('buildingDocumentation/{buildingDocumentation}/buildingStoreyDetail/{buildingStoreyDetail}', 'deleteBuildingStoreyDetail')->name('buildingDocumentation.delete-building-storey-detail');
 });

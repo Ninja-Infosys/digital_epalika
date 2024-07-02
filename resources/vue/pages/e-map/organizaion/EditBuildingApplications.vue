@@ -1,4 +1,5 @@
 <template>
+    console.log('hello');
     <p class="mt-2 fw-bold">तपसिल</p>
     <p>
         <EditBuildingApplicationDetail :building-documentation="buildingDocumentation"/>
@@ -10,12 +11,11 @@
 <script setup>
 import {onMounted} from "vue";
 
-import {useBuildingDocumentApplicationStore} from "../../../stores/e-map/organization/buildingApplication";
+import {useBuildingApplicationStore} from "../../../stores/e-map/organization/buildingDocument";
+import {useBuildingSettingStore} from "../../../stores/buildingSetting";
 
-import { useBuildingSettingStore } from "../../stores/buildingSetting";
 
 import EditBuildingApplicationDetail from "./buildingForms/EditBuildingApplicationDetail.vue";
-
 
 
 defineProps({
@@ -25,10 +25,13 @@ defineProps({
     }
 })
 
-const buildingDocumentApplicationStore=useBuildingDocumentApplicationStore();
+const buildingApplicationStore=useBuildingApplicationStore();
 const buildingSettingStore=useBuildingSettingStore();
 
+
 onMounted(()=>{
+    console.log(data);
     buildingSettingStore.getBuildingSetting();
+
 })
 </script>
