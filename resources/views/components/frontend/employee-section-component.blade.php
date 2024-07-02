@@ -5,7 +5,7 @@
             @foreach ($representatives as $representative)
                 <div>
                     <div class="sub-head">
-                        <h6 class="text-white mb-0 ">{{ $representative->designation }}</h6>
+                        <h6 class="text-white mb-0 mx-2 py-2">{{ $representative->designation }}</h6>
                     </div>
                     <div class="card mt-1">
                         <img src="{{ $representative->photo_url }}" class="card-img-top" alt="{{ $representative->name }}">
@@ -26,7 +26,7 @@
             @foreach ($employees as $employee)
                 <div>
                     <div class="sub-head">
-                        <h6 class="text-white mb-0 ">{{ $employee->designation }}</h6>
+                        <h6 class="text-white mb-0 mx-2 py-2">{{ $employee->designation }}</h6>
                     </div>
                     <div class="card mt-1">
                         <img src="{{ $employee->photo_url }}" class="card-img-top" alt="{{ $employee->name }}">
