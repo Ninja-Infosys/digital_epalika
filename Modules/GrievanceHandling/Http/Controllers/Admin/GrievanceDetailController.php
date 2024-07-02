@@ -11,14 +11,14 @@ use App\Mail\GrievanceHandling\GrievanceRegistrationAssignedUserMail;
 use App\Mail\GrievanceHandling\GrievanceRegistrationUserMail;
 use App\Models\Settings\Branch;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Modules\GrievanceHandling\Entities\GrievanceDetail;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
+use Modules\GrievanceHandling\Entities\GrievanceDetail;
 use Modules\GrievanceHandling\Entities\GrievanceType;
 use Modules\GrievanceHandling\Entities\GrievanceUser;
 use Modules\GrievanceHandling\Http\Requests\GrievanceDetail\StoreGrievanceDetailRequest;
@@ -30,12 +30,11 @@ class GrievanceDetailController extends Controller
         $this->checkAuthorization('grievanceDetail_access');
 
         $grievanceDetails = GrievanceDetail::with('grievanceType')->whereNull('grievance_detail_id')->where(function (Builder $q) {
-            if (!is_null(request('search'))) {
-                $q->whereLike(['token', 'grievanceType.title',], request('search'));
+            if (! is_null(request('search'))) {
+                $q->whereLike(['token', 'grievanceType.title'], request('search'));
             }
         })
             ->latest()->paginate(10);
-
 
         return view('grievancehandling::admin.grievanceDetail.index', compact('grievanceDetails'));
     }
@@ -76,7 +75,7 @@ class GrievanceDetailController extends Controller
 
             $grievanceDetail->grievanceAssignHistories()->create([
                 'from_user_id' => auth()->id(),
-                'user_id' => $grievanceDetail->assigned_user_id
+                'user_id' => $grievanceDetail->assigned_user_id,
             ]);
             //mail to assigned user
             // Mail::to($grievanceDetail->assignedUser->email)
@@ -120,7 +119,6 @@ class GrievanceDetailController extends Controller
 
         return view('grievancehandling::admin.grievanceDetail.show', compact('grievanceDetail', 'users'));
     }
-
 
     public function edit($id)
     {
@@ -176,7 +174,7 @@ class GrievanceDetailController extends Controller
             //mail to grievance user
             if ($grievanceDetail->grievanceUser->email) {
                 Mail::to($grievanceDetail->grievanceUser->email)->send(new GrievanceDetailMail(
-                    $data->user->name . " has replied $data->description to your posted grievance."
+                    $data->user->name." has replied $data->description to your posted grievance."
                 ));
             }
         });
@@ -188,7 +186,7 @@ class GrievanceDetailController extends Controller
 
     public function showToPublic(GrievanceDetail $grievanceDetail): RedirectResponse
     {
-        $grievanceDetail->update(['is_public' => !$grievanceDetail->is_public]);
+        $grievanceDetail->update(['is_public' => ! $grievanceDetail->is_public]);
         toast('सफलतापूर्वक सार्वजनिक गरियो', 'success');
 
         return back();
@@ -196,7 +194,7 @@ class GrievanceDetailController extends Controller
 
     public function approve(GrievanceDetail $grievanceDetail): RedirectResponse
     {
-        $grievanceDetail->update(['is_approved' => !$grievanceDetail->is_approved]);
+        $grievanceDetail->update(['is_approved' => ! $grievanceDetail->is_approved]);
         toast('सफलतापूर्वक दर्ता गरियो', 'success');
 
         return back();
@@ -205,17 +203,17 @@ class GrievanceDetailController extends Controller
     public function grievanceTransfer(Request $request, GrievanceDetail $grievanceDetail)
     {
         $request->validate([
-            'transfer_user_id' => ['required', Rule::exists('users', 'id')->withoutTrashed()]
+            'transfer_user_id' => ['required', Rule::exists('users', 'id')->withoutTrashed()],
         ]);
 
         DB::transaction(function () use ($grievanceDetail, $request) {
             $grievanceAssign = $grievanceDetail->grievanceAssignHistories()->create([
                 'from_user_id' => $grievanceDetail->assigned_user_id,
-                'user_id' => $request->input('transfer_user_id')
+                'user_id' => $request->input('transfer_user_id'),
             ]);
             $grievanceDetail->update([
                 'assigned_user_id' => $request->input('transfer_user_id'),
-                'assigned_at' => now()
+                'assigned_at' => now(),
             ]);
 
             //mail to assigned user
@@ -231,6 +229,7 @@ class GrievanceDetailController extends Controller
         });
 
         toast('Grievance Transferred Successfully', 'success');
+
         return back();
     }
 }

@@ -32,7 +32,7 @@
     </div>
     <div class="card p-4 mb-4">
         <legend>
-            <h5>१. प्रस्तावित भवनको विवरणvcbvcbcvgbcvg</h5>
+            <h5>१. प्रस्तावित भवनको विवरण</h5>
         </legend>
         <div class="mb-3">
             <label class="form-label fw-bolder">१.१ निर्माण कार्यको किसिम *</label>

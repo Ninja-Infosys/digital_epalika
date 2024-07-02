@@ -9,8 +9,10 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Modules\EMap\Entities\BuildingDescription;
 use Modules\EMap\Entities\BuildingDocumentation;
 use Modules\EMap\Entities\BuildingStoreyDetail;
+use Modules\EMap\Entities\ContractorDetail;
 use Modules\EMap\Entities\Neighbour;
 
 class BuildingDocumentationLivewire extends Component
@@ -33,44 +35,99 @@ class BuildingDocumentationLivewire extends Component
 
     public $neighbours = [];
 
+    public bool $same_as_land_owner = false;
+
     public $buildingStoreyDetails = [];
+    public $buildingDescriptions = [];
 
     public BuildingDocumentation $buildingDocumentation;
 
     public array $form = [
-        'house_owner_name' => null,
+        'submission_no' => null,
+        'fiscal_year_id' => null,
+        'registration_no' => null,
+        'registration_date' => null,
+        'former_local_body' => null,
+        'former_ward_no' => null,
+        'land_ward_no' => null,
+        'plot_no' => null,
+        'land_tole' => null,
+        'land_area' => null,
+        'house_built_year' => null,
         'applicant_name' => null,
-        'application_date' => null,
+        'applicant_signature' => null,
         'province_id' => null,
         'district_id' => null,
         'local_body_id' => null,
-        'ward_no' => null,
-        'tole' => null,
-        'former_district' => null,
-        'former_local_body' => null,
-        'former_ward_no' => null,
-        'phone' => null,
-        'plot_no' => null,
-        'land_area' => null,
-        'land_ward_no' => null,
-        'house_built_year' => null,
-        'room' => null,
+        'applicant_ward_no' => null,
+        'applicant_tole' => null,
+        'applicant_phone_no' => null,
+        'applicant_age' => null,
+        'application_date' => null,
+        'building_usage' => null,
+        'field_land_area' => null,
+        'plinth_area' => null,
+        'other_construction_area_new' => null,
+        'other_construction_area_old' => null,
+        'total_area' => null,
         'storey' => null,
-        'area' => null,
-        'building_category' => null,
-        'length' => null,
-        'breadth' => null,
         'height' => null,
-        'other' => null,
-        'road_jurisdiction' => null,
-        'land_detail' => null,
-        'applicant_former_district' => null,
-        'applicant_former_local_body' => null,
-        'applicant_former_ward_no' => null,
-        'citizenship_no' => null,
+        'building_category' => null,
+        'roof_category' => null,
+        'set_back' =>  null,
+        'consultant_engineer_signature' =>  null,
+        'consultant_engineer_name' =>  null,
+        'consultant_engineer_post' =>  null,
+        'consultancy_name' =>  null,
+        'consultancy_registration_no' =>  null,
+        'consultancy_stamp' =>  null,
+        'n_e_c_registration_no' =>  null,
+        'land_detail' =>  null,
+        'room' =>  null,
+        'files' => [],
         'neighbours' => [],
         'buildingStoreyDetails' => [],
-        'files' => [],
+        'buildingDescriptions' => [],
+        'contractorDetails' => [],
+    ];
+
+
+    public array $buildingHouseOwner = [
+        'name' => null,
+        'phone' => null,
+        'father_name' => null,
+        'grandfather_name' => null,
+        'citizenship_issue_district_id' => null,
+        'citizenship_no' => null,
+        'citizenship_issue_date' => [],
+        'address' => null,
+        'local_body' => null,
+        'ward_no' => null,
+        'photo' => null,
+        'province_id' => null,
+        'district_id' => null,
+        'local_body_id'  => null,
+        'tole' => null,
+        'signature' => null,
+    ];
+    public array $buildingLandOwner = [
+        'name' => null,
+        'phone' => null,
+        'father_name' => null,
+        'grandfather_name' => null,
+        'citizenship_issue_district_id' => null,
+        'citizenship_no' => null,
+        'citizenship_issue_date' => [],
+        'address' => null,
+        'local_body' => null,
+        'ward_no' => null,
+        'document' => [],
+        'photo' => null,
+        'province_id' => null,
+        'district_id' => null,
+        'local_body_id'  => null,
+        'tole' => null,
+        'signature' => null,
     ];
 
     public array $requiredDocument = [
@@ -81,7 +138,6 @@ class BuildingDocumentationLivewire extends Component
         'land_map' => null,
         'all_round_house_pic' => null,
         'files' => [],
-
         'photo' => null,
     ];
 
@@ -89,7 +145,7 @@ class BuildingDocumentationLivewire extends Component
     {
 
         $this->provinces = get_provinces();
-
+        $this->districts = get_districts();
         if (!empty($buildingDocumentation)) {
             $this->buildingDocumentation = $buildingDocumentation;
 
@@ -98,13 +154,14 @@ class BuildingDocumentationLivewire extends Component
 
             $this->neighbourArrayIncrement();
             $this->buildingStoreyDetailArrayIncrement();
+            $this->buildingDescriptionArrayIncrement();
+            $this->contractorDetailArrayIncrement();
         }
-
     }
 
     private function assignBuildingDocumentationData()
     {
-        foreach (Arr::except($this->form, ['neighbours', 'buildingStoreyDetails', 'files']) as $key => $data) {
+        foreach (Arr::except($this->form, ['neighbours', 'buildingStoreyDetails', ' buildingDescriptions', 'contractorDetails', 'files']) as $key => $data) {
             $this->form[$key] = $this->buildingDocumentation[$key];
         }
 
@@ -128,6 +185,30 @@ class BuildingDocumentationLivewire extends Component
 
             ];
         }
+        foreach ($this->buildingDocumentation->buildingDescriptions as $buildingDescription) {
+            $this->form['buildingDescriptions'][] = [
+                'id' => $buildingDescription->id,
+                'direction' => $buildingDescription->direction ?? null,
+                'has_road' => $buildingDescription->has_road ?? null,
+                'has_window' => $buildingDescription->has_window ?? null,
+                'minimum_distance_to_leave' => $buildingDescription->minimum_distance_to_leave ?? null,
+                'leave' => $buildingDescription->leave ?? null,
+                'remarks' => $buildingDescription->remarks ?? null,
+
+            ];
+        }
+        foreach ($this->buildingDocumentation->contractorDetails as $contractorDetail) {
+            $this->form['contractorDetails'][] = [
+                'id' => $buildingDescription->id,
+                'contractor_name' => $contractorDetail->contractor_name ?? null,
+                'contractor_signature' => $contractorDetail->contractor_signature ?? null,
+                'address' => $contractorDetail->address ?? null,
+
+                'tole' => $contractorDetail->tole ?? null,
+                'ward_no' => $contractorDetail->ward_no ?? null,
+
+            ];
+        }
     }
 
     protected array $secondStepValidations = [
@@ -135,12 +216,26 @@ class BuildingDocumentationLivewire extends Component
         'form.neighbours.*.neighbour_name' => ['required', 'string'],
         'form.neighbours.*.direction' => ['required'],
         'form.neighbours.*.ward_no' => ['required', 'integer'],
-        'form.neighbours.*.plot_no' => ['nullable', 'string'],
-        'form.buildingStoreyDetails' => ['required', 'array'],
-        'form.buildingStoreyDetails.*.storey' => ['required'],
-        'form.buildingStoreyDetails.*.area_of_former_construction' => ['required', 'string'],
-        'form.buildingStoreyDetails.*.land_area' => ['required', 'string'],
+        'form.neighbours.*.plot_no' => ['required', 'string'],
+        'form.buildingStoreyDetails' => ['nullable', 'array'],
+        'form.buildingStoreyDetails.*.storey' => ['nullable'],
+        'form.buildingStoreyDetails.*.area_of_former_construction' => ['nullable', 'string'],
+        'form.buildingStoreyDetails.*.land_area' => ['nullable', 'string'],
         'form.buildingStoreyDetails.*.remarks' => ['nullable', 'string'],
+        'form.buildingDescriptions' => ['nullable', 'array'],
+        'form.buildingDescriptions.*.direction' => ['nullable', 'string'],
+        'form.buildingDescriptions.*.has_road' => ['nullable', 'string'],
+        'form.buildingDescriptions.*.has_window' => ['nullable', 'string'],
+        'form.buildingDescriptions.*.minimum_distance_to_leave' => ['nullable', 'string'],
+        'form.buildingDescriptions.*.leave' => ['nullable', 'string'],
+        'form.buildingDescriptions.*.remarks' => ['nullable', 'string'],
+        'form.contractorDetails' => ['nullable', 'array'],
+        'form.contractorDetails.*.contractor_name' => ['nullable', 'string'],
+        'form.contractorDetails.*.contractor_signature' => ['nullable', 'image'],
+        'form.contractorDetails.*.address' => ['nullable', 'string'],
+
+        'form.contractorDetails.*.tole' => ['nullable', 'string'],
+        'form.contractorDetails.*.ward_no' => ['nullable', 'integer'],
 
     ];
 
@@ -148,34 +243,72 @@ class BuildingDocumentationLivewire extends Component
     {
         return [
 
-            'form.house_owner_name' => ['required', 'string'],
+            'form.former_local_body' => ['required', 'string'],
+            'form.former_ward_no' => ['required', 'integer'],
+            'form.land_ward_no' => ['required', 'integer'],
+            'form.plot_no' => ['required', 'string'],
+            'form.land_tole' => ['required', 'string'],
+            'form.land_area' => ['required', 'string'],
+            'form.field_land_area' => ['nullable', 'string'],
+            'form.house_built_year' => ['required', 'string'],
+            'form.applicant_name' => ['required', 'string'],
+            'form.applicant_signature' => ['required', 'image'],
             'form.province_id' => ['required', 'integer', 'exists:provinces,id'],
             'form.district_id' => ['required', 'integer', 'exists:districts,id'],
             'form.local_body_id' => ['required', 'integer', 'exists:local_bodies,id'],
-            'form.ward_no' => ['required', 'integer'],
-            'form.tole' => ['required', 'string'],
-            'form.former_district' => ['required', 'string'],
-            'form.former_local_body' => ['required', 'string'],
-            'form.former_ward_no' => ['required', 'string'],
-            'form.applicant_former_district' => ['required', 'string'],
-            'form.applicant_former_local_body' => ['required', 'string'],
-            'form.applicant_former_ward_no' => ['required', 'string'],
-            'form.phone' => ['required', 'string'],
-            'form.plot_no' => ['required', 'string'],
-            'form.land_area' => ['required', 'string'],
-            'form.land_ward_no' => ['required', 'integer'],
-            'form.house_built_year' => ['required', 'string'],
-            'form.room' => ['required', 'string'],
+            'form.applicant_ward_no' => ['required', 'integer'],
+            'form.applicant_tole' => ['required', 'string'],
+            'form.applicant_phone_no' => ['required', 'string'],
+            'form.applicant_age' => ['required', 'integer'],
+            'form.application_date' => ['required', 'string'],
+            'form.plinth_area' => ['required', 'string'],
             'form.storey' => ['required', 'string'],
-            'form.area' => ['required', 'string'],
-            'form.building_category' => ['required', 'string'],
-            'form.length' => ['required', 'string'],
-            'form.breadth' => ['required', 'string'],
-            'form.citizenship_no' => ['required', 'string'],
+            'form.room' => ['required', 'string'],
+            'form.building_usage' => ['required', 'string'],
+            'form.other_construction_area_new' => ['nullable', 'string'],
+            'form.other_construction_area_old' => ['nullable', 'string'],
+            'form.total_area' => ['nullable', 'string'],
             'form.height' => ['required', 'string'],
-            'form.other' => ['nullable', 'string'],
-            'form.road_jurisdiction' => ['required', 'string'],
-            'form.land_detail' => ['required', 'string'],
+            'form.building_category' => ['required', 'string'],
+            'form.roof_category' => ['required', 'string'],
+            'form.set_back' => ['nullable', 'string'],
+            'form.land_detail' => ['nullable', 'string'],
+            'buildingLandOwner.name' => ['required'],
+            'buildingLandOwner.phone' => ['nullable'],
+            'buildingLandOwner.father_name' => ['nullable'],
+            'buildingLandOwner.grandfather_name' => ['nullable'],
+            'buildingLandOwner.citizenship_issue_district_id' => ['nullable'],
+            'buildingLandOwner.citizenship_issue_date' => ['nullable'],
+            'buildingLandOwner.citizenship_no' => ['nullable'],
+            'buildingLandOwner.address' => ['nullable'],
+            'buildingLandOwner.local_body' => ['nullable'],
+            'buildingLandOwner.ward_no' => ['nullable'],
+            'buildingLandOwner.document' => ['nullable'],
+            'buildingLandOwner.photo' => ['nullable'],
+            'buildingLandOwner.province_id' => ['nullable'],
+            'buildingLandOwner.district_id' => ['nullable'],
+            'buildingLandOwner.local_body_id' => ['nullable'],
+            'buildingLandOwner.tole' => ['nullable'],
+            'buildingLandOwner.signature' => ['nullable'],
+            'buildingHouseOwner.name' => ['nullable'],
+            'buildingHouseOwner.phone' => ['nullable'],
+            'buildingHouseOwner.father_name' => ['nullable'],
+            'buildingHouseOwner.grandfather_name' => ['nullable'],
+            'buildingHouseOwner.citizenship_issue_district_id' => ['nullable'],
+            'buildingHouseOwner.citizenship_issue_date' => ['nullable'],
+            'buildingHouseOwner.citizenship_no' => ['nullable'],
+            'buildingHouseOwner.address' => ['nullable'],
+            'buildingHouseOwner.local_body' => ['nullable'],
+            'buildingHouseOwner.ward_no' => ['nullable'],
+            'buildingHouseOwner.document' => ['nullable'],
+            'buildingHouseOwner.photo' => ['nullable'],
+            'buildingHouseOwner.province_id' => ['nullable'],
+            'buildingHouseOwner.district_id' => ['nullable'],
+            'buildingHouseOwner.local_body_id' => ['nullable'],
+            'buildingHouseOwner.tole' => ['nullable'],
+            'buildingHouseOwner.signature' => ['nullable'],
+
+
         ];
     }
 
@@ -190,7 +323,21 @@ class BuildingDocumentationLivewire extends Component
                 'form.buildingStoreyDetails.*.storey' => ['required'],
                 'form.buildingStoreyDetails.*.area_of_former_construction' => ['required', 'string'],
                 'form.buildingStoreyDetails.*.land_area' => ['required', 'string'],
-                'form.buildingStoreyDetails.*.remarks' => ['nullable', 'string'],
+                'form.buildingStoreyDetails.*.remarks' => ['required', 'string'],
+                'form.buildingDescriptions' => ['required', 'array'],
+                'form.buildingDescriptions.*.direction' => ['required', 'string'],
+                'form.buildingDescriptions.*.has_road' => ['required', 'string'],
+                'form.buildingDescriptions.*.has_window' => ['required', 'string'],
+                'form.buildingDescriptions.*.minimum_distance_to_leave' => ['required', 'string'],
+                'form.buildingDescriptions.*.leave' => ['required', 'string'],
+                'form.buildingDescriptions.*.remarks' => ['required', 'string'],
+                'form.contractorDetails' => ['nullable', 'array'],
+                'form.contractorDetails.*.contractor_name' => ['nullable', 'string'],
+                'form.contractorDetails.*.contractor_signature' => ['nullable', 'image'],
+                'form.contractorDetails.*.address' => ['nullable', 'string'],
+
+                'form.contractorDetails.*.tole' => ['nullable', 'string'],
+                'form.contractorDetails.*.ward_no' => ['nullable', 'integer'],
             ])
             : array_merge($this->secondStepValidations, [
                 'form.neighbours.*.neighbour_name' => ['nullable', 'string'],
@@ -200,6 +347,19 @@ class BuildingDocumentationLivewire extends Component
                 'form.buildingStoreyDetails.*.area_of_former_construction' => ['nullable', 'string'],
                 'form.buildingStoreyDetails.*.land_area' => ['nullable', 'string'],
                 'form.buildingStoreyDetails.*.remarks' => ['nullable', 'string'],
+                'form.buildingDescriptions' => ['nullable', 'array'],
+                'form.buildingDescriptions.*.direction' => ['nullable', 'string'],
+                'form.buildingDescriptions.*.has_road' => ['nullable', 'string'],
+                'form.buildingDescriptions.*.has_window' => ['nullable', 'string'],
+                'form.buildingDescriptions.*.minimum_distance_to_leave' => ['nullable', 'string'],
+                'form.buildingDescriptions.*.leave' => ['nullable', 'string'],
+                'form.buildingDescriptions.*.remarks' => ['nullable', 'string'],
+                'form.contractorDetails' => ['nullable', 'array'],
+                'form.contractorDetails.*.contractor_name' => ['nullable', 'string'],
+                'form.contractorDetails.*.contractor_signature' => ['nullable', 'image'],
+                'form.contractorDetails.*.address' => ['nullable', 'string'],
+                'form.contractorDetails.*.tole' => ['nullable', 'string'],
+                'form.contractorDetails.*.ward_no' => ['nullable', 'integer'],
             ]);
     }
 
@@ -212,6 +372,14 @@ class BuildingDocumentationLivewire extends Component
         'requiredDocument.land_map' => ['required'],
         'requiredDocument.all_round_house_pic' => ['nullable'],
         'requiredDocument.photo' => ['required'],
+        'form.consultant_engineer_signature' => ['nullable', 'image'],
+        'form.consultant_engineer_name' => ['nullable', 'string'],
+        'form.consultant_engineer_post' => ['nullable', 'string'],
+        'form.consultancy_name' => ['nullable', 'string'],
+        'form.consultancy_registration_no' => ['nullable', 'string'],
+        'form.consultancy_stamp' => ['nullable', 'string'],
+        'form.n_e_c_registration_no' => ['nullable', 'string'],
+        'form.consultancy_registration_no' => ['nullable', 'string'],
     ];
 
     protected function thirdStepValidations(): array
@@ -225,6 +393,14 @@ class BuildingDocumentationLivewire extends Component
                 'requiredDocument.land_map' => ['nullable'],
                 'requiredDocument.all_round_house_pic' => ['nullable'],
                 'requiredDocument.photo' => ['nullable'],
+                'form.consultant_engineer_signature' => ['required', 'image'],
+                'form.consultant_engineer_name' => ['required', 'string'],
+                'form.consultant_engineer_post' => ['required', 'string'],
+                'form.consultancy_name' => ['required', 'string'],
+                'form.consultancy_registration_no' => ['required', 'string'],
+                'form.consultancy_stamp' => ['required', 'string'],
+                'form.n_e_c_registration_no' => ['required', 'string'],
+                'form.consultancy_registration_no' => ['required', 'string'],
             ] : [
                 'requiredDocument.citizenship' => ['required'],
                 'requiredDocument.landowner_proved' => ['required'],
@@ -233,6 +409,14 @@ class BuildingDocumentationLivewire extends Component
                 'requiredDocument.land_map' => ['nullable'],
                 'requiredDocument.all_round_house_pic' => ['nullable'],
                 'requiredDocument.photo' => ['required'],
+                'form.consultant_engineer_signature' => ['nullable', 'image'],
+                'form.consultant_engineer_name' => ['nullable', 'string'],
+                'form.consultant_engineer_post' => ['nullable', 'string'],
+                'form.consultancy_name' => ['nullable', 'string'],
+                'form.consultancy_registration_no' => ['nullable', 'string'],
+                'form.consultancy_stamp' => ['nullable', 'string'],
+                'form.n_e_c_registration_no' => ['nullable', 'string'],
+                'form.consultancy_registration_no' => ['nullable', 'string'],
             ];
     }
 
@@ -322,8 +506,28 @@ class BuildingDocumentationLivewire extends Component
                 $buildingStoreyDetail
             );
         }
+        foreach ($this->form['buildingDescriptions'] as $buildingDescription) {
+            BuildingDescription::updateOrCreate(
+                [
+                    'building_documentation_id' => $buildingDocumentation->id,
+                    'id' => $buildingDescription['id'] ?? null
+                ],
+                $buildingDescription
+            );
+        }
+        foreach ($this->form['contractorDetails'] as $contractorDetail) {
+            ContractorDetail::updateOrCreate(
+                [
+                    'building_documentation_id' => $buildingDocumentation->id,
+                    'id' => $contractorDetail['id'] ?? null
+                ],
+                $contractorDetail
+            );
+        }
 
         $buildingDocumentation->requiredDocument()->create($this->requiredDocument);
+        $buildingDocumentation->buildingLandOwner()->create($this->buildingLandOwner);
+        $buildingDocumentation->buildingHouseOwner()->create($this->buildingHouseOwner);
         DB::transaction(function () use ($buildingDocumentation) {
 
             foreach ($this->form['requiredDocument.files'] ?? [] as $document) {
@@ -352,6 +556,14 @@ class BuildingDocumentationLivewire extends Component
     {
         $this->form['buildingStoreyDetails'][] = [];
     }
+    public function buildingDescriptionArrayIncrement(): void
+    {
+        $this->form['buildingDescriptions'][] = [];
+    }
+    public function contractorDetailArrayIncrement(): void
+    {
+        $this->form['contractorDetails'][] = [];
+    }
 
     public function neighbourArrayDecrement($index): void
     {
@@ -370,6 +582,22 @@ class BuildingDocumentationLivewire extends Component
         unset($this->form['buildingStoreyDetails'][$index]);
         $this->form['buildingStoreyDetails'] = array_values($this->form['buildingStoreyDetails']);
     }
+    public function buildingDescriptionArrayDecrement($index): void
+    {
+        if (!empty($this->form['buildingDescriptions'][$index]['id'])) {
+            BuildingDescription::find($this->form['buildingDescriptions'][$index]['id'])->delete();
+        }
+        unset($this->form['buildingDescriptions'][$index]);
+        $this->form['buildingDescriptions'] = array_values($this->form['buildingDescriptions']);
+    }
+    public function contractorDetailArrayDecrement($index): void
+    {
+        if (!empty($this->form['contractorDetails'][$index]['id'])) {
+            ContractorDetail::find($this->form['contractorDetails'][$index]['id'])->delete();
+        }
+        unset($this->form['contractorDetails'][$index]);
+        $this->form['contractorDetails'] = array_values($this->form['contractorDetails']);
+    }
 
     public function fileArrayIncrement(): void
     {
@@ -387,6 +615,24 @@ class BuildingDocumentationLivewire extends Component
 
     public function render(): Factory|View|Application
     {
+        if (!empty($this->buildingLandOwner['province_id'])) {
+            $this->districts = get_districts($this->buildingLandOwner['province_id']);
+        }
+        if (!empty($this->buildingLandOwner['district_id'])) {
+            $this->localBodies = get_local_bodies($this->buildingLandOwner['district_id']);
+        }
+        if (!empty($this->buildingLandOwner['local_body_id'])) {
+            $this->wards = get_local_bodies(localBodyId: $this->buildingLandOwner['local_body_id'])->ward_no;
+        }
+        if (!empty($this->buildingHouseOwner['province_id'])) {
+            $this->districts = get_districts($this->buildingHouseOwner['province_id']);
+        }
+        if (!empty($this->buildingHouseOwner['district_id'])) {
+            $this->localBodies = get_local_bodies($this->buildingHouseOwner['district_id']);
+        }
+        if (!empty($this->buildingHouseOwner['local_body_id'])) {
+            $this->wards = get_local_bodies(localBodyId: $this->buildingHouseOwner['local_body_id'])->ward_no;
+        }
         if (!empty($this->form['province_id'])) {
             $this->districts = get_districts($this->form['province_id']);
         }
@@ -459,5 +705,48 @@ class BuildingDocumentationLivewire extends Component
 
 
         ];
+    }
+
+    public function checkSameAsLandOwner(): void
+    {
+        $this->same_as_land_owner = !$this->same_as_land_owner;
+        if ($this->same_as_land_owner) {
+            $this->buildingHouseOwner = [
+                'name' => $this->buildingLandOwner['name'] ?? null,
+                'phone' => $this->buildingLandOwner['phone'] ?? null,
+                'father_name' => $this->buildingLandOwner['father_name'] ?? null,
+                'grandfather_name' => $this->buildingLandOwner['grandfather_name'] ?? null,
+                'photo' => $this->buildingLandOwner['photo'] ?? null,
+                'signature' => $this->buildingLandOwner['signature'] ?? null,
+                'citizenship_issue_district_id' => $this->buildingLandOwner['citizenship_issue_district_id'] ?? null,
+                'citizenship_no' => $this->buildingLandOwner['citizenship_no'] ?? null,
+                'citizenship_issue_date' => $this->buildingLandOwner['citizenship_issue_date'] ?? null,
+                'province_id' => $this->buildingLandOwner['province_id'] ?? null,
+                'district_id' => $this->buildingLandOwner['district_id'] ?? null,
+                'local_body_id' => $this->buildingLandOwner['local_body_id'] ?? null,
+                'tole' => $this->buildingLandOwner['tole'] ?? null,
+                'ward_no' => $this->buildingLandOwner['ward_no'] ?? null,
+
+            ];
+        } else {
+            $this->buildingHouseOwner = [
+                'name' => null,
+                'phone' => null,
+                'father_name' => null,
+                'grandfather_name' => null,
+                'photo' => null,
+                'signature' => null,
+                'citizenship_issue_district_id' => null,
+                'citizenship_no' => null,
+                'citizenship_issue_date' => [],
+                'province_id' => null,
+                'district_id' => null,
+                'local_body_id'  => null,
+                'tole' => null,
+                'address' => null,
+                'ward_no' => null,
+
+            ];
+        }
     }
 }

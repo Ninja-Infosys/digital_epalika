@@ -11,10 +11,10 @@
                                 गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active"></li>
+                        <li class="breadcrumb-item active">{{ $buildingDocumentation->submission_no }}</li>
                     </ol>
                 </div>
-                <h4 class="page-title"></h4>
+                <h4 class="page-title">{{ $buildingDocumentation->submission_no }}</h4>
             </div>
         </div>
     </div>
@@ -38,15 +38,15 @@
 
                     <div class="tab-content">
                         <div class="tab-pane " id="tab-all">
-                            <x-organization.form-steps-component
-                                :map-apply="$mapApply"
+                            <x-organization.building-form-steps-component
+                                :building-documentation="$buildingDocumentation"
                                 :forms="$forms"
                                 :order="$order"
                             />
                         </div>
                         <div class="tab-pane show active" id="tab-organization">
-                            <x-organization.form-steps-component
-                                :map-apply="$mapApply"
+                            <x-organization.building-form-steps-component
+                                :building-documentation="$buildingDocumentation"
                                 :forms="$forms->where('need_from',\Modules\EMap\Enums\EMapFormFillerTypeEnum::ORGANIZATION)"
                                 :order="$order"
                             />

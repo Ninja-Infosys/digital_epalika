@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 
 class PopUpNotice extends Model
@@ -29,16 +30,26 @@ class PopUpNotice extends Model
         'is_displayed',
     ];
 
+
     protected $casts = [
         'is_displayed' => 'boolean',
     ];
+
     protected function ward(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => explode(',', $value),
-            set: fn (string|array|null $value) => !empty($value) ? is_array($value) ? implode(',', $value) : $value : null,
+            get: function ($value) {
+                return $value !== null ? explode(',', $value) : [];
+            },
+            set: function ($value) {
+                if (is_array($value)) {
+                    return implode(',', $value);
+                }
+                return $value;
+            }
         );
     }
+
     public function scopeMainPageDisplay(Builder $builder, bool $display = true): void
     {
         $builder->where('is_displayed', $display);
@@ -46,10 +57,11 @@ class PopUpNotice extends Model
 
     public function getImageUrlAttribute(): string|null
     {
-        return $this->attributes['image']
+        return isset($this->attributes['image']) && $this->attributes['image']
             ? Storage::disk('public')->url($this->attributes['image'])
             : null;
     }
+
 
     public function scopeActive(Builder $builder): void
     {
@@ -60,7 +72,11 @@ class PopUpNotice extends Model
     public function setImageAttribute($value): void
     {
         if (!empty($value) && !is_string($value)) {
-            $this->attributes['image'] = $value->store('popupNotice/', 'public');
+            $this->attributes['image'] = $value->store('popup/', 'public');
         }
+    }
+    public function popupActivations(): HasMany
+    {
+        return $this->hasMany(PopupActivation::class);
     }
 }

@@ -142,13 +142,7 @@ class GrievanceFormWizard extends Component
                 'user_id' => $grievanceDetail->assigned_user_id
             ]);
 
-            //mail to assigned user
-            // Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceRegistrationAssignedUserMail($grievanceDetail));
-
-            // //mail to grievance user
-            // if ($grievanceDetail->grievanceUser->email) {
-            //     Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceRegistrationUserMail($grievanceDetail));
-            // }
+           
 
             return $grievanceDetail;
         });

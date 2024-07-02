@@ -8,6 +8,8 @@ enum BuildingTypeEnum: string
     case SIMPLE_BUILDING = 'simple building';
     case SIMPLE_HOUSE = 'simple house';
     case MUD_HOUSE = 'mud house';
+    case LOAD_BEARING = 'load bearing';
+    case FRAME_STRUCTURE = 'frame structure';
 
     public function label(): string
     {
@@ -21,6 +23,8 @@ enum BuildingTypeEnum: string
             self::SIMPLE_BUILDING => 'साधारण भवन',
             self::SIMPLE_HOUSE => 'साधारण घर',
             self::MUD_HOUSE => 'कच्ची घर',
+            self::LOAD_BEARING => 'लोड बेरिंग',
+            self::FRAME_STRUCTURE => 'फ्रेम स्ट्रक्चर',
         };
     }
 

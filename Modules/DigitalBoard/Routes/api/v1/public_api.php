@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\DigitalBoard\Http\Controllers\Api\DigitalBoardApiController;
 use Modules\DigitalBoard\Http\Controllers\Api\v1\PublicApiController;
 
 Route::get('employee', [PublicApiController::class, 'employee'])->name('api-public.employee');
@@ -25,3 +26,5 @@ Route::get('branch', [PublicApiController::class, 'branch'])->name('api-public.b
 Route::get('service', [PublicApiController::class, 'getAllService'])->name('api-public.get-all-service');
 
 Route::get('video', [PublicApiController::class, 'video'])->name('api-public.video');
+Route::get('home', [DigitalBoardApiController::class, 'home'])->name('home');
+Route::get('ward/{ward}/home', [DigitalBoardApiController::class, 'ward'])->name('ward');
