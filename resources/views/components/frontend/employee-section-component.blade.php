@@ -8,7 +8,8 @@
                         <h6 class="text-white mb-0 ">{{ $representative->designation }}</h6>
                     </div>
                     <div class="card mt-1">
-                        <img src="{{ $representative->photo_url }}" class="card-img-top" alt="{{ $representative->name }}">
+                        <img src="{{ $representative->photo_url }}" class="card-img-top" alt="{{ $representative->name }}" style="height: 15vh !important; width: 100% !important;"
+                             >
                         <div class="card-body text-center">
                             <h6 class="card-title">
                                 {{ $representative->name }}</h6>
