@@ -35,48 +35,14 @@
                     <div id="print">
 
                         <div class="certificate"
-                            style="border-image: url({{ asset('assets/backend/border.png') }}) 30 stretch">
+                             style="border-image: url({{ asset('assets/backend/border.png') }}) 30 stretch">
                             <div class=""
-                                style=" margin-bottom:0rem; margin-left:4rem; margin-right:4rem; margin-top:0rem; text-align:center">
+                                 style=" margin-bottom:0rem; margin-left:4rem; margin-right:4rem; margin-top:0rem; text-align:center">
                                 <span style="font-size:14px"><strong>अनुसूची-२</strong></span><br />
                                 <span style="font-size:14px"><strong>(दफा ११ को उपदफा ३ संग सम्बन्धित)</strong></span>
                             </div>
                             <div class="lh-lg font-15 position-relative">
-                                <table cellspacing="0" style="border-collapse:collapse; border:none; width:100%">
-                                    <tbody>
-                                        <tr>
-                                            <td style="width:25%"><img alt="Office Logo"
-                                                    src="http://127.0.0.1:8000/assets/backend/images/np.png"
-                                                    style="height:100px; width:130px" /></td>
-                                            <td style="text-align:center; width:50%; vertical-align: middle;">
-                                                <div style="line-height: 1.2; color:red; font-size: 20px;">बागचौर नगरपालिका
-                                                </div>
-                                                <div style="line-height: 1.2; color:red; font-size: 25px;">
-                                                    <strong>नगरकार्यपालिकाको कार्यालय</strong>
-                                                </div>
-                                                <div style="line-height: 1.2; color:red; font-size: 16px;">बागचौर, सल्यान
-                                                </div>
-                                                <div style="line-height: 1.2; color:red; font-size: 16px;">कर्णाली प्रदेश
-                                                    नेपाल
-                                                </div>
-                                            </td>
-                                            <td style="width:25%">&nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width:25%">&nbsp;</td>
-                                            <td style="text-align:center; width:50%; vertical-align: middle;">
-                                                <h4
-                                                    style="color:red; font-size: 23px; margin-top:10px; text-decoration:underline">
-                                                    <strong> उपभोक्ता
-                                                        संस्था दर्ता प्रमाण-पत्र</strong>
-                                                </h4>
-                                            </td>
-                                            <td style="width:25%">&nbsp;</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-
+                                {!! letterHead() !!}
                                 <div class="d-flex justify-content-between mt-3">
                                     <div>
                                         <p><strong>करदाता नं. :</strong>
@@ -144,204 +110,145 @@
                         <p style="text-align:center"><span style="font-size:16px"><strong>नविकरण विवरण </strong></span></p>
 
                         <table border="1" cellpadding="8" cellspacing="0" class="mt-2 table table-bordered"
-                            style="border:2px solid black; height:100%; width:100%">
+                               style="border:2px solid black; height:100%; width:100%">
                             <thead>
-                                <tr>
-                                    <th scope="col"><strong><span style="font-size:14px">क्र.स</span></strong></th>
-                                    <th scope="col"><strong><span style="font-size:14px">नविकरण भएको मिति</span></strong>
-                                    </th>
-                                    <th scope="col"><strong><span style="font-size:14px">नविकरण बहाल रहने
+                            <tr>
+                                <th scope="col"><strong><span style="font-size:14px">क्र.स</span></strong></th>
+                                <th scope="col"><strong><span style="font-size:14px">नविकरण भएको मिति</span></strong>
+                                </th>
+                                <th scope="col"><strong><span style="font-size:14px">नविकरण बहाल रहने
                                                 मिति</span></strong></th>
-                                    <th scope="col"><strong><span style="font-size:14px">नविकरण दस्तुर बुझाएको रसिद
+                                <th scope="col"><strong><span style="font-size:14px">नविकरण दस्तुर बुझाएको रसिद
                                                 नं.</span></strong></th>
-                                    <th scope="col"><strong><span style="font-size:14px">कार्यालय प्रमुखको
+                                <th scope="col"><strong><span style="font-size:14px">कार्यालय प्रमुखको
                                                 दस्तखत</span></strong></th>
-                                    <th scope="col">
-                                        <h1 style="margin-left:24px; margin-right:0; text-align:start"><strong><span
-                                                    style="font-size:14px">&nbsp;कैफियत</span></strong></h1>
-                                    </th>
-                                </tr>
+                                <th scope="col">
+                                    <h1 style="margin-left:24px; margin-right:0; text-align:start"><strong><span
+                                                style="font-size:14px">&nbsp;कैफियत</span></strong></h1>
+                                </th>
+                            </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <p>&nbsp;</p>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>&nbsp;</p>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>&nbsp;</p>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td><br />
-                                        &nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>&nbsp;</p>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>&nbsp;</p>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>&nbsp;</p>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>&nbsp;</p>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>&nbsp;</p>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>&nbsp;</p>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>&nbsp;</p>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>&nbsp;</p>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>&nbsp;</p>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>&nbsp;</p>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>&nbsp;</p>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>&nbsp;</p>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>&nbsp;</p>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>&nbsp;</p>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+
                             </tbody>
                         </table>
                     </div>
