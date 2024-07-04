@@ -141,6 +141,8 @@
                             $('#fiscalYear').html(resp.fiscal_year)
                             $('#amount').html(resp.grant_amount)
 
+                        
+
                         },
                         error: function(XMLHttpRequest, textStatus, errorThrown) {
                             submitFormBtn.prop('disabled', false)
