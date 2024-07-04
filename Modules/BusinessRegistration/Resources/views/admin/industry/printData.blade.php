@@ -54,7 +54,7 @@
                                 <td><span
                                         style="font-size:18px">अधावधिक गरिएको भय अधावधिक नं: .................... </span>
                                 </td>
-                                <td><span style="font-size:18px">मिति: ........</span></td>
+                                <td><span style="font-size:18px">मिति: ...........................</span></td>
                             </tr>
                             </tbody>
                         </table>
