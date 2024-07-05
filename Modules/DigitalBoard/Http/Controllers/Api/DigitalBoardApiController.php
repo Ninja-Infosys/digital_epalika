@@ -15,6 +15,7 @@ use Modules\DigitalBoard\Transformers\api\ProgramResource;
 use Modules\DigitalBoard\Transformers\api\v1\CitizenCharterResource;
 use Modules\DigitalBoard\Transformers\EmployeeResource;
 use Modules\DigitalBoard\Transformers\NewsResource;
+use Modules\DigitalBoard\Transformers\NoticeResource;
 use Modules\DigitalBoard\Transformers\OfficeSettingResource;
 
 class DigitalBoardApiController extends Controller
@@ -108,7 +109,8 @@ class DigitalBoardApiController extends Controller
             ->get();
 
         return [
-            'newses' => NewsResource::collection($notices),
+            'notices' => NoticeResource::collection($notices),
+
 
             'videos' => $videos,
             'employees' => [
