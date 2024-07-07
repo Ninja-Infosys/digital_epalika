@@ -19,7 +19,6 @@ use Modules\Recommendation\Entities\SipharisSetting;
 use Modules\Revenue\Entities\Revenue;
 use Modules\Revenue\Entities\RevenueCategory;
 
-
 // if (!function_exists('officeSetting')) {
 //     function officeSetting()
 //     {
@@ -31,15 +30,14 @@ use Modules\Revenue\Entities\RevenueCategory;
 //         });
 //     }
 // }
-if (!function_exists('officeSetting')) {
-    function officeSetting(int|null $ward = null)
+if (! function_exists('officeSetting')) {
+    function officeSetting(?int $ward = null)
     {
         $officeSettings = Cache::rememberForever('office_setting', function () {
             if (Schema::hasTable('office_settings')) {
 
                 return OfficeSetting::with('fiscalYear', 'province', 'district', 'localBody')->first();
             }
-
         });
 
         if (empty($ward)) {
@@ -51,7 +49,7 @@ if (!function_exists('officeSetting')) {
     }
 }
 
-if (!function_exists('checker')) {
+if (! function_exists('checker')) {
     function checker()
     {
         return Cache::rememberForever('sipharis_settings', function () {
@@ -61,7 +59,7 @@ if (!function_exists('checker')) {
         });
     }
 }
-if (!function_exists('approver')) {
+if (! function_exists('approver')) {
     function approver()
     {
         return Cache::rememberForever('sipharis_settings', function () {
@@ -71,7 +69,7 @@ if (!function_exists('approver')) {
         });
     }
 }
-if (!function_exists('minuteTemplateSettingData')) {
+if (! function_exists('minuteTemplateSettingData')) {
 
     function minuteTemplateSettingData()
     {
@@ -81,7 +79,7 @@ if (!function_exists('minuteTemplateSettingData')) {
     }
 }
 
-if (!function_exists('recommendationTemplateSettingData')) {
+if (! function_exists('recommendationTemplateSettingData')) {
     function recommendationTemplateSettingData()
     {
         return Cache::rememberForever('recommendationTemplateSetting', function () {
@@ -90,7 +88,7 @@ if (!function_exists('recommendationTemplateSettingData')) {
     }
 }
 
-if (!function_exists('recommendationCategory')) {
+if (! function_exists('recommendationCategory')) {
     function recommendationCategory()
     {
         if (Schema::hasTable('recommendation_categories')) {
@@ -103,7 +101,7 @@ if (!function_exists('recommendationCategory')) {
     }
 }
 
-if (!function_exists('get_revenue_setting')) {
+if (! function_exists('get_revenue_setting')) {
     function get_revenue_setting()
     {
         return Cache::rememberForever('revenue_setting', function () {
@@ -116,7 +114,7 @@ if (!function_exists('get_revenue_setting')) {
     }
 }
 
-if (!function_exists('get_office_header')) {
+if (! function_exists('get_office_header')) {
     function get_office_header()
     {
         return Cache::rememberForever('officeHeaders', function () {
@@ -130,7 +128,7 @@ if (!function_exists('get_office_header')) {
     }
 }
 
-if (!function_exists('letterHead')) {
+if (! function_exists('letterHead')) {
     function letterHead($type = 'header')
     {
         if (Schema::hasTable('letter_heads')) {
@@ -144,7 +142,7 @@ if (!function_exists('letterHead')) {
         return [];
     }
 }
-if (!function_exists('letterHeadEn')) {
+if (! function_exists('letterHeadEn')) {
     function letterHeadEn()
     {
         if (Schema::hasTable('letter_heads')) {
@@ -159,7 +157,7 @@ if (!function_exists('letterHeadEn')) {
     }
 }
 
-if (!function_exists('get_setting')) {
+if (! function_exists('get_setting')) {
     function get_setting($key, $default = null)
     {
         $settings = Cache::remember('settings', 86400, function () {
@@ -175,7 +173,7 @@ if (!function_exists('get_setting')) {
     }
 }
 
-if (!function_exists('get_provinces')) {
+if (! function_exists('get_provinces')) {
     function get_provinces(?int $provinceId = null)
     {
         $provinces = Cache::rememberForever('provinces', function () {
@@ -193,7 +191,7 @@ if (!function_exists('get_provinces')) {
     }
 }
 
-if (!function_exists('get_districts')) {
+if (! function_exists('get_districts')) {
     function get_districts($province_ids = [], ?int $districtId = null)
     {
         $province_ids = is_array($province_ids) ? $province_ids : [$province_ids];
@@ -204,7 +202,7 @@ if (!function_exists('get_districts')) {
 
             return [];
         });
-        if (!empty($province_ids)) {
+        if (! empty($province_ids)) {
             $allDistricts = $allDistricts->whereIn('province_id', $province_ids);
         }
         if ($districtId !== null) {
@@ -215,7 +213,7 @@ if (!function_exists('get_districts')) {
     }
 }
 
-if (!function_exists('get_local_bodies')) {
+if (! function_exists('get_local_bodies')) {
     function get_local_bodies($district_ids = [], ?int $localBodyId = null)
     {
         $district_ids = is_array($district_ids) ? $district_ids : [$district_ids];
@@ -226,7 +224,7 @@ if (!function_exists('get_local_bodies')) {
 
             return [];
         });
-        if (!empty($district_ids)) {
+        if (! empty($district_ids)) {
             $allLocalBodies = $allLocalBodies->whereIn('district_id', $district_ids);
         }
         if ($localBodyId !== null) {
@@ -237,7 +235,7 @@ if (!function_exists('get_local_bodies')) {
     }
 }
 
-if (!function_exists('getArrayKeys')) {
+if (! function_exists('getArrayKeys')) {
     function getArrayKeys($array = []): array
     {
         $keys = [];
@@ -253,7 +251,7 @@ if (!function_exists('getArrayKeys')) {
     }
 }
 
-if (!function_exists('removeColumns')) {
+if (! function_exists('removeColumns')) {
     function removeColumns($array, $excludeColumns): Collection
     {
         foreach ($array as &$element) {
@@ -272,20 +270,20 @@ if (!function_exists('removeColumns')) {
     }
 }
 
-if (!function_exists('renderListData')) {
+if (! function_exists('renderListData')) {
     function renderListData($data): void
     {
         foreach ($data as $value) {
             if (is_array($value)) {
                 renderListData($value);
             } else {
-                echo '<td>' . $value . '</td>';
+                echo '<td>'.$value.'</td>';
             }
         }
     }
 }
 
-if (!function_exists('getFileType')) {
+if (! function_exists('getFileType')) {
     function getFileType($base64String): string
     {
         $startPos = strpos($base64String, ':') + 1;
@@ -295,7 +293,7 @@ if (!function_exists('getFileType')) {
     }
 }
 
-if (!function_exists('base64ToFile')) {
+if (! function_exists('base64ToFile')) {
     function base64ToFile($base64String, $fileType): string
     {
         $randomString = Str::random(32);
@@ -308,7 +306,7 @@ if (!function_exists('base64ToFile')) {
     }
 }
 
-if (!function_exists('isBase64')) {
+if (! function_exists('isBase64')) {
     function isBase64($string): bool
     {
         $bool = false;
@@ -320,7 +318,7 @@ if (!function_exists('isBase64')) {
     }
 }
 
-if (!function_exists('getAllForSideBarFolders')) {
+if (! function_exists('getAllForSideBarFolders')) {
     function getAllForSideBarFolders(string $folder)
     {
         if (Storage::disk('public')->exists($folder)) {
@@ -335,7 +333,7 @@ if (!function_exists('getAllForSideBarFolders')) {
     }
 }
 
-if (!function_exists('getAllFilesAndFolder')) {
+if (! function_exists('getAllFilesAndFolder')) {
     function getAllFilesAndFolder(string $folder): array
     {
         if (Storage::disk('public')->exists($folder)) {
@@ -356,7 +354,7 @@ if (!function_exists('getAllFilesAndFolder')) {
     }
 }
 
-if (!function_exists('convertPathsToTree')) {
+if (! function_exists('convertPathsToTree')) {
     function convertPathsToTree($paths, $separator = '/', $parent = null)
     {
         return $paths
@@ -366,25 +364,25 @@ if (!function_exists('convertPathsToTree')) {
                 $childrenPaths = $parts->map(function ($parts) {
                     return array_slice($parts, 1);
                 })->filter();
-                $path = $parent . $key;
+                $path = $parent.$key;
                 $response = [
                     'label' => (string) $key,
                     'path' => $path,
                 ];
-                if ($isFile = File::isFile(public_path('storage/' . $path))) {
+                if ($isFile = File::isFile(public_path('storage/'.$path))) {
                     $response['isFile'] = $isFile;
                     $response['detail'] = [
-                        'size' => convert_to_highest_unit(File::size(public_path('storage/' . $path))),
-                        'icon' => getFileIconClass(File::mimeType(public_path('storage/' . $path))),
-                        'extension' => File::extension(public_path('storage/' . $path)),
-                        'name' => File::name(public_path('storage/' . $path)),
+                        'size' => convert_to_highest_unit(File::size(public_path('storage/'.$path))),
+                        'icon' => getFileIconClass(File::mimeType(public_path('storage/'.$path))),
+                        'extension' => File::extension(public_path('storage/'.$path)),
+                        'name' => File::name(public_path('storage/'.$path)),
                     ];
                 } else {
                     $response['isFile'] = false;
                     $response['children'] = convertPathsToTree(
                         $childrenPaths,
                         $separator,
-                        $path . $separator
+                        $path.$separator
                     );
                 }
 
@@ -393,18 +391,18 @@ if (!function_exists('convertPathsToTree')) {
     }
 }
 
-if (!function_exists('convert_to_highest_unit')) {
+if (! function_exists('convert_to_highest_unit')) {
     function convert_to_highest_unit($bytes): string
     {
         $bytes = (int) $bytes;
         if ($bytes >= 1073741824) {
-            $bytes = number_format($bytes / 1073741824, 2) . ' GB';
+            $bytes = number_format($bytes / 1073741824, 2).' GB';
         } elseif ($bytes >= 1048576) {
-            $bytes = number_format($bytes / 1048576, 2) . ' MB';
+            $bytes = number_format($bytes / 1048576, 2).' MB';
         } elseif ($bytes >= 1024) {
-            $bytes = number_format($bytes / 1024, 2) . ' KB';
+            $bytes = number_format($bytes / 1024, 2).' KB';
         } elseif ($bytes >= 1) {
-            $bytes = $bytes . ' bytes';
+            $bytes = $bytes.' bytes';
         } else {
             $bytes = '0 bytes';
         }
@@ -413,7 +411,7 @@ if (!function_exists('convert_to_highest_unit')) {
     }
 }
 
-if (!function_exists('getFileIconClass')) {
+if (! function_exists('getFileIconClass')) {
     function getFileIconClass(string $mime): string
     {
         return match ($mime) {
@@ -430,7 +428,7 @@ if (!function_exists('getFileIconClass')) {
     }
 }
 
-if (!function_exists('get_revenue_categories')) {
+if (! function_exists('get_revenue_categories')) {
     function get_revenue_categories(?int $revenueCategoryId = null, bool $all = false)
     {
         $revenueCategories = Cache::rememberForever('revenueCategories', function () {
@@ -440,7 +438,7 @@ if (!function_exists('get_revenue_categories')) {
 
             return [];
         });
-        if (!$all) {
+        if (! $all) {
             $revenueCategories = $revenueCategories->whereNull('revenue_category_id');
         }
         if ($revenueCategoryId !== null) {
@@ -451,7 +449,7 @@ if (!function_exists('get_revenue_categories')) {
     }
 }
 
-if (!function_exists('get_revenues')) {
+if (! function_exists('get_revenues')) {
     function get_revenues($revenueCategories = [], ?int $revenueId = null)
     {
         $revenueCategories = is_array($revenueCategories) ? $revenueCategories : [$revenueCategories];
@@ -462,7 +460,7 @@ if (!function_exists('get_revenues')) {
 
             return [];
         });
-        if (!empty($revenueCategories)) {
+        if (! empty($revenueCategories)) {
             $revenues = $revenues->whereIn('revenue_category_id', $revenueCategories);
         }
         if ($revenueId !== null) {
@@ -473,7 +471,7 @@ if (!function_exists('get_revenues')) {
     }
 }
 
-if (!function_exists('get_file_type')) {
+if (! function_exists('get_file_type')) {
     function get_file_type($extension): string
     {
         return match ($extension) {
@@ -488,19 +486,19 @@ if (!function_exists('get_file_type')) {
     }
 }
 
-if (!function_exists('get_nepali_number')) {
+if (! function_exists('get_nepali_number')) {
     function get_nepali_number($data): string|array
     {
         return str_replace(['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'], ['१', '२', '३', '४', '५', '६', '७', '८', '९', '०'], $data);
     }
 }
-if (!function_exists('get_english_number')) {
+if (! function_exists('get_english_number')) {
     function get_english_number($data): string|array
     {
         return str_replace(['१', '२', '३', '४', '५', '६', '७', '८', '९', '०'], ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'], $data);
     }
 }
-if (!function_exists('get_nepali_count')) {
+if (! function_exists('get_nepali_count')) {
     function get_nepali_count(int $key, string $language = 'ne'): string
     {
         $count = [
@@ -550,27 +548,24 @@ if (!function_exists('get_nepali_count')) {
     }
 }
 
-if (!function_exists('replaceFormPlaceholderWith')) {
+if (! function_exists('replaceFormPlaceholderWith')) {
     function replaceFormPlaceholderWith($fieldName, $fieldValue, $formContent): array|string
     {
         return str_replace($fieldName, $fieldValue, $formContent);
     }
 }
 
-if (!function_exists('checkWard')) {
-    function checkWard(array $wards)
-    {
-
-    }
+if (! function_exists('checkWard')) {
+    function checkWard(array $wards) {}
 }
 
-if (!function_exists('checkSuperAdmin')) {
+if (! function_exists('checkSuperAdmin')) {
     function checkSuperAdmin(): bool
     {
         return auth()->user()->load('role')?->role?->type == 'Super';
     }
 }
-if (!function_exists('generateRandomRGBAColor')) {
+if (! function_exists('generateRandomRGBAColor')) {
     function generateRandomRGBAColor(): string
     {
         // Generate random intensities for red, green, and blue channels
@@ -585,7 +580,7 @@ if (!function_exists('generateRandomRGBAColor')) {
         return "rgba($red, $green, $blue, $alpha)";
     }
 
-    if (!function_exists('extractBulkYouTubeVideoId')) {
+    if (! function_exists('extractBulkYouTubeVideoId')) {
         function extractBulkYouTubeVideoId($videos): ?string
         {
             $videoIds = collect();
@@ -597,7 +592,7 @@ if (!function_exists('generateRandomRGBAColor')) {
         }
     }
 
-    if (!function_exists('extractYouTubeVideoId')) {
+    if (! function_exists('extractYouTubeVideoId')) {
         function extractYouTubeVideoId($url): ?string
         {
             // Define the regex pattern to extract video ID
