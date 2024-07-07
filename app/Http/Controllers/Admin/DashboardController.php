@@ -163,15 +163,33 @@ class DashboardController extends Controller
     public function ajaxData()
     {
         return [
-            'allNoticeAccordingMonth' => (new DigitalDashboardController())->getNoticeAccordingToMonth(),
-            'wardWiseRegistration' => (new RecommendationDashboardController())->getWardWiseData(),
-            'totalRevenue' => (new RevenueDashboardController())->totalRevenue($this->revenues),
-            'totalCashBankRevenue' => (new RevenueDashboardController())->totalCashBankRevenue($this->revenues),
-            'trainerAccordingToSubject' => (new RoasterDashboardController())->trainerAccordingToSubject(),
-            'mapAccordingToMonth' => (new EmapDashboardController())->mapAccordingToMonth(),
-            'businessRegistration' => (new BusinessRegistrationDashboardController())->getBusinessRegistrationAccordingToFiscalYear(),
-            'wardWise' => (new IdentityDashboardController())->getWardWiseData(),
-            'fyRegistrationAndDispatch' => (new CircularDashboardController())->getFyRegistrationAndDispatchData(),
+            'allNoticeAccordingMonth' => !$this->checkModuleExistence('DigitalBoard') ?
+                (new DigitalDashboardController())->getNoticeAccordingToMonth()
+            : [],
+            'wardWiseRegistration' => !$this->checkModuleExistence('Recommendation') ?
+                (new RecommendationDashboardController())->getWardWiseData()
+            : [],
+            'totalRevenue' => !$this->checkModuleExistence('Revenue') ?
+                (new RevenueDashboardController())->totalRevenue($this->revenues)
+            : [],
+            'totalCashBankRevenue' => !$this->checkModuleExistence('Revenue') ?
+                (new RevenueDashboardController())->totalCashBankRevenue($this->revenues)
+            : [],
+            'trainerAccordingToSubject' => !$this->checkModuleExistence('Roaster') ?
+                (new RoasterDashboardController())->trainerAccordingToSubject()
+            : [],
+            'mapAccordingToMonth' => !$this->checkModuleExistence('EMap') ?
+                (new EmapDashboardController())->mapAccordingToMonth()
+            : [],
+            'businessRegistration' => !$this->checkModuleExistence('BusinessRegistration') ?
+                (new BusinessRegistrationDashboardController())->getBusinessRegistrationAccordingToFiscalYear()
+            : [],
+            'wardWise' => !$this->checkModuleExistence('Identity') ?
+                (new IdentityDashboardController())->getWardWiseData()
+            : [],
+            'fyRegistrationAndDispatch' => !$this->checkModuleExistence('Circular') ?
+                (new CircularDashboardController())->getFyRegistrationAndDispatchData()
+            : [],
 
         ];
     }
