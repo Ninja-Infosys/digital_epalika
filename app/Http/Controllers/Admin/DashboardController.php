@@ -1,35 +1,37 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use Illuminate\Support\Facades\Schema;
+
 use App\Http\Controllers\Controller;
 use App\Models\ActivityLog;
+use App\Models\Settings\Branch;
+use App\Models\Settings\Employee;
+use App\Models\Settings\FiscalYear;
 use App\Models\Settings\OfficeSetting;
 use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema as FacadesSchema;
+use Illuminate\Support\Facades\Schema;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
+use Modules\BusinessRegistration\Http\Controllers\Admin\DashboardController as BusinessRegistrationDashboardController;
+use Modules\Circular\Http\Controllers\Admin\DashboardController as CircularDashboardController;
+use Modules\DigitalBoard\Http\Controllers\Admin\DashboardController as DigitalDashboardController;
 use Modules\EMap\Entities\MapApply;
+use Modules\EMap\Http\Controllers\Admin\DashboardController as EmapDashboardController;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
+use Modules\Identity\Http\Controllers\DashboardController as IdentityDashboardController;
 use Modules\Plan\Entities\PlanArea;
 use Modules\Plan\Entities\Project;
-use Modules\Roaster\Entities\Training;
-
-use Modules\EMap\Http\Controllers\Admin\DashboardController as EmapDashboardController;
-use Modules\Revenue\Http\Controllers\Admin\DashboardController as RevenueDashboardController;
-use Modules\DigitalBoard\Http\Controllers\Admin\DashboardController as DigitalDashboardController;
 use Modules\Recommendation\Http\Controllers\Admin\DashboardController as RecommendationDashboardController;
+use Modules\Revenue\Http\Controllers\Admin\DashboardController as RevenueDashboardController;
+use Modules\Roaster\Entities\Training;
 use Modules\Roaster\Http\Controllers\DashboardController as RoasterDashboardController;
-use Modules\BusinessRegistration\Http\Controllers\Admin\DashboardController as BusinessRegistrationDashboardController;
-use Modules\Identity\Http\Controllers\DashboardController as IdentityDashboardController;
-use Modules\Circular\Http\Controllers\Admin\DashboardController as CircularDashboardController;
-use Nette\Schema\Schema as SchemaSchema;
 
 class DashboardController extends Controller
 {
     protected Collection $projects;
+
     protected Collection $revenues;
 
     public function __construct()
@@ -67,7 +69,7 @@ class DashboardController extends Controller
             'planDashboard_access',
             'grantDashboard_access',
             'revenueDashboard_access',
-            'identityDashboard_access'
+            'identityDashboard_access',
         ]);
         $userPermissions = $dashboardPermissions->intersect(collect(auth()->user()->role->permissions->pluck('title')));
         if ($userPermissions->count() == 1) {
@@ -90,10 +92,9 @@ class DashboardController extends Controller
                 'identityDashboard_access' => route('identity.admin.dashboard'),
                 default => route('admin.dashboard'),
             };
+
             return redirect($routeName);
         }
-
-
 
         $businessDetail_count = 0;
         $training_count = 0;
@@ -105,11 +106,14 @@ class DashboardController extends Controller
             'dataSets' => [
                 [
                     'data' => [],
-                ]
-            ]
+                ],
+            ],
         ];
 
         $user_count = User::count();
+        $employee_count = Employee::count();
+        $branch_count = Branch::count();
+        $fiscal_year_count = FiscalYear::count();
         $activityLogs = ActivityLog::with('user')
             ->filter()
             ->whereDate('created_at', today()->toDateString())
@@ -149,21 +153,25 @@ class DashboardController extends Controller
             'training_count',
             'project_count',
             'map_count',
-            'grievance_count'
+            'grievance_count',
+            'branch_count',
+            'fiscal_year_count',
+            'employee_count',
         ]));
     }
+
     public function ajaxData()
     {
         return [
-            "allNoticeAccordingMonth" => (new DigitalDashboardController())-> getNoticeAccordingToMonth(),
-            "wardWiseRegistration" => (new RecommendationDashboardController())->getWardWiseData(),
-            "totalRevenue" => (new RevenueDashboardController())->totalRevenue($this->revenues),
-            "totalCashBankRevenue" => (new RevenueDashboardController())->totalCashBankRevenue($this->revenues),
-            "trainerAccordingToSubject" => (new RoasterDashboardController())->trainerAccordingToSubject(),
+            'allNoticeAccordingMonth' => (new DigitalDashboardController())->getNoticeAccordingToMonth(),
+            'wardWiseRegistration' => (new RecommendationDashboardController())->getWardWiseData(),
+            'totalRevenue' => (new RevenueDashboardController())->totalRevenue($this->revenues),
+            'totalCashBankRevenue' => (new RevenueDashboardController())->totalCashBankRevenue($this->revenues),
+            'trainerAccordingToSubject' => (new RoasterDashboardController())->trainerAccordingToSubject(),
             'mapAccordingToMonth' => (new EmapDashboardController())->mapAccordingToMonth(),
-            "businessRegistration" => (new BusinessRegistrationDashboardController())->getBusinessRegistrationAccordingToFiscalYear(),
-            "wardWise" => (new IdentityDashboardController())->getWardWiseData(),
-            "fyRegistrationAndDispatch" => (new CircularDashboardController())->getFyRegistrationAndDispatchData(),
+            'businessRegistration' => (new BusinessRegistrationDashboardController())->getBusinessRegistrationAccordingToFiscalYear(),
+            'wardWise' => (new IdentityDashboardController())->getWardWiseData(),
+            'fyRegistrationAndDispatch' => (new CircularDashboardController())->getFyRegistrationAndDispatchData(),
 
         ];
     }
@@ -175,23 +183,22 @@ class DashboardController extends Controller
         $planAreas = PlanArea::withCount([
             'projects' => function ($query) use ($officeSetting) {
                 $query->where('fiscal_year_id', $officeSetting->fiscal_year_id);
-            }
+            },
         ])
             ->with([
                 'planAreas' => function ($query) use ($officeSetting) {
                     $query->withCount([
                         'projects' => function ($sub_query) use ($officeSetting) {
                             $sub_query->where('fiscal_year_id', $officeSetting->fiscal_year_id);
-                        }
+                        },
                     ]);
-                }
+                },
             ])->whereNull('plan_area_id')->get()->map(function ($planArea) {
                 return [
                     'area_name' => $planArea->area_name ?? '',
-                    'projects_count' => $planArea->projects_count + $planArea->planAreas->sum('projects_count')
+                    'projects_count' => $planArea->projects_count + $planArea->planAreas->sum('projects_count'),
                 ];
             });
-
 
         return [
             'labels' => $planAreas->pluck('area_name')->toArray(),
@@ -208,8 +215,9 @@ class DashboardController extends Controller
     public function cacheClear()
     {
         Artisan::call('optimize:clear');
+
         return [
-            'message' => 'क्यास सफलतापूर्वक खाली गरियो'
+            'message' => 'क्यास सफलतापूर्वक खाली गरियो',
         ];
     }
 }
