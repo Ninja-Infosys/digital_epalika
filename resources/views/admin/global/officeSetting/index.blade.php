@@ -101,7 +101,7 @@
                                             class="form-control @error('logo') is-invalid @enderror"
                                             id="logo"
                                     />
-                                    <img class="img-fluid img-thumbnail" src="{{$officeSetting?->logo_url}}" height="60"
+                                    <img class="img-fluid img-thumbnail" src="{{$officeSetting?->logo_url}}" style="height:100px; max-width:500px"
                                          alt="">
                                     @error('logo')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -115,7 +115,7 @@
                                             class="form-control @error('logo1') is-invalid @enderror"
                                             id="logo1"
                                     />
-                                    <img class="img-fluid img-thumbnail" src="{{$officeSetting?->logo1_url}}">
+                                    <img class="img-fluid img-thumbnail" src="{{$officeSetting?->logo1_url}}" style="height:100px; max-width:500px">
                                     @error('logo1')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -128,7 +128,7 @@
                                             class="form-control @error('logo2') is-invalid @enderror"
                                             id="logo1"
                                     />
-                                    <img class="img-fluid img-thumbnail" src="{{$officeSetting?->logo2_url}}">
+                                    <img class="img-fluid img-thumbnail" src="{{$officeSetting?->logo2_url}}" style="height:100px; max-width:500px">
                                     @error('logo2')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -144,7 +144,7 @@
 
                                     />
                                     <img class="img-fluid img-thumbnail"
-                                         src="{{$officeSetting?->background_image_url}}">
+                                         src="{{$officeSetting?->background_image_url}}" style="height:100px; max-width:500px">
                                     @error('background_image')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
