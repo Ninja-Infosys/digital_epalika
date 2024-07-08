@@ -53,8 +53,11 @@
 <script src="{{ asset('assets/frontend/js/custom.min.js') }}"></script>
 <script src="{{ asset('assets/frontend/js/simplyScroll.js') }}"></script>
 <script src="{{ asset('assets/frontend/js/owl/owl.carousel.min.js') }}"></script>
-<script src="{{asset('assets/frontend/js/plugins/datepicker.min.js')}}"></script>
-<script src="{{ asset('assets/backend/print/print.min.js') }}"></script>
+<script
+    src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.4.min.js"
+    type="text/javascript">
+
+</script><script src="{{ asset('assets/backend/print/print.min.js') }}"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {

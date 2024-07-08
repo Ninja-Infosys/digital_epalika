@@ -15,7 +15,7 @@
                                     </div>
                                     <p class="text-body font-15 mb-0 ms-2">प्रयोगकर्ताहरु</p>
                                 </div>
-                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">33</span></h3>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{$user_count}}</span></h3>
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -26,9 +26,9 @@
                                         <img class="sidebar-icon" src="{{ asset('assets/backend/images/document.png') }}"
                                             height="25" loading="lazy" alt="">
                                     </div>
-                                    <p class="text-body font-15 mb-0 ms-2">योजना/कार्यक्रमहरु</p>
+                                    <p class="text-body font-15 mb-0 ms-2">जनप्रतिनिधि/कर्मचारीहरु</p>
                                 </div>
-                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">265</span></h3>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{$employee_count}}</span></h3>
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -39,9 +39,9 @@
                                         <img class="sidebar-icon" src="{{ asset('assets/backend/images/document.png') }}"
                                             height="25" loading="lazy" alt="">
                                     </div>
-                                    <p class="text-body font-15 mb-0 ms-2">सम्पन्न बैठक</p>
+                                    <p class="text-body font-15 mb-0 ms-2">शाखा/उपशाखाहरु</p>
                                 </div>
-                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">35</span></h3>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{$branch_count}}</span></h3>
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -52,9 +52,9 @@
                                         <img class="sidebar-icon" src="{{ asset('assets/backend/images/document.png') }}"
                                             height="25" loading="lazy" alt="">
                                     </div>
-                                    <p class="text-body font-15 mb-0 ms-2">मुद्दा दर्ता</p>
+                                    <p class="text-body font-15 mb-0 ms-2">आर्थिक वर्षहरु</p>
                                 </div>
-                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">21</span></h3>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{$fiscal_year_count}}</span></h3>
                             </div>
                         </div>
                     </div>
@@ -82,9 +82,9 @@
                 <div class="card-body">
                     <canvas id="wardWiseRegistration" chart-type="bar"></canvas>
                 </div>
-    
+
             </div>
-        </div> 
+        </div>
         <div class="col-md-4">
             <div class="card">
                 <h4>

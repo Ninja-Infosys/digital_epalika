@@ -16,12 +16,13 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from "vue";
+import { onMounted, ref } from "vue";
 import dateHelper from "../../utils/dateHelper";
-const emit=defineEmits([
+
+const emit = defineEmits([
     'update:modelValue', 'validate'
-])
-const props=defineProps({
+]);
+const props = defineProps({
     id: {
         type: String,
     },
@@ -33,9 +34,9 @@ const props=defineProps({
         type: String,
         default: "form-control",
     },
-    labelClass:{
-        type:String,
-        default:'form-label fw-bolder'
+    labelClass: {
+        type: String,
+        default: 'form-label fw-bolder'
     },
     label: {
         type: String,
@@ -51,7 +52,6 @@ const props=defineProps({
         type: String,
         default: ''
     },
-
     modelValue: {
         type: String,
         required: true,
@@ -63,24 +63,31 @@ const props=defineProps({
     disableBefore: {
         default: null
     }
-})
+});
 
-const pickerElement=ref('');
+const pickerElement = ref('');
 
 onMounted(() => {
-    if (props.todayDate) {
-        emit("update:modelValue", dateHelper.currentBsDate());
-        emit("validate");
-    }
+    const script = document.createElement('script');
+    script.src = "https://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.4.min.js";
+    script.type = "text/javascript";
+    document.head.appendChild(script);
 
-    pickerElement.value.nepaliDatePicker({
-        ndpYear: true,
-        ndpMonth: true,
-        disableBefore: props.disableBefore,
-        onChange: function (e) {
-            emit("update:modelValue", e.bs);
+    script.onload = () => {
+        if (props.todayDate) {
+            emit("update:modelValue", dateHelper.currentBsDate());
             emit("validate");
-        },
-    });
+        }
+
+        pickerElement.value.nepaliDatePicker({
+            ndpYear: true,
+            ndpMonth: true,
+            disableBefore: props.disableBefore,
+            onChange: function (e) {
+                emit("update:modelValue", e.bs);
+                emit("validate");
+            },
+        });
+    };
 });
 </script>

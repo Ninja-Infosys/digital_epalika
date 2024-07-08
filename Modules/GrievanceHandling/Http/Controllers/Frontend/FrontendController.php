@@ -72,6 +72,7 @@ class FrontendController extends Controller
 
     public function register()
     {
+
         return view('grievancehandling::frontend.register.register-form');
     }
 

@@ -15,6 +15,7 @@ use Modules\DigitalBoard\Transformers\api\ProgramResource;
 use Modules\DigitalBoard\Transformers\api\v1\CitizenCharterResource;
 use Modules\DigitalBoard\Transformers\EmployeeResource;
 use Modules\DigitalBoard\Transformers\NewsResource;
+use Modules\DigitalBoard\Transformers\NoticeResource;
 use Modules\DigitalBoard\Transformers\OfficeSettingResource;
 
 class DigitalBoardApiController extends Controller
@@ -44,16 +45,16 @@ class DigitalBoardApiController extends Controller
      */
     public function extracted($ward = null): array
     {
-        $notices = Notice::contentType('News')
-            ->showInIndex()
-            ->where(function ($q) use ($ward) {
-                if (! empty($ward)) {
-                    $q->whereRaw("FIND_IN_SET('$ward', ward) > 0");
-                } else {
-                    $q->MainPageDisplay();
-                }
-            })
+        $notices = Notice::where('type', 'News')
             ->whereNull('closed_at')
+            ->where(function ($query) use ($ward) {
+                $query->where(function ($q) use ($ward) {
+                    $q->whereRaw("FIND_IN_SET('$ward', ward) > 0");
+                })->orWhere(function ($q) {
+                    $q->whereNull('ward');
+                });
+            })
+            ->orWhere('is_displayed', true) // Include notices marked as displayed everywhere
             ->orderByDesc('date')
             ->get();
 
@@ -108,8 +109,7 @@ class DigitalBoardApiController extends Controller
             ->get();
 
         return [
-            'newses' => NewsResource::collection($notices),
-
+            'newses' => NoticeResource::collection($notices),
             'videos' => $videos,
             'employees' => [
                 'representative' => EmployeeResource::collection($employees->where('is_employee', 0)),

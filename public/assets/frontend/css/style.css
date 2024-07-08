@@ -1647,3 +1647,7 @@ img{
     width: 100%;
     padding: 0px;
 }
+.card-img-top{
+    height: 15vh !important;
+    width: 100% !important;
+}

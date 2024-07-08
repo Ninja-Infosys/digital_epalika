@@ -6,19 +6,19 @@ use App\Models\File;
 use App\Models\Settings\FiscalYear;
 use App\Models\User;
 use App\Traits\EventObserveTrait;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Notice extends Model
 {
+    use EventObserveTrait;
     use HasFactory;
     use SoftDeletes;
-    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -43,6 +43,7 @@ class Notice extends Model
     protected $casts = [
         'is_displayed' => 'boolean',
     ];
+
     // protected function ward(): Attribute
     // {
     //     return Attribute::make(
@@ -50,7 +51,7 @@ class Notice extends Model
     //         set: fn (string|array|null $value) => $value ? (is_array($value) ? implode(',', $value) : $value) : null,
     //     );
     // }
-   protected function ward(): Attribute
+    protected function ward(): Attribute
     {
         return Attribute::make(
             get: function ($value) {
@@ -60,11 +61,11 @@ class Notice extends Model
                 if (is_array($value)) {
                     return implode(',', $value);
                 }
+
                 return $value;
             }
         );
     }
-
 
     public function scopeMainPageDisplay(Builder $builder, bool $display = true): void
     {
@@ -108,7 +109,7 @@ class Notice extends Model
 
     public function scopeNews($builder)
     {
-        return $builder->where('type', "News");
+        return $builder->where('type', 'News');
     }
 
     public function user(): BelongsTo
@@ -120,7 +121,6 @@ class Notice extends Model
     {
         return $this->morphMany(File::class, 'model');
     }
-
 
     public function scopeShowInIndex($builder)
     {
