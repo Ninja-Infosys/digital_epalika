@@ -8,6 +8,7 @@ use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Collection;
 use Modules\Recommendation\Entities\PersonalDetail;
 use Modules\Recommendation\Entities\RecommendationCategory;
+use Modules\Recommendation\Entities\RecommendationCreate;
 use Modules\Recommendation\Entities\RegistrationDetail;
 
 use function officeSetting;
@@ -21,7 +22,7 @@ class DashboardController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->registrationDetail = RegistrationDetail::get();
+        $this->registrationDetail = RecommendationCreate::get();
     }
 
     public function index()
@@ -46,7 +47,7 @@ class DashboardController extends Controller
     public function ajaxData()
     {
         return [
-            'categoryWise' => $this->getCategoryWiseData(),
+//            'categoryWise' => $this->getCategoryWiseData(),
             'wardWiseRegistration' => $this->getWardWiseData(),
             'monthlyWiseRegistration' => $this->getMonthlyWiseData(),
         ];
@@ -82,36 +83,36 @@ class DashboardController extends Controller
         ];
     }
 
-    public function getCategoryWiseData()
-    {
-        $recommendationCategories = RecommendationCategory::withCount(['registrationDetails' => function ($query) {
-            $query->where('fiscal_year_id', officeSetting()->fiscal_year_id);
-        }])
-            ->with(['recommendationCategories' => function ($query) {
-                $query->withCount(['registrationDetails' => function ($sub_query) {
-                    $sub_query->where('fiscal_year_id', officeSetting()->fiscal_year_id);
-                }]);
-            }])->whereNull('recommendation_category_id')->get()->map(function ($recommendationCategory) {
-                return [
-                    'name' => $recommendationCategory->title.' ('.($recommendationCategory->registration_details_count + $recommendationCategory->recommendationCategories->sum('registration_details_count')).')',
-                    'data' => $recommendationCategory->registration_details_count + $recommendationCategory->recommendationCategories->sum('registration_details_count'),
-                    'color' => generateRandomRGBAColor(), // If you have a function to generate random colors
-                ];
-            });
-
-        return [
-            'labels' => $recommendationCategories->pluck('name')->toArray(),
-            'option' => ChartOptionEnum::PIE_CHART->option(),
-            'dataSets' => [
-                [
-                    'data' => $recommendationCategories->pluck('data')->toArray(),
-                    'backgroundColor' => $recommendationCategories->pluck('color')->toArray(),
-                    'borderColor' => $recommendationCategories->pluck('color')->toArray(),
-                    'borderWidth' => 1,
-                ],
-            ],
-        ];
-    }
+//    public function getCategoryWiseData()
+//    {
+//        $recommendationCategories = RecommendationCategory::withCount(['registrationDetails' => function ($query) {
+//            $query->where('fiscal_year_id', officeSetting()->fiscal_year_id);
+//        }])
+//            ->with(['recommendationCategories' => function ($query) {
+//                $query->withCount(['registrationDetails' => function ($sub_query) {
+//                    $sub_query->where('fiscal_year_id', officeSetting()->fiscal_year_id);
+//                }]);
+//            }])->whereNull('recommendation_category_id')->get()->map(function ($recommendationCategory) {
+//                return [
+//                    'name' => $recommendationCategory->title.' ('.($recommendationCategory->registration_details_count + $recommendationCategory->recommendationCategories->sum('registration_details_count')).')',
+//                    'data' => $recommendationCategory->registration_details_count + $recommendationCategory->recommendationCategories->sum('registration_details_count'),
+//                    'color' => generateRandomRGBAColor(), // If you have a function to generate random colors
+//                ];
+//            });
+//
+//        return [
+//            'labels' => $recommendationCategories->pluck('name')->toArray(),
+//            'option' => ChartOptionEnum::PIE_CHART->option(),
+//            'dataSets' => [
+//                [
+//                    'data' => $recommendationCategories->pluck('data')->toArray(),
+//                    'backgroundColor' => $recommendationCategories->pluck('color')->toArray(),
+//                    'borderColor' => $recommendationCategories->pluck('color')->toArray(),
+//                    'borderWidth' => 1,
+//                ],
+//            ],
+//        ];
+//    }
 
     public function getMonthlyWiseData(): array
     {
