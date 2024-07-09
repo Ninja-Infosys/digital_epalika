@@ -26,7 +26,11 @@ class OfficeHeader extends Model
         'font_color',
         'title_en',
         'card_font',
-        'ward'
+        'ward',
+    ];
+
+    protected $casts = [
+        'font_size' => 'double',
     ];
 
     protected function ward(): Attribute
@@ -39,6 +43,7 @@ class OfficeHeader extends Model
                 if (is_array($value)) {
                     return implode(',', $value);
                 }
+
                 return $value;
             }
         );

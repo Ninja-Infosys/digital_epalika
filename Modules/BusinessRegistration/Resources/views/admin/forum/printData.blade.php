@@ -36,45 +36,7 @@
                         <div style="margin: 0 4rem;text-align:center"><span
                                 style="font-size:14px"><strong>"सबल स्थानीय सरकार, समृद्ध बगचौर नगर"</strong></span><br/>
                         </div>
-
-                        <table cellspacing="0" style="border-collapse:collapse; border:none; width:100%">
-                            <tbody>
-                            <tr>
-                                <td style="width:25%"><img alt="Office Logo"
-                                                           src="http://127.0.0.1:8000/assets/backend/images/np.png"
-                                                           style="height:80px; width:100px"/></td>
-                                <td style="text-align:center; vertical-align:middle; width:60%">
-                                    <div style="color:red; font-size:20px; line-height:1.2">बागचौर नगरपालिका</div>
-
-                                    <div style="color:red; font-size:16px; line-height:1.2"><span
-                                            style="font-size:22px"><strong>नगर कार्यपालिकाको कार्यालय</strong></span></div>
-
-                                    <div style="color:red; font-size:16px; line-height:1.2">बागचौर,सल्यान</div>
-                                    <div style="color:red; font-size:16px; line-height:1.2">कर्णाली प्रदेश,नेपाल</div>
-                                </td>
-
-                                <td>
-                                        <img alt="Office Logo"
-                                             src="http://127.0.0.1:8000/assets/backend/images/np.png"
-                                             style="height:80px; width:100px"/>
-
-
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td style="width:25%">&nbsp;</td>
-                                <td style="text-align:center; vertical-align:middle; width:50%">
-                                    <h4><u><span
-                                                style="color:red; font-size:26px"><strong><u>प्राईभेट फर्म दर्ता प्रमाण-पत्र</u></strong></span></u>
-                                    </h4>
-                                </td>
-                                <td style="width:25%">&nbsp; <div class="py-3" style="text-align:center; vertical-align:center; font-size:16px;border:1px solid black; height:6rem; width:6rem; border-radius: 5px">
-                                        संचालकको फोटो
-                                    </div></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        {!! letterHead() !!}
                         <div class="row">
                             <div class="col-sm font-weight-bold" style="font-size:18px">
                                 <p>निजि/साझेदारी प्रा.फ.नं:<span class="dashed-bottom">{{get_nepali_number($forum->registration_no)}}</span></p>

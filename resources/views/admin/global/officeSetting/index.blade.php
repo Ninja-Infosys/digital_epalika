@@ -101,8 +101,7 @@
                                             class="form-control @error('logo') is-invalid @enderror"
                                             id="logo"
                                     />
-                                    <img class="img-fluid img-thumbnail" src="{{$officeSetting?->logo_url}}" height="60"
-                                         alt="">
+                                    <img class="img-fluid img-thumbnail" src="{{$officeSetting?->logo_url}}"  >
                                     @error('logo')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -115,7 +114,8 @@
                                             class="form-control @error('logo1') is-invalid @enderror"
                                             id="logo1"
                                     />
-                                    <img class="img-fluid img-thumbnail" src="{{$officeSetting?->logo1_url}}">
+                                    <img class="img-fluid img-thumbnail" src="{{$officeSetting?->logo1_url}}" width="100"
+                                         alt="">
                                     @error('logo1')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -128,7 +128,7 @@
                                             class="form-control @error('logo2') is-invalid @enderror"
                                             id="logo1"
                                     />
-                                    <img class="img-fluid img-thumbnail" src="{{$officeSetting?->logo2_url}}">
+                                    <img class="img-fluid img-thumbnail" src="{{$officeSetting?->logo2_url}}" width="100">
                                     @error('logo2')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror

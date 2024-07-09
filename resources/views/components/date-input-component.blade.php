@@ -26,7 +26,9 @@
     </div>
     @once
         @push('scripts')
-            <script src="{{asset('assets/backend/js/plugins/datepicker.min.js')}}"></script>
+                <script
+                    src="https://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.4.min.js"
+                    type="text/javascript"></script>
         @endpush
     @endonce
     @push('scripts')
