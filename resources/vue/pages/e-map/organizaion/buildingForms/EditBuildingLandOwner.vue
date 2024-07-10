@@ -40,6 +40,26 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <VInput
+                        id="landowner-former-local-body"
+                        v-model="form.local_body"
+                        label="साविक पालिका"
+                        @validate="validateField('local_body')"
+                        :disabled="!editFormOpened"
+                        :error="errors.local_body"
+                    />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <VInput
+                        id="landowner-former-ward-no"
+                        v-model="form.former_ward_no"
+                        label="साविक वडा नं."
+                        @validate="validateField('former_ward_no')"
+                        :disabled="!editFormOpened"
+                        :error="errors.former_ward_no"
+                    />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <VInput
                         id="landowner-grandfather-name"
                         v-model="form.grandfather_name"
                         label="हजुरबुबाको नाम"
@@ -94,7 +114,7 @@
                         id="landowner-signature"
                         v-model="form.signature"
                         label="जग्गाधनीको सहि"
-                        :default-signature="buildingLandOwner.data?.signature_url"
+                        :default-photo="buildingLandOwner.data?.signature_url"
                         :disabled="!editFormOpened"
                     />
                 </div>
@@ -215,6 +235,8 @@ const initialState={
     province_id: '',
     district_id: '',
     local_body_id: '',
+    local_body: '',
+    former_ward_no: '',
     ward_no: '',
     tole: '',
     photo:'',
@@ -255,6 +277,8 @@ const validations = object({
     local_body_id: string().required('पालिका अनिवार्य छ'),
     ward_no: string().required('वडा नं. अनिवार्य छ'),
     tole: string().required('टोल अनिवार्य छ'),
+    former_ward_no: string().required('साबिक वडा अनिवार्य छ'),
+    local_body: string().required('साबिक पालिका अनिवार्य छ'),
 });
 
 const {errors, validateField, validateForm} = useYup(form, validations);

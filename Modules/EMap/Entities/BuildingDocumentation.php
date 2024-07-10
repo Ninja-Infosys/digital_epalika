@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Modules\EMap\Enums\ApplicantTypeEnum;
 use Modules\EMap\Enums\BuildingDocumentationStatusEnum;
@@ -87,6 +88,8 @@ class BuildingDocumentation extends Model
         'status' => BuildingDocumentationStatusEnum::class,
         'applicant_type' => ApplicantTypeEnum::class,
     ];
+
+
 
     public function requiredDocument(): HasOne
     {
@@ -176,7 +179,14 @@ class BuildingDocumentation extends Model
 
     public function getApplicantSignatureUrlAttribute($value): string
     {
-        return $this->attributes['applicant_signature'] && Storage::disk('public')->exists($this->attributes['applicant_signature']) ? Storage::disk('public')->url($this->attributes['applicant_signature']) : '';
+        return $this->attributes['applicant_signature'] && Storage::disk('public')->exists($this->attributes['applicant_signature']) ? Storage::disk('public')->url($this->attributes['photo']) : '';
+
+    }
+
+
+    public function getSignatureUrlAttribute($value): string
+    {
+        return $this->attributes['signature'] && Storage::disk('public')->exists($this->attributes['signature']) ? Storage::disk('public')->url($this->attributes['photo']) : '';
 
     }
     public function setConsultantEngineerSignatureAttribute($value): void
@@ -192,4 +202,44 @@ class BuildingDocumentation extends Model
 
     }
 
+    public function applyBuildingNotices(): HasMany
+    {
+        return $this->hasMany(ApplyBuildingNotice::class);
+    }
+    public function scopeSentToAdmin($query)
+    {
+        return $query->whereNotNull('sent_to_admin_at');
+    }
+    public function scopeNotSentToAdmin($query)
+    {
+        return $query->whereNull('sent_to_admin_at');
+    }
+    public function getIndexDataAttribute()
+    {
+        $this->load('buildingDocuments.buildingDocumentationStep');
+        $storedDocuments = collect();
+
+        $storedDocuments =
+            $storedDocuments
+                ->merge($this->buildingDocuments)
+                ->sortByDesc('created_at');
+
+        return $storedDocuments
+            ->map(function ($storedDocument) {
+                return collect($storedDocument)
+                    ->put('desk', $storedDocument?->buildingDocumentationStep?->load('group')?->group?->title)
+                    ->put('form_title', $storedDocument->buildingDocumentationStep?->title)
+                    ->only('desk', 'created_at', 'form_title', 'status')
+                    ->toArray();
+            })
+            ->map(function ($form) {
+                return [
+                    'desk' => $form['desk'] ?? '',
+                    'title' => $form['form_title'] ?? '',
+                    'pendingDays' => (array_key_exists('created_at', $form) && ! empty($form['created_at'])) ? Carbon::parse($form['created_at'])?->diffForHumans() : $this->created_at->diffForHumans(),
+                    'status' => $form['status'],
+                ];
+            })
+            ->first();
+    }
 }

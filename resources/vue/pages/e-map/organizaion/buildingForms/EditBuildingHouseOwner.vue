@@ -93,7 +93,7 @@
                         id="house-owner-signature"
                         v-model="form.signature"
                         label="घर धनीको सहि"
-                        :default-signature="buildingHouseOwner.data?.signature_url"
+                        :default-photo="buildingHouseOwner.data?.signature_url"
                         :disabled="!editFormOpened"
                     />
                 </div>

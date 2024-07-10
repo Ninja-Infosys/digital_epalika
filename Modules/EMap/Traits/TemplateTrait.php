@@ -197,6 +197,64 @@ trait TemplateTrait
             get_nepali_number($contractorDetail?->consulting_firm_name ?? ''),
             get_nepali_number($contractorDetail?->district?->district ?? ''),
 
+
+        ];
+    }
+    protected function getBuildingTemplateData($buildingDocumentation): array
+    {
+
+        $buildingContractorDetail = $buildingDocumentation->contractorDetails->first();
+
+        return [
+
+            //Building Documentation
+
+            get_nepali_number($buildingDocumentation?->building_category?->label() ?? ''),
+            get_nepali_number($buildingDocumentation?->house_built_year ?? ''),
+            get_nepali_number($buildingDocumentation?->room ?? ''),
+            get_nepali_number($buildingDocumentation?->current_storey ?? ''),
+            get_nepali_number($buildingDocumentation?->plinth_area ?? ''),
+            get_nepali_number($buildingDocumentation?->former_local_body ?? ''),
+            get_nepali_number($buildingDocumentation?->former_ward_no ?? ''),
+            get_nepali_number($buildingDocumentation?->land_ward_no ?? ''),
+            get_nepali_number($buildingDocumentation?->plot_no ?? ''),
+            get_nepali_number($buildingDocumentation?->land_area ?? ''),
+            get_nepali_number($buildingDocumentation?->applicant_name ?? ''),
+            get_nepali_number($buildingDocumentation?->local_body ?? ''),
+            get_nepali_number($buildingDocumentation?->applicant_ward_no ?? ''),
+            get_nepali_number($buildingDocumentation?->applicant_tole ?? ''),
+            get_nepali_number($buildingDocumentation?->applicant_phone_no ?? ''),
+            get_nepali_number($buildingDocumentation?->consultancy_name ?? ''),
+            get_nepali_number($buildingDocumentation?->consultancy_registration_no ?? ''),
+            get_nepali_number($buildingDocumentation?->consultant_engineer_name ?? ''),
+            get_nepali_number($buildingDocumentation?->n_e_c_registration_no ?? ''),
+            get_nepali_number($buildingDocumentation?->consultant_engineer_post ?? ''),
+
+            get_nepali_number($buildingDocumentation?->buildingLandOwner?->name ?? ''),
+            get_nepali_number($buildingDocumentation?->buildingLandOwner?->localBody?->local_body ?? ''),
+            get_nepali_number($buildingDocumentation?->buildingLandOwner?->former_ward_no ?? ''),
+            get_nepali_number($buildingDocumentation?->buildingLandOwner?->citizenship_no ?? ''),
+            get_nepali_number($buildingDocumentation?->buildingLandOwner?->district?->district ?? ''),
+            get_nepali_number($buildingDocumentation?->buildingLandOwner?->ward_no ?? ''),
+            get_nepali_number($buildingDocumentation?->buildingLandOwner?->tole ?? ''),
+
+            get_nepali_number($buildingDocumentation?->buildingHouseOwner?->name ?? ''),
+            get_nepali_number($buildingDocumentation?->buildingHouseOwner?->district?->district ?? ''),
+            get_nepali_number($buildingDocumentation?->buildingHouseOwner?->localBody?->local_body ?? ''),
+            get_nepali_number($buildingDocumentation?->buildingHouseOwner?->ward_no ?? ''),
+            get_nepali_number($buildingDocumentation?->buildingHouseOwner?->tole ?? ''),
+            $buildingDocumentation?->buildingHouseOwner?->photo_url ?? '',
+
+            get_nepali_number($buildingContractorDetail?->name ?? ''),
+            get_nepali_number($buildingContractorDetail?->localBody?->local_body ?? ''),
+            get_nepali_number($buildingContractorDetail?->ward_no ?? ''),
+            get_nepali_number($buildingContractorDetail?->tole ?? ''),
+            get_nepali_number($buildingContractorDetail?->phone ?? ''),
+
+
+            (string) View::make('emap::inc.building_neighbours', [
+               'neighbours' => $buildingDocumentation?->neighbours,
+            ]),
         ];
     }
 
@@ -350,6 +408,49 @@ trait TemplateTrait
             '[@contractorDetail.local_body_registration_no]',
             '[@contractorDetail.consulting_firm_name]',
             '[@contractorDetail.district]',
+
+            //buildingDocumentation
+
+            '[@building_category]',
+            '[@house_built_year]',
+            '[@room]',
+            '[@current_storey]',
+            '[@plinth_area]',
+            '[@former_local_body]',
+            '[@former_ward_no]',
+            '[@land_ward_no]',
+            '[@plot_no]',
+            '[@land_area]',
+            '[@applicant_name]',
+            '[@local_body]',
+            '[@applicant_ward_no]',
+            '[@applicant_tole]',
+            '[@applicant_phone_no]',
+            '[@consultancy_name]',
+            '[@consultancy_registration_no]',
+            '[@consultant_engineer_name]',
+            '[@n_e_c_registration_no]',
+            '[@consultant_engineer_post]',
+
+          '[@buildingNeighbours]',
+             '[@buildingContractorDetail.local_body]',
+             '[@buildingContractorDetail.ward_no]',
+             '[@buildingContractorDetail.name]',
+             '[@buildingContractorDetail.tole]',
+             '[@buildingContractorDetail.phone]',
+             '[@buildingHouseOwner.name]',
+             '[@buildingHouseOwner.district]',
+             '[@buildingHouseOwner.local_body]',
+             '[@buildingHouseOwner.ward_no]',
+             '[@buildingHouseOwner.tole]',
+             '[@buildingHouseOwner.photo]',
+             '[@buildingLandOwner.name]',
+             '[@buildingLandOwner.local_body]',
+             '[@buildingLandOwner.former_ward_no]',
+             '[@buildingLandOwner.citizenship_no]',
+             '[@buildingLandOwner.ward_no]',
+             '[@buildingLandOwner.district]',
+             '[@buildingLandOwner.tole]',
 
         ];
     }

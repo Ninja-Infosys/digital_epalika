@@ -24,6 +24,8 @@ class BuildingLandOwnerResource extends JsonResource
             'ward_no' => $this->ward_no ?? '',
             'photo_url' => $this->photo_url ?? '',
             'signature_url' => $this->signature_url ?? '',
+            'local_body' => $this->local_body ?? '',
+            'former_ward_no' => $this->former_ward_no ?? '',
         ];
     }
 }

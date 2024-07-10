@@ -10,35 +10,54 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Modules\EMap\Entities\BuildingDocumentation;
 use Modules\EMap\Enums\BuildingDocumentationStatusEnum;
+use Modules\EMap\Enums\MapStatusEnum;
 
 class BuildingDocumentationController extends Controller
 {
     use NepaliDateConverter;
 
-    public function index()
+    public function index($mapStatusEnum = 'all')
     {
+        $this->checkAuthorization('buildingDocumentationApplication_access');
 
-        $buildingDocumentations = BuildingDocumentation::with('requiredDocument', 'neighbours', 'localBody')->where(function (Builder $q) {
-            if (!is_null(request('search'))) {
-                $q->whereLike(['house_owner_name', 'submission_no', 'registration_no'], request('search'));
-            }
-            if (!empty(request('to_date'))) {
-                $q->whereDate('registration_date_ne', '>=', request('to_date'));
-            }
-            if (!empty(request('from_date'))) {
-                $q->whereDate('registration_date_ne', '<=', request('from_date'));
-            }
-            if (!empty(request('registration_no'))) {
-                $q->where('registration_no', request('registration_no'));
-            }
-            if (auth()->user()->role->type != 'Super') {
-                $q->where('land_ward_no', auth()->user()->ward_no);
-            }
-        })->latest()
-            ->paginate(15);
+        $buildingsQuery = BuildingDocumentation::with([
+                'fiscalYear',
+                'organization:id,name',
+                'applyBuildingNotices',
+                'buildingLandOwner',
+                'buildingHouseOwner',
 
-        return view('emap::admin.buildingDocumentation.application.index', compact('buildingDocumentations'));
+            ])
+            ->sentToAdmin()
+            ->when(MapStatusEnum::getAllValues()->contains($mapStatusEnum), function ($q) use ($mapStatusEnum) {
+                $q->where('sent_to_organization', $mapStatusEnum);
+            });
+
+        // Check for the Super Admin role
+        $user = auth()->user();
+        if ($user->role->type != 'Super') {
+            $buildingsQuery->where(function (Builder $q) {
+                if (!is_null(request('search'))) {
+                    $q->whereLike(['registration_no', 'submission_no', 'buildingHouseOwner.name', 'organization.name'], request('search'));
+                }
+            })
+            ->when(!empty($user->ward_no), function (Builder $q) use ($user) {
+                $q->where('land_ward_no', $user->ward_no);
+            })
+            ->when(empty($user->ward_no), function (Builder $q) use ($user) {
+                $mapGroups = DB::table('map_pass_group_user')->where('user_id', $user->id)->first();
+                if ($mapGroups) {
+                    $ward_no = explode(',', $mapGroups->ward_no);
+                    $q->whereIn('land_ward_no', $ward_no);
+                }
+            });
+        }
+
+        $buildingDocumentations = $buildingsQuery->orderBy('updated_at', 'desc')->paginate(10);
+
+        return view('emap::admin.buildingDocumentation.application.index', compact('buildingDocumentations', 'mapStatusEnum'));
     }
+
 
     public function edit(BuildingDocumentation $buildingDocumentation)
     {
@@ -47,7 +66,7 @@ class BuildingDocumentationController extends Controller
         return view('emap::admin.buildingDocumentation.application.edit', compact('buildingDocumentation'));
     }
 
-   
+
 
     public function show(BuildingDocumentation $buildingDocumentation)
     {
