@@ -17,6 +17,7 @@ use Modules\EMap\Entities\Organization;
 use Modules\EMap\Enums\DocumentStatusEnum;
 use Modules\EMap\Enums\FormTypeEnum;
 use Illuminate\Support\Str;
+use Modules\EMap\Enums\NoticeTypeEnum;
 use Modules\EMap\Traits\TemplateTrait;
 
 class BuildingDocumentationStepController extends Controller
@@ -26,6 +27,7 @@ class BuildingDocumentationStepController extends Controller
     public function buildingDocumentationList(BuildingDocumentation $buildingDocumentation)
     {
         [$forms, $order] = $this->buildingDocumentationForms($buildingDocumentation);
+
         return view('emap::organization.buildingDocumentationStep.index', compact('buildingDocumentation', 'forms', 'order'));
     }
 
@@ -67,7 +69,7 @@ class BuildingDocumentationStepController extends Controller
             'fiscalYear',
             'requiredDocument',
         );
-        return $buildingTemplateStore ?? Str::replace($this->getReplaceData(), $this->getEmapTemplateData($buildingDocumentation), $buildingFormDataType->model?->data);
+        return $buildingTemplateStore ?? Str::replace($this->getReplaceData(), $this->getBuildingTemplateData($buildingDocumentation), $buildingFormDataType->model?->data);
     }
 
     public function store(Request $request, BuildingDocumentation $buildingDocumentation, BuildingDocumentationStep $form, BuildingFormDataType $buildingFormDataType)
@@ -162,5 +164,47 @@ class BuildingDocumentationStepController extends Controller
             return redirect(route('organization.admin.documentDetail', [$buildingDocumentation, $form]));
         }
     }
+
+
+
+    // public function storeTemplateData(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)
+    // {
+    //     $request->validate([
+    //         'data' => ['required'],
+    //         'files' => ['nullable', 'array'],
+    //         'files.*' => ['mimes:jpg,png,jpeg,pdf'],
+    //     ]);
+
+    //     $mapApplyData = DB::transaction(function () use ($request, $mapApply, $noticeTypeEnum) {
+    //         $mapApplyData = ApplyMapNotice::updateOrCreate(
+    //             [
+    //                 'map_apply_id' => $mapApply->id,
+    //                 'file_type' => $noticeTypeEnum->value,
+    //             ],
+    //             [
+    //                 'data' => $request->input('data'),
+    //             ]
+    //         );
+
+    //         if (!$mapApplyData->wasChanged()) {
+    //             $mapApplyData->update([
+    //                 'sent_to_admin_at' => now()
+    //             ]);
+    //         }
+
+
+    //         if ($request->hasFile('files')) {
+    //             $this->uploadDocuments($request, $mapApplyData);
+    //         }
+
+    //         return $mapApplyData;
+    //     });
+
+    //     Notification::send(User::all(), new ApplyMapNoticeNotification($mapApply, $mapApplyData));
+
+    //     toast('फाईल सफलता पुर्बक थपियो', 'success');
+
+    //     return back();
+    // }
 }
 

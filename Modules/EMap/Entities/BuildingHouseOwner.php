@@ -37,7 +37,7 @@ class BuildingHouseOwner extends Model
         'citizenship_issue_district_id',
         'citizenship_no',
         'citizenship_issue_date',
-        'address',
+        'former_ward_no',
         'local_body',
         'ward_no',
         'document',

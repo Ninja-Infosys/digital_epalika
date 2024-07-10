@@ -11,11 +11,20 @@ return new class extends Migration
         Schema::create('contractor_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('building_documentation_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->string('contractor_name')->nullable()->comment('ठेकेदारको नाम');
-            $table->string('contractor_signature')->nullable()->comment('ठेकेदारको नाम');
-            $table->string('address')->nullable()->comment('ठेकेदारको ठेगाना');
-            $table->string('ward_no')->nullable()->comment('ठेकेदारको वडा नं');
-            $table->string('tole')->nullable()->comment('ठेकेदारको गाउ/टोल');
+
+            $table->string('name')->comment('नाम');
+            $table->string('father_name')->nullable()->comment('बुवाको नाम ');
+            $table->string('grandfather_name')->nullable()->comment('बाजेको नाम ');
+            $table->string('phone')->nullable()->comment('फोन');
+            $table->integer('ward_no')->nullable()->comment('वार्ड ');
+            $table->string('post')->nullable()->comment('पोस्ट');
+            $table->string('nec_council_no')->nullable()->comment('nec काउन्सिल नं');
+            $table->string('local_body_registration_no')->nullable()->comment('स्थानीय निकाय दर्ता नं');
+            $table->string('consulting_firm_name')->nullable()->comment('परामर्श फर्म नाम');
+            $table->foreignId('province_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('district_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('local_body_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->string('tole')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

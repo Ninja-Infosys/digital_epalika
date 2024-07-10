@@ -77,7 +77,9 @@ class MapApplyController extends Controller
 
     public function destroy(MapApply $mapApply)
     {
-        //
+        $mapApply->delete();
+        toast(' नक्सा दर्खास्त सफलतापूर्वक मेटाइयो', 'success');
+        return back();
     }
 
     public function mapFormInfo(MapApply $mapApply)

@@ -17,7 +17,13 @@ return new class extends Migration
             $table->string('building_map')->nullable()->comment('घरको नक्सा');
             $table->string('land_map')->nullable()->comment('जग्गाको नक्सा');
             $table->string('all_round_house_pic')->nullable()->comment('चारैतिरको फोटो');
-            $table->string('photo')->nullable()->comment('घरधनिको फोटो');
+            $table->string('citizenship_status')->default('pending');
+            $table->string('landowner_proved_status')->default('pending');
+            $table->string('revenue_status')->default('pending');
+            $table->string('building_map_status')->default('pending');
+            $table->string('land_map_status')->default('pending');
+            $table->string('all_round_house_pic_status')->default('pending');
+
             $table->timestamps();
             $table->softDeletes();
         });
