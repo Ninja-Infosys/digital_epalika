@@ -126,7 +126,7 @@
                             id="other_construction_area_new"
                             v-model="form.other_construction_area_new"
                             @validate="validateField('other_construction_area_new')"
-                            label="अन्य निर्माण (भवन बाहेक जस्तै ः कम्पाउणडवाल, टहरा)ले ढाकेको क्षेत्रफल (वर्ग फिट/वर्ग मिटर)"
+                            label="अन्य निर्माण (भवन बाहेक जस्तै: कम्पाउणडवाल, टहरा)ले ढाकेको क्षेत्रफल (वर्ग फिट/वर्ग मिटर)"
                             :disabled="!editFormOpened"
                             :error="errors.other_construction_area_new"
                         />
@@ -137,7 +137,7 @@
                             id="other_construction_area_old"
                             v-model="form.other_construction_area_old"
                             @validate="validateField('other_construction_area_old')"
-                            label="अन्य निर्माण (भवन बाहेक जस्तै ः कम्पाउणडवाल, टहरा)ले ढाकी सकेको क्षेत्रफल (वर्ग फिट/वर्ग मिटर)"
+                            label="अन्य निर्माण (भवन बाहेक जस्तै: कम्पाउणडवाल, टहरा)ले ढाकी सकेको क्षेत्रफल (वर्ग फिट/वर्ग मिटर)"
                             :disabled="!editFormOpened"
                             :error="errors.other_construction_area_old"
                         />
