@@ -9,12 +9,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Modules\EMap\Entities\BuildingDocumentation;
+use Modules\EMap\Entities\BuildingDocumentationStep;
+use Modules\EMap\Entities\BuildingFormDataType;
 use Modules\EMap\Enums\BuildingDocumentationStatusEnum;
 use Modules\EMap\Enums\MapStatusEnum;
+use Illuminate\Support\Facades\View;
+use Modules\EMap\Entities\BuildingTemplateStore;
+use Modules\EMap\Entities\RequiredDocument;
+use Modules\EMap\Traits\TemplateTrait;
 
 class BuildingDocumentationController extends Controller
 {
     use NepaliDateConverter;
+    use TemplateTrait;
 
     public function index($mapStatusEnum = 'all')
     {
@@ -81,139 +88,86 @@ class BuildingDocumentationController extends Controller
         return view('emap::admin.buildingDocumentation.application.show', compact('buildingDocumentation'));
     }
 
-    public function customData(Request $request, BuildingDocumentation $buildingDocumentation)
+    public function printTemplate(BuildingDocumentation $buildingDocumentation, BuildingDocumentationStep $form, BuildingFormDataType $buildingFormDataType)
     {
+        $data = $this->getPrintData($buildingDocumentation, $form, $buildingFormDataType);
 
-        $data = $request->validate([
-            'bill_no' => ['required'],
-            'bill_date_bs' => ['required'],
-            'bill_date_ad' => ['required'],
-            'other_file' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
-            'amount' => ['required'],
-            'taxpayer_number' => ['nullable'],
+        return response()->json([
+            'view' => (string)View::make('emap::organization.attach-document.print', compact('data')),
         ]);
-
-        DB::transaction(function () use ($buildingDocumentation, $data) {
-            if (empty($buildingDocumentation->registration_no)) {
-                $reg_no = BuildingDocumentation::whereFiscalYearId(\officeSetting()->fiscal_year_id)
-                    ->max('reg_no') + 1;
-                $data = array_merge($data, [
-                    'reg_no' => $reg_no,
-                    'fiscal_year_id' => \officeSetting()->fiscal_year_id,
-                    'registration_no' => 'FR-' . officeSetting()->fiscalYear?->title . '-' . Str::padLeft($reg_no, 4, 0),
-                    'registration_date_en' => today()->toDateString(),
-                    'registration_date_ne' => $this->get_today_nepali_date(),
-                    'status' => BuildingDocumentationStatusEnum::NOTICE->value,
-                ]);
-            }
-
-            $buildingDocumentation->update($data);
-        });
-        toast('दस्तुर सफलतापूर्वक थपियो', 'success');
-
-        return redirect()->route('emap.admin.buildingDocumentation.printNotice', $buildingDocumentation->id);
     }
 
-    public function printNotice(BuildingDocumentation $buildingDocumentation)
+    public function getPrintData(BuildingDocumentation $buildingDocumentation, BuildingDocumentationStep $form, BuildingFormDataType $buildingFormDataType): string
     {
-        $buildingDocumentation->load([
+        $buildingTemplateStore = BuildingTemplateStore::where('building_documentation_id', $buildingDocumentation->id)
+            ->where('building_documentation_step_id', $form->id)
+            ->where('building_form_data_type_id', $buildingFormDataType->id)
+            ->first()?->data ?? null;
+
+        $buildingFormDataType->load('model');
+        $buildingDocumentation->load(
+            'buildingStoreyDetails',
             'neighbours',
+            'files',
+            'localBody',
+            'district',
+            'province',
+            'fiscalYear',
+            'requiredDocument',
+        );
+        return $buildingTemplateStore ?? Str::replace($this->getReplaceData(), $this->getBuildingTemplateData($buildingDocumentation), $buildingFormDataType->model?->data);
+    }
+
+    public function editTemplate(BuildingDocumentation $buildingDocumentation, BuildingDocumentationStep $form, BuildingFormDataType $buildingFormDataType)
+    {
+        $data = $this->getPrintData($buildingDocumentation, $form, $buildingFormDataType);
+
+        return view('emap::admin.template-edit.template-edit', compact('buildingDocumentation', 'data', 'buildingFormDataType', 'form'));
+    }
+
+    public function storeFileTemplate(Request $request, BuildingDocumentation $buildingDocumentation, BuildingDocumentationStep $form, BuildingFormDataType $buildingFormDataType)
+    {
+        $request->validate([
+            'data' => ['required'],
         ]);
+        BuildingTemplateStore::updateOrCreate([
+            'building_documentation_id' => $buildingDocumentation->id,
+            'building_documentation_step_id' => $form->id,
+            'building_form_data_type_id' => $buildingFormDataType->id,
+        ], ['data' => $request->input('data')]);
+        toast('टेम्प्लेट विवरण सम्पादन सफलतापूर्वक गरियो', 'success');
 
-        return view('emap::admin.buildingDocumentation.template.notice', compact('buildingDocumentation'));
+        return redirect(route('emap.admin.buildingDocumentation.admin-step.formDetail', [$buildingDocumentation, $form]));
     }
-
-    public function printLandConfirmation(BuildingDocumentation $buildingDocumentation)
+    public function updateDocumentStatus(Request $request, BuildingDocumentation $buildingDocumentation)
     {
-
-        if (!is_null(auth()->user()->ward_no)) {
-            $buildingDocumentation->update([
-                'status' => BuildingDocumentationStatusEnum::LAND_CONFIRMATION->value,
+        if ($request->input('citizenship_status')) {
+            RequiredDocument::where('building_documentation_id', $buildingDocumentation->id)->update([
+                'citizenship_status' => $request->input('citizenship_status')
             ]);
-            $buildingDocumentation->load([
-                'neighbours',
+        } elseif ($request->input('landowner_proved_status')) {
+            RequiredDocument::where('building_documentation_id', $buildingDocumentation->id)->update([
+                'landowner_proved_status' => $request->input('landowner_proved_status')
+            ]);
+        } elseif ($request->input('revenue_status')) {
+            RequiredDocument::where('building_documentation_id', $buildingDocumentation->id)->update([
+                'revenue_status' => $request->input('revenue_status')
+            ]);
+        } elseif ($request->input('building_map_status')) {
+            RequiredDocument::where('building_documentation_id', $buildingDocumentation->id)->update([
+                'building_map_status' => $request->input('building_map_status')
+            ]);
+        } elseif ($request->input('land_map_status')) {
+            RequiredDocument::where('building_documentation_id', $buildingDocumentation->id)->update([
+                'land_map_status' => $request->input('land_map_status')
+            ]);
+        } elseif ($request->input('all_round_house_pic_status')) {
+            RequiredDocument::where('building_documentation_id', $buildingDocumentation->id)->update([
+                'all_round_house_pic_status' => $request->input('all_round_house_pic_status')
             ]);
         }
-
-        return view('emap::admin.buildingDocumentation.template.landConfirmation', compact('buildingDocumentation'));
-    }
-
-    public function printRecommendation(BuildingDocumentation $buildingDocumentation)
-    {
-        if (!is_null(auth()->user()->ward_no)) {
-            $buildingDocumentation->update([
-                'status' => BuildingDocumentationStatusEnum::RECOMMENDATION->value,
-            ]);
-            $buildingDocumentation->load([
-                'neighbours',
-            ]);
-        }
-
-        return view('emap::admin.buildingDocumentation.template.recommendation', compact('buildingDocumentation'));
-    }
-
-    public function printCertificate(BuildingDocumentation $buildingDocumentation)
-    {
-        if (is_null(auth()->user()->ward_no)) {
-            $buildingDocumentation->update([
-                'status' => BuildingDocumentationStatusEnum::CERTIFICATE->value,
-            ]);
-            $buildingDocumentation->load([
-                'neighbours',
-            ]);
-        }
-
-        return view('emap::admin.buildingDocumentation.template.certificate', compact('buildingDocumentation'));
-    }
-
-    public function sentToAdmin(BuildingDocumentation $buildingDocumentation)
-    {
-        $buildingDocumentation->update([
-            'sent_admin' => 'recommendation_sent',
-        ]);
+        toast(' सफलता पुर्बक आवधिक गरियो', 'success');
         return back();
-    }
-
-    public function showToAdmin(BuildingDocumentation $buildingDocumentation)
-    {
-        $buildingDocumentation->update([
-            'sent_admin' => 'land_confirmation_show',
-        ]);
-        $buildingDocumentation->load([
-            'neighbours',
-        ]);
-        return back();
-    }
-
-    public function printPermission(BuildingDocumentation $buildingDocumentation)
-    {
-        $currentDateTime = date('Y-m-d H:i:s');
-        $buildingDocumentation->update([
-            'status' => BuildingDocumentationStatusEnum::RECOMMENDATION->value,
-        ]);
-        $buildingDocumentation->load([
-            'neighbours',
-        ]);
-
-        return view('emap::admin.buildingDocumentation.template.permission', compact('buildingDocumentation', 'currentDateTime'));
-    }
-
-    public function printConfession(BuildingDocumentation $buildingDocumentation)
-    {
-
-        $buildingDocumentation->update([
-            'status' => BuildingDocumentationStatusEnum::RECOMMENDATION->value,
-        ]);
-        $buildingDocumentation->load([
-            'neighbours',
-        ]);
-
-        return view('emap::admin.buildingDocumentation.template.confession', compact('buildingDocumentation', 'currentDateTime'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     public function destroy($id)

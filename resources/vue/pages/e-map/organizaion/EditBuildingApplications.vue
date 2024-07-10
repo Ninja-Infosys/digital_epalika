@@ -5,14 +5,22 @@
     </p>
     <p class="break-page"></p>
     <BuildingStoreyDetail :building-documentation="buildingDocumentation" />
+
     <EditBuildingLandDetail :building-documentation="buildingDocumentation" />
+
     <EditBuildingLandOwner :building-documentation="buildingDocumentation" />
+
     <EditBuildingHouseOwner :building-documentation="buildingDocumentation" />
+
     <EditBuildingApplicantDetail :building-documentation="buildingDocumentation" />
+
     <EditNeighbourDetail :building-documentation="buildingDocumentation" />
+
     <EditContractorDetail :building-documentation="buildingDocumentation" />
+
     <p class="break-page"></p>
     <EditBuildingDescription :building-documentation="buildingDocumentation" />
+    
     <EditConsultancyDetail :building-documentation="buildingDocumentation" />
 
 </template>

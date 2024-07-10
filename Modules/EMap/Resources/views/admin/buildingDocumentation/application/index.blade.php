@@ -82,7 +82,7 @@
                                     <div class="d-flex align-items-center gap-1">
 
 
-                                            <a href=""
+                                            <a href="{{route('emap.admin.buildingDocumentation.show', $buildingDocumentation)}}"
                                                 title="विवरण हेर्नुहोस" class="btn btn-xs btn-outline-success">
                                                 <i class="fa fa-eye"></i>
                                             </a>

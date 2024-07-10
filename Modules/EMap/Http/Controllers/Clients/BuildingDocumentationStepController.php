@@ -48,9 +48,24 @@ class BuildingDocumentationStepController extends Controller
     public function templateEdit(BuildingDocumentation $buildingDocumentation, BuildingDocumentationStep $form, BuildingFormDataType $buildingFormDataType)
     {
         $data = $this->getPrintData($buildingDocumentation, $form, $buildingFormDataType);
-        return view('emap::organization.template-edit.edit-file', compact('buildingDocumentation', 'data', 'buildingFormDataType', 'form'));
+        return view('emap::organization.template-edit.template-edit', compact('buildingDocumentation', 'data', 'buildingFormDataType', 'form'));
     }
 
+
+
+    public function storeFileTemplate(Request $request, BuildingDocumentation $buildingDocumentation, BuildingDocumentationStep $form, BuildingFormDataType $buildingFormDataType)
+    {
+        $request->validate([
+            'data' => ['required']
+        ]);
+       BuildingTemplateStore::updateOrCreate([
+            'building_documentation_id' => $buildingDocumentation->id,
+            'building_documentation_step_id' => $form->id,
+            'building_form_data_type_id' => $buildingFormDataType->id,
+        ], ['data' => $request->input('data')]);
+        toast('टेम्प्लेट विवरण सम्पादन सफलतापूर्वक गरियो', 'success');
+        return redirect(route('organization.admin.documentDetail', [$buildingDocumentation, $form])  );
+    }
     public function getPrintData(BuildingDocumentation $buildingDocumentation, BuildingDocumentationStep $form, BuildingFormDataType $buildingFormDataType): string
     {
         $buildingTemplateStore = BuildingTemplateStore::where('building_documentation_id', $buildingDocumentation->id)
@@ -167,44 +182,6 @@ class BuildingDocumentationStepController extends Controller
 
 
 
-    // public function storeTemplateData(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)
-    // {
-    //     $request->validate([
-    //         'data' => ['required'],
-    //         'files' => ['nullable', 'array'],
-    //         'files.*' => ['mimes:jpg,png,jpeg,pdf'],
-    //     ]);
 
-    //     $mapApplyData = DB::transaction(function () use ($request, $mapApply, $noticeTypeEnum) {
-    //         $mapApplyData = ApplyMapNotice::updateOrCreate(
-    //             [
-    //                 'map_apply_id' => $mapApply->id,
-    //                 'file_type' => $noticeTypeEnum->value,
-    //             ],
-    //             [
-    //                 'data' => $request->input('data'),
-    //             ]
-    //         );
-
-    //         if (!$mapApplyData->wasChanged()) {
-    //             $mapApplyData->update([
-    //                 'sent_to_admin_at' => now()
-    //             ]);
-    //         }
-
-
-    //         if ($request->hasFile('files')) {
-    //             $this->uploadDocuments($request, $mapApplyData);
-    //         }
-
-    //         return $mapApplyData;
-    //     });
-
-    //     Notification::send(User::all(), new ApplyMapNoticeNotification($mapApply, $mapApplyData));
-
-    //     toast('फाईल सफलता पुर्बक थपियो', 'success');
-
-    //     return back();
-    // }
 }
 

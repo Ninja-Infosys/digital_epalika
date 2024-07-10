@@ -56,14 +56,13 @@
                         <VSelect
                             id="storey"
                             v-model="form.storey"
-                            :options="storeys"
+                            :options="eBuildingSetting?.storeys ?? []"
                             label="तल्ला"
-                            name-prop="storey"
+                            name-prop="label"
                             @validate="validateField('storey')"
                             :error="errors.storey"
                         />
                     </div>
-
 
                     <div class="col-md-6 mb-2">
                         <VInput

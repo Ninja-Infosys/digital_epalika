@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Storage;
 use Modules\EMap\Enums\ApplicantTypeEnum;
 use Modules\EMap\Enums\BuildingDocumentationStatusEnum;
 use Modules\EMap\Enums\BuildingTypeEnum;
+use Modules\EMap\Enums\BuildingUsageEnum;
+use Modules\EMap\Enums\RoofTypeEnum;
 
 class BuildingDocumentation extends Model
 {
@@ -85,6 +87,8 @@ class BuildingDocumentation extends Model
 
     protected $casts = [
         'building_category' => BuildingTypeEnum::class,
+        'building_usage' => BuildingUsageEnum::class,
+        'roof_category' => RoofTypeEnum::class,
         'status' => BuildingDocumentationStatusEnum::class,
         'applicant_type' => ApplicantTypeEnum::class,
     ];
@@ -184,23 +188,21 @@ class BuildingDocumentation extends Model
     }
 
 
-    public function getSignatureUrlAttribute($value): string
-    {
-        return $this->attributes['signature'] && Storage::disk('public')->exists($this->attributes['signature']) ? Storage::disk('public')->url($this->attributes['photo']) : '';
 
-    }
     public function setConsultantEngineerSignatureAttribute($value): void
-    {
-        if (! empty($value) && ! is_string($value)) {
-            $this->attributes['consultant_engineer_signature'] = $value->store('e_map/buildingDocumentation/house_owner/consultant_engineer_signature', 'public');
-        }
+{
+    if (! empty($value) && ! is_string($value)) {
+        $this->attributes['consultant_engineer_signature'] = $value->store('e_map/buildingDocumentation/house_owner/consultant_engineer_signature', 'public');
     }
+}
 
-    public function getConsultantEngineerSignatureUrlAttribute($value): string
-    {
-        return $this->attributes['consultant_engineer_signature'] && Storage::disk('public')->exists($this->attributes['consultant_engineer_signature']) ? Storage::disk('public')->url($this->attributes['photo']) : '';
+public function getConsultantEngineerSignatureUrlAttribute($value): string
+{
+    return $this->attributes['consultant_engineer_signature'] && Storage::disk('public')->exists($this->attributes['consultant_engineer_signature'])
+        ? Storage::disk('public')->url($this->attributes['consultant_engineer_signature'])
+        : '';
+}
 
-    }
 
     public function applyBuildingNotices(): HasMany
     {
