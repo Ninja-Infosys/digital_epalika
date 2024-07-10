@@ -25,10 +25,19 @@ class ContractorDetail extends Model
 
     protected $fillable = [
         'building_documentation_id',
-        'contractor_name',
-        'contractor_signature',
+        'name',
+        'father_name',
+        'grandfather_name',
+        'phone',
         'address',
+        'local_body',
         'ward_no',
+        'nec_council_no',
+        'local_body_registration_no',
+        'consulting_firm_name',
+        'province_id',
+        'district_id',
+        'local_body_id',
         'tole',
 
     ];
@@ -38,19 +47,21 @@ class ContractorDetail extends Model
         return $this->belongsTo(BuildingDocumentation::class);
     }
 
-  
-
-
-    public function setContractorSignatureAttribute($value): void
+    public function province(): BelongsTo
     {
-        if (! empty($value) && ! is_string($value)) {
-            $this->attributes['contractor_signature'] = $value->store('e_map/buildingDocumentation/house_owner/contractor_signature', 'public');
-        }
+        return $this->belongsTo(Province::class);
     }
 
-    public function getContractorSignatureUrlAttribute($value): string
+    public function district(): BelongsTo
     {
-        return $this->attributes['contractor_signature'] && Storage::disk('public')->exists($this->attributes['contractor_signature']) ? Storage::disk('public')->url($this->attributes['photo']) : '';
-
+        return $this->belongsTo(District::class);
     }
+
+    public function localBody(): BelongsTo
+    {
+        return $this->belongsTo(LocalBody::class);
+    }
+
+
+
 }

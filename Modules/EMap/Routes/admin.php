@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\FileController;
 use Illuminate\Support\Facades\Route;
+use Modules\EMap\Http\Controllers\Admin\BuildingDocumentation\BuildingAdminStepController;
 use Modules\EMap\Http\Controllers\Admin\BuildingDocumentation\BuildingDocumentationController;
 use Modules\EMap\Http\Controllers\Admin\BuildingDocumentation\BuildingDocumentationStepController;
 use Modules\EMap\Http\Controllers\Admin\BuildingDocumentation\LandReportController;
@@ -149,6 +150,16 @@ Route::controller(ReportController::class)->prefix('reports')->as('report.')->gr
 });
 
 Route::prefix('buildingDocumentation')->group(function () {
+Route::resource('buildingDocumentation', BuildingDocumentationController::class);
+Route::get('buildingDocumentation/{buildingDocumentation}/buildingSteps', [BuildingAdminStepController::class, 'buildingFormList'])->name('buildingDocumentation.admin-step.building-form-list');
+Route::get('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFill', [BuildingAdminStepController::class, 'buildingFillDetail'])->name('buildingDocumentation.admin-step.fill-detail');
+Route::post('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFormDataType/{buildingFormDataType}/document/buildingDocument', [BuildingAdminStepController::class, 'store'])->name('building-documentation.buildingDocument.store');
+Route::put('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFormDataType/{buildingFormDataType}/buildingDocument/{buildingDocument}', [BuildingAdminStepController::class, 'update'])->name('building-documentation.buildingDocument.update');
+Route::get('buildingDocumentation/{buildingDocumentation}/form/{form}/documentDetail', [BuildingAdminStepController::class, 'viewDocumentDetail'])->name('buildingDocumentation.admin-step.view-document');
+Route::get('buildingDocumentation/{buildingDocumentation}/form/{form}/formDetail', [BuildingAdminStepController::class, 'formDetail'])->name('buildingDocumentation.admin-step.formDetail');
+Route::get('buildingDocumentation/{buildingDocumentation}/form/{form}/detail', [BuildingAdminStepController::class, 'viewDetail'])->name('buildingDocumentation.admin-step.view-detail');
+Route::put('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFormDataType/{buildingFormDataType}/{id}/buildingDocument', [BuildingAdminStepController::class, 'updateDocument'])->name('building-documentation.updateDocument');
+Route::post('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFormDataType/{buildingFormDataType}/buildingDocument', [BuildingAdminStepController::class, 'storeDocument'])->name('building-documentation.storeDocument');
+Route::put('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFormDataType/{buildingFormDataType}/buildingDocument/{buildingDocument}/updateAppliedDocumentStatus', [BuildingAdminStepController::class, 'updateAppliedDocumentStatus'])->name('buildingDocumentation.admin-step.updateAppliedDocumentStatus');
 
-    Route::resource('buildingDocumentation', BuildingDocumentationController::class);
 });

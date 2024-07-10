@@ -1,60 +1,54 @@
 <template>
     <p class="mt-2 fw-bold">तपसिल</p>
     <p>
-        <EditApplicationDetail :map-apply="mapApply"/>
+        <EditBuildingApplicationDetail :building-documentation="buildingDocumentation"/>
     </p>
     <p class="break-page"></p>
-    <StoreyDetail :map-apply="mapApply" />
-
-    <EditLandDetail :map-apply="mapApply" />
-
-    <EditLandOwner :map-apply="mapApply" />
-
-    <EditHouseOwner :map-apply="mapApply" />
-
-    <EditApplicantDetail :map-apply="mapApply" />
-
-    <EditFourForts :map-apply="mapApply" />
-
-    <EditDesignerDetail :map-apply="mapApply" />
-
+    <BuildingStoreyDetail :building-documentation="buildingDocumentation" />
+    <EditBuildingLandDetail :building-documentation="buildingDocumentation" />
+    <EditBuildingLandOwner :building-documentation="buildingDocumentation" />
+    <EditBuildingHouseOwner :building-documentation="buildingDocumentation" />
+    <EditBuildingApplicantDetail :building-documentation="buildingDocumentation" />
+    <EditNeighbourDetail :building-documentation="buildingDocumentation" />
+    <EditContractorDetail :building-documentation="buildingDocumentation" />
     <p class="break-page"></p>
+    <EditBuildingDescription :building-documentation="buildingDocumentation" />
+    <EditConsultancyDetail :building-documentation="buildingDocumentation" />
 
-    <EditCriteriaDetail :map-apply="mapApply" />
-
-    <EditBuildingDetail :map-apply="mapApply" />
-
-    <EditConsultancyDetail :map-apply="mapApply" />
 </template>
 
 <script setup>
 import {onMounted} from "vue";
 
-import {useApplicationStore} from "../../../stores/e-map/organization/application";
-import {useSettingStore} from "../../../stores/setting";
-import StoreyDetail from "./forms/StoreyDetail.vue";
-import EditLandDetail from "./forms/EditLandDetail.vue";
-import EditLandOwner from "./forms/EditLandOwner.vue";
-import EditHouseOwner from "./forms/EditHouseOwner.vue";
-import EditFourForts from "./forms/EditFourForts.vue";
-import EditDesignerDetail from "./forms/EditDesignerDetail.vue";
-import EditApplicantDetail from "./forms/EditApplicantDetail.vue";
-import EditApplicationDetail from "./forms/EditApplicationDetail.vue";
-import EditCriteriaDetail from "./forms/EditCriteriaDetail.vue";
-import EditBuildingDetail from "./forms/EditBuildingDetail.vue";
-import EditConsultancyDetail from "./forms/EditConsultancyDetail.vue";
+import {useBuildingApplicationStore} from "../../../stores/e-map/organization/buildingDocument";
+import {useBuildingSettingStore} from "../../../stores/buildingSetting";
+import BuildingStoreyDetail from "./buildingForms/BuildingStoreyDetail.vue";
+import EditBuildingLandDetail from "./buildingForms/EditBuildingLandDetail.vue";
+import EditBuildingLandOwner from "./buildingForms/EditBuildingLandOwner.vue";
+import EditBuildingHouseOwner from "./buildingForms/EditBuildingHouseOwner.vue";
+import EditNeighbourDetail from "./buildingForms/EditNeighbourDetail.vue";
+import EditContractorDetail from "./buildingForms/EditContractorDetail.vue";
+import EditBuildingDescription from "./buildingForms/EditBuildingDescription.vue";
+import EditConsultancyDetail from "./buildingForms/EditConsultancyDetail.vue";
+import EditBuildingApplicantDetail from "./buildingForms/EditBuildingApplicantDetail.vue";
+
+
+import EditBuildingApplicationDetail from "./buildingForms/EditBuildingApplicationDetail.vue";
+
 
 defineProps({
-    mapApply:{
+    buildingDocumentation:{
         required:true,
         type:Object
     }
 })
 
-const applicationStore=useApplicationStore();
-const settingStore=useSettingStore();
+const buildingApplicationStore=useBuildingApplicationStore();
+const buildingSettingStore=useBuildingSettingStore();
+
 
 onMounted(()=>{
-    settingStore.getEMapSetting();
+    buildingSettingStore.getBuildingSetting();
+
 })
 </script>

@@ -50,7 +50,10 @@ class BuildingApplicationNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-
+            'निर्माणको किसिम ' => $this->buildingDocumentation->building_category?->label() ?? '',
+            'निर्माणको प्रयोजन ' => $this->buildingDocumentation->building_usage ?? '',
+           
+           'घर धनीको नाम' => $this->buildingDocumentation->buildingHouseOwner->name ?? '',
             'सन्देश' => $this->buildingDocumentation->sent_to_organization == 'Reject' || $this->buildingDocumentation->sent_to_organization == 'Unseen' ? 'तपाईको फारम पालिकाले अस्वीकार गरेको छ' : 'तपाईको फारम पालिकाले स्वीकार गरेको छ'
         ];
     }

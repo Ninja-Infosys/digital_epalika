@@ -31,7 +31,8 @@
                         <h4 class="header-title mb-0">दर्खास्त निवेदनहरु</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
-                            <a href="{{route('organization.admin.buildingDocumentation.create')}}" class="btn btn-sm btn-outline-primary">
+                            <a href="{{ route('organization.admin.buildingDocumentation.create') }}"
+                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
                         </div>
@@ -56,7 +57,7 @@
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td>{{ get_nepali_number($buildingDocumentation->submission_no ?? '') }}</td>
-                                        <td>{{ $buildingDocumentation->house_owner_name ?? '' }}</td>
+                                        <td>{{ $buildingDocumentation->buildingHouseOwner->name ?? '' }}</td>
                                         <td>
                                             <span>{{ $buildingDocumentation->localBody->local_body ?? '' }}
                                                 - {{ get_nepali_number($buildingDocumentation->land_ward_no ?? '') }}
@@ -64,7 +65,7 @@
                                         </td>
                                         <td class="d-flex gap-1">
                                             <form
-                                                action="{{ route('organization.admin.buildingDocumentation.edit', $buildingDocumentation) }}"
+                                                action="{{ route('organization.admin.buildingDocumentation.show', $buildingDocumentation) }}"
                                                 method="get" class="d-inline">
                                                 <button type="submit"
                                                     class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
@@ -78,7 +79,7 @@
                                             </form>
 
                                             <form
-                                                action="{{ route('organization.admin.buildingDocumentation.show', $buildingDocumentation) }}"
+                                                action="{{ route('organization.admin.buildingDocumentationList', $buildingDocumentation) }}"
                                                 method="get" class="d-inline">
                                                 <button type="submit"
                                                     class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
@@ -88,25 +89,47 @@
                                             </form>
 
                                             <a data-bs-type="show" class="btn me-1 btn-xs btn-outline-warning"
-                                            href="{{ route('organization.admin.buildingDocumentationList', $buildingDocumentation) }}"
-                                            data-bs-toggle="tooltip" data-bs-placement="top" title="हेर्नुहोस">
-                                            <i class="fa fa-list"></i>
-                                        </a>
+                                                href="{{ route('organization.admin.requiredDocument', $buildingDocumentation) }}"
+                                                data-bs-toggle="tooltip" data-bs-placement="top" title="हेर्नुहोस">
+                                                <i class="fa fa-file"></i>
+                                            </a>
+                                            @if (empty($mapApply->registration_no))
+                                                <a data-bs-type="sent-to-admin"
+                                                    class="btn me-1 btn-xs {{ $buildingDocumentation->sent_to_admin_at == null ? 'btn-outline-danger' : 'btn-outline-success' }}"
+                                                    href="{{ route('organization.admin.updateAdminStatus', $buildingDocumentation) }}"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="एडमिनलाई पठाउनुस">
+                                                    <i
+                                                        class="fa {{ $buildingDocumentation->sent_to_admin_at == null ? 'fa-times' : 'fa-check' }}"></i>
 
+                                                </a>
+                                                <form
+                                                    action="{{ route('organization.admin.buildingDocumentation.destroy', $buildingDocumentation) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('delete')
+
+                                                    @if (empty($buildingDocumentation->registration_no))
+                                                        <button data-bs-type="delete"
+                                                            class="btn btn-xs btn-outline-danger show_confirm">
+                                                            <i class="fa fa-trash {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"
+                                                                data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                title="मेटाउनु होस्"></i>
+                                                        </button>
+                                                    @endif
+
+                                                </form>
+                                            @endif
 
                                         </td>
-
-
                                     </tr>
-
                                 @empty
                                     <tr>
-                                        <td class="text-center" colspan="13">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                        <td class="text-center" colspan="5">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                     </tr>
                                 @endforelse
                             </tbody>
                         </table>
-                        {{ $buildingDocumentations->links() }}
                     </div>
 
                 </div>

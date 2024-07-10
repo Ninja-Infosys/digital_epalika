@@ -198,6 +198,64 @@ trait EMapTemplateTrait
                 'भवन विवरण' => '[@buildingDetails]',
             ],
         ],
+        [
+            'title' => 'भवन अभिलेखिकरण सम्बन्धि विवरण',
+            'data' => [
+                'निर्माण कार्यको किसिम' => '[@building_category]',
+                'भवन निर्माण भएको वर्ष' => '[@house_built_year]',
+                'भवनको कोठा संख्या' => '[@room]',
+                'तल्ला संख्या' => '[@current_storey]',
+                'भवनको प्लिनथको क्षेत्रफल' => '[@plinth_area]',
+                'जग्गाको साविक पालिका' => '[@former_local_body]',
+                'जग्गाको साविक वडा नं.' => '[@former_ward_no]',
+                'जग्गाको वडा नं.' => '[@land_ward_no]',
+                'जग्गाको कित्ता नं.' => '[@plot_no]',
+                'जग्गाको क्षेत्रफल' => '[@land_area]',
+
+                'कन्सल्टेन्सीको नाम' => '[@consultancy_name]',
+                'कन्सल्टेन्टको ईन्जीन्यरको नाम' => '[@consultant_engineer_name]',
+                'कन्सल्टेन्टको ईन्जीन्यरको पद' => '[@consultant_engineer_post]',
+                'कन्सल्टेन्सीको एन.ई.सी. नं' => '[@n_e_c_registration_no]',
+                'कन्सल्टेन्टको ईन्जीन्यरको सहि' => '[@consultant_signature]',
+
+                'निवेदकको नाम' => '[@applicant_name]',
+                'निवेदकको फोन नं.' => '[@applicant_phone_no]',
+                'निवेदकको पालिका' => '[@local_body]',
+                'निवेदकको वडा नं' => '[@applicant_ward_no]',
+                'निवेदकको टोल' => '[@applicant_tole]',
+            ],
+        ],
+        [
+            'title' => 'भवन अभिलेखिकरण  विवरण',
+            'data' => [
+                'ठेकेदारको नाम' => '[@buildingContractorDetail.name]',
+                'ठेकेदारको फोन नं.' => '[@buildingContractorDetail.phone]',
+                'ठेकेदारको पालिका' => '[@buildingContractorDetail.local_body]',
+                'ठेकेदारको वडा नं.' => '[@buildingContractorDetail.ward_no]',
+                'ठेकेदारको टोल.' => '[@buildingContractorDetail.tole]',
+                'घरधनिको नाम' => '[@buildingHouseOwner.name]',
+                'घरधनिको जिल्ला' => '[@buildingHouseOwner.district]',
+                'घरधनिको पालिका' => '[@buildingHouseOwner.local_body]',
+                'घरधनिको वडा नं' => '[@buildingHouseOwner.ward_no]',
+                'घरधनिको टोल' => '[@buildingHouseOwner.tole]',
+                'घरधनिको फोटो' => '[@buildingHouseOwner.photo]',
+                'जग्गाधनिको नाम' => '[@buildingLandOwner.name]',
+                'जग्गाधनिको जिल्ला' => '[@buildingLandOwner.district]',
+                'जग्गाधनिको पालिका' => '[buildingLandOwner.local_body]',
+                'जग्गाधनिको वडा नं' => '[@buildingLandOwner.former_ward_no]',
+                'जग्गाधनिको न.प्र.प.नं.' => '[@buildingLandOwner.citizenship_no]',
+                'जग्गाधनिको टोल' => '[@buildingLandOwner.tole]',
+
+            ],
+        ],
+
+        [
+            'title' => 'भवन अभिलेखिकरण संधियारको विवरण',
+            'data' => [
+                'संधियारको विवरण' => '[@buildingNeighbours]',
+
+            ],
+        ],
     ];
 
     public function getTemplateDataAttribute(): Collection
@@ -247,6 +305,8 @@ trait EMapTemplateTrait
             $this->getDesignerDetailsReplacement(),
             $this->getSupervisorDetailsReplacement(),
             $this->getContractorDetailsReplacement(),
+            $this->getBuildingDocumentationReplacement(),
+
 
             $replace
         );
@@ -482,5 +542,79 @@ trait EMapTemplateTrait
         return Cache::rememberForever('eMapTemplates', function () {
             return EMapTemplate::all();
         });
+    }
+    private function getBuildingDocumentationReplacement(): array
+    {
+        return [
+            '[@building_category]' => $this->get_nepali_number(optional($this->building_category)->label()) ?? '',
+            '[@house_built_year]' => $this->get_nepali_number(optional($this->house_built_year)->label()) ?? '',
+            '[@room]' => $this->get_nepali_number(optional($this->room)->label()) ?? '',
+            '[@current_storey]' => $this->get_nepali_number($this->current_storey) ?? '',
+            '[@plinth_area]' => $this->get_nepali_number($this->plinth_area->title) ?? '',
+            '[@former_local_body]' => $this->get_nepali_number($this->former_local_body) ?? '',
+            '[@former_ward_no]' => $this->get_nepali_number($this->former_ward_no) ?? '',
+            '[@land_ward_no]' => $this->get_nepali_number($this->land_ward_no) ?? '',
+            '[@plot_no]' => $this->get_nepali_number($this->plot_no) ?? '',
+            '[@land_area]' => $this->get_nepali_number($this->land_area) ?? '',
+            '[@applicant_name]' => get_nepali_number($this->applicant_name) ?? '',
+            '[@local_body]' => get_nepali_number($this->localBodies?->local_body) ?? '',
+            '[@applicant_ward_no]' => get_nepali_number($this->applicant_ward_no) ?? '',
+            '[@applicant_tole]' => get_nepali_number($this->applicant_tole) ?? '',
+            '[@applicant_phone_no]' => get_nepali_number($this->applicant_phone_no) ?? '',
+            '[@consultancy_name]' => get_nepali_number($this->consultancy_name) ?? '',
+            '[@consultancy_registration_no]' => get_nepali_number($this->consultancy_registration_no) ?? '',
+            '[@consultant_engineer_name]' => get_nepali_number($this->consultant_engineer_name) ?? '',
+            '[@n_e_c_registration_no]' => get_nepali_number($this->n_e_c_registration_no) ?? '',
+            '[@consultant_engineer_post]' => get_nepali_number($this->consultant_engineer_post) ?? '',
+
+        ];
+    }
+
+    private function getBuildingNeighboursReplacement(): array
+    {
+        return [
+            '[@buildingNeighbours]' => (string) View::make('emap::inc.building_neighbours', [
+                'neighbours' => $this->neighbours,
+            ])
+        ];
+    }
+
+    private function getBuildingContractorDetailsReplacement(): array
+    {
+        $contractorDetail = $this->contractorDetails->first();
+
+        return [
+            '[@contractorDetail.local_body]' => get_nepali_number($this->$contractorDetail?->localBody?->local_body) ?? '',
+            '[@contractorDetail.ward_no]' => get_nepali_number($this->$contractorDetail?->ward_no) ?? '',
+            '[@contractorDetail.name]' => get_nepali_number($this->$contractorDetail?->name) ?? '',
+            '[@contractorDetail.tole]' => get_nepali_number($this->$contractorDetail?->tole) ?? '',
+            '[@contractorDetail.phone]' => get_nepali_number($this->$contractorDetail?->name) ?? '',
+        ];
+    }
+
+    private function getBuildingHouseOwnerReplacement(): array
+    {
+        return [
+            '[@buildingHouseOwner.name]' => $this->get_nepali_number($this->buildingHouseOwner?->name) ?? '',
+            '[@buildingHouseOwner.district]' => $this->get_nepali_number($this->buildingHouseOwner?->district?->district) ?? '',
+            '[@buildingHouseOwner.local_body]' => $this->get_nepali_number($this->buildingHouseOwner?->localBody?->local_body) ?? '',
+            '[@buildingHouseOwner.ward_no]' => $this->get_nepali_number($this->buildingHouseOwner?->ward_no) ?? '',
+            '[@buildingHouseOwner.tole]' => $this->get_nepali_number($this->buildingHouseOwner?->tole) ?? '',
+            '[@buildingHouseOwner.photo]' => '<img src="'.($this->buildingHouseOwner?->photo_url ?? '').'" width="100" height="100" alt="House Owner Photo">',
+        ];
+    }
+
+
+    private function getBuildingLandOwnerReplacement(): array
+    {
+        return [
+            '[@buildingLandOwner.name]' => $this->get_nepali_number($this->buildingLandOwner?->name) ?? '',
+            '[@buildingLandOwner.local_body]' => $this->get_nepali_number($this->buildingLandOwner?->local_body) ?? '',
+            '[@buildingLandOwner.former_ward_no]' => $this->get_nepali_number($this->buildingLandOwner?->former_ward_no) ?? '',
+            '[@buildingLandOwner.citizenship_no]' => $this->get_nepali_number($this->buildingLandOwner?->citizenship_no) ?? '',
+            '[@buildingLandOwner.ward_no]' => $this->get_nepali_number($this->buildingLandOwner?->ward_no) ?? '',
+            '[@buildingLandOwner.district]' => $this->get_nepali_number($this->buildingLandOwner?->district?->district) ?? '',
+            '[@buildingLandOwner.tole]' => $this->get_nepali_number($this->buildingLandOwner?->tole) ?? '',
+        ];
     }
 }
