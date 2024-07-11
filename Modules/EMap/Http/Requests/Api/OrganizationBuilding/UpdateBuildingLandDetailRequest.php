@@ -21,7 +21,7 @@ class UpdateBuildingLandDetailRequest extends FormRequest
             'land_ward_no' => ['required'],
             'land_tole' => ['required'],
             'former_local_body' => ['required'],
-            'former_ward_no' => ['required', 'numeric'],
+            'former_ward_no' => ['required', 'string'],
         ];
     }
 

@@ -109,15 +109,7 @@
                         :disabled="!editFormOpened"
                     />
                 </div>
-                <div class="col-md-4 mb-3">
-                    <VFileUpload
-                        id="landowner-signature"
-                        v-model="form.signature"
-                        label="जग्गाधनीको सहि"
-                        :default-photo="buildingLandOwner.data?.signature_url"
-                        :disabled="!editFormOpened"
-                    />
-                </div>
+
                 <div class="col-md-12">
                     <fieldset>
                         <legend>ठेगाना</legend>
@@ -240,7 +232,6 @@ const initialState={
     ward_no: '',
     tole: '',
     photo:'',
-    signature:'',
 }
 
 const form = reactive({...initialState});

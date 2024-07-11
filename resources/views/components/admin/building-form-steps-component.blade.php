@@ -36,7 +36,7 @@
                                 @if ($form->form_approve)
                                     <a href="{{ route('emap.admin.buildingDocumentation.admin-step.view-detail', [$buildingDocumentation, $form]) }}"
                                         class="btn btn-xs bn-outline-success">
-                                        <i class="fa fa-eye"></i>
+                                        <i class="fa fa-edit"></i>
                                     </a>
                                 @endif
                                 @if ($form->form_edit)
@@ -44,6 +44,11 @@
                                         class="btn btn-xs btn-outline-primary {{ $form->order == $order ? '' : 'disabled' }}">
                                         <i class="fa fa-edit"></i>
                                     </a>
+                                    <a href="{{ route('emap.admin.buildingDocumentation.admin-step.view-document', [$buildingDocumentation, $form]) }}"
+                                    class="btn me-1 btn-xs btn-outline-primary ">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                </a>
                                 @else
                                     <a href="{{ route('emap.admin.buildingDocumentation.admin-step.view-document', [$buildingDocumentation, $form]) }}"
                                         class="btn me-1 btn-xs btn-outline-primary ">

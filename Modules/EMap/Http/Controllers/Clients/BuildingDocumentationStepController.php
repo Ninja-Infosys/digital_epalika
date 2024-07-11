@@ -69,9 +69,9 @@ class BuildingDocumentationStepController extends Controller
     public function getPrintData(BuildingDocumentation $buildingDocumentation, BuildingDocumentationStep $form, BuildingFormDataType $buildingFormDataType): string
     {
         $buildingTemplateStore = BuildingTemplateStore::where('building_documentation_id', $buildingDocumentation->id)
-            ->where('building_documentation_step_id', $form->id)
-            ->where('building_form_data_type_id', $buildingFormDataType->id)
-            ->first()?->data ?? null;
+        ->where('building_documentation_step_id', $form->id)
+        ->where('building_form_data_type_id', $buildingFormDataType->id)
+        ->first()?->data ?? null;
 
         $buildingFormDataType->load('model');
         $buildingDocumentation->load(
@@ -84,7 +84,7 @@ class BuildingDocumentationStepController extends Controller
             'fiscalYear',
             'requiredDocument',
         );
-        return $buildingTemplateStore ?? Str::replace($this->getReplaceData(), $this->getBuildingTemplateData($buildingDocumentation), $buildingFormDataType->model?->data);
+        return $buildingTemplateStore ?? Str::replace($this->getBuildingReplaceData(), $this->getBuildingTemplateData($buildingDocumentation), $buildingFormDataType->model?->data);
     }
 
     public function store(Request $request, BuildingDocumentation $buildingDocumentation, BuildingDocumentationStep $form, BuildingFormDataType $buildingFormDataType)

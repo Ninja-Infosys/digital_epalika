@@ -28,7 +28,6 @@ class UpdateBuildingHouseOwnerRequest extends FormRequest
             'ward_no' => ['required', 'integer'],
             'tole' => ['required'],
             'photo' => ['nullable','image'],
-            'signature' => ['nullable','image']
         ];
     }
 

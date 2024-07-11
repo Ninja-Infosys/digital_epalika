@@ -26,12 +26,10 @@ class UpdateBuildingLandOwnerRequest extends FormRequest
             'district_id' =>['required', Rule::exists('districts', 'id')],
             'local_body_id' => ['required', Rule::exists('local_bodies', 'id')],
             'ward_no' => ['required', 'integer'],
-            'former_ward_no' => ['required', 'integer'],
+            'former_ward_no' => ['required', 'string'],
             'local_body' => ['required', 'string'],
             'tole' => ['required'],
-            'ward_no' => ['required', 'integer'],
-            'photo' => ['required', 'image'],
-            'signature' => ['required', 'image'],
+            'photo' => ['nullable', 'image'],
         ];
     }
 
