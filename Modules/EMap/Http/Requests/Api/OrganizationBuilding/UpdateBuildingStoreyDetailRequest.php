@@ -15,7 +15,6 @@ class UpdateBuildingStoreyDetailRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => ['nullable',Rule::exists('building_storey_details', 'id')],
             'storey' => ['required'],
             'area_of_former_construction' => ['required'],
             'land_area' => ['required'],
