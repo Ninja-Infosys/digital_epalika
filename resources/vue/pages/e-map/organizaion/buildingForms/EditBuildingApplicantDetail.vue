@@ -145,16 +145,7 @@
             :error="errors.application_date"
           />
         </div>
-        <div class="col-4">
-          <VFileUpload
-            id="applicant_signature"
-            v-model="form.applicant_signature"
-            label="निवेदकको सहि"
-            :default-photo="applicant_signature_url"
-            :show-preview-image="true"
-            :disabled="!editFormOpened"
-          />
-        </div>
+
       </div>
 
       <div v-if="editFormOpened" class="d-flex mt-3 justify-content-end">
