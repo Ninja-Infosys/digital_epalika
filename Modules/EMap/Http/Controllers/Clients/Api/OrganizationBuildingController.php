@@ -53,7 +53,7 @@ class OrganizationBuildingController extends Controller
 
         return response()->json([
             'current_storey' => $buildingDocumentation->current_storey,
-            'storey_details_count' => $buildingDocumentation->storey_details_count,
+            'building_storey_details_count' => $buildingDocumentation->building_storey_details_count,
             'data' => BuildingStoreyDetailResource::collection($buildingDocumentation->buildingStoreyDetails),
         ]);
     }
@@ -66,10 +66,14 @@ class OrganizationBuildingController extends Controller
 
             if (! empty($request->validated('id'))) {
                 BuildingStoreyDetail::find($request->validated('id'))?->update($formData);
-            } else {
+
+            }
+            else {
                 BuildingStoreyDetail::create($formData + [
                     'building_documentation_id' => $buildingDocumentation->id,
+
                 ]);
+                // dd($formData);
             }
         });
 

@@ -13,9 +13,10 @@
                 </tr>
                 </thead>
                 <tbody>
+
                 <tr v-for="(buildingStorey,index) in buildingStoreyDetails" :key="buildingStorey.id">
                     <td>
-                        {{ buildingStorey.storey || 'उपलब्ध छैन' }}
+                        {{ buildingStorey.mapFee?.storey || 'उपलब्ध छैन' }}
                     </td>
 
                     <td>
@@ -46,21 +47,22 @@
         </div>
     </fieldset>
 
-    <VModal title="तल्लाको क्षेत्रफल र उचाईको विवरण"
+    <VModal title="साबिक भवन/निर्माण तला र क्षेत्रफल सम्बन्धित विवरण"
             v-model:show-modal="editFormOpened"
             @close-click="closeEditForm">
         <template #body>
             <form @submit.prevent="saveFormData(buildingDocumentation.id)">
                 <div class="row">
+
                     <div class="col-md-6 mb-2">
                         <VSelect
-                            id="storey"
-                            v-model="form.storey"
-                            :options="eBuildingSetting?.storeys ?? []"
+                            id="map_fee_id"
+                            v-model="form.map_fee_id"
+                            :options="eBuildingSetting.mapFees"
                             label="तल्ला"
-                            name-prop="label"
-                            @validate="validateField('storey')"
-                            :error="errors.storey"
+                            name-prop="storey"
+                            @validate="validateField('map_fee_id')"
+                            :error="errors.map_fee_id"
                         />
                     </div>
 
@@ -68,7 +70,7 @@
                         <VInput
                             id="area_of_former_construction"
                             v-model="form.area_of_former_construction"
-                            label="साविक निर्माणको क्षेत्रफल"
+                            label="निर्माणको क्षेत्रफल फिट/मिटर"
                             @validate="validateField('area_of_former_construction')"
                             :error="errors.area_of_former_construction"
                         />
@@ -77,7 +79,7 @@
                         <VInput
                             id="land_area"
                             v-model="form.land_area"
-                            label="जम्मा क्षेत्रफल"
+                            label="निर्माण भैसकेको जम्मा क्षेत्रफल वर्ग/मिटर/फिट/मिटर"
                             @validate="validateField('land_area')"
                             :error="errors.land_area"
                         />
@@ -86,7 +88,7 @@
                         <VInput
                             id="remarks"
                             v-model="form.remarks"
-                            label="उचाई"
+                            label="कैफियत"
                             @validate="validateField('remarks')"
                             :error="errors.remarks"
                         />
@@ -134,7 +136,7 @@ const {buildingStoreyDetailsData} = storeToRefs(buildingApplicationStore);
 
 const initialState = {
     id: '',
-    storey: '',
+    map_fee_id: '',
     area_of_former_construction: '',
     land_area: '',
     remarks: '',
@@ -154,10 +156,10 @@ const getBuildingStoreyDetails = async () => {
     buildingStoreyDetailsData.value.data.forEach((buildingStorey) => {
         buildingStoreyDetails.value.push(buildingStorey);
     })
-    if (buildingStoreyDetailsData.value.storey_details_count < buildingStoreyDetailsData.value.current_storey) {
-        for (let i = buildingStoreyDetailsData.value.storey_details_count; i < buildingStoreyDetailsData.value.current_storey; i++) {
+    if (buildingStoreyDetailsData.value.building_storey_details_count < buildingStoreyDetailsData.value.current_storey) {
+        for (let i = buildingStoreyDetailsData.value.building_storey_details_count; i < buildingStoreyDetailsData.value.current_storey; i++) {
             buildingStoreyDetails.value.push({
-                storey: '',
+                map_fee_id: '',
                 area_of_former_construction: '',
                 land_area: '',
                 remarks: '',
@@ -169,7 +171,7 @@ const getBuildingStoreyDetails = async () => {
 const isSubmitting = ref(false);
 
 const validations = object({
-    storey: string().required('तल्ला अनिवार्य छ |'),
+    map_fee_id: string().required('तल्ला अनिवार्य छ |'),
     area_of_former_construction: string().required('निर्माणको क्षेत्रफल अनिवार्य छ |'),
     land_area: string().required('निर्माण भैसकेको जम्मा क्षेत्रफल अनिवार्य छ |'),
     remarks: string().required('कैफियत अनिवार्य छ |'),
@@ -218,7 +220,7 @@ const openEditForm = (index) => {
     const selectedStorey = buildingStoreyDetails.value[index];
     Object.assign(form, {
         id: selectedStorey.id ?? '',
-        storey: selectedStorey.storey ?? '',
+        map_fee_id: selectedStorey.map_fee_id ?? '',
         area_of_former_construction: selectedStorey.area_of_former_construction ?? 0,
         land_area: selectedStorey.land_area ?? 0,
         remarks: selectedStorey.remarks ?? 0,

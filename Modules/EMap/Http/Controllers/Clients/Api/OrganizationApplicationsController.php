@@ -75,7 +75,9 @@ class OrganizationApplicationsController extends Controller
 
             if (! empty($request->validated('id'))) {
                 StoreyDetail::find($request->validated('id'))?->update($formData);
-            } else {
+
+
+        } else {
                 StoreyDetail::create($formData + [
                     'map_apply_id' => $mapApply->id,
                 ]);

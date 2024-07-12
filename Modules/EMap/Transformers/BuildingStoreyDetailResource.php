@@ -3,6 +3,7 @@
 namespace Modules\EMap\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Modules\Plan\Transformers\MapFeeResource;
 
 class BuildingStoreyDetailResource extends JsonResource
 {
@@ -10,10 +11,12 @@ class BuildingStoreyDetailResource extends JsonResource
     {
         return [
             'id' => $this->id ?? '',
-            'storey' => $this->storey ?? '',
+            'map_fee_id' => $this->map_fee_id ?? '',
             'area_of_former_construction' => $this->area_of_former_construction ?? '',
-            'land_area' => $this->land_area ?? '',
+            'land_area' => $this->land_area ?? '',  
             'remarks' => $this->remarks ?? '',
+            'mapFee' => MapFeeResource::make($this->whenLoaded('mapFee')),
+
         ];
     }
 }
