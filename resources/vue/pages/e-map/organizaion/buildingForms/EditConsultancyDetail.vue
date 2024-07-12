@@ -13,7 +13,8 @@
                         id="consultant_engineer_signature"
                         v-model="form.consultant_engineer_signature"
                         label="(कन्सल्टेन्ट इंन्जिनियरको सहि)"
-                        :default-photo="consultant_engineer_signature_url"
+                        :default-photo="form.data?.consultant_engineer_signature_url"
+
                         :show-preview-image="true"
                     />
                 </div>

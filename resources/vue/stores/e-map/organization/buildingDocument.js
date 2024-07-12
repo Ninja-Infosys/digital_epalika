@@ -6,8 +6,8 @@ const baseUrl=`${window.location.origin}`
 export const useBuildingApplicationStore = defineStore('buildingDocument', {
     state: () => ({
         buildingStoreyDetailsData: {
-            buildingStorey:0,
-            storey_details_count:0,
+            current_storey:0,
+            building_storey_details_count:0,
             data:[]
         },
         neighbours: {
@@ -46,7 +46,7 @@ export const useBuildingApplicationStore = defineStore('buildingDocument', {
             return axios.get(`${baseUrl}/api/organization/admin/buildingDocumentation/${building_documentation_id}/building-storey-details`)
                 .then((res) => {
                     this.buildingStoreyDetailsData.current_storey=res.data.current_storey;
-                    this.buildingStoreyDetailsData.storey_details_count=res.data.storey_details_count;
+                    this.buildingStoreyDetailsData.building_storey_details_count=res.data.building_storey_details_count;
                     this.buildingStoreyDetailsData.data=res.data.data;
                 })
                 .catch((err) => {

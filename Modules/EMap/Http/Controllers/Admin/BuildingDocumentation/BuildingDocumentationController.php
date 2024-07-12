@@ -81,6 +81,7 @@ class BuildingDocumentationController extends Controller
             'neighbours',
             'buildingStoreyDetails',
             'requiredDocument',
+            'buildingStoreyDetails.mapFee',
         );
 
         return view('emap::admin.buildingDocumentation.application.show', compact('buildingDocumentation'));

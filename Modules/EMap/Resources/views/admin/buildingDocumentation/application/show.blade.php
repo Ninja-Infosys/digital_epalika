@@ -120,11 +120,11 @@
                                             @foreach ($buildingDocumentation->buildingStoreyDetails as $storeyDetail)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $storeyDetail?->direction?->label() }}</td>
+                                                <td>{{ $storeyDetail->mapFee?->storey ?? '' }}</td>
                                                 <td>{{ get_nepali_number($storeyDetail->land_area) }}</td>
                                                 <td>{{ get_nepali_number($storeyDetail->area_of_former_construction) }}
                                                 </td>
-                                                <td>{{ $storeyDetail->remarks }}</td>
+                                                <td>{{ get_nepali_number($storeyDetail->remarks) }}</td>
 
                                             </tr>
                                             @endforeach
