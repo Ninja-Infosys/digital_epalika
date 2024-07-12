@@ -37,7 +37,7 @@ class BuildingApplicationRequest extends FormRequest
             'applicant_ward_no' => ['required'],
             'applicant_tole' => ['required'],
             'application_date' => ['nullable'],
-            'applicant_signature' => ['nullable','image'],
+            'applicant_signature' => ['nullable', 'image'],
 
             'buildingLandOwner.name' => ['required'],
             'buildingLandOwner.phone' => ['required'],
@@ -52,7 +52,6 @@ class BuildingApplicationRequest extends FormRequest
             'buildingLandOwner.ward_no' => ['required'],
             'buildingLandOwner.tole' => ['required'],
             'buildingLandOwner.photo' => ['nullable', 'image'],
-            'buildingLandOwner.signature' => ['nullable', 'image'],
             'buildingHouseOwner.name' => ['required'],
             'buildingHouseOwner.phone' => ['required'],
             'buildingHouseOwner.father_name' => ['required'],
@@ -66,7 +65,6 @@ class BuildingApplicationRequest extends FormRequest
             'buildingHouseOwner.ward_no' => ['required'],
             'buildingHouseOwner.tole' => ['required'],
             'buildingHouseOwner.photo' => ['nullable','image'],
-            'buildingHouseOwner.signature' => ['nullable','image'],
         ];
     }
 }

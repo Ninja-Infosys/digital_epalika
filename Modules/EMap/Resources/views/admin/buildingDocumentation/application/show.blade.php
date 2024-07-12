@@ -563,13 +563,13 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <h4 class="form-label"><b>४. वडा नं. :</b>
-                                        {{ get_nepali_number($buildingDocumentation->ward_no) ?? '' }}
+                                        {{ get_nepali_number($buildingDocumentation->applicant_ward_no) ?? '' }}
                                     </h4>
 
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <h4 class="form-label"><b>५. टोल :</b>
-                                        {{ $buildingDocumentation->tole ?? '' }}
+                                        {{ $buildingDocumentation->applicant_tole ?? '' }}
                                     </h4>
 
                                 </div>
@@ -1096,7 +1096,7 @@
             </div>
 
         </div>
-        @include('admin.inc.file-view');
+        @include('admin.inc.file-view')
     </div>
 </div>
 @endif

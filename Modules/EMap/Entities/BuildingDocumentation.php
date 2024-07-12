@@ -174,34 +174,33 @@ class BuildingDocumentation extends Model
     {
         return $this->hasOne(BuildingLandOwner::class);
     }
+    public function getApplicantSignatureUrlAttribute(): string
+    {
+
+        return $this->attributes['applicant_signature'] && Storage::disk('public')->exists($this->attributes['applicant_signature']) ? Storage::disk('public')->url($this->attributes['applicant_signature']) : '';
+    }
+
     public function setApplicantSignatureAttribute($value): void
     {
-        if (! empty($value) && ! is_string($value)) {
-            $this->attributes['applicant_signature'] = $value->store('e_map/buildingDocumentation/house_owner/applicant_signature', 'public');
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['applicant_signature'] = $value->store('building/applicant_signature', 'public');
         }
     }
 
-    public function getApplicantSignatureUrlAttribute($value): string
-    {
-        return $this->attributes['applicant_signature'] && Storage::disk('public')->exists($this->attributes['applicant_signature']) ? Storage::disk('public')->url($this->attributes['photo']) : '';
-
-    }
 
 
 
     public function setConsultantEngineerSignatureAttribute($value): void
-{
-    if (! empty($value) && ! is_string($value)) {
-        $this->attributes['consultant_engineer_signature'] = $value->store('e_map/buildingDocumentation/house_owner/consultant_engineer_signature', 'public');
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['consultant_engineer_signature'] = $value->store('e_map/buildingDocumentation/house_owner/consultant_engineer_signature', 'public');
+        }
     }
-}
 
-public function getConsultantEngineerSignatureUrlAttribute($value): string
-{
-    return $this->attributes['consultant_engineer_signature'] && Storage::disk('public')->exists($this->attributes['consultant_engineer_signature'])
-        ? Storage::disk('public')->url($this->attributes['consultant_engineer_signature'])
-        : '';
-}
+    public function getConsultantEngineerSignatureUrlAttribute(): string
+    {
+        return $this->attributes['consultant_engineer_signature'] ? Storage::disk('public')->url($this->attributes['consultant_engineer_signature']) : '';
+    }
 
 
     public function applyBuildingNotices(): HasMany
@@ -223,8 +222,8 @@ public function getConsultantEngineerSignatureUrlAttribute($value): string
 
         $storedDocuments =
             $storedDocuments
-                ->merge($this->buildingDocuments)
-                ->sortByDesc('created_at');
+            ->merge($this->buildingDocuments)
+            ->sortByDesc('created_at');
 
         return $storedDocuments
             ->map(function ($storedDocument) {
@@ -238,7 +237,7 @@ public function getConsultantEngineerSignatureUrlAttribute($value): string
                 return [
                     'desk' => $form['desk'] ?? '',
                     'title' => $form['form_title'] ?? '',
-                    'pendingDays' => (array_key_exists('created_at', $form) && ! empty($form['created_at'])) ? Carbon::parse($form['created_at'])?->diffForHumans() : $this->created_at->diffForHumans(),
+                    'pendingDays' => (array_key_exists('created_at', $form) && !empty($form['created_at'])) ? Carbon::parse($form['created_at'])?->diffForHumans() : $this->created_at->diffForHumans(),
                     'status' => $form['status'],
                 ];
             })

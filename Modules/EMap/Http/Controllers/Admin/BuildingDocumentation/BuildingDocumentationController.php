@@ -81,8 +81,6 @@ class BuildingDocumentationController extends Controller
             'neighbours',
             'buildingStoreyDetails',
             'requiredDocument',
-            'files'
-
         );
 
         return view('emap::admin.buildingDocumentation.application.show', compact('buildingDocumentation'));
@@ -115,7 +113,7 @@ class BuildingDocumentationController extends Controller
             'fiscalYear',
             'requiredDocument',
         );
-        return $buildingTemplateStore ?? Str::replace($this->getReplaceData(), $this->getBuildingTemplateData($buildingDocumentation), $buildingFormDataType->model?->data);
+        return $buildingTemplateStore ?? Str::replace($this->getBuildingReplaceData(), $this->getBuildingTemplateData($buildingDocumentation), $buildingFormDataType->model?->data);
     }
 
     public function editTemplate(BuildingDocumentation $buildingDocumentation, BuildingDocumentationStep $form, BuildingFormDataType $buildingFormDataType)

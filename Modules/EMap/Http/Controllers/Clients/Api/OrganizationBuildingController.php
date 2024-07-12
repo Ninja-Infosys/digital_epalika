@@ -49,7 +49,7 @@ class OrganizationBuildingController extends Controller
 
     public function buildingStoreyDetails(BuildingDocumentation $buildingDocumentation)
     {
-        $buildingDocumentation->load('buildingStoreyDetails')->loadCount('buildingStoreyDetails');
+        $buildingDocumentation->load('buildingStoreyDetails.mapFee')->loadCount('buildingStoreyDetails');
 
         return response()->json([
             'current_storey' => $buildingDocumentation->current_storey,

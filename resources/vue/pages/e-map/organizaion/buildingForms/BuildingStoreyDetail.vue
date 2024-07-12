@@ -35,7 +35,7 @@
                                 class="fa fa-pen"></i>
                             </button>
                             <button v-if="buildingStorey.id" type="button" class="btn btn-outline-danger btn-xs"
-                                    @click.prevent="deleteStoreyDetail(buildingDocumentation.id,buildingStorey.id)"><i
+                                    @click.prevent="deleteBuildingStoreyDetail(buildingDocumentation.id,buildingStorey.id)"><i
                                 class="fa fa-trash"></i>
                             </button>
                         </div>

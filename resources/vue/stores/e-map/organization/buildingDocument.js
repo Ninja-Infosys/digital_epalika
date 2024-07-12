@@ -53,7 +53,7 @@ export const useBuildingApplicationStore = defineStore('buildingDocument', {
                     showErrors(err);
                 })
         },
-        updateStoreyDetail(building_documentation_id,form) {
+        updateBuildingStoreyDetail(building_documentation_id,form) {
             return axios.post(`${baseUrl}/api/organization/admin/buildingDocumentation/${building_documentation_id}/update-building-storey-detail`,form)
                 .then((res) => {
                     return res;

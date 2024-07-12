@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    <h4 class="header-title">{{ $buildingFormDataType->model?->title }} थप्नुहोस् dsf</h4>
+                    <h4 class="header-title">{{ $buildingFormDataType->model?->title }} थप्नुहोस् </h4>
                     <div class="d-flex justify-content-between">
                         <a href="javascript:void(0)"
                            route_action="{{ route('emap.admin.building-documentation.print-template', [$buildingDocumentation, $form, $buildingFormDataType]) }}"

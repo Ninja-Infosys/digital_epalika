@@ -55,7 +55,7 @@
                         <VInput
                             id="neighbour_name"
                             v-model="form.neighbour_name"
-                            label="संघीरारको नाम"
+                            label="संधियारको नाम"
                             @validate="validateField('neighbour_name')"
                             :error="errors.neighbour_name"
                         />
@@ -65,7 +65,7 @@
                         <VInput
                             id="ward_no"
                             v-model="form.ward_no"
-                            label="संघीरारको वडा नं."
+                            label="संधियारको वडा नं."
                             @validate="validateField('ward_no')"
                             :error="errors.ward_no"
                         />
@@ -74,7 +74,7 @@
                         <VInput
                             id="plot_no"
                             v-model="form.plot_no"
-                            label="संघीरारको कित्ता नं."
+                            label="संधियारको कित्ता नं."
                             @validate="validateField('plot_no')"
                             :error="errors.plot_no"
                         />
@@ -141,9 +141,9 @@ const isSubmitting=ref(false);
 
 const validations = object({
     direction: string().required('विवरण अनिवार्य छ |'),
-    neighbour_name: string().required('संघीरारको नाम अनिवार्य छ |'),
-    ward_no: string().required('संघीरारको वडा नं. अनिवार्य छ |'),
-    plot_no: string().required('संघीरारको कित्ता नं. अनिवार्य छ |'),
+    neighbour_name: string().required('संधियारको नाम अनिवार्य छ |'),
+    ward_no: string().required('संधियारको वडा नं. अनिवार्य छ |'),
+    plot_no: string().required('संधियारको कित्ता नं. अनिवार्य छ |'),
 });
 
 const {errors, validateField, validateForm} = useYup(form, validations);
