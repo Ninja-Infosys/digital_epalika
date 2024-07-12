@@ -174,21 +174,17 @@ class BuildingDocumentation extends Model
     {
         return $this->hasOne(BuildingLandOwner::class);
     }
-    public function getApplicantSignatureUrlAttribute(): string
-    {
-
-        return $this->attributes['applicant_signature'] && Storage::disk('public')->exists($this->attributes['applicant_signature']) ? Storage::disk('public')->url($this->attributes['applicant_signature']) : '';
-    }
-
     public function setApplicantSignatureAttribute($value): void
     {
         if (!empty($value) && !is_string($value)) {
-            $this->attributes['applicant_signature'] = $value->store('building/applicant_signature', 'public');
+            $this->attributes['applicant_signature'] = $value->store('e_map/buildingDocumentation/applicant_signature', 'public');
         }
     }
 
-
-
+    public function getApplicantSignatureUrlAttribute(): string
+    {
+        return $this->attributes['applicant_signature'] ? Storage::disk('public')->url($this->attributes['applicant_signature']) : '';
+    }
 
     public function setConsultantEngineerSignatureAttribute($value): void
     {

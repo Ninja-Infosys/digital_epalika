@@ -20,7 +20,6 @@ class MapApplicationController extends Controller
 {
     public function registerApplication(MapApplicationRequest $request)
     {
-
         $mapApply = DB::transaction(function () use ($request) {
             $mapApply = MapApply::create($request->validated() + [
                     'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
@@ -47,13 +46,11 @@ class MapApplicationController extends Controller
     }
     public function registerBuildingApplication(BuildingApplicationRequest $request)
     {
-
         $buildingDocumentation = DB::transaction(function () use ($request) {
             $buildingDocumentation = BuildingDocumentation::create($request->validated() + [
                 'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
                 'sent_to_organization' => 'pending'
             ]);
-            dd($buildingDocumentation);
 
             $buildingDocumentation->buildingHouseOwner()->create($request->validated('buildingHouseOwner'));
 
@@ -61,7 +58,7 @@ class MapApplicationController extends Controller
             $buildingDocumentation->buildingLandOwner()->create($request->validated('buildingLandOwner'));
 
 
-            // Notification::send($buildingDocumentation->organization, new BuildingApplicationNotification($buildingDocumentation));
+            Notification::send($buildingDocumentation->organization, new BuildingApplicationNotification($buildingDocumentation));
 
             return $buildingDocumentation;
         });

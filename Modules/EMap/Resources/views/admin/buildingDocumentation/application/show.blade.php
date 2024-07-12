@@ -584,12 +584,7 @@
                             </h4>
 
                         </div>
-                        <div class="col-3">
-                            <h4 class="form-label fw-bold">निवेदकको सहि :
-                                <img src="{{ $buildingDocumentation->applicant_signature_url }}" height="80" width="80"
-                                    alt="Signature">
-                            </h4>
-                        </div>
+
                     </div>
 
                 </fieldset>
