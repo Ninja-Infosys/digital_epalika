@@ -49,7 +49,7 @@ class OrganizationBuildingController extends Controller
 
     public function buildingStoreyDetails(BuildingDocumentation $buildingDocumentation)
     {
-        $buildingDocumentation->load('buildingStoreyDetails')->loadCount('buildingStoreyDetails');
+        $buildingDocumentation->load('buildingStoreyDetails.mapFee')->loadCount('buildingStoreyDetails');
 
         return response()->json([
             'current_storey' => $buildingDocumentation->current_storey,
@@ -60,7 +60,6 @@ class OrganizationBuildingController extends Controller
 
     public function updateBuildingStoreyDetail(UpdateBuildingStoreyDetailRequest $request, BuildingDocumentation $buildingDocumentation)
     {
-        dd($request);
         $formData = Arr::except($request->validated(), ['id']);
 
         DB::transaction(function () use ($formData, $request, $buildingDocumentation) {
