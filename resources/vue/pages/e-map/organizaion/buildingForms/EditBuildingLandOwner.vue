@@ -41,11 +41,11 @@
                 <div class="col-md-4 mb-3">
                     <VInput
                         id="landowner-former-local-body"
-                        v-model="form.local_body"
+                        v-model="form.former_local_body"
                         label="साविक पालिका"
-                        @validate="validateField('local_body')"
+                        @validate="validateField('former_local_body')"
                         :disabled="!editFormOpened"
-                        :error="errors.local_body"
+                        :error="errors.former_local_body"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -227,7 +227,7 @@ const initialState={
     province_id: '',
     district_id: '',
     local_body_id: '',
-    local_body: '',
+    former_local_body: '',
     former_ward_no: '',
     ward_no: '',
     tole: '',
@@ -269,7 +269,7 @@ const validations = object({
     ward_no: string().required('वडा नं. अनिवार्य छ'),
     tole: string().required('टोल अनिवार्य छ'),
     former_ward_no: string().required('साबिक वडा अनिवार्य छ'),
-    local_body: string().required('साबिक पालिका अनिवार्य छ'),
+    former_local_body: string().required('साबिक पालिका अनिवार्य छ'),
 });
 
 const {errors, validateField, validateForm} = useYup(form, validations);
