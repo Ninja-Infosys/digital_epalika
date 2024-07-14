@@ -16,7 +16,7 @@ class UpdateBuildingStoreyDetailRequest extends FormRequest
     {
         return [
             'id' => ['nullable',Rule::exists('building_storey_details', 'id')],
-            'storey' => ['required'],
+            'map_fee_id' => ['required',Rule::exists('map_fees', 'id')],
             'area_of_former_construction' => ['required'],
             'land_area' => ['required'],
             'remarks' => ['required'],
@@ -26,7 +26,7 @@ class UpdateBuildingStoreyDetailRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'storey.required' => 'तल्ला अनिवार्य छ|',
+            'map_fee_id.required' => 'तल्ला अनिवार्य छ|',
             'area_of_former_construction.required' => ' निर्माणको क्षेत्रफल अनिवार्य छ|',
             'land_area.required' => ' निर्माण भैसकेको जम्मा क्षेत्रफल अनिवार्य छ|',
             'remarks.required' => 'कैफियत अनिवार्य छ|',

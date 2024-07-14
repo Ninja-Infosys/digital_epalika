@@ -57,7 +57,7 @@ Route::prefix('buildingDocumentation')->group(function () {
     Route::get('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFormDataType/{buildingFormDataType}/templatePrint', [BuildingDocumentationStepController::class, 'templatePrint'])->name('templatePrint');
     Route::get('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFormDataType/{buildingFormDataType}/templateEdit', [BuildingDocumentationStepController::class, 'templateEdit'])->name('templateEdit');
     Route::resource('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFormDataType/{buildingFormDataType}/documentApplied', BuildingDocumentationStepController::class);
-
+    Route::post('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFormDataType/{buildingFormDataType}/storeFileTemplate', [BuildingDocumentationStepController::class, 'storeFileTemplate'])->name('organization.storeFileTemplate');
     //required document
 
     Route::get('buildingDocumentation/{buildingDocumentation}/required/requiredDocument', [BuildingDocumentationController::class, 'requiredDocument'])->name('requiredDocument');

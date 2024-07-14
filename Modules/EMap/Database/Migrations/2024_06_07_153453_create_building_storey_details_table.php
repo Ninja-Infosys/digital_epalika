@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('area_of_former_construction')->nullable()->comment('साविक निर्माण भइसकेको क्षेत्रफल');
             $table->string('land_area')->nullable()->comment('जग्गाको क्षेत्रफल');
             $table->string('remarks')->nullable()->comment('कैफियत');
-            $table->string('storey')->nullable()->comment('तल्ला');
+            $table->foreignId('map_fee_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

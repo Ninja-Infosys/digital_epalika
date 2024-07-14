@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="card-body">
-                {{ route('organization.admin.appliedDocument.store', [$mapApply, $form, $formDataType]) }}
+
                 @if (count($mapApply->appliedDocuments->where('form_data_id', $formDataType->id)) == 0)
                     <form
                         action="{{ route('organization.admin.appliedDocument.store', [$mapApply, $form, $formDataType]) }}"

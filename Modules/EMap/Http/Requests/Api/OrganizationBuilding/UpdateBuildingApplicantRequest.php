@@ -22,7 +22,7 @@ class UpdateBuildingApplicantRequest extends FormRequest
             'applicant_phone_no' => ['required'],
             'applicant_age' => ['required'],
             'application_date' => ['nullable'],
-            'applicant_signature' => ['nullable','image'],
+            'applicant_signature' => ['nullable', 'image'],
             'province_id' => ['required', Rule::exists('provinces', 'id')],
             'district_id' =>['required', Rule::exists('districts', 'id')],
             'local_body_id' => ['required', Rule::exists('local_bodies', 'id')],

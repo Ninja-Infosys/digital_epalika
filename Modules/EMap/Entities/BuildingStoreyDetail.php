@@ -22,17 +22,20 @@ class BuildingStoreyDetail extends Model
 
     protected $fillable = [
         'building_documentation_id',
-        'storey',
+        'map_fee_id',
         'area_of_former_construction',
         'land_area',
         'remarks',
     ];
 
-    protected $casts = [
-        'storey' => StoreyTypeEnum::class,
-    ];
+
     public function buildingDocumentation(): BelongsTo
     {
         return $this->belongsTo(BuildingDocumentation::class);
+    }
+
+    public function mapFee(): BelongsTo
+    {
+        return $this->belongsTo(MapFee::class);
     }
 }

@@ -5,14 +5,14 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    <h4 class="header-title">{{ $buildingFormDataType->model?->title }} थप्नुहोस् dsf</h4>
+                    <h4 class="header-title">{{ $buildingFormDataType->model?->title }} थप्नुहोस् </h4>
                     <div class="d-flex justify-content-between">
                         <a href="javascript:void(0)"
-                           route_action="{{ route('emap.admin.printTemplate', [$buildingDocumentation, $form, $buildingFormDataType]) }}"
+                           route_action="{{ route('emap.admin.building-documentation.print-template', [$buildingDocumentation, $form, $buildingFormDataType]) }}"
                            class="btn btn-primary btn-sm printDetail">
                             <i class="fa fa-print"></i> प्रिन्ट गर्नुहोस
                         </a>
-                        <a href="{{ route('emap.admin.editTemplate', [$buildingDocumentation, $form, $buildingFormDataType]) }}"
+                        <a href="{{ route('emap.admin.building-documentation.editTemplate', [$buildingDocumentation, $form, $buildingFormDataType]) }}"
                            class="btn btn-success btn-sm">
                             <i class="fa fa-pen"></i>
                         </a>

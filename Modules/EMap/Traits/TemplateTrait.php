@@ -409,6 +409,14 @@ trait TemplateTrait
             '[@contractorDetail.consulting_firm_name]',
             '[@contractorDetail.district]',
 
+           
+
+        ];
+    }
+    private function getBuildingReplaceData(): array
+    {
+        return [
+
             //buildingDocumentation
 
             '[@building_category]',

@@ -120,7 +120,7 @@
 
         <div class="col-md-4 mb-3">
           <VInput
-          input-type="number"
+            input-type="number"
             id="plot_no"
             v-model="form.plot_no"
             label="२.४ जग्गा कित्ता नं"
@@ -212,14 +212,7 @@
             :show-preview-image="false"
           />
         </div>
-        <div class="col-md-4 mb-3">
-          <VFileUpload
-            id="landowner-signature"
-            v-model="form.buildingLandOwner.signature"
-            label="जग्गाधनीको सहि"
-            :show-preview-image="false"
-          />
-        </div>
+
         <div class="col-md-12">
           <fieldset>
             <legend>ठेगाना</legend>
@@ -388,14 +381,7 @@
             :show-preview-image="false"
           />
         </div>
-        <div class="col-md-4 mb-3">
-          <VFileUpload
-            id="houseowner-signature"
-            v-model="form.buildingHouseOwner.signature"
-            label="घर धनीको सहि"
-            :show-preview-image="false"
-          />
-        </div>
+
         <div class="col-md-12">
           <fieldset>
             <legend>ठेगाना</legend>
@@ -515,15 +501,6 @@
             :error="errors['applicant_phone_no']"
           />
         </div>
-
-        <div class="col-md-4 mb-3">
-          <VFileUpload
-            id="applicant_signature"
-            v-model="form.applicant_signature"
-            label="घर धनीको सहि"
-            :show-preview-image="false"
-          />
-        </div>
       </div>
       <div class="col-md-12">
         <fieldset>
@@ -598,11 +575,12 @@
         <VNepaliDatePicker
           id="application_date"
           v-model="form.application_date"
-          label="निबेदनको मिति"
+          label="निवेदनको मिति"
           @validate="validateField('application_date')"
           :error="errors['application_date']"
         />
       </div>
+
     </div>
     <div class="mt-4 d-flex justify-content-end">
       <VButton :loading="isSubmitting" btn-label="पेश गर्नुहोस्" />
@@ -673,7 +651,6 @@ const initialState = {
   applicant_name: "",
   applicant_phone_no: "",
   application_date: "",
-  applicant_signature: "",
   province_id: "",
   district_id: "",
   local_body_id: "",
@@ -693,7 +670,6 @@ const initialState = {
     ward_no: "",
     tole: "",
     photo: "",
-    signature: "",
   },
   buildingHouseOwner: {
     name: "",
@@ -709,9 +685,7 @@ const initialState = {
     ward_no: "",
     tole: "",
     photo: "",
-    signature: "",
   },
-
 };
 
 const form = reactive({ ...initialState });
@@ -751,7 +725,6 @@ const setBuildingLandOwnerToBuildingHouseOwner = () => {
     form.buildingHouseOwner.ward_no = form.buildingLandOwner.ward_no;
     form.buildingHouseOwner.tole = form.buildingLandOwner.tole;
     form.buildingHouseOwner.photo = form.buildingLandOwner.photo;
-    form.buildingHouseOwner.signature = form.buildingLandOwner.signature;
   } else {
     form.buildingHouseOwner.name = "";
     form.buildingHouseOwner.phone = "";
@@ -766,7 +739,6 @@ const setBuildingLandOwnerToBuildingHouseOwner = () => {
     form.buildingHouseOwner.ward_no = "";
     form.buildingHouseOwner.tole = "";
     form.buildingHouseOwner.photo = "";
-    form.buildingHouseOwner.signature = "";
   }
 };
 
@@ -777,7 +749,6 @@ watch(
       isApplicantSame.value = true;
       form.applicant_name = form.buildingHouseOwner.name;
       form.applicant_phone_no = form.buildingHouseOwner.phone;
-      form.applicant_signature = form.buildingHouseOwner.signature;
       form.province_id = form.buildingHouseOwner.province_id;
       form.district_id = form.buildingHouseOwner.district_id;
       form.local_body_id = form.buildingHouseOwner.local_body_id;
@@ -787,7 +758,6 @@ watch(
       isApplicantSame.value = true;
       form.applicant_name = form.buildingLandOwner.name;
       form.applicant_phone_no = form.buildingLandOwner.phone;
-      form.applicant_signature = form.buildingLandOwner.signature;
       form.province_id = form.buildingLandOwner.province_id;
       form.district_id = form.buildingLandOwner.district_id;
       form.local_body_id = form.buildingLandOwner.local_body_id;
@@ -797,8 +767,6 @@ watch(
       isApplicantSame.value = false;
       form.applicant_name = "";
       form.applicant_phone_no = "";
-      form.applicant_signature = "";
-      form.application_date = "";
       form.province_id = "";
       form.district_id = "";
       form.local_body_id = "";
@@ -880,7 +848,7 @@ const registerBuildingApplication = async () => {
       resetForm();
       toastMessage(res.data.data);
     } catch (e) {
-        showFormErrors(e);
+      showFormErrors(e);
     } finally {
       isSubmitting.value = false;
     }
@@ -890,7 +858,7 @@ const registerBuildingApplication = async () => {
 const toastMessage = (data) => {
   Swal.fire({
     title: "धन्यबाद!!!",
-    text: `तपाईंको फारम सफलतापूर्वक पेश भएको छ, तपाईंको सबमिशन नं. ${data['submission_no']} हो। कृपया भविष्यमा प्रयोगको लागि सबमिशन नं. सुरक्षित राख्नुहोस् ।`,
+    text: `तपाईंको फारम सफलतापूर्वक पेश भएको छ, तपाईंको सबमिशन नं. ${data["submission_no"]} हो। कृपया भविष्यमा प्रयोगको लागि सबमिशन नं. सुरक्षित राख्नुहोस् ।`,
     icon: "success",
   });
 };

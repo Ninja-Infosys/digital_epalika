@@ -5,6 +5,7 @@ namespace Modules\EMap\Http\Controllers\Admin\Api;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Modules\EMap\Entities\MapFee;
 use Modules\EMap\Entities\Organization;
 use Modules\EMap\Enums\ApplicantTypeEnum;
 use Modules\EMap\Enums\ApplicationFormTypeEnum;
@@ -14,6 +15,7 @@ use Modules\EMap\Enums\NeighbourTypeEnum;
 use Modules\EMap\Enums\RoofTypeEnum;
 use Modules\EMap\Enums\StoreyTypeEnum;
 use Modules\EMap\Enums\TypeOfConstructionWorkEnum;
+use Modules\Plan\Transformers\MapFeeResource;
 use Modules\Plan\Transformers\OrganizationResource;
 
 class BuildingApplicationApiController extends Controller
@@ -27,7 +29,8 @@ class BuildingApplicationApiController extends Controller
             'roofCategories' => RoofTypeEnum::getValuesWithLabels(),
             'buildingUsages' => BuildingUsageEnum::getValuesWithLabels(),
             'buildingCategories' => BuildingTypeEnum::getValuesWithLabels(),
-            'storeys' => StoreyTypeEnum::getValuesWithLabels(),
+            'mapFees' => MapFeeResource::collection(MapFee::get()),
+
             'directions' => NeighbourTypeEnum::getValuesWithLabels(),
         ];
     }

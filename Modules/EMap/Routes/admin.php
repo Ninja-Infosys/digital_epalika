@@ -161,5 +161,9 @@ Route::get('buildingDocumentation/{buildingDocumentation}/form/{form}/detail', [
 Route::put('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFormDataType/{buildingFormDataType}/{id}/buildingDocument', [BuildingAdminStepController::class, 'updateDocument'])->name('building-documentation.updateDocument');
 Route::post('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFormDataType/{buildingFormDataType}/buildingDocument', [BuildingAdminStepController::class, 'storeDocument'])->name('building-documentation.storeDocument');
 Route::put('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFormDataType/{buildingFormDataType}/buildingDocument/{buildingDocument}/updateAppliedDocumentStatus', [BuildingAdminStepController::class, 'updateAppliedDocumentStatus'])->name('buildingDocumentation.admin-step.updateAppliedDocumentStatus');
+Route::get('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFormDataType/{buildingFormDataType}/printTemplate', [BuildingDocumentationController::class, 'printTemplate'])->name('building-documentation.print-template');
+Route::get('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFormDataType/{buildingFormDataType}/editTemplate', [BuildingDocumentationController::class, 'editTemplate'])->name('building-documentation.editTemplate');
+Route::post('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFormDataType/{buildingFormDataType}/storeFileTemplate', [BuildingDocumentationController::class, 'storeFileTemplate'])->name('building-documentation.storeFileTemplate');
+Route::put('buildingDocumentation/{buildingDocumentation}/updateDocumentStatus',[BuildingDocumentationController::class, 'updateDocumentStatus'])->name('buildingDocumentation.updateDocumentStatus');
 
 });

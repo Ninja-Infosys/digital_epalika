@@ -93,7 +93,7 @@
                                                 data-bs-toggle="tooltip" data-bs-placement="top" title="हेर्नुहोस">
                                                 <i class="fa fa-file"></i>
                                             </a>
-                                            @if (empty($mapApply->registration_no))
+                                            @if (empty($buildingDocumentation->registration_no))
                                                 <a data-bs-type="sent-to-admin"
                                                     class="btn me-1 btn-xs {{ $buildingDocumentation->sent_to_admin_at == null ? 'btn-outline-danger' : 'btn-outline-success' }}"
                                                     href="{{ route('organization.admin.updateAdminStatus', $buildingDocumentation) }}"
@@ -109,14 +109,12 @@
                                                     @csrf
                                                     @method('delete')
 
-                                                    @if (empty($buildingDocumentation->registration_no))
                                                         <button data-bs-type="delete"
                                                             class="btn btn-xs btn-outline-danger show_confirm">
                                                             <i class="fa fa-trash {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"
                                                                 data-bs-toggle="tooltip" data-bs-placement="top"
                                                                 title="मेटाउनु होस्"></i>
                                                         </button>
-                                                    @endif
 
                                                 </form>
                                             @endif
