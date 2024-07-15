@@ -16,7 +16,7 @@
                 </li>
                 <li class="{{request()->is('organization/admin/mapApply') ? 'active' : ''}}">
                     <a href="{{route('organization.admin.buildingDocumentation.index')}}">
-                        <i class="fa fa-map"></i>
+                        <i class="fa fa-building"></i>
                         <span>भवन अभिलेखिकरण</span>
                     </a>
                 </li>

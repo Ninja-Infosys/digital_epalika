@@ -91,7 +91,7 @@
 
 <li class="{{ request()->is('admin/emap') ? 'active' : '' }}">
     <a href="{{ route('emap.admin.oldMap.index') }}">
-        <i class="fa fa-building"></i>
+        <i class="fa fa-tags"></i>
         <span>पुरानो नक्सा </span>
     </a>
 </li>
@@ -99,7 +99,7 @@
 <li class="{{ request()->is('admin/emap/buildingDocumentation/*') ? 'active' : '' }}">
     <a href="#sidebarEMapBuildingDocumentation" {{ request()->is('admin/emap/buildingDocumentation/*') ? 'aria-expanded=true' : '' }}
     data-bs-toggle="collapse">
-        <i class="fa fa-cogs"></i>
+        <i class="fa fa-university"></i>
         <span>घर अभिलेखिकरण</span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>
@@ -211,7 +211,7 @@
 <li class="{{ request()->is('admin/emap/setting/*') ? 'active' : '' }}">
     <a href="#sidebarEMapBuildingDocumentationSetting" {{ request()->is('admin/emap/setting/*') ? 'aria-expanded=true' : '' }}
         data-bs-toggle="collapse">
-        <i class="fa fa-cogs"></i>
+        <i class="fa fa-cog"></i>
         <span>अभिलेखिकरणको सेटिङ</span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>

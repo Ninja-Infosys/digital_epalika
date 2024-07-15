@@ -11,27 +11,30 @@ use Modules\EMap\Enums\StoreyTypeEnum;
 
 class StoreyDescription extends Model
 {
-    use HasFactory,SoftDeletes,EventObserveTrait;
+    use HasFactory, SoftDeletes, EventObserveTrait;
 
-   protected $dates = [
-       'created_at',
-       'updated_at',
-       'deleted_at'
-   ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
-   protected $fillable = [
-    'building_documentation_id',
-    'height',
-    'width',
-    'length',
-    'storey',
-];
+    protected $fillable = [
+        'building_documentation_id',
+        'map_fee_id',
+        'height',
+        'width',
+        'length',
+    ];
 
-protected $casts = [
-    'storey' => StoreyTypeEnum::class,
-];
-public function buildingDocumentation(): BelongsTo
-{
-    return $this->belongsTo(BuildingDocumentation::class);
-}
+
+    public function buildingDocumentation(): BelongsTo
+    {
+        return $this->belongsTo(BuildingDocumentation::class);
+    }
+
+    public function mapFee(): BelongsTo
+    {
+        return $this->belongsTo(MapFee::class);
+    }
 }

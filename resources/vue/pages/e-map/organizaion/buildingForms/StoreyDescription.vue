@@ -1,42 +1,42 @@
 <template>
     <fieldset class="my-3">
-        <legend>१.१२  साविक भवन/निर्माण तला र क्षेत्रफल सम्बन्धित विवरण:</legend>
+        <legend>१३) प्रत्येक तल्लाको लम्बाई र सिलिङ्गसम्मको उचाईः</legend>
         <div class="table-responsive">
             <table class="table table-striped table-bordered">
                 <thead>
                 <tr class="text-center">
                     <th>तल्ला</th>
-                    <th>  निर्माणको क्षेत्रफल फिट/मिटर</th>
-                    <th>  निर्माण भैसकेको जम्मा क्षेत्रफल वर्ग/मिटर फिट/मिटर</th>
-                    <th>कैफियत</th>
+                    <th> लम्बाई</th>
+                    <th> चौडाई</th>
+                    <th>उचाई</th>
                     <th>#</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                <tr v-for="(buildingStorey,index) in buildingStoreyDetails" :key="buildingStorey.id" class="text-center">
-                    <td >
+                <tr v-for="(buildingStorey,index) in storeyDescriptions" :key="buildingStorey.id" class="text-center">
+                    <td>
                         {{ buildingStorey.mapFee?.storey || 'उपलब्ध छैन' }}
                     </td>
 
                     <td>
-                        {{ buildingStorey.area_of_former_construction || '-' }}
+                        {{ buildingStorey.length || '-' }}
                     </td>
                     <td>
-                        {{ buildingStorey.land_area || 'उपलब्ध छैन' }}
+                        {{ buildingStorey.width || 'उपलब्ध छैन' }}
                     </td>
                     <td>
-                        {{ buildingStorey.remarks || 'उपलब्ध छैन' }}
+                        {{ buildingStorey.height || 'उपलब्ध छैन' }}
                     </td>
 
-                    <td>
-                        <div class="d-flex gap-1">
+                    <td >
+                        <div class="d-flex gap-1 ">
                             <button type="button" class="btn btn-outline-primary btn-xs"
                                     @click.prevent="openEditForm(index)"><i
                                 class="fa fa-pen"></i>
                             </button>
                             <button v-if="buildingStorey.id" type="button" class="btn btn-outline-danger btn-xs"
-                                    @click.prevent="deleteBuildingStoreyDetail(buildingDocumentation.id,buildingStorey.id)"><i
+                                    @click.prevent="deleteStoreyDescription(buildingDocumentation.id,buildingStorey.id)"><i
                                 class="fa fa-trash"></i>
                             </button>
                         </div>
@@ -47,7 +47,7 @@
         </div>
     </fieldset>
 
-    <VModal title="साबिक भवन/निर्माण तला र क्षेत्रफल सम्बन्धित विवरण"
+    <VModal title="प्रत्येक तल्लाको लम्बाई र सिलिङ्गसम्मको उचाईः"
             v-model:show-modal="editFormOpened"
             @close-click="closeEditForm">
         <template #body>
@@ -68,29 +68,29 @@
 
                     <div class="col-md-6 mb-2">
                         <VInput
-                            id="area_of_former_construction"
-                            v-model="form.area_of_former_construction"
-                            label="निर्माणको क्षेत्रफल फिट/मिटर"
-                            @validate="validateField('area_of_former_construction')"
-                            :error="errors.area_of_former_construction"
+                            id="length"
+                            v-model="form.length"
+                            label="लम्बाई"
+                            @validate="validateField('length')"
+                            :error="errors.length"
                         />
                     </div>
                     <div class="col-md-6 mb-2">
                         <VInput
-                            id="land_area"
-                            v-model="form.land_area"
-                            label="निर्माण भैसकेको जम्मा क्षेत्रफल वर्ग/मिटर/फिट/मिटर"
-                            @validate="validateField('land_area')"
-                            :error="errors.land_area"
+                            id="width"
+                            v-model="form.width"
+                            label="चौडाई"
+                            @validate="validateField('width')"
+                            :error="errors.width"
                         />
                     </div>
                     <div class="col-md-6 mb-2">
                         <VInput
-                            id="remarks"
-                            v-model="form.remarks"
-                            label="कैफियत"
-                            @validate="validateField('remarks')"
-                            :error="errors.remarks"
+                            id="height"
+                            v-model="form.height"
+                            label="उचाई"
+                            @validate="validateField('height')"
+                            :error="errors.height"
                         />
                     </div>
 
@@ -132,37 +132,37 @@ const buildingApplicationStore=useBuildingApplicationStore();
 const editFormOpened = ref(false);
 
 const {eBuildingSetting}=storeToRefs(buildingSettingStore);
-const {buildingStoreyDetailsData} = storeToRefs(buildingApplicationStore);
+const {storeyDescriptionsData} = storeToRefs(buildingApplicationStore);
 
 const initialState = {
     id: '',
     map_fee_id: '',
-    area_of_former_construction: '',
-    land_area: '',
-    remarks: '',
+    length: '',
+    width: '',
+    height: '',
 }
 
-const buildingStoreyDetails = ref([]);
+const storeyDescriptions = ref([]);
 
 const form = reactive({...initialState});
 
 onMounted(() => {
-    getBuildingStoreyDetails();
+    getStoreyDescriptions();
 })
 
-const getBuildingStoreyDetails = async () => {
-    buildingStoreyDetails.value = [];
-    await buildingApplicationStore.getBuildingStoreyDetails(props.buildingDocumentation.id);
-    buildingStoreyDetailsData.value.data.forEach((buildingStorey) => {
-        buildingStoreyDetails.value.push(buildingStorey);
+const getStoreyDescriptions = async () => {
+    storeyDescriptions.value = [];
+    await buildingApplicationStore.getStoreyDescriptions(props.buildingDocumentation.id);
+    storeyDescriptionsData.value.data.forEach((buildingStorey) => {
+        storeyDescriptions.value.push(buildingStorey);
     })
-    if (buildingStoreyDetailsData.value.building_storey_details_count < buildingStoreyDetailsData.value.current_storey) {
-        for (let i = buildingStoreyDetailsData.value.building_storey_details_count; i < buildingStoreyDetailsData.value.current_storey; i++) {
-            buildingStoreyDetails.value.push({
+    if (storeyDescriptionsData.value.storey_descriptions_count < storeyDescriptionsData.value.current_storey) {
+        for (let i = storeyDescriptionsData.value.storey_descriptions_count; i < storeyDescriptionsData.value.current_storey; i++) {
+            storeyDescriptions.value.push({
                 map_fee_id: '',
-                area_of_former_construction: '',
-                land_area: '',
-                remarks: '',
+                length: '',
+                width: '',
+                height: '',
             });
         }
     }
@@ -172,9 +172,9 @@ const isSubmitting = ref(false);
 
 const validations = object({
     map_fee_id: string().required('तल्ला अनिवार्य छ |'),
-    area_of_former_construction: string().required('निर्माणको क्षेत्रफल अनिवार्य छ |'),
-    land_area: string().required('निर्माण भैसकेको जम्मा क्षेत्रफल अनिवार्य छ |'),
-    remarks: string().required('कैफियत अनिवार्य छ |'),
+    length: string().required('लम्बाई अनिवार्य छ |'),
+    width: string().required('चौडाई क्षेत्रफल अनिवार्य छ |'),
+    height: string().required(' उचाई अनिवार्य छ |'),
 });
 
 const {errors, validateField, validateForm} = useYup(form, validations);
@@ -184,10 +184,10 @@ const saveFormData = async (building_documentation_id) => {
     if (validated) {
         isSubmitting.value = true;
         try {
-            let res = await buildingApplicationStore.updateBuildingStoreyDetail(building_documentation_id, form);
+            let res = await buildingApplicationStore.updateStoreyDescription(building_documentation_id, form);
             toast(res.status, res.data.message);
             closeEditForm();
-            await getBuildingStoreyDetails();
+            await getStoreyDescriptions();
         } catch (e) {
             showErrors(e);
         } finally {
@@ -196,7 +196,7 @@ const saveFormData = async (building_documentation_id) => {
     }
 }
 
-const deleteBuildingStoreyDetail = (building_documentation_id, id) => {
+const deleteStoreyDescription = (building_documentation_id, id) => {
     Swal.fire({
         title: 'Are You Sure to Delete ? ',
         showCancelButton: true,
@@ -205,9 +205,9 @@ const deleteBuildingStoreyDetail = (building_documentation_id, id) => {
     }).then(async (result) => {
         if (result.value) {
             try {
-                let res = await buildingApplicationStore.deleteBuildingStoreyDetail(building_documentation_id, id)
+                let res = await buildingApplicationStore.deleteStoreyDescription(building_documentation_id, id)
                 toast(res.status, res.data.message)
-                await getBuildingStoreyDetails();
+                await getStoreyDescriptions();
             } catch (e) {
                 showErrors(e)
             }
@@ -217,13 +217,13 @@ const deleteBuildingStoreyDetail = (building_documentation_id, id) => {
 
 const openEditForm = (index) => {
     editFormOpened.value = true;
-    const selectedStorey = buildingStoreyDetails.value[index];
+    const selectedStorey = storeyDescriptions.value[index];
     Object.assign(form, {
         id: selectedStorey.id ?? '',
         map_fee_id: selectedStorey.map_fee_id ?? '',
-        area_of_former_construction: selectedStorey.area_of_former_construction ?? 0,
-        land_area: selectedStorey.land_area ?? 0,
-        remarks: selectedStorey.remarks ?? 0,
+        length: selectedStorey.length ?? 0,
+        width: selectedStorey.width ?? 0,
+        height: selectedStorey.height ?? 0,
     })
 }
 

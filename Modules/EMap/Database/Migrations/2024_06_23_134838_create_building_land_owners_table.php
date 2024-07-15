@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('citizenship_no')->nullable()->comment('नागरिकत नम्बर');
             $table->string('citizenship_issue_date')->nullable()->comment('नागरिकता लिएको मिति');
             $table->string('former_ward_no')->nullable()->comment('ठेगाना');
-            $table->string('local_body')->nullable()->comment('पालिका');
+            $table->string('former_local_body')->nullable()->comment('पालिका');
             $table->integer('ward_no')->nullable()->comment('वडा नं');
             $table->foreignId('province_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('district_id')->nullable()->constrained()->cascadeOnDelete();

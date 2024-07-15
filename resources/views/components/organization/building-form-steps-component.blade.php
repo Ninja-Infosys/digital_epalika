@@ -27,7 +27,7 @@
                         </a>
                     @endif
                     @if($form->show_to_consultancy == 1)
-                        <a href="{{ route('organization.admin.organization.view-detail', [$buildingDocumentation, $form]) }}"
+                        <a href="{{ route('organization.admin.view-detail', [$buildingDocumentation, $form]) }}"
                            class="btn me-1 btn-xs btn-outline-primary">
                             <i class="fa fa-eye"></i>
                         </a>

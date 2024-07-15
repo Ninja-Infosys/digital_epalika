@@ -10,6 +10,11 @@ export const useBuildingApplicationStore = defineStore('buildingDocument', {
             building_storey_details_count:0,
             data:[]
         },
+        storeyDescriptionsData: {
+            current_storey:0,
+            storey_descriptions_count:0,
+            data:[]
+        },
         neighbours: {
             data:[],
             loading:false
@@ -65,6 +70,37 @@ export const useBuildingApplicationStore = defineStore('buildingDocument', {
         },
         deleteBuildingStoreyDetail(building_documentation_id,building_storey_detail_id) {
             return axios.delete(`${baseUrl}/api/organization/admin/buildingDocumentation/${building_documentation_id}/buildingStoreyDetail/${building_storey_detail_id}`)
+                .then((res) => {
+                    return res;
+                })
+                .catch((err) => {
+                    throw err;
+                })
+
+        },
+        getStoreyDescriptions(building_documentation_id) {
+            return axios.get(`${baseUrl}/api/organization/admin/buildingDocumentation/${building_documentation_id}/storey_descriptions`)
+                .then((res) => {
+                    this.storeyDescriptionsData.current_storey=res.data.current_storey;
+                    this.storeyDescriptionsData.storey_descriptions_count=res.data.storey_descriptions_count;
+                    this.storeyDescriptionsData.data=res.data.data;
+                })
+                .catch((err) => {
+                    showErrors(err);
+                })
+        },
+        updateStoreyDescription(building_documentation_id,form) {
+            return axios.post(`${baseUrl}/api/organization/admin/buildingDocumentation/${building_documentation_id}/update-storey_description`,form)
+                .then((res) => {
+                    return res;
+                })
+                .catch((err) => {
+                    throw err;
+                })
+
+        },
+        deleteStoreyDescription(building_documentation_id,storey_description_id) {
+            return axios.delete(`${baseUrl}/api/organization/admin/buildingDocumentation/${building_documentation_id}/StoreyDescription/${storey_description_id}`)
                 .then((res) => {
                     return res;
                 })
