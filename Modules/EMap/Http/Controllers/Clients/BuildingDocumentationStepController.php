@@ -33,8 +33,13 @@ class BuildingDocumentationStepController extends Controller
 
     public function documentDetail(BuildingDocumentation $buildingDocumentation, BuildingDocumentationStep $form)
     {
-        $form->load('buildingFormDataTypes.model', 'buildingFormDataTypes.buildingDocuments.documentStatuses');
+        $form->load('buildingFormDataTypes.model','buildingFormDataTypes.buildingDocuments.documentStatuses');
         return view('emap::organization.buildingDocumentationStep.create', compact('buildingDocumentation', 'form'));
+    }
+    public function viewDetail(BuildingDocumentation $buildingDocumentation, BuildingDocumentationStep $form)
+    {
+        $form->load('buildingFormDataTypes.model', 'buildingFormDataTypes.buildingDocuments');
+        return view('emap::organization.buildingDocumentationStep.viewDetail', compact('buildingDocumentation', 'form'));
     }
 
     public function templatePrint(BuildingDocumentation $buildingDocumentation, BuildingDocumentationStep $form, BuildingFormDataType $buildingFormDataType)

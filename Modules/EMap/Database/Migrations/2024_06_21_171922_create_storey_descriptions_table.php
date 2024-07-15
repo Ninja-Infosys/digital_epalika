@@ -14,7 +14,8 @@ return new class extends Migration
             $table->string('height')->nullable()->comment('उचाई');
             $table->string('width')->nullable()->comment('चऔडाई');
             $table->string('length')->nullable()->comment('लम्बाई');
-            $table->string('storey')->nullable()->comment('तल्ला');
+            $table->foreignId('map_fee_id')->constrained()->cascadeOnDelete();
+
             $table->timestamps();
             $table->softDeletes();
         });

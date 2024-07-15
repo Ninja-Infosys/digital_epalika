@@ -14,6 +14,7 @@ use Modules\EMap\Entities\BuildingLandOwner;
 use Modules\EMap\Entities\BuildingStoreyDetail;
 use Modules\EMap\Entities\ContractorDetail;
 use Modules\EMap\Entities\Neighbour;
+use Modules\EMap\Entities\StoreyDescription;
 use Modules\EMap\Enums\NeighbourTypeEnum;
 use Modules\EMap\Http\Requests\Api\OrganizationBuilding\UpdateBuildingApplicantRequest;
 use Modules\EMap\Http\Requests\Api\OrganizationBuilding\UpdateBuildingApplicationRequest;
@@ -25,11 +26,13 @@ use Modules\EMap\Http\Requests\Api\OrganizationBuilding\UpdateBuildingLandOwnerR
 use Modules\EMap\Http\Requests\Api\OrganizationBuilding\UpdateBuildingNeighbourRequest;
 use Modules\EMap\Http\Requests\Api\OrganizationBuilding\UpdateBuildingStoreyDetailRequest;
 use Modules\EMap\Http\Requests\Api\OrganizationBuilding\UpdateContractorRequest;
+use Modules\EMap\Http\Requests\Api\OrganizationBuilding\UpdateStoreyDescriptionRequest;
 use Modules\EMap\Transformers\BuildingApplicantResource;
 use Modules\EMap\Transformers\BuildingHouseOwnerResource;
 use Modules\EMap\Transformers\BuildingLandOwnerResource;
 use Modules\EMap\Transformers\BuildingNeighbourResource;
 use Modules\EMap\Transformers\BuildingStoreyDetailResource;
+use Modules\EMap\Transformers\StoreyDescriptionResource;
 
 class OrganizationBuildingController extends Controller
 {
@@ -290,5 +293,49 @@ class OrganizationBuildingController extends Controller
             'message' => 'Consultancy Detail Updated Successfully',
         ]);
     }
+    public function storeyDescriptions(BuildingDocumentation $buildingDocumentation)
+    {
+        $buildingDocumentation->load('storeyDescriptions.mapFee')->loadCount('storeyDescriptions');
 
+        return response()->json([
+            'current_storey' => $buildingDocumentation->current_storey,
+            'storey_descriptions_count' => $buildingDocumentation->storey_descriptions_count,
+            'data' => StoreyDescriptionResource::collection($buildingDocumentation->storeyDescriptions),
+        ]);
+    }
+
+    public function updateStoreyDescription(UpdateStoreyDescriptionRequest $request, BuildingDocumentation $buildingDocumentation)
+
+    {
+
+        $formData = Arr::except($request->validated(), ['id']);
+//        dd($formData);
+
+        DB::transaction(function () use ($formData, $request, $buildingDocumentation) {
+
+            if (! empty($request->validated('id'))) {
+                storeyDescription::find($request->validated('id'))?->update($formData);
+
+            }
+            else {
+                storeyDescription::create($formData + [
+                        'building_documentation_id' => $buildingDocumentation->id,
+
+                    ]);
+            }
+        });
+
+        return response()->json([
+            'message' => 'तल्लाको विवरण सफलतापूर्वक अद्यावधिक गरियो',
+        ]);
+    }
+
+    public function deleteStoreyDescription(BuildingDocumentation $buildingDocumentation, StoreyDescription $storeyDescription)
+    {
+        $storeyDescription->delete();
+
+        return response()->json([
+            'message' => 'तल्लाको विवरण सफलतापूर्वक सफलतापूर्वक मेटाइयो',
+        ]);
+    }
 }

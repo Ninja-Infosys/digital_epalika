@@ -6,6 +6,8 @@
     <p class="break-page"></p>
     <BuildingStoreyDetail :building-documentation="buildingDocumentation" />
 
+    <StoreyDescription :building-documentation="buildingDocumentation" />
+
     <EditBuildingLandDetail :building-documentation="buildingDocumentation" />
 
     <EditBuildingLandOwner :building-documentation="buildingDocumentation" />
@@ -20,7 +22,7 @@
 
     <p class="break-page"></p>
     <EditBuildingDescription :building-documentation="buildingDocumentation" />
-    
+
     <EditConsultancyDetail :building-documentation="buildingDocumentation" />
 
 </template>
@@ -42,6 +44,7 @@ import EditBuildingApplicantDetail from "./buildingForms/EditBuildingApplicantDe
 
 
 import EditBuildingApplicationDetail from "./buildingForms/EditBuildingApplicationDetail.vue";
+import StoreyDescription from "./buildingForms/StoreyDescription.vue";
 
 
 defineProps({

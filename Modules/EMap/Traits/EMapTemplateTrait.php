@@ -221,6 +221,7 @@ trait EMapTemplateTrait
                 'जग्गाको टोल' => '[@land_tole]',
 
                 'कन्सल्टेन्सीको नाम' => '[@consultancy_name]',
+                'न.पा मा सूचिकृत भएको व्यवसाय प्रमाण पत्रको नं.' => '[@palika_reg_no]',
                 'कन्सल्टेन्टको ईन्जीन्यरको नाम' => '[@consultant_engineer_name]',
                 'कन्सल्टेन्टको ईन्जीन्यरको पद' => '[@consultant_engineer_post]',
                 'कन्सल्टेन्सीको एन.ई.सी. नं' => '[@n_e_c_registration_no]',
@@ -575,6 +576,7 @@ trait EMapTemplateTrait
             '[@land_area]' => $this->get_nepali_number($this->land_area) ?? '',
             '[@land_tole]' => $this->get_nepali_number($this->land_tole) ?? '',
             '[@consultancy_name]' => get_nepali_number($this->consultancy_name) ?? '',
+            '[@palika_reg_no]' => get_nepali_number($this->palika_reg_no) ?? '',
             '[@consultant_engineer_name]' => get_nepali_number($this->consultant_engineer_name) ?? '',
             '[@consultant_engineer_post]' => get_nepali_number($this->consultant_engineer_post) ?? '',
             '[@n_e_c_registration_no]' => get_nepali_number($this->n_e_c_registration_no) ?? '',

@@ -14,6 +14,15 @@
                                 <p class="text-muted font-15 mb-0">कुल नक्सा</p>
                             </div>
                         </div>
+                        <div class="col-sm-6 col-xl-3 border-end">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-building avatar-title font-18 text-white"></i>
+                                </div>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{$buildingDocumentationCount}}</span></h3>
+                                <p class="text-muted font-15 mb-0">कुल भवन अभिलेखीकरण फारम</p>
+                            </div>
+                        </div>
                     </div> <!-- end row -->
                 </div>
             </div> <!-- end card-->
