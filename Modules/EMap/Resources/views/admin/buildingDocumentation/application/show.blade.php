@@ -355,18 +355,18 @@
 
                         </div>
                         <div class="col-md-4 mb-3">
-                            <h4 class="form-label"><b>४.६ नागरिकता नम्बर :</b>
+                            <h4 class="form-label"><b>४.५ नागरिकता नम्बर :</b>
                                 {{ get_nepali_number($buildingDocumentation->buildingHouseOwner?->citizenship_no) ?? ''
                                 }}</h4>
 
                         </div>
                         <div class="col-md-4 mb-3">
-                            <h4 class="form-label"><b>४.७ नागरिकता लिएको मिति :</b>
+                            <h4 class="form-label"><b>४.६ नागरिकता लिएको मिति :</b>
                                 {{ $buildingDocumentation->buildingHouseOwner?->citizenship_issue_date ?? '' }}</h4>
 
                         </div>
                         <div class="col-md-4 mb-3">
-                            <h4 class="form-label"><b>४.५ नागरिकता लिएको
+                            <h4 class="form-label"><b>४.७ नागरिकता लिएको
                                     जिल्ला
                                     :</b> {{
                                 $buildingDocumentation->buildingHouseOwner?->citizenshipIssueDistrict?->district ?? ''
@@ -375,7 +375,7 @@
 
                         </div>
                         <div class="col-md-4 mb-3">
-                            <h4 class="form-label"><b>४.६ घरधनीको फोटो :</b>
+                            <h4 class="form-label"><b>४.८ घरधनीको फोटो :</b>
                                 <img src="    {{ $buildingDocumentation->buildingHouseOwner?->photo_url ?? '' }}"
                                     width="100" height="100" alt="">
                             </h4>
@@ -389,33 +389,33 @@
                                 <div class="row">
 
                                     <div class="col-md-4 mb-3">
-                                        <h4 class="form-label"><b>४.७ प्रदेश :</b>
+                                        <h4 class="form-label"><b>४.९ प्रदेश :</b>
                                             {{ $buildingDocumentation->buildingHouseOwner?->province->province ?? '' }}
                                         </h4>
 
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <h4 class="form-label"><b>४.८. जिल्ला:</b>
+                                        <h4 class="form-label"><b>४.१० जिल्ला:</b>
                                             {{ $buildingDocumentation->buildingHouseOwner?->district->district ?? '' }}
                                         </h4>
 
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <h4 class="form-label"><b>४.९. पालिका :</b>
+                                        <h4 class="form-label"><b>४.११ पालिका :</b>
                                             {{ $buildingDocumentation->buildingHouseOwner?->localBody->local_body ?? ''
                                             }}
                                         </h4>
 
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <h4 class="form-label"><b>४.१०. वडा नं. :</b>
+                                        <h4 class="form-label"><b>४.१२ वडा नं. :</b>
                                             {{ get_nepali_number($buildingDocumentation->buildingHouseOwner?->ward_no)
                                             ?? '' }}
                                         </h4>
 
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <h4 class="form-label"><b>४.११. टोल :</b>
+                                        <h4 class="form-label"><b>४.१३ टोल :</b>
                                             {{ $buildingDocumentation->buildingHouseOwner?->tole ?? '' }}
                                         </h4>
 
@@ -442,12 +442,12 @@
                             @foreach ($buildingDocumentation->neighbours as $neighbour)
                             <tbody>
                                 <tr>
-                                    <td>
+                                    <td style="text-align: center;">
                                         {{ $neighbour->direction?->label() }}
                                     </td>
-                                    <td>{{ $neighbour->neighbour_name }}</td>
-                                    <td>{{ get_nepali_number($neighbour->ward_no) }}</td>
-                                    <td>{{ get_nepali_number($neighbour->plot_no) }}</td>
+                                    <td style="text-align: center;">{{ $neighbour->neighbour_name }}</td>
+                                    <td style="text-align: center;">{{ get_nepali_number($neighbour->ward_no) }}</td>
+                                    <td style="text-align: center;">{{ get_nepali_number($neighbour->plot_no) }}</td>
                                 </tr>
                             </tbody>
                             @endforeach
@@ -497,34 +497,34 @@
                     <div class="col-md-12">
                         <fieldset>
                             <legend>
-                                <h5 class="py-1">६.७ ठेगाना</h5>
+                                <h5 class="py-1"> ठेगाना</h5>
                             </legend>
                             <div class="row">
 
                                 <div class="col-md-4 mb-3">
-                                    <h4 class="form-label"><b>६.८ प्रदेश :</b>
+                                    <h4 class="form-label"><b>६.७ प्रदेश :</b>
                                         {{ $contractorDetail->province?->province ?? '' }}</h4>
 
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <h4 class="form-label"><b>६.९ जिल्ला:</b>
+                                    <h4 class="form-label"><b>६.८ जिल्ला:</b>
                                         {{ $contractorDetail->district?->district ?? '' }}</h4>
 
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <h4 class="form-label"><b>६.१० पालिका :</b>
+                                    <h4 class="form-label"><b>६.९ पालिका :</b>
                                         {{ $contractorDetail->localBody->local_body ?? '' }}
                                     </h4>
 
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <h4 class="form-label"><b>६.११ वडा नं. :</b>
+                                    <h4 class="form-label"><b>६.१० वडा नं. :</b>
                                         {{ get_nepali_number($contractorDetail->ward_no) ?? '' }}
                                     </h4>
 
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <h4 class="form-label"><b>६.१२ टोल :</b> {{ $contractorDetail?->tole ?? '' }}
+                                    <h4 class="form-label"><b>६.११ टोल :</b> {{ $contractorDetail?->tole ?? '' }}
                                     </h4>
 
                                 </div>
@@ -551,15 +551,15 @@
                     <div class="row">
                         <h4 class="form-label fw-bold mb-2">जग्गाधनी वा घरधनी भन्दा फरक भएमा</h4>
                         <div class="col-md-4 mb-3">
-                            <h4 class="form-label"><b>७.१ नाम :</b> {{ $buildingDocumentation->applicant_name }}</h4>
+                            <h4 class="form-label"><b>७.२ नाम :</b> {{ $buildingDocumentation->applicant_name }}</h4>
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <h4 class="form-label"><b>७.२ फोन नं. :</b> {{
+                            <h4 class="form-label"><b> ७.३ फोन नं. :</b> {{
                                 get_nepali_number($buildingDocumentation->applicant_phone_no) }}</h4>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <h4 class="form-label"><b>७.३ उमेर :</b>
+                            <h4 class="form-label"><b>७.४ उमेर :</b>
                                 {{ get_nepali_number($buildingDocumentation->applicant_age) }}
                             </h4>
 
@@ -576,29 +576,29 @@
                             <div class="row">
 
                                 <div class="col-md-4 mb-3">
-                                    <h4 class="form-label"><b>७.४ प्रदेश :</b>
+                                    <h4 class="form-label"><b>७.५ प्रदेश :</b>
                                         {{ $buildingDocumentation->province->province ?? '' }}</h4>
 
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <h4 class="form-label"><b>७.५ जिल्ला:</b>
+                                    <h4 class="form-label"><b>७.६ जिल्ला:</b>
                                         {{ $buildingDocumentation->district->district ?? '' }}</h4>
 
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <h4 class="form-label"><b>७.६ पालिका :</b>
+                                    <h4 class="form-label"><b>७.७ पालिका :</b>
                                         {{ $buildingDocumentation->localBody->local_body ?? '' }}
                                     </h4>
 
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <h4 class="form-label"><b>७.७ वडा नं. :</b>
+                                    <h4 class="form-label"><b>७.८ वडा नं. :</b>
                                         {{ get_nepali_number($buildingDocumentation->applicant_ward_no) ?? '' }}
                                     </h4>
 
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <h4 class="form-label"><b>७.८ टोल :</b>
+                                    <h4 class="form-label"><b>७.९ टोल :</b>
                                         {{ $buildingDocumentation->applicant_tole ?? '' }}
                                     </h4>
 
