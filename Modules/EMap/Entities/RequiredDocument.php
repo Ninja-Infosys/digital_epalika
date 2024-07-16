@@ -126,10 +126,23 @@ class RequiredDocument extends Model
     }
     public function getRevenueSizeAttribute(): string
     {
-        if (!empty($this->attributes['revenue'])) {
-            return Storage::disk('public')->size($this->attributes['revenue']);
-        } else {
-            return '';
+        try {
+            if (!empty($this->attributes['revenue'])) {
+                $filePath = $this->attributes['revenue'];
+
+                // Check if the file exists
+                if (Storage::disk('public')->exists($filePath)) {
+                    return (string) Storage::disk('public')->size($filePath);
+                } else {
+                    return 'File does not exist';
+                }
+            } else {
+                return 'No revenue attribute set';
+            }
+        } catch (\Exception $e) {
+            // Log the error for debugging purposes
+            \Log::error('Error getting revenue size: ' . $e->getMessage());
+            return 'Error retrieving file size';
         }
     }
 
