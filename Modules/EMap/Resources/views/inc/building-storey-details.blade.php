@@ -11,9 +11,9 @@
     @foreach($buildingStoreyDetails as $buildingStoreyDetail)
         <tr>
             <td style="width: 20%; text-align: center; border: 1px solid;">{{$buildingStoreyDetail?->mapFee?->storey}}</td>
-            <td style="width: 50%; text-align: center; border: 1px solid;">{{$buildingStoreyDetail->area_of_former_construction}}</td>
-            <td style="width: 30%; text-align: center; border: 1px solid;">{{$buildingStoreyDetail->land_area}}</td>
-            <td style="width: 20%; text-align: center; border: 1px solid;">{{$buildingStoreyDetail->remarks}}</td>
+            <td style="width: 50%; text-align: center; border: 1px solid;">{{get_nepali_number($buildingStoreyDetail->area_of_former_construction)}}</td>
+            <td style="width: 30%; text-align: center; border: 1px solid;">{{get_nepali_number($buildingStoreyDetail->land_area)}}</td>
+            <td style="width: 20%; text-align: center; border: 1px solid;">{{get_nepali_number($buildingStoreyDetail->remarks)}}</td>
         </tr>
     @endforeach
     </tbody>
