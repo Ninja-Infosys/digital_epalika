@@ -442,12 +442,12 @@
                             @foreach ($buildingDocumentation->neighbours as $neighbour)
                             <tbody>
                                 <tr>
-                                    <td style="text-align: center;">
+                                    <td>
                                         {{ $neighbour->direction?->label() }}
                                     </td>
-                                    <td style="text-align: center;">{{ $neighbour->neighbour_name }}</td>
-                                    <td style="text-align: center;">{{ get_nepali_number($neighbour->ward_no) }}</td>
-                                    <td style="text-align: center;">{{ get_nepali_number($neighbour->plot_no) }}</td>
+                                    <td>{{ $neighbour->neighbour_name }}</td>
+                                    <td>{{ get_nepali_number($neighbour->ward_no) }}</td>
+                                    <td>{{ get_nepali_number($neighbour->plot_no) }}</td>
                                 </tr>
                             </tbody>
                             @endforeach
