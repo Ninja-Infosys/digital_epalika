@@ -36,6 +36,7 @@
                                 <th scope="col">सब्मिसन आइडी</th>
                                 <th scope="col">घर धनीको नाम</th>
                                 <th scope="col">घर धनीको फोन नं.</th>
+                                <th scope="col">जग्गाको वडा नं</th>
                                 <th scope="col">निर्माण कार्यको किसिम</th>
                                 <th scope="col">#</th>
                             </tr>
@@ -48,6 +49,8 @@
                                     <td>{{ get_nepali_number($buildingDocumentation->submission_no ?? '') }}</td>
                                     <td>{{ $buildingDocumentation->buildingHouseOwner->name ?? '' }}</td>
                                     <td>{{ $buildingDocumentation->buildingHouseOwner->phone ?? '' }}</td>
+                                    <td>{{ get_nepali_number($buildingDocumentation->land_ward_no ?? '') }}</td>
+
                                     <td>{{ $buildingDocumentation?->building_category?->label() }}</td>
                                     <td class="d-flex">
                                         @if ($buildingDocumentation->sent_to_organization !== 'Accept')
