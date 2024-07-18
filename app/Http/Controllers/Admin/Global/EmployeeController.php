@@ -20,13 +20,16 @@ class EmployeeController extends Controller
     public function index()
     {
         $this->checkAuthorization('employee_access');
-        $employees = Employee::orderBy('position')->where(function ($q) {
+        $employees = Employee::with('branch')->orderBy('position')->where(function ($q) {
             if (!empty (auth()->user()->ward_no)) {
                             $q->where('ward', auth()->user()->ward_no);
                         }
                     })
                     ->orderByDesc('created_at')
                     ->where(function (Builder $q) {
+                        if (!is_null(request('search'))) {
+                $q->whereLike(['name', 'designation', 'branch.branch_name'], request('search'));
+                        }
                         if (!empty (auth()->user()->ward_no)) {
                             $authWardNo = auth()->user()->ward_no;
                             $wardString = implode(',', (array) $authWardNo);
