@@ -38,6 +38,8 @@ class DashboardController extends Controller
             'constructionType' => $this->getMapApplyConstructionTypeAccordingToFiscalYear(),
             'structureType' => $this->getMapApplyStructureTypeAccordingToFiscalYear(),
             'mapAccordingToMonth' => $this->mapAccordingToMonth(),
+
+            
         ];
     }
     public function getMapApplyStructureTypeAccordingToFiscalYear()

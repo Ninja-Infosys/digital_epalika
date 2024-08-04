@@ -152,5 +152,5 @@ class FormDataTypeLivewire extends Component
             $this->form['show_to_consultancy'] = 1;
         }
         return view('emap::livewire.form-data-type-livewire');
-    }
+}
 }

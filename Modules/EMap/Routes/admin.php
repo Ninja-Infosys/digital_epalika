@@ -147,6 +147,10 @@ Route::delete('oldMap/{oldMap}/oldMapDocument/{oldMapDocument}', [OldMapControll
 Route::controller(ReportController::class)->prefix('reports')->as('report.')->group(function () {
     Route::get('/', 'getRequiredData')->name('report');
     Route::post('report-data', 'report')->name('report-data');
+    Route::get('count-report', 'getReportData')->name('count-report');
+    Route::post('count-report-data', 'countReport')->name('count-report-data');
+
+
 });
 
 Route::prefix('buildingDocumentation')->group(function () {

@@ -132,6 +132,7 @@ class AdminStepController extends Controller
         $this->getStatusValidation($request);
         DB::transaction(function () use ($firstId, $request, $mapApply, $form, $formDataType, $appliedDocument, $lastStep) {
             if ($lastStep == $form->order) {
+
                 $appliedDocumentStatus = AppliedDocument::where('id', '!=', $appliedDocument->id)
                     ->where('map_apply_id', $mapApply->id)
                     ->where('form_id', $form->id)
