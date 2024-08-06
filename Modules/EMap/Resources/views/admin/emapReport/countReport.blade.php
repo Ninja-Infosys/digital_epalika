@@ -37,7 +37,7 @@
             <div class="card-body px-0">
                 <div class="collapse show mb-2" id="collapseFilterForm">
                     <form id="report-filter-form" method="POST">
-                        <fieldset class="border p-2 mb-2">
+                        {{-- <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
                                 <strong>मिति </strong>
                             </legend>
@@ -52,7 +52,8 @@
                                         labelEn="To Date" :get-today-date="false" />
                                 </div>
                             </div>
-                        </fieldset>
+                        </fieldset> --}}
+
                         <div class="row">
                             <div class="col-md-4">
                                 <fieldset class="border p-2 mb-2">
@@ -69,6 +70,26 @@
                                                 <option value="{{ $fiscalYear->id }}">{{ $fiscalYear->title }}
                                                 </option>
                                                 @endforeach
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-4">
+                                <fieldset class="border p-2 mb-2">
+                                    <legend class="font-16 text-info">
+                                        <strong>महिना</strong>
+                                    </legend>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-2">
+                                            <label for="month">महिना</label>
+                                            <select name="month[]" multiple data-toggle="select2" id="month"
+                                                class="form-control">
+                                                <option disabled>--- छान्नुहोस् ---</option>
+                                                @foreach (\Modules\EMap\Enums\MonthEnum::cases() as $case)
+                                                <option value="{{ $case->value ?? '' }}">{{ $case->label() ?? '' }}</option>
+                                            @endforeach
                                             </select>
 
                                         </div>
@@ -112,6 +133,58 @@
         </div>
     </div>
 </div>
+ <div class="row mt-2" id="charts" data-chart-url="{{ route('emap.admin.dashboard.ajax') }}">
+        <div class="col-md-6">
+            <div class="card">
+                <h4>
+                    आर्थिक बर्ष 2080/081 अनुसार प्रयोजन
+                </h4>
+                <div class="card-body">
+                    <canvas id="mapApply" chart-type="bar"></canvas>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+        <div class="col-md-4">
+            <div class="card">
+                <h4>चालु आर्थिक बर्षको महिना अनुसारले प्लिन्थ लेभल सम्मको विवरण
+                </h4>
+                <div class="card-body">
+                    <canvas id="mapAccordingToPlinth" chart-type="pie"> </canvas>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <h4>चालु आर्थिक बर्षको महिना अनुसारले प्लिन्थ लेभल सम्मको विवरण
+                </h4>
+                <div class="card-body">
+                    <canvas id="mapAccordingToSuperStructure" chart-type="doughnut"> </canvas>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <h4>चालु आर्थिक बर्षको महिना अनुसारले प्लिन्थ लेभल सम्मको विवरण
+                </h4>
+                <div class="card-body">
+                    <canvas id="mapAccordingToLastStep" chart-type="line"> </canvas>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    @push('scripts')
+        <script src="{{ asset('assets/backend/js/chart.js') }}"></script>
+        <script type="module" src="{{ asset('assets/backend/js/chartInit.js') }}"></script>
+    @endpush
 
 @push('scripts')
 <script>

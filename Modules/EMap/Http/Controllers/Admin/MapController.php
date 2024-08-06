@@ -92,7 +92,7 @@ class MapController extends Controller
             return back();
         }
         $mapApply->update([
-            'registration_date' => $this->get_today_nepali_date(),
+            'registration_date' => now(),
             'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
         ]);
         toast('नक्सा सफलता पुर्वक दर्ता भयो', 'success');

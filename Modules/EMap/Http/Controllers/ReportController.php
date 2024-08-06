@@ -5,6 +5,7 @@ namespace Modules\EMap\Http\Controllers;
 use App\Models\Settings\FiscalYear;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Facades\View;
 use Modules\EMap\Entities\Form;
 use Modules\EMap\Entities\LandDetail;
@@ -12,6 +13,7 @@ use Modules\EMap\Entities\MapApply;
 
 class ReportController extends Controller
 {
+    use NepaliDateConverter;
     public function getRequiredData()
     {
         $fiscalYears = FiscalYear::get();
@@ -159,50 +161,55 @@ class ReportController extends Controller
             'columns' => ['nullable', 'array']
         ]);
 
-        $forms = Form::all();
-
         $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
 
-        $query = MapApply::whereHas('landDetail', function ($q) use ($request) {
+        $query = MapApply::where('fiscal_year_id', $request->input('fiscal_year'))
+        // ->whereMonth('registration_date', $request->input('month'))
+        ->whereHas('landDetail', function ($q) use ($request) {
             if (!empty($request->input('ward_no'))) {
                 $q->whereIn('ward_no', $request->input('ward_no'));
             }
-        });
-
+        })->whereNotNull('registration_date');
+// dd($query);
         $this->filterDataFromReport($query, $request);
-
         $generalCount = $query->count();
+        $plinthOrderThreshold = 2;
+        $superStructureOrderThreshold = 4;
+        $plinthStepCount = $query->whereHas('appliedDocuments', function ($query) use ($plinthOrderThreshold) {
+            $query->whereHas('form', function ($query) use ($plinthOrderThreshold) {
+                $query->where('order', '>=', $plinthOrderThreshold);
+            });
+        })->count();
+
+        $superStructureStepCount = $query->whereHas('appliedDocuments', function ($query) use ($superStructureOrderThreshold) {
+            $query->whereHas('form', function ($query) use ($superStructureOrderThreshold) {
+                $query->where('order', '>=', $superStructureOrderThreshold);
+            });
+        })->count();
 
         $lastStepCount = 0;
-
-        foreach ($forms as $form) {
-            if ($form->order == $lastStep) {
-                $lastStepCount = $query->whereHas('appliedDocuments', function ($query) use ($lastStep) {
-                        $query->whereHas('form', function ($query) use ($lastStep) {
-                            $query->where('order', $lastStep);
-                        });
-                    })->count();
-                break;
-            }
-
-
+        if ($lastStep !== null) {
+            $lastStepCount = $query->whereHas('appliedDocuments', function ($query) use ($lastStep) {
+                $query->whereHas('form', function ($query) use ($lastStep) {
+                    $query->where('order', $lastStep);
+                });
+            })->count();
         }
 
         $mapApplies = $query->get();
 
-
         return response()->json([
-            'view' => (string) View::make('emap::admin.emapReport.count_report_table', compact('mapApplies', 'generalCount', 'lastStepCount'))
+            'view' => (string) View::make('emap::admin.emapReport.count_report_table', compact('mapApplies', 'generalCount', 'lastStepCount', 'plinthStepCount', 'superStructureStepCount'))
         ]);
     }
 
-
-    public function filterDataFromReport($q, Request $request): void
+    public function filterDataFromReport($query, Request $request): void
     {
         if (!empty($request->input('fiscal_year'))) {
-            $q->whereIn('fiscal_year_id', $request->input('fiscal_year'));
+            $query->whereIn('fiscal_year_id', $request->input('fiscal_year'));
         }
     }
+
 
 
 }

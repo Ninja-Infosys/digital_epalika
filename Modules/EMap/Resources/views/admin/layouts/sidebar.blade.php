@@ -241,11 +241,12 @@
 </li>
 <li class="{{ request()->is('admin/emap/reports/count-report*') ? 'active' : '' }}">
     <a href="{{route('emap.admin.report.count-report')}}">
-        <span> रिपोर्ट</span>
+        <i class="fa fa-file"></i>
+        <span>रिपोर्ट</span>
     </a>
 </li>
-<li class="{{ request()->is('admin/emap/reports/report*') ? 'active' : '' }}">
+{{-- <li class="{{ request()->is('admin/emap/reports/report*') ? 'active' : '' }}">
     <a href="{{route('emap.admin.report.report')}}">
         <span> रिपोर्ट</span>
     </a>
-</li>
+</li> --}}

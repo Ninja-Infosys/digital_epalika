@@ -21,16 +21,16 @@
                                     <i class="fas fa-map avatar-title font-18 text-white"></i>
                                 </div>
                                 <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{ $map_apply_count }}</span></h3>
-                                <p class="text-muted font-15 mb-0 text-truncate">जम्मा दर्ता भएका घर नक्सा</p>
+                                <p class="text-muted font-15 mb-0 text-truncate">जम्मा घर नक्सा</p>
                             </div>
                         </div>
 
                         <div class="col-sm-6 col-xl-3 border-end">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="avatar-sm bg-blue rounded-circle">
-                                    <i class="fas fa-map avatar-title font-18 text-white"></i>
+                                    <i class="fa fa-file avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{ $map_apply_count }}</span></h3>
+                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{ $map_count_according_fiscal_year }}</span></h3>
                                 <p class="text-muted font-15 mb-0">वार्षिक दर्ता भएका घर नक्सा</p>
                             </div>
                         </div>
@@ -38,9 +38,9 @@
                         <div class="col-sm-6 col-xl-3">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="avatar-sm bg-blue rounded-circle">
-                                    <i class="fas fa-map avatar-title font-18 text-white"></i>
+                                    <i class="fa fa-briefcase avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{ $map_apply_count }}</span></h3>
+                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{ $map_according_to_month }}</span></h3>
                                 <p class="text-muted font-15 mb-0">मासिक दर्ता भएका घर नक्सा</p>
                             </div>
                         </div>
@@ -121,5 +121,5 @@
         <script src="{{ asset('assets/backend/js/chart.js') }}"></script>
         <script type="module" src="{{ asset('assets/backend/js/chartInit.js') }}"></script>
     @endpush
-    
+
 @endsection
