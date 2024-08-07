@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\View;
 use Modules\EMap\Entities\Form;
 use Modules\EMap\Entities\LandDetail;
 use Modules\EMap\Entities\MapApply;
+use Illuminate\Database\Eloquent\Builder;
 
 class ReportController extends Controller
 {
@@ -164,6 +165,7 @@ class ReportController extends Controller
 
         $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
 
+
         $query = MapApply::whereHas('landDetail', function ($q) use ($request) {
             if (!empty($request->input('ward_no'))) {
                 $q->whereIn('ward_no', $request->input('ward_no'));
@@ -205,10 +207,17 @@ class ReportController extends Controller
             $query->whereIn('fiscal_year_id', $request->input('fiscal_year'));
         }
         if (!empty($request->input('month'))) {
-            $query->whereMonth('registration_date_ne', $request->input('month'));
+            $query->where(function (Builder $q) use ($request) {
+                $registrationDateColumn = 'registration_date';
+
+                $q->selectRaw("MONTH(CAST(CONVERT_TZ($registrationDateColumn, '+00:00', @@session.time_zone) AS DATE)) as month")
+                  ->havingRaw("month = ?", [$request->input('month')]);
+            });
         }
+
     }
 
 
 
 }
+
