@@ -53,22 +53,7 @@ class EMapPermissionTableSeeder extends Seeder
             'buildingDocumentationApplication_edit',
             'buildingDocumentationApplication_create',
             'buildingDocumentationApplication_delete',
-            'landConfirmation_access',
-            'landConfirmation_edit',
-            'landConfirmation_create',
-            'landConfirmation_delete',
-            'landRecommendation_access',
-            'landRecommendation_edit',
-            'landRecommendation_create',
-            'landRecommendation_delete',
-            'landReport_access',
-            'landReport_edit',
-            'landReport_create',
-            'landReport_delete',
-            'certificate_access',
-            'certificate_edit',
-            'certificate_create',
-            'certificate_delete',
+           
 
         ];
 

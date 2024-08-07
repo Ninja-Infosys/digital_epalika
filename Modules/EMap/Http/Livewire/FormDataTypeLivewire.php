@@ -22,7 +22,8 @@ class FormDataTypeLivewire extends Component
         'map_group_user_id' => null,
         'need_from' => null,
         'formDataType' => [],
-        'show_to_consultancy' => null
+        'show_to_consultancy' => null,
+        'check_step' => null,
 
     ];
     public $mapPassGroups = [];
@@ -40,6 +41,7 @@ class FormDataTypeLivewire extends Component
             $this->form['map_group_id'] = $formData->map_group_id;
             $this->form['map_group_user_id'] = $formData->map_group_user_id;
             $this->form['need_from'] = $formData->need_from->value;
+            $this->form['check_step'] = $formData?->check_step?->value;
             $this->form['show_to_consultancy'] = $formData->show_to_consultancy;
 
             foreach ($formData->formDataTypes as $index => $formDataType) {
@@ -102,6 +104,7 @@ class FormDataTypeLivewire extends Component
         "form.map_group_id" => ['required', 'integer', 'exists:map_pass_groups,id,deleted_at,NULL'],
         "form.map_group_user_id" => ['nullable', 'integer', 'exists:map_pass_groups,id,deleted_at,NULL'],
         "form.need_from" => ['required'],
+        "form.check_step" => ['nullable'],
         'form.show_to_consultancy' => ['required_if:form.need_from,==,office'],
         "form.formDataType" => ['required', 'array'],
         "form.formDataType.*.type" => ['required'],
@@ -122,6 +125,9 @@ class FormDataTypeLivewire extends Component
             if (!empty($this->existingForm)) {
                 if ($validatedData['form']['map_group_user_id'] === '') {
                     $validatedData['form']['map_group_user_id'] = null;
+                }
+                if ($validatedData['form']['check_step'] === '') {
+                    $validatedData['form']['check_step'] = null;
                 }
                 $this->existingForm->update($validatedData['form']);
                 $form = $this->existingForm;
@@ -152,5 +158,5 @@ class FormDataTypeLivewire extends Component
             $this->form['show_to_consultancy'] = 1;
         }
         return view('emap::livewire.form-data-type-livewire');
-    }
+}
 }

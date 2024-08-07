@@ -132,6 +132,7 @@ class AdminStepController extends Controller
         $this->getStatusValidation($request);
         DB::transaction(function () use ($firstId, $request, $mapApply, $form, $formDataType, $appliedDocument, $lastStep) {
             if ($lastStep == $form->order) {
+
                 $appliedDocumentStatus = AppliedDocument::where('id', '!=', $appliedDocument->id)
                     ->where('map_apply_id', $mapApply->id)
                     ->where('form_id', $form->id)
@@ -152,6 +153,7 @@ class AdminStepController extends Controller
                     if ($form->id == $firstId && empty($mapApply->registration_no)) {
                         $mapApply->update([
                             'registration_date' => now(),
+                            'registration_date_ne' => $this->get_today_nepali_date(),
                             'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
                         ]);
                     }
@@ -221,6 +223,7 @@ class AdminStepController extends Controller
         }
         $mapApply->update([
             'registration_date' => now(),
+            'registration_date_ne' => $this->get_today_nepali_date(),
             'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
         ]);
 
@@ -257,6 +260,7 @@ class AdminStepController extends Controller
                     if ($form->id == $firstId && empty($mapApply->registration_no)) {
                         $mapApply->update([
                             'registration_date' => now(),
+                    'registration_date_ne' => $this->get_today_nepali_date(),
                             'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
                         ]);
                     }
@@ -353,6 +357,7 @@ class AdminStepController extends Controller
                     if ($form->id == $firstId && empty($mapApply->registration_no)) {
                         $mapApply->update([
                             'registration_date' => now(),
+                    'registration_date_ne' => $this->get_today_nepali_date(),
                             'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
                         ]);
                     }

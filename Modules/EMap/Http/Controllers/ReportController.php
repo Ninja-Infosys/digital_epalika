@@ -5,11 +5,15 @@ namespace Modules\EMap\Http\Controllers;
 use App\Models\Settings\FiscalYear;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Facades\View;
+use Modules\EMap\Entities\Form;
+use Modules\EMap\Entities\LandDetail;
 use Modules\EMap\Entities\MapApply;
 
 class ReportController extends Controller
 {
+    use NepaliDateConverter;
     public function getRequiredData()
     {
         $fiscalYears = FiscalYear::get();
@@ -140,4 +144,71 @@ class ReportController extends Controller
             'to' => (int)MapApply::select('future_storey')->max('future_storey')
         ];
     }
+
+    public function getReportData()
+    {
+        $fiscalYears = FiscalYear::get();
+        $landDetails = LandDetail::all();
+        $months = $this->month_name;
+
+        return view('emap::admin.emapReport.countReport', compact('fiscalYears', 'landDetails','months'));
+    }
+
+    public function countReport(Request $request)
+    {
+        $request->validate([
+            'from_date' => ['nullable'],
+            'to_date' => ['nullable', 'after_or_equal:from_date'],
+            'columns' => ['nullable', 'array']
+        ]);
+
+        $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
+
+        $query = MapApply::whereHas('landDetail', function ($q) use ($request) {
+            if (!empty($request->input('ward_no'))) {
+                $q->whereIn('ward_no', $request->input('ward_no'));
+            }
+        })->whereNotNull('registration_date');
+        $this->filterDataFromReport($query, $request);
+        $generalCount = $query->count();
+        $plinthStepCount = $query->whereHas('appliedDocuments', function ($query)  {
+            $query->whereHas('form', function ($query)  {
+                $query->where('check_step',\Modules\EMap\Enums\EMapCheckStepTypeEnum::PLINTH_LEVEL);
+            });
+        })->count();
+
+        $superStructureStepCount = $query->whereHas('appliedDocuments', function ($query)  {
+            $query->whereHas('form', function ($query)  {
+                $query->where('check_step',\Modules\EMap\Enums\EMapCheckStepTypeEnum::SUPERSTRUCTURE_LEVEL);
+            });
+        })->count();
+
+        $lastStepCount = 0;
+        if ($lastStep !== null) {
+            $lastStepCount = $query->whereHas('appliedDocuments', function ($query) use ($lastStep) {
+                $query->whereHas('form', function ($query) use ($lastStep) {
+                    $query->where('order', $lastStep);
+                });
+            })->count();
+        }
+
+        $mapApplies = $query->get();
+
+        return response()->json([
+            'view' => (string) View::make('emap::admin.emapReport.count_report_table', compact('mapApplies', 'generalCount', 'lastStepCount', 'plinthStepCount', 'superStructureStepCount'))
+        ]);
+    }
+
+    public function filterDataFromReport($query, Request $request): void
+    {
+        if (!empty($request->input('fiscal_year'))) {
+            $query->whereIn('fiscal_year_id', $request->input('fiscal_year'));
+        }
+        if (!empty($request->input('month'))) {
+            $query->whereMonth('registration_date_ne', $request->input('month'));
+        }
+    }
+
+
+
 }

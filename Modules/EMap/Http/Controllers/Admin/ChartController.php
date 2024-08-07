@@ -2,23 +2,13 @@
 
 namespace Modules\EMap\Http\Controllers\Admin;
 
-use App\Enums\ChartOptionEnum;
-use App\Http\Controllers\Controller;
-use App\Models\Settings\FiscalYear;
-use App\Traits\NepaliDateConverter;
-use Carbon\Carbon;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
-use Modules\EMap\Entities\Form;
-use Modules\EMap\Entities\MapApply;
-use Modules\EMap\Entities\Organization;
-use Modules\EMap\Entities\StructureType;
-use Modules\EMap\Enums\ApplicationFormTypeEnum;
-use Modules\EMap\Enums\BuildingUsageEnum;
-use Modules\EMap\Enums\CategorizationEnum;
-use Modules\EMap\Enums\TypeOfConstructionWorkEnum;
 
-class DashboardController extends Controller
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Traits\NepaliDateConverter;
+
+class ChartController extends Controller
 {
     use NepaliDateConverter;
 
@@ -26,17 +16,9 @@ class DashboardController extends Controller
     {
         $this->checkAuthorization('eMapDashboard_access');
 
-        $officeSetting = $this->getOfficeSetting();
-
-    $organization_count = Organization::count();
-    $map_apply_count = MapApply::count();
-    $map_count_according_fiscal_year = MapApply::where('fiscal_year_id', $officeSetting->fiscal_year_id )->whereNotNull('registration_no')->count();
-
-    $currentMonth = now()->month;
-    $currentYear = now()->year;
-    $map_according_to_month = MapApply::where('fiscal_year_id', $officeSetting->fiscal_year_id )->whereMonth('registration_date', $currentMonth)->whereYear('registration_date', $currentYear)->count();
-
-    return view('emap::admin.dashboard', compact('organization_count', 'map_apply_count', 'map_count_according_fiscal_year','map_according_to_month'));
+        $organization_count = Organization::count();
+        $map_apply_count = MapApply::count();
+        return view('emap::admin.dashboard', compact('organization_count', 'map_apply_count', ));
     }
     public function ajaxData()
     {
@@ -47,9 +29,7 @@ class DashboardController extends Controller
             'constructionType' => $this->getMapApplyConstructionTypeAccordingToFiscalYear(),
             'structureType' => $this->getMapApplyStructureTypeAccordingToFiscalYear(),
             'mapAccordingToMonth' => $this->mapAccordingToMonth(),
-            'mapAccordingToPlinth' => $this->mapAccordingToPlinth(),
-            'mapAccordingToSuperStructure' => $this->mapAccordingToSuperStructure(),
-            'mapAccordingToLastStep' => $this->mapAccordingToLastStep(),
+
 
         ];
     }
@@ -65,6 +45,7 @@ class DashboardController extends Controller
                     'color' => generateRandomRGBAColor()
                 ];
             });
+
         $chartData = [
             'labels' => $structureTypes->pluck('name')->toArray(),
             'option' => ChartOptionEnum::PIE_CHART->option(),
@@ -113,24 +94,22 @@ class DashboardController extends Controller
 
     public function getMapApplyAccordingToFiscalYear(): array
     {
-        $fiscalYear = FiscalYear::withCount([
-            'mapApplies',
+        $fiscalYear = FiscalYear::withCount(['mapApplies',
             'mapApplies as mapRegistrationCount' => function ($query) {
-                $query->where('application_type', ApplicationFormTypeEnum::MAP_REGISTRATION)->whereNotNull('registration_no');
+                $query->where('application_type', ApplicationFormTypeEnum::MAP_REGISTRATION);
             }, 'mapApplies as mapVerificationCount' => function ($query) {
-                $query->where('application_type', ApplicationFormTypeEnum::MAP_VERIFIED)->whereNotNull('registration_no');
-            },
-        ])
+                $query->where('application_type', ApplicationFormTypeEnum::MAP_VERIFIED);
+            },])
             ->selectRaw('id,title')
             ->get()
-            ->map(function ($fiscalYear) {
-                return [
-                    'title' => $fiscalYear->title,
-                    'map_applies_count' => (int)$fiscalYear->map_applies_count,
-                    'mapRegistrationCount' => (int)$fiscalYear->mapRegistrationCount,
-                    'mapVerificationCount' => (int)$fiscalYear->mapVerificationCount,
-                ];
-            });
+        ->map(function ($fiscalYear) {
+            return [
+                'title' => $fiscalYear->title,
+                'map_applies_count' => (int)$fiscalYear->map_applies_count,
+                'mapRegistrationCount' => (int)$fiscalYear->mapRegistrationCount,
+                'mapVerificationCount' => (int)$fiscalYear->mapVerificationCount,
+            ];
+        });
         return [
             'labels' => $fiscalYear->pluck('title')->toArray(),
             'dataSets' => [
@@ -165,7 +144,7 @@ class DashboardController extends Controller
     {
         return DB::table('map_applies')
             ->select('registration_date', 'usage', 'building_category', 'application_type', 'construction_type', 'deleted_at')
-            ->whereNull('deleted_at')->whereNotNull('registration_no')
+            ->whereNull('deleted_at')
             ->where(function ($query) use ($hasCurrentFiscalYear) {
                 if ($hasCurrentFiscalYear) {
                     $query->where('fiscal_year_id', $hasCurrentFiscalYear);
@@ -173,9 +152,6 @@ class DashboardController extends Controller
             })
             ->get();
     }
-
-
-
 
     public function getMapApplyBuildingUsageAccordingToFiscalYear()
     {
@@ -294,86 +270,5 @@ class DashboardController extends Controller
                 ]
             ]
         ];
-    }
-    private function mapAccordingToLevel($fiscalYearId, $orderThreshold, $label)
-    {
-        $mapApplies = $this->getTotalMapApply($fiscalYearId, $orderThreshold);
-
-        $month = array_fill(0, 12, 0);
-
-        foreach ($mapApplies as $mapApply) {
-            if (!empty($mapApply->registration_date)) {
-                $registration_date = Carbon::parse($mapApply->registration_date);
-                $registrationDate = $this->get_nepali_date($registration_date->format('Y'), $registration_date->format('m'), $registration_date->format('d'));
-                $month[$registrationDate['m'] - 1] += 1;
-            }
-        }
-
-        $backgroundColors = [];
-        $borderColors = [];
-        for ($i = 0; $i < 12; $i++) {
-            $backgroundColors[] = $this->generateRandomRGBAColor();
-            $borderColors[] = $this->generateRandomRGBAColor();
-        }
-
-        return [
-            'labels' => $this->month_name,
-            'dataSets' => [
-                [
-                    'data' => $month,
-                    'label' => $label,
-                    'backgroundColor' => $backgroundColors,
-                    'borderColor' => $borderColors,
-                    'borderWidth' => 1,
-                ]
-            ]
-        ];
-    }
-
-    private function getTotalMapApply($hasCurrentFiscalYear = null, $orderThreshold): Collection
-    {
-        return MapApply::select('registration_date', 'usage', 'building_category', 'application_type', 'construction_type', 'deleted_at')
-            ->whereNull('deleted_at')
-            ->where(function ($query) use ($hasCurrentFiscalYear) {
-                if ($hasCurrentFiscalYear) {
-                    $query->where('fiscal_year_id', $hasCurrentFiscalYear);
-                }
-            })
-            ->whereHas('appliedDocuments', function ($query) use ($orderThreshold) {
-                $query->whereHas('form', function ($query) use ($orderThreshold) {
-                    $query->where('order', '>=', $orderThreshold);
-                });
-            })
-            ->get();
-    }
-
-    public function mapAccordingToPlinth()
-    {
-        $orderThreshold = 2;
-        $officeSetting = $this->getOfficeSetting();
-        return $this->mapAccordingToLevel($officeSetting->fiscal_year_id, $orderThreshold, 'जम्मा प्लिन्थ लेभल सम्मको इजाजत');
-    }
-
-    public function mapAccordingToSuperStructure()
-    {
-        $orderThreshold = 4;
-        $officeSetting = $this->getOfficeSetting();
-        return $this->mapAccordingToLevel($officeSetting->fiscal_year_id, $orderThreshold, 'जम्मा सुपर स्ट्रक्चर लेभल सम्मको इजाजत पाएको');
-    }
-    public function mapAccordingToLastStep()
-    {
-        $orderThreshold = Form::orderBy('order', 'desc')->first()?->order ?? null;
-
-        $officeSetting = $this->getOfficeSetting();
-        return $this->mapAccordingToLevel($officeSetting->fiscal_year_id, $orderThreshold, 'निर्माण कार्य सम्मपन भएको');
-    }
-
-    private function generateRandomRGBAColor()
-    {
-        $r = rand(0, 255);
-        $g = rand(0, 255);
-        $b = rand(0, 255);
-        $a = 0.7; // Adjust alpha for transparency if needed
-        return "rgba($r, $g, $b, $a)";
     }
 }
