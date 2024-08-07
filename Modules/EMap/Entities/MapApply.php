@@ -65,6 +65,7 @@ class MapApply extends Model
         'longitude',
         'mobile_user_id',
         'comment',
+        'registration_date_ne',
     ];
 
     protected $casts = [

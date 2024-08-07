@@ -69,6 +69,19 @@
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
+        <div class="col-md-3 mb-2">
+            <label for="check_step" class="form-label">फारमको किसिम</label>
+            <select id="check_step" name="check_step" wire:model="form.check_step" class="form-select">
+                <option value="">-- छान्नुहोस् --</option>
+                @foreach(\Modules\EMap\Enums\EMapCheckStepTypeEnum::cases() as $checkStep)
+                <option value="{{$checkStep->value}}" {{old('check_step') == $checkStep->value ? 'selected' : ''}}>{{$checkStep->label()}}</option>
+                @endforeach
+
+            </select>
+            @error('form.check_step')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
         @if($form['need_from'] == \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE->value)
         <div class="col-md-3 mb-2">
             <label for="show_to_consultancy" class="form-label">Show Consultancy</label>

@@ -81,18 +81,19 @@
                                     <legend class="font-16 text-info">
                                         <strong>महिना</strong>
                                     </legend>
-                                    <div class="row">
-                                        <div class="col-md-12 mb-2">
-                                            <label for="month">महिना</label>
-                                            <select name="month[]" multiple data-toggle="select2" id="month"
-                                                class="form-control">
-                                                <option disabled>--- छान्नुहोस् ---</option>
-                                                @foreach (\Modules\EMap\Enums\MonthEnum::cases() as $case)
-                                                <option value="{{ $case->value ?? '' }}">{{ $case->label() ?? '' }}</option>
-                                            @endforeach
-                                            </select>
 
-                                        </div>
+                                    <div class="row">
+                                    <div class="col-md-12 mb-2">
+                                        <label for="month" class="form-label">महिना</label>
+                                        <select name="month" id="month" class="form-select">
+                                            <option value="">- - महिना छान्नुहोस् - -</option>
+                                            @foreach ($months as $key => $month)
+                                                <option value="{{ $key + 1 }}">
+                                                    {{ $month }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                     </div>
                                 </fieldset>
                             </div>
@@ -161,7 +162,7 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-                <h4>चालु आर्थिक बर्षको महिना अनुसारले प्लिन्थ लेभल सम्मको विवरण
+                <h4>चालु आर्थिक बर्षको महिना अनुसारले सुपरस्टर्कचर लेभल सम्मको विवरण
                 </h4>
                 <div class="card-body">
                     <canvas id="mapAccordingToSuperStructure" chart-type="doughnut"> </canvas>
@@ -171,7 +172,7 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-                <h4>चालु आर्थिक बर्षको महिना अनुसारले प्लिन्थ लेभल सम्मको विवरण
+                <h4>चालु आर्थिक बर्षको महिना अनुसारले निर्माण कार्य सम्पन्न भएका विवरण
                 </h4>
                 <div class="card-body">
                     <canvas id="mapAccordingToLastStep" chart-type="line"> </canvas>

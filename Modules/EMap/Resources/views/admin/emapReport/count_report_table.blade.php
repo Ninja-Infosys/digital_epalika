@@ -16,14 +16,9 @@
                     <td>{{ $generalCount }}</td>
                     <td>{{ $plinthStepCount }}</td>
                     <td>{{ $superStructureStepCount }}</td>
-
                     <td>{{$lastStepCount}}</td>
-
                 </tr>
-
             </tbody>
         </table>
     @endif
-
-
 </div>

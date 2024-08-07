@@ -149,8 +149,9 @@ class ReportController extends Controller
     {
         $fiscalYears = FiscalYear::get();
         $landDetails = LandDetail::all();
+        $months = $this->month_name;
 
-        return view('emap::admin.emapReport.countReport', compact('fiscalYears', 'landDetails'));
+        return view('emap::admin.emapReport.countReport', compact('fiscalYears', 'landDetails','months'));
     }
 
     public function countReport(Request $request)
@@ -163,27 +164,22 @@ class ReportController extends Controller
 
         $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
 
-        $query = MapApply::where('fiscal_year_id', $request->input('fiscal_year'))
-        // ->whereMonth('registration_date', $request->input('month'))
-        ->whereHas('landDetail', function ($q) use ($request) {
+        $query = MapApply::whereHas('landDetail', function ($q) use ($request) {
             if (!empty($request->input('ward_no'))) {
                 $q->whereIn('ward_no', $request->input('ward_no'));
             }
         })->whereNotNull('registration_date');
-// dd($query);
         $this->filterDataFromReport($query, $request);
         $generalCount = $query->count();
-        $plinthOrderThreshold = 2;
-        $superStructureOrderThreshold = 4;
-        $plinthStepCount = $query->whereHas('appliedDocuments', function ($query) use ($plinthOrderThreshold) {
-            $query->whereHas('form', function ($query) use ($plinthOrderThreshold) {
-                $query->where('order', '>=', $plinthOrderThreshold);
+        $plinthStepCount = $query->whereHas('appliedDocuments', function ($query)  {
+            $query->whereHas('form', function ($query)  {
+                $query->where('check_step',\Modules\EMap\Enums\EMapCheckStepTypeEnum::PLINTH_LEVEL);
             });
         })->count();
 
-        $superStructureStepCount = $query->whereHas('appliedDocuments', function ($query) use ($superStructureOrderThreshold) {
-            $query->whereHas('form', function ($query) use ($superStructureOrderThreshold) {
-                $query->where('order', '>=', $superStructureOrderThreshold);
+        $superStructureStepCount = $query->whereHas('appliedDocuments', function ($query)  {
+            $query->whereHas('form', function ($query)  {
+                $query->where('check_step',\Modules\EMap\Enums\EMapCheckStepTypeEnum::SUPERSTRUCTURE_LEVEL);
             });
         })->count();
 
@@ -207,6 +203,9 @@ class ReportController extends Controller
     {
         if (!empty($request->input('fiscal_year'))) {
             $query->whereIn('fiscal_year_id', $request->input('fiscal_year'));
+        }
+        if (!empty($request->input('month'))) {
+            $query->whereMonth('registration_date_ne', $request->input('month'));
         }
     }
 

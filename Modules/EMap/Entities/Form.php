@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Modules\EMap\Enums\EMapCheckStepTypeEnum;
 use Modules\EMap\Enums\EMapFormFillerTypeEnum;
 
 class Form extends Model
@@ -32,11 +33,13 @@ class Form extends Model
         "need_from",
         "show_to_consultancy",
         "map_group_id",
-        "map_group_user_id"
+        "map_group_user_id",
+        "check_step",
     ];
 
     protected $casts = [
         "need_from" => EMapFormFillerTypeEnum::class,
+        "check_step" => EMapCheckStepTypeEnum::class,
         "order" => 'integer',
         "status" => 'bool',
         "map_pass_group_id" => 'integer',

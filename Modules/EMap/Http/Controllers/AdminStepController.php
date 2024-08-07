@@ -153,6 +153,7 @@ class AdminStepController extends Controller
                     if ($form->id == $firstId && empty($mapApply->registration_no)) {
                         $mapApply->update([
                             'registration_date' => now(),
+                            'registration_date_ne' => $this->get_today_nepali_date(),
                             'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
                         ]);
                     }
@@ -222,6 +223,7 @@ class AdminStepController extends Controller
         }
         $mapApply->update([
             'registration_date' => now(),
+            'registration_date_ne' => $this->get_today_nepali_date(),
             'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
         ]);
 
@@ -258,6 +260,7 @@ class AdminStepController extends Controller
                     if ($form->id == $firstId && empty($mapApply->registration_no)) {
                         $mapApply->update([
                             'registration_date' => now(),
+                    'registration_date_ne' => $this->get_today_nepali_date(),
                             'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
                         ]);
                     }
@@ -354,6 +357,7 @@ class AdminStepController extends Controller
                     if ($form->id == $firstId && empty($mapApply->registration_no)) {
                         $mapApply->update([
                             'registration_date' => now(),
+                    'registration_date_ne' => $this->get_today_nepali_date(),
                             'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
                         ]);
                     }
