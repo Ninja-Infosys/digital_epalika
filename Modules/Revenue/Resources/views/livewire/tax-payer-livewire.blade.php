@@ -96,7 +96,7 @@
                     class="form-control @error('taxPayerDetail.phone') is-invalid @enderror"
                     id="taxPayerDetail.phone"
                     placeholder="फोन"
-
+required
                 />
                 @error('taxPayerDetail.phone')
                 <div class="invalid-feedback">{{$message}}</div>
