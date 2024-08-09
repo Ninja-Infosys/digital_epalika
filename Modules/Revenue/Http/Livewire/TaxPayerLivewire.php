@@ -124,7 +124,7 @@ class TaxPayerLivewire extends Component
             'taxPayerDetail.tax_payer_type_id' => ['required', 'exists:tax_payer_types,id,deleted_at,NULL'],
             'taxPayerDetail.name' => ['required', 'string', 'max:255'],
             'taxPayerDetail.name_en' => ['required', 'string', 'max:255'],
-            'taxPayerDetail.phone' => ['required', 'string', 'max:255'],
+            'taxPayerDetail.phone' => ['nullable', 'string', 'max:255'],
             'taxPayerDetail.address' => ['required', 'string', 'max:255'],
             'taxPayerDetail.email' => ['nullable', 'email'],
             'taxPayerDetail.gender' => ['nullable', 'string', 'max:255', 'in:male,female,other'],

@@ -20,7 +20,7 @@ class StoreTaxPayerRequest extends FormRequest
             'tax_payer_type_id' => ['required', Rule::exists('tax_payer_types', 'id')->withoutTrashed()],
             'name' => ['required', 'string', 'max:255'],
             'name_en' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
             'email' => ['nullable', 'email'],
             'gender' => ['required', 'string', 'max:255', new Enum(Gender::class)],
