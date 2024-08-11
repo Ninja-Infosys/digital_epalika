@@ -3,6 +3,7 @@
 namespace Modules\BusinessRegistration\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Traits\NepaliDateConverter;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\BusinessRegistration\Entities\Forum;
 use Modules\BusinessRegistration\Entities\Industry;
@@ -11,6 +12,7 @@ use Modules\BusinessRegistration\Entities\ProprietorDetail;
 
 class FrontendController extends Controller
 {
+    use NepaliDateConverter;
     public function business()
     {
         return view('businessregistration::frontend.index');
@@ -36,7 +38,9 @@ class FrontendController extends Controller
                 $query->with('issueDistrict', 'district', 'localBody', 'province');
             }, 'businessNature', 'registeredBusinesses', 'province', 'district', 'localBody']
         );
-        return view('businessregistration::frontend.printDetail', compact('businessDetail'));
+        $todayDateInBS = $this->get_today_nepali_date();
+
+        return view('businessregistration::frontend.printDetail', compact('businessDetail','todayDateInBS'));
     }
 
     public function print(OrganizationRegistration $organizationRegistration)
@@ -46,7 +50,9 @@ class FrontendController extends Controller
                 $query->with('issueDistrict', 'district', 'localBody', 'province');
             }]
         );
-        return view('businessregistration::frontend.register.print', compact('organizationRegistration'));
+        $todayDateInBS = $this->get_today_nepali_date();
+
+        return view('businessregistration::frontend.register.print', compact('organizationRegistration','todayDateInBS'));
     }
 
     public function printIndustry(Industry $industry)
@@ -56,7 +62,9 @@ class FrontendController extends Controller
                 $query->with('issueDistrict', 'district', 'localBody', 'province');
             }]
         );
-        return view('businessregistration::frontend.industry.print', compact('industry'));
+        $todayDateInBS = $this->get_today_nepali_date();
+
+        return view('businessregistration::frontend.industry.print', compact('industry','todayDateInBS'));
     }
     public function printForum(Forum $forum)
     {
@@ -65,7 +73,9 @@ class FrontendController extends Controller
                 $query->with('issueDistrict', 'district', 'localBody', 'province');
             }]
         );
-        return view('businessregistration::frontend.forum.print', compact('forum'));
+        $todayDateInBS = $this->get_today_nepali_date();
+
+        return view('businessregistration::frontend.forum.print', compact('forum','todayDateInBS'));
     }
 
     public function printPdf(ProprietorDetail $proprietorDetail)

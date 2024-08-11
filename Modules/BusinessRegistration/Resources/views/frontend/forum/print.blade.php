@@ -28,10 +28,10 @@
 
                     <div class="item-auto"
                          style="flex:1 1 auto; margin: 0 4rem;text-align:center">
-                        <strong><span style="font-size:16px" class="text-danger">चिङ्गाड गाउँपालिका</span><br/>
-                            <span style="font-size:20px" class="text-danger">गाउँ कार्यपालिकाको कार्यालय</span></strong><br/>
+                        <strong><span style="font-size:16px" class="text-danger">{{ $officeSetting->localBody->local_body ?? '' }}</span><br/>
+                            <span style="font-size:20px" class="text-danger">{{config('app.office')}}</span></strong><br/>
                         <span class="fw-bold text-danger mb-0" style="font-size:24px; width:80px">उधोग शाखा</span><br>
-                        <span style="font-size:16px" class="text-danger fw-bold">अवलचिङ्ग, सुर्खेत</span>
+                        <span style="font-size:16px" class="text-danger fw-bold">{{ $officeSetting->site_address ?? '' }}</span>
                     </div>
                     <div class="item-auto"
                          style="flex:1 1 auto; margin: 0 4rem;text-align:center">
@@ -45,9 +45,10 @@
                     <div class="col-sm sub-title2 text-end ml-auto">
                         <p class="text-danger fw-bold lh-1"
                            style="text-align: end;">मिती :
-                            ......................</p>
+                           {{ get_nepali_number($todayDateInBS) }}
+                        </p>
                     </div>
-                </div>
+                </div
 
                 <p class="fw-bold my-2">श्री...........................<br>
                     ...........................  </p>
@@ -132,11 +133,11 @@
 
                     <div class="item-auto"
                          style="flex:1 1 auto; margin: 0 4rem;text-align:center">
-                        <strong><span style="font-size:16px" class="text-danger">चिङ्गाड गाउँपालिका</span><br/>
+                        <strong><span style="font-size:16px" class="text-danger">{{ $officeSetting->localBody->local_body ?? '' }}</span><br/>
                             <span style="font-size:20px"
-                                  class="text-danger">गाउँ कार्यपालिकाको कार्यालय</span></strong><br/>
+                                  class="text-danger">{{config('app.office')}}</span></strong><br/>
                         <span class="fw-bold text-danger mb-0" style="font-size:24px; width:80px">उधोग शाखा</span><br>
-                        <span style="font-size:16px" class="text-danger fw-bold">अवलचिङ्ग, सुर्खेत</span>
+                        <span style="font-size:16px" class="text-danger fw-bold">{{ $officeSetting->site_address ?? '' }}</span>
                     </div>
                     <div class="item-auto"
                          style="flex:1 1 auto; margin: 0 4rem;text-align:center">
@@ -151,7 +152,7 @@
                     <div class="col-sm sub-title2 text-end ml-auto">
                         <p class="text-danger fw-bold lh-1"
                            style="text-align: end;">मिती :
-                            ......................</p>
+                           {{ get_nepali_number($todayDateInBS) }}</p>
                     </div>
                 </div>
                 <p class="fw-bold fs-5 text-center my-3">
@@ -160,7 +161,7 @@
 
 
                 <p class="fw-bold my-2">श्री........................... को कार्यालय<br>
-                    ........................... , सुर्खेत ।</p>
+                    {{ $officeSetting->site_address ?? '' }} ।</p>
 
 
                 <p class="mb-0">

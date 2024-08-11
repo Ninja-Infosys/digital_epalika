@@ -75,11 +75,6 @@ class MapController extends Controller
         return view('emap::admin.map.index', compact('maps', 'application_types', 'applicationFormTypeEnum', 'mapStatusEnum'));
     }
 
-
-
-
-
-
     public function noticeList(MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum): Factory|View|Application
     {
         return view('emap::admin.map.notice-list', compact('mapApply', 'applicationFormTypeEnum'));
