@@ -13,52 +13,118 @@ class DashboardController extends Controller
 {
     use NepaliDateConverter;
 
+    // public function index()
+    // {
+    //     $this->checkAuthorization('revenueDashboard_access');
+
+    //     $fiscal_year_id = officeSetting()->fiscal_year_id;
+
+    //     $taxPayerCount = DB::table('tax_payers')
+    //         ->whereNull('deleted_at')
+    //         ->where('is_active', true)
+    //         ->count();
+
+    //     $invoiceCount = DB::table('invoices')
+    //         ->where('fiscal_year_id', $fiscal_year_id)
+    //         ->whereNull('deleted_at')
+    //         ->count();
+
+    //     $results = DB::table('invoices')
+    //         ->selectRaw('invoices.is_cash_invoice,invoices.payment_method,invoices.payment_date,invoices.payment_date_en,invoices.fiscal_year_id, SUM((invoice_particulars.rate * invoice_particulars.quantity)+ (invoice_particulars.rate * invoice_particulars.quantity) * invoice_particulars.due + invoice_particulars.fine) as total')
+    //         ->join('invoice_particulars', 'invoice_particulars.invoice_id', '=', 'invoices.id')
+    //         ->whereNull('invoices.deleted_at')
+    //         ->whereNull('invoice_particulars.deleted_at')
+    //         ->groupBy('invoices.fiscal_year_id', 'invoices.payment_date', 'invoices.is_cash_invoice', 'invoices.payment_method', 'invoices.payment_date_en')
+    //         ->get();
+
+    //     $all_total = $results->sum('total');
+
+    //     $fiscal_year_total = $results->where('fiscal_year_id', $fiscal_year_id)->sum('total');
+
+    //     $today_total = $results->where('payment_date_en', today())->sum('total');
+
+    //     $nepaliMonth = $this->get_nepali_date(date('Y'), date('m'), date('d'));
+
+    //     $this_month_total = $results->where('fiscal_year_id', $fiscal_year_id)
+    //         ->filter(function ($item) use ($nepaliMonth) {
+    //             return date('m', strtotime($item->payment_date)) == $nepaliMonth['m'];
+    //         })
+    //         ->sum('total');
+
+    //     $previous_month_total = $results->where('fiscal_year_id', $fiscal_year_id)
+    //         ->filter(function ($item) use ($nepaliMonth) {
+    //             return date('m', strtotime($item->payment_date)) == $nepaliMonth['m'] - 1;
+    //         })
+    //         ->sum('total');
+
+    //     return view('revenue::admin.dashboard', compact('taxPayerCount', 'invoiceCount', 'all_total', 'fiscal_year_total', 'today_total', 'this_month_total', 'previous_month_total'));
+    // }
+
     public function index()
-    {
-        $this->checkAuthorization('revenueDashboard_access');
+{
+    $this->checkAuthorization('revenueDashboard_access');
 
-        $fiscal_year_id = officeSetting()->fiscal_year_id;
+    $fiscal_year_id = officeSetting()->fiscal_year_id;
+    $userWardNo = auth()->user()->ward_no;
 
-        $taxPayerCount = DB::table('tax_payers')
-            ->whereNull('deleted_at')
-            ->where('is_active', true)
-            ->count();
+    $wardCondition = function ($query) use ($userWardNo) {
+        if (!empty($userWardNo)) {
+            if (is_array($userWardNo)) {
+                foreach ($userWardNo as $ward) {
+                    $query->orWhereRaw("FIND_IN_SET('$ward', ward) > 0");
+                }
+            } else {
+                $query->whereRaw("FIND_IN_SET('$userWardNo', ward) > 0");
+            }
+        }
+    };
+    $taxPayerCount = DB::table('tax_payers')
+        ->where($wardCondition)
+        ->whereNull('deleted_at')
+        ->where('is_active', true)
+        ->count();
 
-        $invoiceCount = DB::table('invoices')
-            ->where('fiscal_year_id', $fiscal_year_id)
-            ->whereNull('deleted_at')
-            ->count();
+    $invoiceCount = DB::table('invoices')
+        ->where($wardCondition)
+        ->where('fiscal_year_id', $fiscal_year_id)
+        ->whereNull('deleted_at')
+        ->count();
 
-        $results = DB::table('invoices')
-            ->selectRaw('invoices.is_cash_invoice,invoices.payment_method,invoices.payment_date,invoices.payment_date_en,invoices.fiscal_year_id, SUM((invoice_particulars.rate * invoice_particulars.quantity)+ (invoice_particulars.rate * invoice_particulars.quantity) * invoice_particulars.due + invoice_particulars.fine) as total')
-            ->join('invoice_particulars', 'invoice_particulars.invoice_id', '=', 'invoices.id')
-            ->whereNull('invoices.deleted_at')
-            ->whereNull('invoice_particulars.deleted_at')
-            ->groupBy('invoices.fiscal_year_id', 'invoices.payment_date', 'invoices.is_cash_invoice', 'invoices.payment_method', 'invoices.payment_date_en')
-            ->get();
+    $results = DB::table('invoices')
+        ->selectRaw('invoices.is_cash_invoice, invoices.payment_method, invoices.payment_date, invoices.payment_date_en, invoices.fiscal_year_id, SUM((invoice_particulars.rate * invoice_particulars.quantity) + (invoice_particulars.rate * invoice_particulars.quantity) * invoice_particulars.due + invoice_particulars.fine) as total')
+        ->join('invoice_particulars', 'invoice_particulars.invoice_id', '=', 'invoices.id')
+        ->where($wardCondition)
+        ->whereNull('invoices.deleted_at')
+        ->whereNull('invoice_particulars.deleted_at')
+        ->groupBy('invoices.fiscal_year_id', 'invoices.payment_date', 'invoices.is_cash_invoice', 'invoices.payment_method', 'invoices.payment_date_en')
+        ->get();
 
-        $all_total = $results->sum('total');
+    $all_total = $results->sum('total');
 
-        $fiscal_year_total = $results->where('fiscal_year_id', $fiscal_year_id)->sum('total');
+    $fiscal_year_total = $results->where('fiscal_year_id', $fiscal_year_id)->sum('total');
 
-        $today_total = $results->where('payment_date_en', today())->sum('total');
+    $today_total = $results->where('payment_date_en', today())->sum('total');
 
-        $nepaliMonth = $this->get_nepali_date(date('Y'), date('m'), date('d'));
+    $nepaliMonth = $this->get_nepali_date(date('Y'), date('m'), date('d'));
 
-        $this_month_total = $results->where('fiscal_year_id', $fiscal_year_id)
-            ->filter(function ($item) use ($nepaliMonth) {
-                return date('m', strtotime($item->payment_date)) == $nepaliMonth['m'];
-            })
-            ->sum('total');
+    $this_month_total = $results->where('fiscal_year_id', $fiscal_year_id)
+        ->filter(function ($item) use ($nepaliMonth) {
+            return date('m', strtotime($item->payment_date)) == $nepaliMonth['m'];
+        })
+        ->sum('total');
 
-        $previous_month_total = $results->where('fiscal_year_id', $fiscal_year_id)
-            ->filter(function ($item) use ($nepaliMonth) {
-                return date('m', strtotime($item->payment_date)) == $nepaliMonth['m'] - 1;
-            })
-            ->sum('total');
+    $previous_month_total = $results->where('fiscal_year_id', $fiscal_year_id)
+        ->filter(function ($item) use ($nepaliMonth) {
+            return date('m', strtotime($item->payment_date)) == $nepaliMonth['m'] - 1;
+        })
+        ->sum('total');
 
-        return view('revenue::admin.dashboard', compact('taxPayerCount', 'invoiceCount', 'all_total', 'fiscal_year_total', 'today_total', 'this_month_total', 'previous_month_total'));
-    }
+    return view('revenue::admin.dashboard', compact(
+        'taxPayerCount', 'invoiceCount', 'all_total',
+        'fiscal_year_total', 'today_total', 'this_month_total',
+        'previous_month_total'
+    ));
+}
 
     public function ajaxData()
     {

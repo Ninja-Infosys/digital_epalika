@@ -97,7 +97,10 @@
                                 <tr>
                                     @foreach(officeSetting()->localBody->ward_no as $ward_no)
                                         <th> वडा नं. {{$ward_no}}</th>
+
                                     @endforeach
+                                    <th>पालिका</th>
+
                                     <th>जम्मा</th>
                                 </tr>
                                 </thead>
