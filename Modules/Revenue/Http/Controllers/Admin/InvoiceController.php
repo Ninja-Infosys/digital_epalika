@@ -13,6 +13,20 @@ use Modules\Revenue\Http\Requests\Invoice\UpdateInvoiceRequest;
 
 class InvoiceController extends Controller
 {
+    // public function index()
+    // {
+    //     $this->checkAuthorization('invoice_access');
+
+    //     $invoices = Invoice::withSum(['invoiceParticulars' => function ($query) {
+    //         $query->select(DB::raw('SUM((rate * quantity) + (rate * quantity) * due + fine) as total'));
+    //     }], 'total')
+    //         ->where('fiscal_year_id', officeSetting()->fiscal_year_id)
+    //         ->cashInvoice()
+    //         ->latest('payment_date_en')
+    //         ->paginate(25);
+
+    //     return view('revenue::admin.invoice.index', compact('invoices'));
+    // }
     public function index()
     {
         $this->checkAuthorization('invoice_access');
@@ -20,6 +34,18 @@ class InvoiceController extends Controller
         $invoices = Invoice::withSum(['invoiceParticulars' => function ($query) {
             $query->select(DB::raw('SUM((rate * quantity) + (rate * quantity) * due + fine) as total'));
         }], 'total')
+            ->where(function ($q) {
+                if (!empty(auth()->user()->ward_no)) {
+                    $authWardNo = auth()->user()->ward_no;
+                    if (is_array($authWardNo)) {
+                        foreach ($authWardNo as $ward) {
+                            $q->orWhereRaw("FIND_IN_SET('$ward', ward) > 0");
+                        }
+                    } else {
+                        $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
+                    }
+                }
+            })
             ->where('fiscal_year_id', officeSetting()->fiscal_year_id)
             ->cashInvoice()
             ->latest('payment_date_en')
@@ -27,6 +53,7 @@ class InvoiceController extends Controller
 
         return view('revenue::admin.invoice.index', compact('invoices'));
     }
+
 
     public function create()
     {

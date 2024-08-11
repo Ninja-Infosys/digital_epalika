@@ -12,17 +12,55 @@ use Modules\Revenue\Http\Requests\TaxPayer\UpdateTaxPayerRequest;
 
 class TaxPayerController extends Controller
 {
+    // public function index()
+    // {
+    //     $this->checkAuthorization('taxPayer_access');
+
+    //     $taxPayers = TaxPayer::where(function (Builder $q) {
+    //         if (!is_null(request('search'))) {
+    //             $q->whereLike(['tax_payer_type_id', 'fiscal_year_id', 'registration_no', 'name', 'name_en', 'phone', 'email', 'father_name', 'grandfather_name', 'citizenship_no', 'ward',], request('search'));
+    //         }
+    //     })->latest()->paginate(10);
+    //     return view('revenue::admin.tax-payer.index', compact('taxPayers'));
+    // }
     public function index()
     {
         $this->checkAuthorization('taxPayer_access');
 
-        $taxPayers = TaxPayer::where(function (Builder $q) {
-            if (!is_null(request('search'))) {
-                $q->whereLike(['tax_payer_type_id', 'fiscal_year_id', 'registration_no', 'name', 'name_en', 'phone', 'email', 'father_name', 'grandfather_name', 'citizenship_no', 'ward',], request('search'));
+        $authWardNo = auth()->user()->ward_no;
+        $searchTerm = request('search');
+
+        $taxPayers = TaxPayer::when($authWardNo, function ($q) use ($authWardNo) {
+            if (is_array($authWardNo)) {
+                foreach ($authWardNo as $ward) {
+                    $q->orWhereRaw("FIND_IN_SET(?, ward) > 0", [$ward]);
+                }
+            } else {
+                $q->whereRaw("FIND_IN_SET(?, ward) > 0", [$authWardNo]);
             }
-        })->latest()->paginate(10);
+        })
+            ->when($searchTerm, function ($q) use ($searchTerm) {
+                $q->whereLike([
+                    'tax_payer_type_id',
+                    'fiscal_year_id',
+                    'registration_no',
+                    'name',
+                    'name_en',
+                    'phone',
+                    'email',
+                    'father_name',
+                    'grandfather_name',
+                    'citizenship_no',
+                    'ward'
+                ], $searchTerm);
+            })
+            ->latest()
+            ->paginate(10);
+
         return view('revenue::admin.tax-payer.index', compact('taxPayers'));
     }
+
+
 
     public function create()
     {

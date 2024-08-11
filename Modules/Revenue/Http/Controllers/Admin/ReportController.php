@@ -6,6 +6,7 @@ use App\Models\Settings\FiscalYear;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
+use Modules\Plan\Transformers\ProjectResource;
 use Modules\Revenue\Entities\TaxPayer;
 
 class ReportController extends Controller
