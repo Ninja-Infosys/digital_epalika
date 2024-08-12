@@ -71,7 +71,7 @@ class LandInvoiceController extends Controller
         $this->checkAuthorization('invoice_create');
 
         DB::transaction(function () use ($request) {
-            $invoice = Invoice::create($request->validated() + ['is_cash_invoice' => 0]);
+            $invoice = Invoice::create($request->validated() + ['is_cash_invoice' => 0]+['ward'=>auth()->user()->ward_no,'user_id'=>auth()->id()]);
 
             foreach ($request->input('particulars') as $particular) {
                 $invoice->invoiceParticulars()->create($particular);

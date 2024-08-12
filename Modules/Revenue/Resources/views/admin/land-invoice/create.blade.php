@@ -47,7 +47,7 @@
                                         <option value="{{ $taxPayer->id }}"
                                             {{ old('tax_payer_id') == $taxPayer->id ? 'selected' : '' }}>
                                             ({{ $taxPayer->registration_no }})
-                                            {{ $taxPayer->name }}
+                                            {{ $taxPayer->name }} (वार्ड नं. {{ $taxPayer->ward ??'' }})
                                         </option>
                                     @endforeach
                                 </select>
@@ -97,7 +97,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-2">
+                            {{-- <div class="col-md-6 mb-2">
                                 <label for="ward" class="form-label">वार्ड</label>
                                 <select name="ward" class="form-select @error('ward') is-invalid @enderror"
                                     id="ward" data-toggle="select2" data-width="100%">
@@ -111,7 +111,7 @@
                                 @error('ward')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                            </div>
+                            </div> --}}
                             @livewire('revenue::land-invoice-form-livewire', ['formDetail' => old('particulars', [])])
                             <div class="col-md-12 mb-2">
                                 <label for="remarks" class="form-label">कैफियत</label>
