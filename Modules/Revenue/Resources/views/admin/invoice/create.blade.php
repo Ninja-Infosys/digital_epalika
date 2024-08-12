@@ -57,7 +57,7 @@
                                         <option value="{{ $taxPayer->id }}"
                                             {{ old('tax_payer_id') == $taxPayer->id ? 'selected' : '' }}>
                                             ({{ $taxPayer->registration_no }})
-                                            {{ $taxPayer->name }}
+                                            {{ $taxPayer->name }} (वडा नं.{{ $taxPayer->ward }})
                                         </option>
                                     @endforeach
                                 </select>
@@ -107,8 +107,14 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-2">
-                                <label for="ward" class="form-label">वार्ड</label>
+
+                            {{-- <div class="col-md-6 mb-2">
+                                @if (Auth::user()->id == 1)
+                                    <label for="ward" class="form-label">वार्ड (<span class="text-danger">पाालिकाले
+                                            वार्ड छन्नु पर्दैन</span>)</label>
+                                @else
+                                    <label for="ward" class="form-label">वार्ड</label>
+                                @endif
                                 <select name="ward" class="form-select @error('ward') is-invalid @enderror"
                                     id="ward" data-toggle="select2" data-width="100%">
                                     <option value="">--- छान्नुहोस् ---</option>
@@ -121,7 +127,8 @@
                                 @error('ward')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                            </div>
+                            </div> --}}
+
                             @livewire('revenue::invoice-form-livewire', ['formDetail' => old('particulars', [])])
                             <div class="col-md-12 mb-2">
                                 <label for="remarks" class="form-label">कैफियत</label>
