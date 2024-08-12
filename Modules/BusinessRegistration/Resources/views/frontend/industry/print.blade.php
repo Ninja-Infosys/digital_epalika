@@ -28,10 +28,10 @@
 
                     <div class="item-auto"
                          style="flex:1 1 auto; margin: 0 4rem;text-align:center">
-                        <strong><span style="font-size:16px" class="text-danger">चिङ्गाड गाउँपालिका</span><br/>
-                            <span style="font-size:20px" class="text-danger">गाउँ कार्यपालिकाको कार्यालय</span></strong><br/>
+                        <strong><span style="font-size:16px" class="text-danger">{{ $officeSetting->localBody->local_body ?? '' }}</span><br/>
+                            <span style="font-size:20px" class="text-danger">{{config('app.office')}}</span></strong><br/>
                         <span class="fw-bold text-danger mb-0" style="font-size:24px; width:80px">उधोग शाखा</span><br>
-                        <span style="font-size:16px" class="text-danger fw-bold">अवलचिङ्ग, सुर्खेत</span>
+                        <span style="font-size:16px" class="text-danger fw-bold">{{ $officeSetting->site_address ?? '' }}</span>
                     </div>
                     <div class="item-auto"
                          style="flex:1 1 auto; margin: 0 4rem;text-align:center">
@@ -45,11 +45,14 @@
                     <div class="col-sm sub-title2 text-end ml-auto">
                         <p class="text-danger fw-bold lh-1"
                            style="text-align: end;">मिती :
-                            ......................</p>
+                           {{ get_nepali_number($todayDateInBS) }}</p>
                     </div>
                 </div>
                 <p class="text-center mb-0">विषय :- फर्म रजिष्ट्रेशन गरिएको</p>
-                <p>श्री ...............................................</p>
+                @foreach ( $industry->committeeNames as $committeeName)
+                <p>श्री {{$committeeName->name ??''}}</p>
+
+                @endforeach
                 <p class="mb-0">तपाईले स्थिर पूँजी रु. {{$industry->fixed_capital}} र चालु पूँजी रु.
                     {{$industry->working_capital}} समेत कूल
                     पूँजी रु. {{$industry->investment}}
@@ -57,12 +60,12 @@
                     ..............................................................................................
                     उत्पादन गर्ने उदेश्यले कामदार ................................... जवान राखी,
                     {{ $industry->province->province ?? '' }} प्रदेश {{ $industry->district->district ?? '' }} जिल्ला
-                    {{ $industry->localBody->local_body ?? '' }}गा.पा/न.पा. वडा नं. {{ $industry->ward_no ?? '' }} मा
-                    उधोग स्थापना गर्ने गरी ............................................................... नामको
+                    {{ $industry->localBody->local_body ?? '' }} वडा नं. {{ $industry->ward_no ?? '' }} मा
+                    उधोग स्थापना गर्ने गरी {{$industry->name ??''}} नामको
                     प्राइभेट/साझेदारी/प्रा.लि. फर्म रजिष्ट्रेशन पाउँ भनि दिएको निवेदन उपर कारबाही हुँदा मिति
-                    ..................... को निर्णयाअनुसार निम्नलिखित शर्तहरु पालना गर्नुपर्ने
+                    {{$industry->registration_date_ne ??''}} को निर्णयाअनुसार निम्नलिखित शर्तहरु पालना गर्नुपर्ने
                     गरी रजिष्ट्रेशन गरिदिने भनी निर्णय भएको हुँदा तपाई समेतको नाममा रजिष्ट्रेशन भएको फ.नं.
-                    .................................... को सक्कल प्रमाण-पत्र यसै साथ संलग्न गरी प्त्हैएको व्यहोरा
+                    {{$industry->phone ??''}} को सक्कल प्रमाण-पत्र यसै साथ संलग्न गरी प्त्हैएको व्यहोरा
                     जानकारी गराइएको छ ।
                 </p>
                 <p class="text-decoration-underline mb-0">उद्योगले पालना गर्नुपर्ने शर्तहरुः
