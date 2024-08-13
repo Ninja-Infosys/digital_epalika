@@ -127,6 +127,10 @@ trait TemplateTrait
                 'storeyDetails' => $mapApply?->storeyDetails,
 
             ]),
+            (string) View::make('emap::inc.storey-detail', [
+                'storeyDetails' => $mapApply?->storeyDetails,
+
+            ]),
 
             //applicantDetail
             get_nepali_number($mapApply?->applicantDetail?->applicant_type?->label() ?? ''),
@@ -356,6 +360,7 @@ trait TemplateTrait
             '[@heightOfEachStorey]',
             '[@areaOfEachStorey]',
             '[@storeyDetails]',
+            '[@completeStoreyDetails]',
 
             //applicantDetail
 
