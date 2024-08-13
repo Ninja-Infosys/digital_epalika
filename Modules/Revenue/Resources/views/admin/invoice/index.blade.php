@@ -61,13 +61,13 @@
                                         <td>{{ $invoice->invoice_particulars_sum_total ?? '' }}</td>
                                         <td>{{ $invoice->remarks ?? '' }}</td>
                                         <td class="d-flex gap-1">
-                                            @can('taxPayerType_access')
+                                            @can('invoice_create')
                                                 <a href="{{ route('admin.revenue.invoice.show', [$invoice]) }}"
                                                     class="btn btn-xs btn-outline-success">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                             @endcan
-                                            @can('taxPayerType_edit')
+                                            @can('invoice_edit')
                                                 <a data-bs-type="edit"
                                                     href="{{ route('admin.revenue.invoice.edit', [$invoice]) }}"
                                                     class="btn btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
@@ -78,7 +78,7 @@
                                                     </svg>
                                                 </a>
                                             @endcan
-                                            @can('taxPayerType_delete')
+                                            @can('invoice_delete')
                                                 <form action="{{ route('admin.revenue.invoice.destroy', [$invoice]) }}"
                                                     method="post">
                                                     @csrf
