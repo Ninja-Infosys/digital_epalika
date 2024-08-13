@@ -27,7 +27,7 @@
                         <h4 class="header-title mb-0">मालपोत रसिदहरु सूची</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
-                            @can('revenueCategory_create')
+                            @can('invoice_create')
                                 <a href="{{ route('admin.revenue.land.invoice.create') }}"
                                     class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                     <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
@@ -61,13 +61,13 @@
                                         <td>{{ $invoice->invoice_particulars_sum_total ?? '' }}</td>
                                         <td>{{ $invoice->remarks ?? '' }}</td>
                                         <td class="d-flex gap-1">
-                                            @can('taxPayerType_access')
+                                            @can('invoice_edit')
                                                 <a href="{{ route('admin.revenue.land.invoice.show', [$invoice]) }}"
                                                     class="btn btn-xs btn-outline-success" title="हेर्नुहोस्">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                             @endcan
-                                            @can('taxPayerType_edit')
+                                            @can('invoice_edit')
                                                 <a data-bs-type="edit"
                                                     href="{{ route('admin.revenue.land.invoice.edit', [$invoice]) }}"
                                                     class="btn btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
@@ -79,7 +79,7 @@
                                                     </svg>
                                                 </a>
                                             @endcan
-                                            @can('taxPayerType_delete')
+                                            @can('invoice_delete')
                                                 <form action="{{ route('admin.revenue.land.invoice.destroy', [$invoice]) }}"
                                                     method="post">
                                                     @csrf
