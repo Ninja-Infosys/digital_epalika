@@ -87,7 +87,7 @@
                 </div>
             </div>
             <div class="col-md-3 mb-2">
-                <label for="taxPayerDetail.phone" class="form-label">फोन *</label>
+                <label for="taxPayerDetail.phone" class="form-label">फोन </label>
                 <input
                     type="text"
                     name="taxPayerDetail.phone"
@@ -102,7 +102,7 @@
                 @enderror
             </div>
             <div class="col-md-3 mb-2">
-                <label for="taxPayerDetail.email" class="form-label">इमेल *</label>
+                <label for="taxPayerDetail.email" class="form-label">इमेल </label>
                 <input
                     type="email"
                     name="taxPayerDetail.email"
