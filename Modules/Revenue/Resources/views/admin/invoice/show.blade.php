@@ -197,7 +197,13 @@
                                     <thead>
                                         <tr>
                                             <th>बिषय</th>
-                                            <th>क्षेत्रफल</th>
+                                            <th>
+                                                @if (Route::is('admin.revenue.invoice.show'))
+                                                  वटा
+                                                @elseif (Route::is('admin.revenue.land.invoice.show'))
+                                                क्षेत्रफल
+                                                @endif
+                                            </th>
                                             <th>दर</th>
                                             <th>बक्यौता</th>
                                             <th>जरिवाना</th>
