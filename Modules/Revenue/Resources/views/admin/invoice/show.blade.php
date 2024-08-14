@@ -93,7 +93,7 @@
                                         <thead>
                                             <tr>
                                                 <th>बिषय</th>
-                                                {{-- <th>क्षेत्रफल/वटा</th> --}}
+                                              
                                                 <th>
                                                     @if (Route::is('admin.revenue.invoice.show'))
                                                       वटा
