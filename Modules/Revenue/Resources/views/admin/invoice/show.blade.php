@@ -42,7 +42,8 @@
                                     </a>
                                 @endcan
                                 @can('revenueCategory_create')
-                                    <a href="{{ route('admin.revenue.invoice.edit', [$invoice]) }}" class="btn btn-sm btn-outline-primary">
+                                    <a href="{{ route('admin.revenue.invoice.edit', [$invoice]) }}"
+                                        class="btn btn-sm btn-outline-primary">
                                         <i class="fa fa-edit"></i>
                                         सम्पादन र समिक्षा गर्नुहोस्
                                     </a>
@@ -92,7 +93,14 @@
                                         <thead>
                                             <tr>
                                                 <th>बिषय</th>
-                                                <th>क्षेत्रफल/वटा</th>
+                                              
+                                                <th>
+                                                    @if (Route::is('admin.revenue.invoice.show'))
+                                                      वटा
+                                                    @elseif (Route::is('admin.revenue.land.invoice.show'))
+                                                    क्षेत्रफल
+                                                    @endif
+                                                </th>
                                                 <th>दर</th>
                                                 <th>बक्यौता</th>
                                                 <th>जरिवाना</th>
