@@ -102,7 +102,7 @@
                 @enderror
             </div>
             <div class="col-md-3 mb-2">
-                <label for="taxPayerDetail.email" class="form-label">इमेल </label>
+                <label for="taxPayerDetail.email" class="form-label">इ-मेल</label>
                 <input
                     type="email"
                     name="taxPayerDetail.email"
