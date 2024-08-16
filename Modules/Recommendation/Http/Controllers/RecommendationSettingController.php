@@ -32,7 +32,7 @@ class RecommendationSettingController extends Controller
             $recommendationSetting->update($data);
         } else {
             RecommendationSetting::create($data + [
-                'ward_no' => auth()->user()->ward_no,
+                'ward' => auth()->user()->ward_no,
             ]);
         }
 
