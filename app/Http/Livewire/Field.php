@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\MobileUser;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -48,6 +49,20 @@ class Field extends Component
             }
         }
         $this->mobileUsers = MobileUser::with('mobileUserDetail')->get();
+        // $this->formTypes = RecommendationDetail::get();
+
+        $authUserWardNo = Auth::user()->ward_no;
+
+        if ($authUserWardNo) {
+            $this->mobileUsers = MobileUser::with('mobileUserDetail')
+                ->whereHas('mobileUserDetail', function ($query) use ($authUserWardNo) {
+                    $query->where('ward_no', $authUserWardNo);
+                })
+                ->get();
+        } else {
+            $this->mobileUsers = MobileUser::with('mobileUserDetail')->get();
+        }
+
         $this->formTypes = RecommendationDetail::get();
     }
 
