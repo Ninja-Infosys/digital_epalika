@@ -47,7 +47,7 @@ class Field extends Component
                 }
             }
         }
-        $this->mobileUsers = MobileUser::all();
+        $this->mobileUsers = MobileUser::with('mobileUserDetail')->get();
         $this->formTypes = RecommendationDetail::get();
     }
 

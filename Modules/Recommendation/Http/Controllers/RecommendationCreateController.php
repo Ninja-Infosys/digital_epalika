@@ -3,6 +3,7 @@
 namespace Modules\Recommendation\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -19,10 +20,43 @@ class RecommendationCreateController extends Controller
 {
     public function index()
     {
-        $recommendationCreates = RecommendationCreate::with('recommendationDetail', 'mobileUser')->latest()->get();
+        $user = auth()->user();
+        $recommendation = RecommendationCreate::with('recommendationDetail', 'mobileUser');
+        if ($user->ward_no != NULL) {
+            $recommendation->whereHas('mobileUser.mobileUserDetail', function (Builder $q) use ($user) {
+                if (!empty($user->ward_no)) {
+                    $q->where('ward_no', $user->ward_no);
+                }
+            });
+        }
+        $recommendationCreates = $recommendation->paginate(10);
 
         return view('recommendation::admin.recommendation.recommendation-create.index', compact('recommendationCreates'));
     }
+
+    //     public function index()
+    // {
+    //     $recommendationCreates = RecommendationCreate::with('recommendationDetail', 'mobileUser')
+    //         ->where(function ($query) {
+    //             if (!empty(auth()->user()->ward_no)) {
+    //                 $authWardNo = auth()->user()->ward_no;
+
+    //                 // Check if $authWardNo is an array
+    //                 if (is_array($authWardNo)) {
+    //                     foreach ($authWardNo as $ward) {
+    //                         $query->orWhereRaw("FIND_IN_SET('$ward', ward) > 0");
+    //                     }
+    //                 } else {
+    //                     // If it's not an array, use it directly
+    //                     $query->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
+    //                 }
+    //             }
+    //         })
+    //         ->latest()
+    //         ->get();
+
+    //     return view('recommendation::admin.recommendation.recommendation-create.index', compact('recommendationCreates'));
+    // }
 
     public function create()
     {
@@ -31,12 +65,12 @@ class RecommendationCreateController extends Controller
 
     public function store(StoreRecommendationCreateRequest $request)
     {
-        
+
         $recommendationCreate = DB::transaction(function () use ($request) {
 
             $recommendationCreate = RecommendationCreate::create($request->validated() + [
-                    'created_by' => auth()->id(),
-                ]);
+                'created_by' => auth()->id(),
+            ]);
 
             if (
                 array_key_exists('fields', $request->validated())
@@ -84,8 +118,8 @@ class RecommendationCreateController extends Controller
     }
 
     public function update(UpdateRecommendationCreateRequest $request, RecommendationCreate $recommendationCreate)
-{
-    
+    {
+
         $recommendationCreate = DB::transaction(function () use ($request, $recommendationCreate) {
             $recommendationCreate->update($request->validated() + [
                 'created_by' => auth()->id(),
@@ -130,10 +164,10 @@ class RecommendationCreateController extends Controller
 
         toast('सिफारिस सफलतापूर्वक अपडेट गरियो', 'success');
         return redirect(route('admin.recommendation.recommendationCreate.show', $recommendationCreate));
-    } 
+    }
 
-    
-    
+
+
     public function show(RecommendationCreate $recommendationCreate)
     {
         $recommendationCreate->load(
@@ -184,7 +218,7 @@ class RecommendationCreateController extends Controller
         return back();
     }
 
-    
+
     public function approvedStatus(RecommendationCreate $recommendationCreate)
     {
         $recommendationCreate->update([
@@ -195,4 +229,3 @@ class RecommendationCreateController extends Controller
         return back();
     }
 }
-

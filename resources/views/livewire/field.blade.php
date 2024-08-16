@@ -14,6 +14,7 @@
                         @foreach ($mobileUsers as $mobileUser)
                             <option value="{{ $mobileUser->id }}">{{ $mobileUser->name }}
                                 ({{ $mobileUser->reg_no ?? '' }})
+                             (वार्ड नं.{{ $mobileUser->mobileUserDetail?->ward_no ?? 'null' }})
                             </option>
                         @endforeach
                     </select>

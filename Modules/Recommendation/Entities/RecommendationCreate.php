@@ -83,7 +83,8 @@ class RecommendationCreate extends Model
 
     public function resolveTemplate($recommendationSetting): string
     {
-        $content = letterHead().$this->recommendationDetail?->content;
+        // $content = letterHead().$this->recommendationDetail?->content; //for letter head
+         $content =$this->recommendationDetail?->content;
         $replaceableList = collect();
         $this->load('recommendationDetail', 'recommendationValues.recommendationFormField');
 
