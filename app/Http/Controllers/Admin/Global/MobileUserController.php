@@ -12,7 +12,7 @@ class MobileUserController extends Controller
     public function index()
     {
 
-        $mobileUsers = MobileUser::latest()->get();
+        $mobileUsers = MobileUser::with('mobileUserDetail')->latest()->get();
 
         return view('admin.global.mobileUser.index', compact('mobileUsers'));
     }

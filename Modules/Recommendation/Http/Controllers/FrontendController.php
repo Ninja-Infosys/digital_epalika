@@ -44,11 +44,11 @@ class FrontendController extends Controller
 
     public function sipharishRegisterStore(StoreRecommendationCreateRequest $request)
     {
-     
+
         $recommendationCreate = DB::transaction(function () use ($request) {
             // Get the authenticated user
             $user = Auth::guard('mobile-user')->user();
-        
+
             // Create a new recommendation with validated data
             $recommendationCreate = RecommendationCreate::create(array_merge(
                 $request->validated(),
@@ -57,8 +57,8 @@ class FrontendController extends Controller
                     'created_by' => $user->id
                 ]
             ));
-            
-    
+
+
             if (
                 array_key_exists('fields', $request->validated())
                 && !empty ($request->validated()['fields'])
@@ -107,10 +107,10 @@ class FrontendController extends Controller
         $mobileUser = Auth::guard('mobile-user')->user()->load('mobileUserDetail');
         $recommendationCreate->load('recommendationDetail', 'recommendationValues', 'recommendationFiles.recommendationDocument');
         $recommendationSetting = RecommendationSetting::with('approver', 'checker')->where('ward', auth()->user()?->ward_no ?? null)->first();
-        
+
         return view('recommendation::frontend.sipharisView', compact('recommendationCreate', 'mobileUser', 'recommendationSetting'));
     }
-    
+
 
 
     public function recommendationEdit(RecommendationCreate $recommendationCreate)
@@ -124,7 +124,7 @@ class FrontendController extends Controller
         $recommendationCreate = DB::transaction(function () use ($request, $recommendationCreate) {
             // Get the authenticated user
             $user = Auth::guard('mobile-user')->user();
-    
+
             // Update the recommendation with validated data
             $recommendationCreate->update(array_merge(
                 $request->validated(),
@@ -133,26 +133,26 @@ class FrontendController extends Controller
                     'created_by' => $user->id
                 ]
             ));
-    
+
             // Delete old files
             if (array_key_exists('deleted_files', $request->validated())) {
                 $deletedFileIds = $request->validated()['deleted_files'];
                 $recommendationCreate->RecommendationFile::whereIn('id', $deletedFileIds)->delete();
             }
-    
+
             // Update or delete existing recommendation values
             if (array_key_exists('fields', $request->validated()) && !empty($request->validated()['fields'])) {
                 foreach ($request->validated()['fields'] as $field) {
                     $value = $field['value'];
-    
+
                     if (!empty($field['type']) && $field['type'] == 'image') {
                         $value = Storage::disk('public')->putFile('recommendation/files', $field['value']);
                     }
-    
+
                     $recommendationValue = $recommendationCreate->recommendationValues()
                         ->where('recommendation_form_field_id', $field['recommendation_form_field_id'])
                         ->first();
-    
+
                     if ($recommendationValue) {
                         $recommendationValue->update([
                             'value' => $value,
@@ -167,7 +167,7 @@ class FrontendController extends Controller
                     }
                 }
             }
-    
+
             // Add new files
              // Replace old files with new ones
         if (array_key_exists('files', $request->validated()) && !empty($request->validated()['files'])) {
@@ -177,15 +177,15 @@ class FrontendController extends Controller
             }
         }
 
-    
+
             return $recommendationCreate;
         });
-    
+
         toast('सिफारिस सफलतापूर्वक अपडेट गरियो', 'success');
         return redirect(route('recommendationrecommendation.recommendationListshow', $recommendationCreate));
     }
-    
-    
+
+
 
     public function destroySipharish(RecommendationCreate $recommendationCreate)
     {

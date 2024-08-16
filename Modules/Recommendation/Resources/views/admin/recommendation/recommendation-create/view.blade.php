@@ -219,7 +219,7 @@
                                     targetStyles: ['*'],
                                     ignoreElements: ['ignore-header'],
                                     type: 'html',
-                                   
+
                                 })">
                                     <i class="fa fa-print"></i> प्रिन्ट गर्नुहोस
                                 </button>

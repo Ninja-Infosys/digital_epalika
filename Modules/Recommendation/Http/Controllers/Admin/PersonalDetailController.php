@@ -10,17 +10,48 @@ use Illuminate\Database\Eloquent\Builder;
 
 class PersonalDetailController extends Controller
 {
+    // public function index()
+    // {
+    //     $this->checkAuthorization('personalDetail_access');
+    //     $personalDetails = PersonalDetail::filterData()->where(function (Builder $q) {
+    //         if (!is_null(request('search'))) {
+    //             $q->whereLike(['name', 'phone_no', 'reg_no','gender'], request('search'));
+    //         }
+    //     })->latest()
+    //         ->paginate(15);
+    //     return view('recommendation::admin.setting.personalDetail.index', compact('personalDetails'));
+    // }
+
     public function index()
-    {
-        $this->checkAuthorization('personalDetail_access');
-        $personalDetails = PersonalDetail::filterData()->where(function (Builder $q) {
+{
+    $this->checkAuthorization('personalDetail_access');
+
+    $personalDetails = PersonalDetail::filterData()
+        ->where(function (Builder $q) {
             if (!is_null(request('search'))) {
-                $q->whereLike(['name', 'phone_no', 'reg_no','gender'], request('search'));
+                $q->whereLike(['name', 'phone_no', 'reg_no', 'gender'], request('search'));
             }
-        })->latest()
-            ->paginate(15);
-        return view('recommendation::admin.setting.personalDetail.index', compact('personalDetails'));
-    }
+
+            if (!empty(auth()->user()->ward_no)) {
+                $authWardNo = auth()->user()->ward_no;
+
+                // Check if $authWardNo is an array
+                if (is_array($authWardNo)) {
+                    foreach ($authWardNo as $ward) {
+                        $q->orWhereRaw("FIND_IN_SET('$ward', ward_no) > 0");
+                    }
+                } else {
+                    // If it's not an array, use it directly
+                    $q->whereRaw("FIND_IN_SET('$authWardNo', ward_no) > 0");
+                }
+            }
+        })
+        ->latest()
+        ->paginate(15);
+
+    return view('recommendation::admin.setting.personalDetail.index', compact('personalDetails'));
+}
+
 
     public function create()
     {
