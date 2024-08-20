@@ -23,33 +23,35 @@ class PersonalDetailController extends Controller
     // }
 
     public function index()
-{
-    $this->checkAuthorization('personalDetail_access');
+    {
+        $this->checkAuthorization('personalDetail_access');
 
-    $personalDetails = PersonalDetail::filterData()
-        ->where(function (Builder $q) {
-            if (!is_null(request('search'))) {
-                $q->whereLike(['name', 'phone_no', 'reg_no', 'gender'], request('search'));
-            }
+        $personalDetails = PersonalDetail::filterData()
+            ->where(function (Builder $q) {
+                if (!is_null(request('search'))) {
+                    $q->whereLike(['name', 'phone_no', 'reg_no', 'gender'], request('search'));
+                }
 
-            if (!empty(auth()->user()->ward_no)) {
                 $authWardNo = auth()->user()->ward_no;
 
-                if (is_array($authWardNo)) {
-                    foreach ($authWardNo as $ward) {
-                        $q->orWhereRaw("FIND_IN_SET('$ward', ward_no) > 0");
+                // Check if the ward_no is not null
+                if (!is_null($authWardNo)) {
+                    if (is_array($authWardNo)) {
+                        foreach ($authWardNo as $ward) {
+                            $q->orWhereRaw("FIND_IN_SET('$ward', ward_no) > 0");
+                        }
+                    } else {
+                        $q->whereRaw("FIND_IN_SET('$authWardNo', ward_no) > 0");
                     }
-                } else {
-
-                    $q->whereRaw("FIND_IN_SET('$authWardNo', ward_no) > 0");
                 }
-            }
-        })
-        ->latest()
-        ->paginate(15);
+            })
+            ->latest()
+            ->paginate(15);
 
-    return view('recommendation::admin.setting.personalDetail.index', compact('personalDetails'));
-}
+        return view('recommendation::admin.setting.personalDetail.index', compact('personalDetails'));
+    }
+
+
 
 
     public function create()

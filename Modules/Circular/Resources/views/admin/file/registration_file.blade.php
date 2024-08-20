@@ -31,7 +31,7 @@
                 </div>
                 <div class="card-body">
 
-                    @foreach(getAllFilesAndFolders('registration') as $file)
+                    @foreach(getAllFilesAndFolder('registration') as $file)
                         <h4 class="mb-2">{{collect($file)->has('label') ? \Illuminate\Support\Str::upper($file['label']) : ''}}</h4>
                         @if(collect($file)->has('children'))
                             <div class="row">
