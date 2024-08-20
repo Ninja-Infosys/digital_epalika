@@ -161,7 +161,7 @@
                                                             </div>
                                                             <div class="col-8">
                                                                 <a href="javascript:void(0);"
-                                                                   onclick="openFileModal('{{ $document->recommendationDocument->title }}', '{{ $document->file_extension }}','{{ $document->file_url }}')"
+                                                                   onclick="openFileModal('{{ $document?->recommendationDocument?->title }}', '{{ $document?->file_extension }}','{{ $document?->file_url }}')"
                                                                    class="text-muted fw-medium">{{ $document->recommendationDocument->title ?? '' }}</a>
                                                             </div>
                                                             <div class="col-2">
@@ -254,11 +254,11 @@
                                                 <td>सिफारिस दस्तुर</td>
                                                 <!-- Assuming these properties exist, replace them with the actual column names -->
                                                 <td>
-                                                    रु. {{ get_nepali_number($recommendationCreate->recommendationDetail->service_cost) }}
+                                                    रु. {{ get_nepali_number($recommendationCreate?->recommendationDetail?->service_cost) }}
                                                 </td>
                                                 <td>{{ get_nepali_number(1) }}</td>
                                                 <td>
-                                                    रु. {{ get_nepali_number($total += $recommendationCreate->recommendationDetail->service_cost * 1) }}
+                                                    रु. {{ get_nepali_number($total += $recommendationCreate?->recommendationDetail?->service_cost * 1) }}
                                                 </td>
                                             </tr>
                                         @endif
@@ -269,11 +269,11 @@
                                                 <!-- Incrementing key by 1 to start from 1 instead of 0 -->
                                                 <td>{{ $revenueHeaders->title }}</td>
                                                 <!-- Assuming these properties exist, replace them with the actual column names -->
-                                                <td>रु. {{ get_nepali_number($revenueHeaders->amount) }}</td>
+                                                <td>रु. {{ get_nepali_number($revenueHeaders?->amount) }}</td>
                                                 <td>{{ get_nepali_number(1) }}</td>
                                                 <td>
-                                                    @php($total+=$revenueHeaders->amount)
-                                                    रु. {{ get_nepali_number($revenueHeaders->amount * 1) }}
+                                                    @php($total+=$revenueHeaders?->amount)
+                                                    रु. {{ get_nepali_number($revenueHeaders?->amount * 1) }}
                                                 </td>
                                             </tr>
                                         @endforeach
