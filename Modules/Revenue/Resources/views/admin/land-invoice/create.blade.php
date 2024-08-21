@@ -26,8 +26,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">नयाँ रसिद थप्नुहोस्</h4>
                         <a href="{{ route('admin.revenue.land.invoice.index') }}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> मालपोत रसिद सूची hello
-                        </a>
+                            <i class="fa fa-list"></i> मालपोत रसिद सूची </a>
                     </div>
                 </div>
                 <div class="card-body px-0">
