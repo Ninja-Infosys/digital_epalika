@@ -89,7 +89,7 @@
                 </td>
                 <td>
                     <input type="hidden" name="particulars[{{$index}}][quantity]"
-                           value="{{$detail['quantity']?? ''}}" required>
+                           value="{{$detail['quantity']?? ''}}" >
                     {{$detail['quantity'] ?? 0}}
                     @error('particulars.'.$index.'.quantity')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -97,7 +97,7 @@
                 </td>
                 <td>
                     <input type="hidden" name="particulars[{{$index}}][rate]"
-                           value="{{$detail['rate']?? ''}}" required>
+                           value="{{$detail['rate']?? ''}}" >
                     {{$detail['rate'] ?? 0}}
                     @error('particulars.'.$index.'.rate')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -109,7 +109,7 @@
                 </td>
                 <td>
                     <input type="hidden" name="particulars[{{$index}}][due]"
-                           value="{{$detail['due']?? ''}}" required>
+                           value="{{$detail['due']?? ''}}" >
                     {{$detail['due'] ?? 0}}
                     @error('particulars.'.$index.'.due')
                     <div class="invalid-feedback">{{$message}}</div>
