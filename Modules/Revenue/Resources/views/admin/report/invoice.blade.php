@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item active">वडा अनुसार रसिद रिपोर्ट</li>
                     </ol>
                 </div>
-                <h4 class="page-title">वडा अनुसार रसिद रिपोर्ट </h4>
+                <h4 class="page-title">वडा अनुसार रसिद रिपोर्ट hh</h4>
             </div>
         </div>
     </div>
@@ -91,7 +91,6 @@
                                 </thead>
                                 <tbody>
                                     <tr id="report_data">
-
 
                                     </tr>
                                 </tbody>

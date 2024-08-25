@@ -100,37 +100,70 @@ class ReportController extends Controller
         return view('revenue::admin.report.invoice', compact('fiscalYears'));
     }
 
+    // public function invoiceReport(Request $request)
+    // {
+    //     $request->validate([
+    //         'from_date' => ['nullable'],
+    //         'to_date' => ['nullable'],
+    //         'payment_method' => ['nullable'],
+    //         'fiscal_year' => ['nullable', 'array'],
+    //         'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')],
+    //     ]);
+
+    //     $invoices = Invoice::where(function ($query) use ($request) {
+    //         $this->filterDataFromUser($query, $request);
+    //     })->get();
+
+    //     $wardData = [];
+    //     foreach (officeSetting()->localBody->ward_no as $ward_no) {
+    //         $wardData[] = $invoices->where('ward', $ward_no)->count();
+    //     }
+
+    //     // Calculate the count of invoices where ward is null
+    //     $palikaCount = $invoices->whereNull('ward')->count();
+
+    //     return response()->json([
+    //         'fiscal_years' => !empty($request->input('fiscal_year')) ? FiscalYear::select('title')->whereIn('id', Arr::wrap($request->input('fiscal_year')))->pluck('title') : FiscalYear::pluck('title'),
+    //         'wardsData' => $wardData,
+    //         'palikaCount' => $palikaCount,
+    //     ]);
+    // }
+
     public function invoiceReport(Request $request)
-    {
-        $request->validate([
-            'from_date' => ['nullable'],
-            'to_date' => ['nullable'],
-            'payment_method' => ['nullable'],
-            'fiscal_year' => ['nullable', 'array'],
-            'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')],
-        ]);
+{
+    $request->validate([
+        'from_date' => ['nullable'],
+        'to_date' => ['nullable'],
+        'payment_method' => ['nullable'],
+        'fiscal_year' => ['nullable', 'array'],
+        'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')],
+    ]);
+
+    // Retrieve the current user's ward number
+    $userWard = auth()->user()->ward_no;
+
+    $invoices = Invoice::where(function ($query) use ($request, $userWard) {
+        $this->filterDataFromUser($query, $request);
 
 
-
-        $invoices = Invoice::where(function ($query) use ($request) {
-            $this->filterDataFromUser($query, $request);
-        })->get();
-
-        $wardData = [];
-        foreach (officeSetting()->localBody->ward_no as $ward_no) {
-            $wardData[] = $invoices->where('ward', $ward_no)->count();
+        if ($userWard !==null ) {
+            $query->where('ward', $userWard);
         }
+    })->get();
 
-        // Calculate the count of invoices where ward is null
-        $palikaCount = $invoices->whereNull('ward')->count();
-
-        return response()->json([
-            'fiscal_years' => !empty($request->input('fiscal_year')) ? FiscalYear::select('title')->whereIn('id', Arr::wrap($request->input('fiscal_year')))->pluck('title') : FiscalYear::pluck('title'),
-            'wardsData' => $wardData,
-            'palikaCount' => $palikaCount,
-        ]);
+    $wardData = [];
+    foreach (officeSetting()->localBody->ward_no as $ward_no) {
+        $wardData[] = $invoices->where('ward', $ward_no)->count();
     }
 
+    $palikaCount = $invoices->whereNull('ward')->count();
+
+    return response()->json([
+        'fiscal_years' => !empty($request->input('fiscal_year')) ? FiscalYear::select('title')->whereIn('id', Arr::wrap($request->input('fiscal_year')))->pluck('title') : FiscalYear::pluck('title'),
+        'wardsData' => $wardData,
+        'palikaCount' => $palikaCount,
+    ]);
+}
 
 
     public function taxPayer()
