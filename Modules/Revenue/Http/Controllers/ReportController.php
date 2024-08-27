@@ -21,38 +21,77 @@ class ReportController extends Controller
         return view('revenue::admin.report.index', compact('fiscalYears', 'columnData'));
     }
 
+    // public function report(Request $request)
+    // {
+    //     $request->validate([
+    //         'from_date' => ['nullable'],
+    //         'to_date' => ['nullable', 'after_or_equal:from_date'],
+    //         'columns' => ['nullable', 'array']
+    //     ]);
+
+    //     if (empty($request->input('columns'))) {
+    //         $request->request->add(
+    //             [
+    //                 'columns' =>
+    //                 [
+    //                     'invoices' => ['invoice_no', 'name', 'address', 'payment_method']
+    //                 ]
+    //             ]
+    //         );
+    //     }
+
+    //     $invoices = Invoice::with('taxPayer', 'fiscalYear')->where(function ($q) use ($request) {
+    //         $this->filterDataFromUser($q, $request);
+    //     })->get();
+
+    //     if (!empty($request->input('columns')['invoice_particulars'])) {
+    //         $invoices->load('InvoiceParticulars');
+    //     }
+
+
+    //     return response()->json([
+    //         'data' => InvoiceResource::collection($invoices)
+    //     ]);
+    // }
+
     public function report(Request $request)
-    {
-        $request->validate([
-            'from_date' => ['nullable'],
-            'to_date' => ['nullable', 'after_or_equal:from_date'],
-            'columns' => ['nullable', 'array']
-        ]);
+{
+    $request->validate([
+        'from_date' => ['nullable'],
+        'to_date' => ['nullable', 'after_or_equal:from_date'],
+        'columns' => ['nullable', 'array']
+    ]);
 
-        if (empty($request->input('columns'))) {
-            $request->request->add(
-                [
-                    'columns' =>
-                    [
-                        'invoices' => ['invoice_no', 'name', 'address', 'payment_method']
-                    ]
+    if (empty($request->input('columns'))) {
+        $request->request->add(
+            [
+                'columns' => [
+                    'invoices' => ['invoice_no', 'name', 'address', 'payment_method']
                 ]
-            );
-        }
-
-        $invoices = Invoice::with('taxPayer', 'fiscalYear')->where(function ($q) use ($request) {
-            $this->filterDataFromUser($q, $request);
-        })->get();
-
-        if (!empty($request->input('columns')['invoice_particulars'])) {
-            $invoices->load('InvoiceParticulars');
-        }
-
-
-        return response()->json([
-            'data' => InvoiceResource::collection($invoices)
-        ]);
+            ]
+        );
     }
+
+    $userWardNo = auth()->user()->ward_no;
+
+    $invoices = Invoice::with('taxPayer', 'fiscalYear')->where(function ($q) use ($request, $userWardNo) {
+        $this->filterDataFromUser($q, $request);
+
+        if ($userWardNo !== null) {
+            $q->whereHas('taxPayer', function ($query) use ($userWardNo) {
+                $query->where('ward', $userWardNo);
+            });
+        }
+    })->get();
+
+    if (!empty($request->input('columns')['invoice_particulars'])) {
+        $invoices->load('InvoiceParticulars');
+    }
+
+    return response()->json([
+        'data' => InvoiceResource::collection($invoices)
+    ]);
+}
 
     private function getColumns(): \Illuminate\Support\Collection
     {
