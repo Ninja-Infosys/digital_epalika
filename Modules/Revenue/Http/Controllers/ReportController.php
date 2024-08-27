@@ -195,8 +195,13 @@ class ReportController extends Controller
             'fiscal_year' => ['nullable', 'array'],
             'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')],
         ]);
-        $taxPayerTypes = TaxPayerType::with(['taxPayer' => function ($query) use ($request) {
+
+        $userWard = auth()->user()->ward_no;
+        $taxPayerTypes = TaxPayerType::with(['taxPayer' => function ($query) use ($request,$userWard) {
             $this->filterDataFromUser($query, $request);
+            if ($userWard!== null) {
+                $query->where('ward', $userWard);
+            }
         }])->where(function ($query) use ($request) {
             if (!empty($request->input('tax_payer_type'))) {
                 $query->whereIn('id', $request->input('tax_payer_type'));
