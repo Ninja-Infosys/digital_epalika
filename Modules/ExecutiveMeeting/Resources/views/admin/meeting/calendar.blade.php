@@ -213,7 +213,9 @@
 
     @push('style')
         <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" rel="stylesheet">
+
     @endpush
+
 
     @push('scripts')
         <script src="{{asset('assets/backend/js/plugins/datepicker.min.js')}}"></script>
@@ -221,8 +223,66 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.15/index.global.min.js" integrity="sha512-PneTXNl1XRcU6n5B1PGTDe3rBXY04Ht+Eddn/NESwvyc+uV903kiyuXCWgL/OfSUgnr8HLSGqotxe6L8/fOvwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <!-- Calendar init -->
-        <script type="text/javascript">
+
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
+        <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    const calendarEl = document.getElementById('calendar');
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth, timeGridWeek, timeGridDay'
+        },
+        locale: 'ne', // Optional: Sets the locale for displaying month and day names in Nepali
+        selectable: true,
+        editable: true,
+        events: "{{ route('admin.executiveMeeting.calendar.meetingCalendar') }}",
+        select: function(start, end, jsEvent, view) {
+            $('#createMeetingForm').trigger('reset');
+
+            // Convert Gregorian to Nepali Date for Form
+            let startAD = NepaliFunctions.ParseDate(start.startStr);
+            let startNepali = NepaliFunctions.AD2BS(startAD.parsedDate);
+            let startNepaliFormatted = NepaliFunctions.ConvertDateFormat(startNepali, "YYYY-MM-DD");
+
+            $('#start_date').val(startNepaliFormatted);
+            $('#end_date').val(startNepaliFormatted);
+            $('#en_start_date').val(start.startStr);
+            $('#en_end_date').val(start.startStr);
+
+            $('#create-meeting-modal').modal('toggle');
+        },
+        eventClick: function(eventInfo) {
+            $('#edit_meeting_name').val(eventInfo.event.title);
+
+            // Assuming event has custom fields 'ne_start_date' and 'ne_end_date' for Nepali dates
+            $('#edit_start_date').val(eventInfo.event.extendedProps.ne_start_date);
+            $('#edit_end_date').val(eventInfo.event.extendedProps.ne_end_date);
+
+            // Use Gregorian dates for hidden English fields
+            $('#edit_en_start_date').val(eventInfo.event.startStr);
+            $('#edit_en_end_date').val(eventInfo.event.endStr);
+
+            $('#edit_committee_id').val(eventInfo.event.extendedProps.committee_id);
+            $('#edit_description').val(eventInfo.event.extendedProps.description);
+
+            const meetingUrl = "{{ route('admin.executiveMeeting.meeting.index') }}";
+            $('#editMeetingForm').attr('data-edit-meeting-url', `${meetingUrl}/${eventInfo.event.id}`);
+            $('#edit-meeting-modal').modal('toggle');
+        }
+    });
+
+    calendar.render();
+});
+
+        </script>
+
+        {{-- <script type="text/javascript">
             $(document).ready(function () {
                 $.ajaxSetup({
                     headers: {
@@ -334,6 +394,6 @@
                     });
                 }
             });
-        </script>
+        </script> --}}
     @endpush
 @endsection
