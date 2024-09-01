@@ -23,6 +23,7 @@
     <!-- icons -->
     <link href="{{ asset('assets/backend/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{ asset('assets/backend/css/scss/style.css') }}" type="text/css" />
+
     @stack('style')
     @livewireStyles
 </head>
@@ -81,6 +82,7 @@
     <script src="{{ asset('assets/backend/js/custom.js') }}"></script>
     <script src="{{ asset('assets/backend/print/print.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/jquery.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.15/index.global.js" integrity="sha512-3I+0zIxy2IkeeCvvhXUEu+AFT3zAGuHslHLDmM8JBv6FT7IW6WjhGpUZ55DyGXArYHD0NshixtmNUWJzt0K32w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>
