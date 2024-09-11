@@ -243,4 +243,8 @@ class BuildingDocumentation extends Model
             })
             ->first();
     }
+    public function mapFee(): BelongsTo
+    {
+        return $this->belongsTo(MapFee::class);
+    }
 }
