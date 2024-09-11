@@ -113,7 +113,7 @@ class BuildingDocumentationController extends Controller
             'province',
             'fiscalYear',
             'requiredDocument',
-            'mapFee',
+            'buildingStoreyDetails.mapFee',
 
         );
         return $buildingTemplateStore ?? Str::replace($this->getBuildingReplaceData(), $this->getBuildingTemplateData($buildingDocumentation), $buildingFormDataType->model?->data);
