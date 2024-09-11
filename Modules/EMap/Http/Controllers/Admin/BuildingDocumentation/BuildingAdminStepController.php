@@ -215,7 +215,7 @@ class BuildingAdminStepController extends Controller
 
         $buildingDocumentation->load('buildingHouseOwner');
         $form->load('buildingFormDataTypes.model', 'buildingFormDataTypes.buildingDocuments.documentStatuses', 'group');
-        $checkUser = $form->group->users->pluck('id')->contains(auth()->user()->id);
+        $checkUser = $form->group?->users?->pluck('id')->contains(auth()->user()->id);
         $mapGroups = DB::table('map_pass_group_user')->where('user_id', auth()->user()->id)->first() ?? null;
         $ward_no = $mapGroups ? explode(',', $mapGroups?->ward_no ?? '') : [];
         $checkAuthorization = in_array($buildingDocumentation->land_ward_no, $ward_no);
@@ -304,5 +304,5 @@ class BuildingAdminStepController extends Controller
         ]);
     }
 
-    
+
 }
