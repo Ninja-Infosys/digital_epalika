@@ -31,16 +31,49 @@ class Field extends Component
 
     public $data = [];
 
+    // public function mount($categorySubCategory = null): void
+    // {
+    //     //        dd($this->fields);
+    //     if (! empty($categorySubCategory)) {
+    //         $this->mobile_user_id = $categorySubCategory['mobile_user_id'] ?? null;
+    //         $this->recommendation_detail_id = $categorySubCategory['recommendation_detail_id'] ?? null;
+    //         $this->status = $categorySubCategory['status'] ? 1 : 0;
+    //         if (array_key_exists('fields', $categorySubCategory) && ! empty($categorySubCategory['fields'])) {
+    //             foreach ($categorySubCategory['fields'] as $field) {
+
+    //                 $this->fieldData[$field->recommendationFormField?->slug] = [
+    //                     'recommendation_form_field_id' => $field->sipharish_form_field_id ?? $field['recommendation_form_field_id'] ?? null,
+    //                     'value' => $field->value ?? $field['value'] ?? null,
+    //                 ];
+    //             }
+    //         }
+    //     }
+    //     $this->mobileUsers = MobileUser::with('mobileUserDetail')->get();
+    //     // $this->formTypes = RecommendationDetail::get();
+
+    //     $authUserWardNo = Auth::user()->ward_no;
+
+    //     if ($authUserWardNo) {
+    //         $this->mobileUsers = MobileUser::with('mobileUserDetail')
+    //             ->whereHas('mobileUserDetail', function ($query) use ($authUserWardNo) {
+    //                 $query->where('ward_no', $authUserWardNo);
+    //             })
+    //             ->get();
+    //     } else {
+    //         $this->mobileUsers = MobileUser::with('mobileUserDetail')->get();
+    //     }
+
+    //     $this->formTypes = RecommendationDetail::get();
+    // }
+
     public function mount($categorySubCategory = null): void
     {
-        //        dd($this->fields);
-        if (! empty($categorySubCategory)) {
+        if (!empty($categorySubCategory)) {
             $this->mobile_user_id = $categorySubCategory['mobile_user_id'] ?? null;
             $this->recommendation_detail_id = $categorySubCategory['recommendation_detail_id'] ?? null;
             $this->status = $categorySubCategory['status'] ? 1 : 0;
-            if (array_key_exists('fields', $categorySubCategory) && ! empty($categorySubCategory['fields'])) {
+            if (array_key_exists('fields', $categorySubCategory) && !empty($categorySubCategory['fields'])) {
                 foreach ($categorySubCategory['fields'] as $field) {
-
                     $this->fieldData[$field->recommendationFormField?->slug] = [
                         'recommendation_form_field_id' => $field->sipharish_form_field_id ?? $field['recommendation_form_field_id'] ?? null,
                         'value' => $field->value ?? $field['value'] ?? null,
@@ -48,11 +81,9 @@ class Field extends Component
                 }
             }
         }
-        $this->mobileUsers = MobileUser::with('mobileUserDetail')->get();
-        // $this->formTypes = RecommendationDetail::get();
 
+        // Fetch mobile users
         $authUserWardNo = Auth::user()->ward_no;
-
         if ($authUserWardNo) {
             $this->mobileUsers = MobileUser::with('mobileUserDetail')
                 ->whereHas('mobileUserDetail', function ($query) use ($authUserWardNo) {
@@ -63,7 +94,14 @@ class Field extends Component
             $this->mobileUsers = MobileUser::with('mobileUserDetail')->get();
         }
 
-        $this->formTypes = RecommendationDetail::get();
+        // Fetch form types based on ward number condition
+        if (is_null($authUserWardNo)) {
+            // Show data where 'is_displayed' is 1
+            $this->formTypes = RecommendationDetail::where('is_displayed', 1)->get();
+        } else {
+            // Show data where 'is_displayed' is null
+            $this->formTypes = RecommendationDetail::whereNull('is_displayed')->get();
+        }
     }
 
     public function addRowInTable($index): void
@@ -114,7 +152,6 @@ class Field extends Component
             $this->fields = $recommendationDetail?->recommendationFormFields;
 
             $this->documents = $recommendationDetail?->recommendationDocuments ?? [];
-
         }
 
         return view('livewire.field');

@@ -207,7 +207,7 @@ class RecommendationCreateController extends Controller
     public function destroy(RecommendationCreate $recommendationCreate)
     {
 
-        if ($recommendationCreate->status == 1) {
+        if ($recommendationCreate->approved_status !== 1) {
             toast('सक्रिय भएको सिफारिस प्रकार मेटाउन मनाहि छ', 'error');
 
             return back();
