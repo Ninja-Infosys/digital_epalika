@@ -185,6 +185,18 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                <div class="col-md-4 mb-2">
+                                    <input type="checkbox" name="is_displayed" value="1"{{ old('is_displayed',$recommendationDetail->is_displayed)==1 ? 'checked':'' }}
+                                        class="form-check-input @error('is_displayed') is-invalid @enderror"
+                                        id="is_displayed"
+                                        @if (!empty(auth()->user()->ward_no)) disabled @endif />
+                                    <label for="is_displayed" class="form-label">पालिका हो</label>
+
+                                    @error('is_displayed')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
                                 @livewire('sipharish-form-type-livewire',['formData'=>$recommendationDetail])
                             </div>
                         </fieldset>
