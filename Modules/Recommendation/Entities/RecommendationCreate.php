@@ -83,7 +83,7 @@ class RecommendationCreate extends Model
 
     public function resolveTemplate($recommendationSetting): string
     {
-        // $content = letterHead().$this->recommendationDetail?->content; //for letter head
+        // $content = letterHead().$this->recommendationDetail?->content;
          $content =$this->recommendationDetail?->content;
         $replaceableList = collect();
         $this->load('recommendationDetail', 'recommendationValues.recommendationFormField');
@@ -107,6 +107,7 @@ class RecommendationCreate extends Model
         $replaceableList->put('[@province]', (string) officeSetting()->province?->province);
         $replaceableList->put('[@district]', (string) officeSetting()->district?->district);
         $replaceableList->put('[@muncipal]', (string) officeSetting()->localBody?->local_body);
+        $replaceableList->put('[@letterHead]', (string) letterHead());
 
         $replaceableList->put('[@ward_no]', (string) officeSetting()->ward_no);
         $replaceableList->put('[@today_date_bs]', (string) get_nepali_number($this->get_today_nepali_date()));

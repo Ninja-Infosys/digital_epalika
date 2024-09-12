@@ -30,6 +30,15 @@
                         </a>
                     </div>
                 </div>
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
                 <div class="card-body px-0">
                     <form action="{{ route('admin.recommendation.setting.recommendationDetail.store') }}" method="post"
                           enctype="multipart/form-data">
@@ -67,6 +76,7 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+
                                 <div class="col-md-6 mb-2">
                                     <label for="type" class="form-label">सिफारिस दस्तुरको किसिम *</label>
                                     <select id="type" name="type" class="form-select" required>
@@ -183,6 +193,16 @@
                                     <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description">{{old('description')}}</textarea>
                                     @error('description')
                                     <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <input type="checkbox" name="is_displayed" value="1"
+                                        class="form-check-input @error('is_displayed') is-invalid @enderror"
+                                        id="is_displayed" @if (!empty(auth()->user()->ward_no)) disabled @else checked @endif />
+                                    <label for="is_displayed" class="form-label">पालिका हो</label>
+
+                                    @error('is_displayed')
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 @livewire('sipharish-form-type-livewire')

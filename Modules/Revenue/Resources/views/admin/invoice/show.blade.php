@@ -93,7 +93,7 @@
                                         <thead>
                                             <tr>
                                                 <th>बिषय</th>
-                                              
+
                                                 <th>
                                                     @if (Route::is('admin.revenue.invoice.show'))
                                                       वटा

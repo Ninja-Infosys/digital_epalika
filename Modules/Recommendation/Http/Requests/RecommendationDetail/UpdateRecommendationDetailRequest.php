@@ -31,6 +31,7 @@ class UpdateRecommendationDetailRequest extends FormRequest
             'is_taxcode_required' => ['nullable','boolean'],
             'add_land_diff_locations' => ['nullable','boolean'],
             'is_applicable_on_recommendation' => ['nullable','boolean'],
+            'is_displayed'=>['nullable','boolean'],
             'order' => ['required','integer'],
             'status' => ['nullable','string'],
             'description' => ['required'],
