@@ -21,7 +21,16 @@ class RecommendationCreateController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $recommendation = RecommendationCreate::with('recommendationDetail', 'mobileUser');
+        $recommendation = RecommendationCreate::with('recommendationDetail', 'mobileUser')
+        ->whereHas('recommendationDetail', function ($q) use($user){
+            if($user->ward_no != NULL){
+                $q->where('is_displayed', 0);
+
+            }else{
+                $q->where('is_displayed', 1);
+
+            }
+        });
         if ($user->ward_no != NULL) {
             $recommendation->whereHas('mobileUser.mobileUserDetail', function (Builder $q) use ($user) {
                 if (!empty($user->ward_no)) {

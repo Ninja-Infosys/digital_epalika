@@ -94,12 +94,10 @@ class Field extends Component
             $this->mobileUsers = MobileUser::with('mobileUserDetail')->get();
         }
 
-        // Fetch form types based on ward number condition
+
         if (is_null($authUserWardNo)) {
-            // Show data where 'is_displayed' is 1
             $this->formTypes = RecommendationDetail::where('is_displayed', 1)->get();
         } else {
-            // Show data where 'is_displayed' is null
             $this->formTypes = RecommendationDetail::whereNull('is_displayed')->get();
         }
     }
