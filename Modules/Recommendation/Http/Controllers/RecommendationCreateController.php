@@ -18,54 +18,75 @@ use Modules\Recommendation\Http\Requests\UpdateRecommendationRequest;
 
 class RecommendationCreateController extends Controller
 {
+    // public function index()
+    // {
+    //     $user = auth()->user();
+    //     $recommendation = RecommendationCreate::with('recommendationDetail', 'mobileUser')
+    //     ->whereHas('recommendationDetail', function ($q) use($user){
+    //         if($user->ward_no != NULL){
+    //             $q->where('is_displayed', 0);
+
+    //         }else{
+    //             $q->where('is_displayed', 1);
+
+    //         }
+    //     });
+    //     if ($user->ward_no != NULL) {
+    //         $recommendation->whereHas('mobileUser.mobileUserDetail', function (Builder $q) use ($user) {
+    //             if (!empty($user->ward_no)) {
+    //                 $q->where('ward_no', $user->ward_no);
+    //             }
+    //         });
+    //     }
+    //     $recommendationCreates = $recommendation->paginate(10);
+
+    //     return view('recommendation::admin.recommendation.recommendation-create.index', compact('recommendationCreates'));
+    // }
+
     public function index()
     {
         $user = auth()->user();
+
         $recommendation = RecommendationCreate::with('recommendationDetail', 'mobileUser')
-        ->whereHas('recommendationDetail', function ($q) use($user){
-            if($user->ward_no != NULL){
-                $q->where('is_displayed', 0);
-
-            }else{
-                $q->where('is_displayed', 1);
-
-            }
-        });
-        if ($user->ward_no != NULL) {
-            $recommendation->whereHas('mobileUser.mobileUserDetail', function (Builder $q) use ($user) {
-                if (!empty($user->ward_no)) {
-                    $q->where('ward_no', $user->ward_no);
+            ->whereHas('recommendationDetail', function ($q) use ($user) {
+                // Condition for displaying recommendations based on 'is_displayed' status and user ward_no
+                if ($user->ward_no != NULL) {
+                    // If 'is_displayed' is 0, show recommendations in the user's ward
+                    $q->where(function ($subQuery) use ($user) {
+                        $subQuery->where('is_displayed', 0)
+                            ->orWhereNull('is_displayed');
+                    });
+                } else {
+                    // For users without a ward_no, show all recommendations with 'is_displayed' as 1
+                    $q->where('is_displayed', 1);
                 }
             });
+
+        // Additional condition based on the user's ward_no and mobileUser details
+        if ($user->ward_no != NULL) {
+            $recommendation->whereHas('mobileUser.mobileUserDetail', function (Builder $q) use ($user) {
+                $q->where(function ($subQuery) use ($user) {
+                    // Show data where the ward number matches or where ward_no is null based on user's ward and is_displayed
+                    if (!empty($user->ward_no)) {
+                        $subQuery->where('ward_no', $user->ward_no)
+                            ->orWhere(function ($nestedQuery) use ($user) {
+                                // User from ward 1 seeing recommendations with 'is_displayed' as 1 and where 'ward_no' is null
+                                if ($user->ward_no == 1) {
+                                    $nestedQuery->whereNull('ward_no');
+                                }
+                            });
+                    }
+                });
+            });
         }
+
         $recommendationCreates = $recommendation->paginate(10);
 
         return view('recommendation::admin.recommendation.recommendation-create.index', compact('recommendationCreates'));
     }
 
-    //     public function index()
-    // {
-    //     $recommendationCreates = RecommendationCreate::with('recommendationDetail', 'mobileUser')
-    //         ->where(function ($query) {
-    //             if (!empty(auth()->user()->ward_no)) {
-    //                 $authWardNo = auth()->user()->ward_no;
 
-    //                 // Check if $authWardNo is an array
-    //                 if (is_array($authWardNo)) {
-    //                     foreach ($authWardNo as $ward) {
-    //                         $query->orWhereRaw("FIND_IN_SET('$ward', ward) > 0");
-    //                     }
-    //                 } else {
-    //                     // If it's not an array, use it directly
-    //                     $query->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
-    //                 }
-    //             }
-    //         })
-    //         ->latest()
-    //         ->get();
 
-    //     return view('recommendation::admin.recommendation.recommendation-create.index', compact('recommendationCreates'));
-    // }
 
     public function create()
     {
