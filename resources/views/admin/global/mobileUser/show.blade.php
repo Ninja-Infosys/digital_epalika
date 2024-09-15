@@ -26,7 +26,7 @@
                     <img src="{{ $mobileUser->avatar }}" class="rounded-circle mb-1 avatar-lg img-thumbnail"
                         alt="profile-image">
                     <h4 class="mt-2 text-black">व्यक्तिगत विवरण</h4>
-                    <a href="{{ route('admin.global.mobileUser.update-login-status', $mobileUser) }}"
+                    <a href="{{ route('admin.mobileUser.update-login-status', $mobileUser) }}"
                         class="btn btn-{{ $mobileUser->is_active == 1 ? 'success' : 'danger' }} btn-xs waves-effect mb-2 waves-light"
                         title="लग इन {{ $mobileUser->is_active == 1 ? 'गर्न मिल्छ' : 'गर्न मिल्दैन' }}">
                         <i class="fa  {{ $mobileUser->is_active == 1 ? ' fa-check' : 'fa-window-close' }}"></i>

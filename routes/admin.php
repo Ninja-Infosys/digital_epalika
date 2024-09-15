@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AddressController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Admin\FileUploadController;
+use App\Http\Controllers\Admin\Global\MobileUserController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\PinController;
@@ -50,3 +51,6 @@ Route::get('activityLog', [ActivityLogController::class, 'index'])->name('activi
 //check pin
 Route::post('pin/checkPin', [PinController::class, 'checkPin'])->name('pin.check-pin');
 Route::resource('pin', PinController::class);
+
+Route::resource('mobileUser', MobileUserController::class);
+Route::get('mobileUser/{mobileUser}/updateLoginStatus', [MobileUserController::class, 'updateLoginStatus'])->name('mobileUser.update-login-status');
