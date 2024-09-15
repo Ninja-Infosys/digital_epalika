@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.global.dashboard') }}">सेटिङ</a>
+                            <a href="{{ route('admin.dashboard') }}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">सेवाग्राहीहरु</li>
                     </ol>
@@ -28,7 +28,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> सेवाग्राहीहरु</h4>
 {{--                        @can('branch_create')--}}
-                            <a href="{{route('admin.global.mobileUser.create')}}"
+                            <a href="{{route('admin.mobileUser.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -55,19 +55,19 @@
                                         <td>{{ $mobileUser->email }}</td>
                                         <td>{{ $mobileUser->phone }}</td>
                                         <td class="d-flex flex-wrap">
-                                            <a href="{{ route('admin.global.mobileUser.update-login-status', $mobileUser) }}"
+                                            <a href="{{ route('admin.mobileUser.update-login-status', $mobileUser) }}"
                                                 class="rounded-1 btn me-1 btn-xs btn-outline-{{ $mobileUser->is_active == 1 ? 'primary' : 'danger' }}"
                                                 title="लग इन {{ $mobileUser->is_active == 1 ? 'गर्न मिल्छ' : 'गर्न मिल्दैन' }}">
                                                 <i
                                                     class="fa  {{ $mobileUser->is_active == 1 ? ' fa-check' : 'fa-window-close' }}"></i>
                                             </a>
-                                            <a href="{{ route('admin.global.mobileUser.show', $mobileUser) }}"
+                                            <a href="{{ route('admin.mobileUser.show', $mobileUser) }}"
                                                 title="हेर्नुहोस्"
                                                 class="rounded-1 btn me-1 btn-xs btn-outline-primary  ">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                             <form data-bs-type="delete"
-                                                action="{{ route('admin.global.mobileUser.destroy', $mobileUser) }}"
+                                                action="{{ route('admin.mobileUser.destroy', $mobileUser) }}"
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
