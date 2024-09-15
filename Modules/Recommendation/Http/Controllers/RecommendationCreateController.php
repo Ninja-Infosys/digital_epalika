@@ -49,9 +49,8 @@ class RecommendationCreateController extends Controller
 
         $recommendation = RecommendationCreate::with('recommendationDetail', 'mobileUser')
             ->whereHas('recommendationDetail', function ($q) use ($user) {
-                // Condition for displaying recommendations based on 'is_displayed' status and user ward_no
+
                 if ($user->ward_no != NULL) {
-                    // If 'is_displayed' is 0, show recommendations in the user's ward
                     $q->where(function ($subQuery) use ($user) {
                         $subQuery->where('is_displayed', 0)
                             ->orWhereNull('is_displayed');

@@ -104,6 +104,7 @@ class FrontendController extends Controller
 
     public function recommendationListshow(RecommendationCreate $recommendationCreate)
     {
+        
         $mobileUser = Auth::guard('mobile-user')->user()->load('mobileUserDetail');
         $recommendationCreate->load('recommendationDetail', 'recommendationValues', 'recommendationFiles.recommendationDocument');
         $recommendationSetting = RecommendationSetting::with('approver', 'checker')->where('ward', auth()->user()?->ward_no ?? null)->first();
