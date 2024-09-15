@@ -4,6 +4,7 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\FeatureActivation;
+use App\Models\File;
 use App\Models\OfficeHeader;
 use App\Models\RevenueSetting;
 use App\Models\Settings\LetterHead;

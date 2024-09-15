@@ -15,9 +15,9 @@
                         <option value="{{ $formType->id }}">
                             {{ $formType->title }}
                             @if ($formType->is_displayed == 1)
-                                {{ '(सिफरिस पालिकाले दिनेछ)' }}
+                                {{ '( पालिकाले सिफरिस दिनेछ)' }}
                             @elseif ($formType->is_displayed == null)
-                                {{ '(सिफरिस वार्डले दिनेछ)' }}
+                                {{ '( वाडले सिफरिस दिनेछ)' }}
                             @endif
                         </option>
                     @endforeach

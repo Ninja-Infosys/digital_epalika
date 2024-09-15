@@ -85,16 +85,12 @@ class Field extends Component
         // Fetch mobile users
         $authUserWardNo = Auth::user()->ward_no;
         if ($authUserWardNo) {
-            $this->mobileUsers = MobileUser::with('mobileUserDetail')
-                ->whereHas('mobileUserDetail', function ($query) use ($authUserWardNo) {
-                    $query->where('ward_no', $authUserWardNo);
-                })
-                ->get();
+
+            $this->mobileUsers = MobileUser::where('ward_no', $authUserWardNo)->get();
         } else {
-            $this->mobileUsers = MobileUser::with('mobileUserDetail')->get();
+
+            $this->mobileUsers = MobileUser::get();
         }
-
-
         if (is_null($authUserWardNo)) {
             $this->formTypes = RecommendationDetail::where('is_displayed', 1)->get();
         } else {

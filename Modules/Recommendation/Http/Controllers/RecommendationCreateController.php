@@ -63,7 +63,7 @@ class RecommendationCreateController extends Controller
 
         // Additional condition based on the user's ward_no and mobileUser details
         if ($user->ward_no != NULL) {
-            $recommendation->whereHas('mobileUser.mobileUserDetail', function (Builder $q) use ($user) {
+            $recommendation->whereHas('mobileUser', function (Builder $q) use ($user) {
                 $q->where(function ($subQuery) use ($user) {
                     // Show data where the ward number matches or where ward_no is null based on user's ward and is_displayed
                     if (!empty($user->ward_no)) {
