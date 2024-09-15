@@ -43,7 +43,7 @@
                             printable: 'printData',
                             targetStyles: ['*'],
                             ignoreElements:['ignore-header'],
-                            
+
                             type: 'html'
                             })">
                                     <i class="fa fa-print"></i> पूर्ण विवरण प्रिन्ट गर्नुहोस
@@ -99,7 +99,7 @@
 
                         <div class="row">
                             <div class="col-md-12 mt-3">
-                              
+
                                 <h4 class="font-bold " style="padding-left: 10px;">व्यतिगत विवरण</h4>
                             </div>
                                 <div class="table-responsive mt-2">
@@ -181,7 +181,7 @@
                                 </div>
                             </div>
                             @include('admin.inc.file-view')
-                          
+
                         </div>
                     </div>
                     @if ($recommendationCreate->approved_status->value > 1)
@@ -199,7 +199,7 @@
                                     })">
                                         <i class="fa fa-print"></i> प्रिन्ट गर्नुहोस
                                     </button>
-                                    
+
                                 </div>
                             </div>
                             <div class="card-body mt-4" id="printBill">
@@ -377,7 +377,7 @@
                 </div>
 
 
-                <div class="row mt-3">
+                <div class="row mt-3 mb-5">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
@@ -397,12 +397,12 @@
                                     {!! $recommendationCreate->resolveTemplate($recommendationSetting) ?? '' !!}
                                 </div>
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
 @endsection

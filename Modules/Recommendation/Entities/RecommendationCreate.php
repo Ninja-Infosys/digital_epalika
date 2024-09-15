@@ -153,11 +153,11 @@ class RecommendationCreate extends Model
 
     public function getRecommendationHeader(): string
     {
-        $this->load('recommendationDetail', 'mobileUser.mobileUserDetail');
+        $this->load('recommendationDetail', 'mobileUser');
         $isWard = $this->recommendationDetail->is_displayed == null;
 
         if ($isWard) {
-            $user = User::where('ward_no', $this->mobileUser?->mobileUserDetail?->ward_no)->first();
+            $user = User::where('ward_no', $this->mobileUser?->ward_no)->first();
             $letterHead = $user->letterHead?->header
                 ?? ($user->role->letterHead?->header ?? null)
                 ?? LetterHead::first()?->header;
