@@ -62,6 +62,7 @@ class DashboardController extends Controller
 
     public function index()
 {
+
     $this->checkAuthorization('revenueDashboard_access');
 
     $fiscal_year_id = officeSetting()->fiscal_year_id;

@@ -1,9 +1,17 @@
+
+<li class="{{ request()->is('admin/mobileUser/*') ? 'active' : '' }}">
+    <a href="{{ route('admin.mobileUser.index') }}">
+        <i class="fa fa-crop-alt"></i>
+        <span>सेवाग्राहीहरु</span>
+    </a>
+</li>
 <li class="{{request()->is('admin/dashboard') ? 'active' : ''}}">
     <a href="{{route('admin.dashboard')}}">
         <img class="sidebar-icon" src="{{asset('assets/backend/images/modules/dashboard.svg')}}" height="25" loading="lazy">
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
+
 @if(Route::has('admin.digitalBoard.dashboard'))
     @can('digitalBoardDashboard_access')
         <li class="{{request()->routeIs('admin.digitalBoard.dashboard') ? 'active' : ''}}">

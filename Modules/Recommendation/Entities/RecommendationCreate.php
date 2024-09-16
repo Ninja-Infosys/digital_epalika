@@ -3,6 +3,7 @@
 namespace Modules\Recommendation\Entities;
 
 use App\Models\MobileUser;
+use App\Models\Settings\LetterHead;
 use App\Models\User;
 use App\Traits\EventObserveTrait;
 use App\Traits\NepaliDateConverter;
@@ -83,8 +84,8 @@ class RecommendationCreate extends Model
 
     public function resolveTemplate($recommendationSetting): string
     {
-        // $content = letterHead().$this->recommendationDetail?->content; //for letter head
-         $content =$this->recommendationDetail?->content;
+        // $content = letterHead().$this->recommendationDetail?->content;
+        $content = $this->recommendationDetail?->content;
         $replaceableList = collect();
         $this->load('recommendationDetail', 'recommendationValues.recommendationFormField');
 
@@ -97,24 +98,29 @@ class RecommendationCreate extends Model
             }
             $key = (string) $values->recommendationFormField?->field_name;
 
-            $replaceableList->put('{{'.$key.'}}', $value);
-            $replaceableList->put('[@form.'.$key.']', $value);
+            $replaceableList->put('{{' . $key . '}}', $value);
+            $replaceableList->put('[@form.' . $key . ']', $value);
             if (! empty($values->recommendationFormField?->slug)) {
-                $replaceableList->put('[@form.'.$values->recommendationFormField->slug.']', $value);
+                $replaceableList->put('[@form.' . $values->recommendationFormField->slug . ']', $value);
             }
         }
 
         $replaceableList->put('[@province]', (string) officeSetting()->province?->province);
         $replaceableList->put('[@district]', (string) officeSetting()->district?->district);
         $replaceableList->put('[@muncipal]', (string) officeSetting()->localBody?->local_body);
+        $replaceableList->put('[@letterHead]', $this->getRecommendationHeader());
 
         $replaceableList->put('[@ward_no]', (string) officeSetting()->ward_no);
         $replaceableList->put('[@today_date_bs]', (string) get_nepali_number($this->get_today_nepali_date()));
         $replaceableList->put('[@today_date_ad]', (string) today()->toDateString());
-        $replaceableList->put('[@checker_signature]',
-            ($this->approved_status->value > 2 && $this->approved_status->value < 5) ? "<img src='{$recommendationSetting?->checker?->signature_photo_url}' width='100' height='100' alt='Signature Photo'>" : '');
-        $replaceableList->put('[@approver_signature]',
-            ($this->approved_status->value > 3 && $this->approved_status->value < 5) ? "<img src='{$recommendationSetting?->approver?->signature_photo_url}' width='100' height='100' alt='Signature Photo'>" : '');
+        $replaceableList->put(
+            '[@checker_signature]',
+            ($this->approved_status->value > 2 && $this->approved_status->value < 5) ? "<img src='{$recommendationSetting?->checker?->signature_photo_url}' width='100' height='100' alt='Signature Photo'>" : ''
+        );
+        $replaceableList->put(
+            '[@approver_signature]',
+            ($this->approved_status->value > 3 && $this->approved_status->value < 5) ? "<img src='{$recommendationSetting?->approver?->signature_photo_url}' width='100' height='100' alt='Signature Photo'>" : ''
+        );
         $replaceableKeys = $replaceableList->keys()->toArray();
         $replaceableValues = $replaceableList->values()->toArray();
 
@@ -141,5 +147,27 @@ class RecommendationCreate extends Model
     public function recommendationCategories(): BelongsTo
     {
         return $this->belongsTo(RecommendationCategory::class);
+    }
+
+
+
+    public function getRecommendationHeader(): string
+    {
+        $this->load('recommendationDetail', 'mobileUser');
+        $isWard = $this->recommendationDetail->is_displayed == null;
+
+        if ($isWard) {
+            $user = User::where('ward_no', $this->mobileUser?->ward_no)->first();
+            $letterHead = $user->letterHead?->header
+                ?? ($user->role->letterHead?->header ?? null)
+                ?? LetterHead::first()?->header;
+        } else {
+            $user = User::whereNull('ward_no')->first();
+            $letterHead = $user->letterHead?->header
+                ?? ($user->role->letterHead->header ?? null)
+                ?? LetterHead::first()?->header;
+        }
+
+        return $letterHead;
     }
 }

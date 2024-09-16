@@ -83,7 +83,7 @@ class MobileUserLivewire extends Component
             $this->resetForm();
         });
 
-        return redirect(route('admin.global.mobileUser.index'));
+        return redirect(route('admin.mobileUser.index'));
     }
 
     public function render()

@@ -34,11 +34,11 @@ class GrievanceUser extends Model
         }
     }
 
-    public function getAvatarAttribute(): string
-    {
-        $name = $this->attributes['name'] ?? 'User';
-        return (new Avatar())->create($name)->toBase64();
-    }
+    // public function getAvatarAttribute(): string
+    // {
+    //     $name = $this->attributes['name'] ?? 'User';
+    //     return (new Avatar())->create($name)->toBase64();
+    // }
 
     public function grievanceDetails(): HasMany
     {

@@ -12,10 +12,16 @@
                         class="form-select @error('recommendation_detail_id') is-invalid @enderror" required>
                         <option value="">-- छान्नुहोस् --</option>
                         @foreach ($formTypes as $formType)
-                            <option value="{{ $formType->id }}">
-                                {{ $formType->title }}
-                            </option>
-                        @endforeach
+                        <option value="{{ $formType->id }}">
+                            {{ $formType->title }}
+                            @if ($formType->is_displayed == 1)
+                                {{ '( पालिकाले सिफरिस दिनेछ)' }}
+                            @elseif ($formType->is_displayed == null)
+                                {{ '( वाडले सिफरिस दिनेछ)' }}
+                            @endif
+                        </option>
+                    @endforeach
+
                     </select>
 
                 </div>
@@ -105,7 +111,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     @endforeach
                 </div>
             </fieldset>

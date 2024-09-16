@@ -37,6 +37,7 @@ class MobileUser extends Authenticatable
         'name',
         'email',
         'phone',
+        'ward_no',
         'is_active',
         'password',
         'tax_prayer_id',

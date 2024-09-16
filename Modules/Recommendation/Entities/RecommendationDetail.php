@@ -41,6 +41,7 @@ class RecommendationDetail extends Model
          'status',
          'description',
          'content',
+         'is_displayed',
     ];
 
     public function recommendationCategory(): BelongsTo
@@ -79,8 +80,8 @@ class RecommendationDetail extends Model
                 'आजको मिति (बि‍.स‌.)' => '[@today_date_bs]',
                 'आजको मिति (ई.स.)' => '[@today_date_ad]',
                 'अनुमोदनकर्ताको सहि' => '[@approver_signature]',
-                'परिक्षकको सहि' => '[@checker_signature]', 
-//                'लेटरहेड' => '[@letterHead]',
+                'परिक्षकको सहि' => '[@checker_signature]',
+               'लेटरहेड' => '[@letterHead]',
             ],
         ]];
     }

@@ -97,8 +97,6 @@ Route::prefix('systemSetting')->as('systemSetting.')->group(function () {
 Route::resource('officeHeader', OfficeHeaderController::class)->only(['edit', 'update', 'destroy']);
 
 
-Route::resource('mobileUser', MobileUserController::class);
-Route::get('mobileUser/{mobileUser}/updateLoginStatus', [MobileUserController::class, 'updateLoginStatus'])->name('mobileUser.update-login-status');
 
 
 // website admin routes

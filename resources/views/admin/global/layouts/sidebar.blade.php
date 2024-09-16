@@ -253,10 +253,10 @@
 </li>
 
 
-
+{{--
 <li class="{{ request()->is('admin/mobileUser/*') ? 'active' : '' }}">
     <a href="{{ route('admin.global.mobileUser.index') }}">
         <i class="fa fa-crop-alt"></i>
         <span>सेवाग्राहीहरु</span>
     </a>
-</li>
+</li> --}}

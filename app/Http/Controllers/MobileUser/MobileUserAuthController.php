@@ -18,6 +18,7 @@ class MobileUserAuthController extends Controller
 
     public function showMobileUserRegisterForm()
     {
+        
         return view('mobileUser.auth.register');
     }
 

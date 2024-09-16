@@ -34,6 +34,7 @@ class StoreRecommendationDetailRequest extends FormRequest
             'order' => ['required','integer'],
             'status' => ['nullable','string'],
             'description' => ['required'],
+            'is_displayed'=>['nullable','boolean'],
             'revenueHeaders' => ['required','array'],
             'revenueHeaders.*' => ['required',Rule::exists('revenue_headers', 'id')->withoutTrashed()],
             'recommendationDocuments' => ['required','array'],

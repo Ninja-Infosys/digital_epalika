@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.global.dashboard')}}">सेटिङ</a>
+                            <a href="{{route('admin.dashboard')}}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">सेवाग्राही</li>
                     </ol>
@@ -28,7 +28,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ सेवाग्राही थप्नुहोस्</h4>
-                        <a href="{{route('admin.global.mobileUser.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.mobileUser.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i>सेवाग्राही सूची
                         </a>
                     </div>

@@ -18,9 +18,20 @@ class RecommendationDetailController extends Controller
 {
     public function index()
     {
-        $recommendationDetails = RecommendationDetail::all();
+        $userWardNo = auth()->user()->ward_no;
+
+        // Check if the user's ward number is null
+        if (is_null($userWardNo)) {
+            // Show data where 'is_displayed' is null
+            $recommendationDetails = RecommendationDetail::where('is_displayed',1)->get();
+        } else {
+            // Show data where 'is_displayed' is 1
+            $recommendationDetails = RecommendationDetail::whereNull('is_displayed')->get();
+        }
+
         return view('recommendation::admin.recommendation.setting.recommendation-detail.index', compact('recommendationDetails'));
     }
+
 
     public function create()
     {
@@ -161,5 +172,5 @@ class RecommendationDetailController extends Controller
         return back();
     }
 
-   
+
 }
