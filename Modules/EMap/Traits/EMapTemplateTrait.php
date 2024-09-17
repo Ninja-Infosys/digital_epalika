@@ -266,6 +266,7 @@ trait EMapTemplateTrait
             'data' => [
                 'संधियारको विवरण' => '[@buildingNeighbours]',
                 'तल्लाको विवरण' => '[@buildingStoreyDetails]',
+                'घरबाटोको विवरण'=> '[@buildingDescriptions]',
 
             ],
         ],
@@ -604,11 +605,20 @@ trait EMapTemplateTrait
                 'neighbours' => $this->neighbours,
             ])
         ];
-    }  private function getBuildingStoreyDetailsReplacement(): array
+    }
+    private function getBuildingStoreyDetailsReplacement(): array
     {
         return [
             '[@buildingStoreyDetails]' => (string) View::make('emap::inc.building-storey-details', [
                 'buildingStoreyDetails' => $this->buildingStoreyDetails,
+            ])
+        ];
+    }
+    private function getBuildingDescriptionsReplacement(): array
+    {
+        return [
+            '[@buildingDescriptions]' => (string) View::make('emap::inc.building_road_details', [
+                'buildingDescriptions' => $this->buildingDescriptions,
             ])
         ];
     }
