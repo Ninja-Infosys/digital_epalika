@@ -93,6 +93,9 @@ class RecommendationCreate extends Model
 
             if ($values->type == 'table') {
                 $value = (string) View::make('recommendation::admin.recommendation.recommendation-create.recommendation-table', compact('values'));
+            }elseif($values->type == 'image'){
+                $imagePath = asset('storage/'.$values->value);
+                $value = "<img src='$imagePath' width='200'/>";
             } else {
                 $value = (string) $values->value;
             }
