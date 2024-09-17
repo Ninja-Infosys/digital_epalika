@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Modules\Recommendation\Http\Controllers\Admin\Api\v1\SifarishApicontroller;
+// use Modules\Recommendation\Http\Controllers\Admin\Api\v1\SifarishApicontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +19,4 @@ Route::middleware('auth:api')->get('/recommendation', function (Request $request
     return $request->user();
 });
 
-Route::resource('sifarish', SifarishApicontroller::class);
+// Route::resource('sifarish', SifarishApicontroller::class);
