@@ -84,7 +84,7 @@
                                             <td>
                                                 <div>
                                                     @if($recommendationValue->type == 'image')
-                                                        <img src="{{ asset('storage/'.$recommendationValue->value) ?? '' }}" alt="">
+                                                        <img src="{{ asset('storage/'.$recommendationValue->value) ?? '' }}" alt="" width="150">
                                                     @elseif($recommendationValue->type == 'table')
                                                     @else
                                                         {{ $recommendationValue->value ?? '' }}
