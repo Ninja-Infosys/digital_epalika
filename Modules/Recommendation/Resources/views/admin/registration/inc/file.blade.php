@@ -133,7 +133,7 @@
                 const personalDetailSubmitBtn = $("#personalDetailSubmitBtn");
                 $.ajax({
                     type: "post",
-                    url: "{{route('admin.global.mobileUser.store')}}",
+                    url: "{{route('admin.mobileUser.store')}}",
                     data: new FormData(this),
                     processData: false,
                     contentType: false,
