@@ -246,8 +246,12 @@ trait TemplateTrait
             (string) View::make('emap::inc.building_neighbours', [
                 'neighbours' => $buildingDocumentation?->neighbours,
             ]),
+
             (string) View::make('emap::inc.building-storey-details', [
                 'buildingStoreyDetails' => $buildingDocumentation?->buildingStoreyDetails,
+            ]),
+            (string) View::make('emap::inc.building_road_details', [
+                'buildingDescriptions' => $buildingDocumentation?->buildingDescriptions,
             ]),
             get_nepali_number($buildingContractorDetail?->name ?? ''),
             get_nepali_number($buildingContractorDetail?->phone ?? ''),
@@ -467,6 +471,7 @@ trait TemplateTrait
 
           '[@buildingNeighbours]',
           '[@buildingStoreyDetails]',
+          '[@buildingDescriptions]',
             '[@buildingContractorDetail.name]',
             '[@buildingContractorDetail.phone]',
             '[@buildingContractorDetail.local_body]',
