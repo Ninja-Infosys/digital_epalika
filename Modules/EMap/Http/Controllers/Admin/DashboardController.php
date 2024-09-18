@@ -30,7 +30,7 @@ class DashboardController extends Controller
 
     $organization_count = Organization::count();
     $map_apply_count = MapApply::count();
-    $map_count_according_fiscal_year = MapApply::where('fiscal_year_id', $officeSetting->fiscal_year_id )->whereNotNull('registration_no')->count();
+    $map_count_according_fiscal_year = MapApply::where('fiscal_year_id', $officeSetting?->fiscal_year_id )->whereNotNull('registration_no')->count();
 
     $currentMonth = now()->month;
     $currentYear = now()->year;
