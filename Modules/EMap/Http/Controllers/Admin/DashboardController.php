@@ -34,7 +34,7 @@ class DashboardController extends Controller
 
     $currentMonth = now()->month;
     $currentYear = now()->year;
-    $map_according_to_month = MapApply::where('fiscal_year_id', $officeSetting->fiscal_year_id )->whereMonth('registration_date', $currentMonth)->whereYear('registration_date', $currentYear)->count();
+    $map_according_to_month = MapApply::where('fiscal_year_id', $officeSetting?->fiscal_year_id )->whereMonth('registration_date', $currentMonth)->whereYear('registration_date', $currentYear)->count();
 
     return view('emap::admin.dashboard', compact('organization_count', 'map_apply_count', 'map_count_according_fiscal_year','map_according_to_month'));
     }
