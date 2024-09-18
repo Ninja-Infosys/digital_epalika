@@ -38,6 +38,7 @@ class DashboardController extends Controller
 
     return view('emap::admin.dashboard', compact('organization_count', 'map_apply_count', 'map_count_according_fiscal_year','map_according_to_month'));
     }
+    
     public function ajaxData()
     {
         return [
