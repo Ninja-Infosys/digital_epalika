@@ -72,12 +72,14 @@ class OrganizationController extends Controller
             'userDetail.temporaryLocalBody',
             'userDetail.temporaryDistrict',
             'userDetail.temporaryProvince',
+
             'mapApplies' => function ($q) {
                 $q->whereNotNull('sent_to_admin_at');
             },
             'mapApplies.fiscalYear',
             'mapApplies.landDetail',
         ]);
+
 
         return view('emap::admin.organization.show', compact('organization'));
     }

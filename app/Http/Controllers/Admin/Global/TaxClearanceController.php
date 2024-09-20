@@ -51,7 +51,8 @@ class TaxClearanceController extends Controller
         $taxClearance->update($request->validated());
         toast('कर चुक्ता सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.global.taxClearance.index'));
+        // return redirect(route('admin.global.taxClearance.index'));
+        return back();
     }
 
     public function destroy(TaxClearance $taxClearance)
