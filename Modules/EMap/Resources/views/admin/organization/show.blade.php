@@ -312,6 +312,7 @@
                                 @endif
                             </div>
                             @if($organization->is_organization==1)
+                            <h5 class="mt-3 font-bold ">कर चुक्ता</h5>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <table class="table table-sm mb-0 table-striped table-hover">
@@ -333,6 +334,38 @@
                                                         </a>
                                                     </td>
                                                     <td><img src="{{$taxClearance->document_url}}" alt=""
+                                                             style="max-width: 100%;height: 200px;object-fit: contain;">
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            @endif
+                            @if($organization->is_organization==1)
+                            <h5 class="mt-3 font-bold">नविकरण</h5>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-sm mb-0 table-striped table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>क्र.सं</th>
+                                                <th>वर्ष</th>
+                                                <th>कागजात</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($organization->organizationDetail->reneweds??collect() as $renewed)
+                                                <tr>
+                                                    <td>{{$loop->iteration}}</td>
+                                                    <td>{{$renewed->year ?? ''}}
+                                                        <a href="{{route('admin.file-url-download', ['file_url'=>$renewed->document]??'')}}"
+                                                           class="btn btn-xs text-primary">
+                                                            <i class="fa fa-download"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td><img src="{{$renewed->document_url}}" alt=""
                                                              style="max-width: 100%;height: 200px;object-fit: contain;">
                                                     </td>
                                                 </tr>
