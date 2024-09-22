@@ -48,13 +48,14 @@ class FrontendController extends Controller
         $recommendationCreate = DB::transaction(function () use ($request) {
             // Get the authenticated user
             $user = Auth::guard('mobile-user')->user();
+            $userId =Auth::user()->id;
 
             // Create a new recommendation with validated data
             $recommendationCreate = RecommendationCreate::create(array_merge(
                 $request->validated(),
                 [
                     'mobile_user_id' => $user->id,
-                    'created_by' => $user->id
+                    'created_by' => $userId
                 ]
             ));
 
@@ -104,7 +105,7 @@ class FrontendController extends Controller
 
     public function recommendationListshow(RecommendationCreate $recommendationCreate)
     {
-        
+
         $mobileUser = Auth::guard('mobile-user')->user()->load('mobileUserDetail');
         $recommendationCreate->load('recommendationDetail', 'recommendationValues', 'recommendationFiles.recommendationDocument');
         $recommendationSetting = RecommendationSetting::with('approver', 'checker')->where('ward', auth()->user()?->ward_no ?? null)->first();
