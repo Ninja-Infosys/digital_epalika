@@ -3,6 +3,7 @@
 namespace Modules\Recommendation\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\MobileUser;
 use Modules\Recommendation\Entities\PersonalDetail;
 use Modules\Recommendation\Http\Requests\PersonalDetail\StorePersonalDetailRequest;
 use Modules\Recommendation\Http\Requests\PersonalDetail\UpdatePersonalDetailRequest;
@@ -26,10 +27,10 @@ class PersonalDetailController extends Controller
     {
         $this->checkAuthorization('personalDetail_access');
 
-        $personalDetails = PersonalDetail::filterData()
-            ->where(function (Builder $q) {
+        $MobileUsers = MobileUser::with('mobileUserDetail')->
+            where(function (Builder $q) {
                 if (!is_null(request('search'))) {
-                    $q->whereLike(['name', 'phone_no', 'reg_no', 'gender'], request('search'));
+                    $q->whereLike(['name', 'phone_no', 'reg_no', 'email'], request('search'));
                 }
 
                 $authWardNo = auth()->user()->ward_no;
@@ -48,7 +49,7 @@ class PersonalDetailController extends Controller
             ->latest()
             ->paginate(15);
 
-        return view('recommendation::admin.setting.personalDetail.index', compact('personalDetails'));
+        return view('recommendation::admin.setting.personalDetail.index', compact('MobileUsers'));
     }
 
 
@@ -77,13 +78,21 @@ class PersonalDetailController extends Controller
         toast('व्यक्तिगत विवरण सफलतापूर्वक थपियो', 'success');
         return redirect()->route('admin.recommendation.setting.personalDetail.index');
     }
-
-    public function show(PersonalDetail $personalDetail)
+    public function show(MobileUser $personalDetail)
     {
+        // Check user authorization
         $this->checkAuthorization('personalDetail_access');
-        $personalDetail->load('province', 'district', 'localBody');
+        $personalDetail->load([
+            'mobileUserDetail',
+            'recommendationCreates' => function ($query) {
+                $query->where('approved_status', 4);
+            }
+        ]);
+
+        // Return the view with the filtered personalDetail
         return view('recommendation::admin.setting.personalDetail.show', compact('personalDetail'));
     }
+
 
 
     public function edit(PersonalDetail $personalDetail)

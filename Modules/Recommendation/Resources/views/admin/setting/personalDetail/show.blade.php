@@ -40,23 +40,23 @@
                                 <div class="text-start mt-3">
 
                                     <p class="mb-2 font-15"><strong>पुरा नाम :</strong> <span
-                                            class="ms-2">{{ $personalDetail->name }}</span>
+                                            class="ms-2">{{ $personalDetail->name  ??''}}</span>
                                     </p>
                                     <p class="mb-2 font-15"><strong>सम्पर्क नं :</strong><span
-                                            class="ms-2">{{ $personalDetail->phone_no }}</span></p>
+                                            class="ms-2">{{ $personalDetail->phone ??''}}</span></p>
 
                                     <p class="mb-2 font-15"><strong>लिङ्ग:</strong> <span
-                                            class="ms-2">{{ $personalDetail->gender?->label()??'' }}</span></p>
+                                            class="ms-2">{{ $personalDetail->mobileUserDetail?->gender?->label() ??'' }}</span></p>
 
                                     <p class="mb-2 font-15"><strong>नाबालिक हो/होइन:</strong> <span
                                             class="ms-2">{{ $personalDetail->is_minor==0 ? 'होइन':'हो' }}</span></p>
 
                                     <p class="mb-2 font-15"><strong>नागरिकता नं:</strong> <span
-                                            class="ms-2">{{ $personalDetail->citizenship_no }}</span></p>
+                                            class="ms-2">{{ $personalDetail->mobileUserDetail->citizenship_no ??'' }}</span></p>
                                     <p class="mb-2 font-15"><strong> ठेगाना (स्थायी) : :</strong> <span
-                                            class="ms-2">  {{ $personalDetail->localBody->local_body}}
-                                                -{{ $personalDetail->ward_no }}
-                                                , {{ $personalDetail->tole }}</span>
+                                            class="ms-2">  {{ $personalDetail->mobileUserDetail?->localBody?->local_body ??''}}
+                                                -{{ $personalDetail->mobileUserDetail?->ward_no ?? '' }}
+                                                , {{ $personalDetail->tole ??'' }}</span>
                                     </p>
                                 </div>
                                 <table class="table table-bordered mt-2">
@@ -64,17 +64,30 @@
                                     <tr>
                                         <th>क्र.स</th>
                                         <th>सिफारिस</th>
+                                        <th>सिफारिस बुझ्ने व्यक्तिको नाम</th>
                                         <th>मिति</th>
+                                        <th>#</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-{{--                                    @foreach ($personalDetail->registrationDetails as $registrationDetail)--}}
-{{--                                        <tr>--}}
-{{--                                            <td>{{ $loop->iteration }}</td>--}}
-{{--                                            <td>{{ $registrationDetail->recommendationCategory->title ??'' }}</td>--}}
-{{--                                            <td>{{ $registrationDetail->date_ne }}</td>--}}
-{{--                                        </tr>--}}
-{{--                                    @endforeach--}}
+                                   @foreach ($personalDetail->recommendationCreates as $recommendationCreate)
+                                       <tr>
+                                           <td>{{ $loop->iteration }}</td>
+                                           <td>{{ $recommendationCreate->recommendationDetail?->title ??'' }}</td>
+                                           <td>{{ $recommendationCreate->reciver_name ??'' }}</td>
+
+                                           <td>{{ $recommendationCreate->created_at ? \Carbon\Carbon::parse($recommendationCreate->created_at)->format('Y-m-d') : '' }}</td>
+                                           <td><a data-bs-type="edit"
+                                            href="{{  route('admin.recommendation.recommendationCreate.show', $recommendationCreate) }}"
+                                            class="btn btn-xs btn-outline-warning {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
+                                            title="व्यक्तिगत विवरण हेर्नुहोस">
+                                            <i class="fa fa-eye"></i>
+                                        </a></td>
+
+
+
+                                 </tr>
+                                 @endforeach
                                     </tbody>
                                 </table>
 

@@ -5,8 +5,7 @@
         </legend>
         <div class="row">
             <div class="col-md-4 mb-2">
-                <label for="mobile_user_id" class="form-label">व्यक्तिगत विवरण <span
-                        class="text-danger">*</span></label>
+                <label for="mobile_user_id" class="form-label">व्यक्तिगत विवरण <span class="text-danger">*</span></label>
                 <div class="d-flex justify-content-between gap-1">
                     <select id="mobile_user_id" name="mobile_user_id" class="form-select personalDetail"
                         wire:model="mobile_user_id">
@@ -14,7 +13,7 @@
                         @foreach ($mobileUsers as $mobileUser)
                             <option value="{{ $mobileUser->id }}">{{ $mobileUser->name }}
                                 ({{ $mobileUser->reg_no ?? '' }})
-                             (वार्ड नं.{{ $mobileUser->ward_no ?? 'null' }})
+                                (वार्ड नं.{{ $mobileUser->ward_no ?? 'null' }})
                             </option>
                         @endforeach
                     </select>
@@ -48,6 +47,10 @@
                     </div>
                 @enderror
             </div>
+            
+
+
+
         </div>
     </fieldset>
 
@@ -164,3 +167,6 @@
         @endif
     </div>
 </div>
+
+
+

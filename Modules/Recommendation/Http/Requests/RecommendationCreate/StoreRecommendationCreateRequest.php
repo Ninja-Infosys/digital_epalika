@@ -19,6 +19,7 @@ class StoreRecommendationCreateRequest extends FormRequest
         return [
             'recommendation_detail_id' => ['required', Rule::exists('recommendation_details', 'id')->withoutTrashed()],
             'mobile_user_id' => ['nullable', Rule::exists('mobile_users', 'id')->withoutTrashed()],
+            'reciver_name'=>['required','string'],
             'status' => ['nullable', new Enum(RecommendationStatusEnum::class)],
             'fields' => ['nullable', 'array'],
             'fields.*.recommendation_form_field_id' => ['nullable', Rule::exists('recommendation_form_fields', 'id')->withoutTrashed()],
