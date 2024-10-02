@@ -135,7 +135,7 @@
                                 </div>
                             </div>
                         </div>
-                      
+
                         <div class="col-md-2 p-2">
                             <div class="card bg-l-danger text-danger border-0 text-center">
                                 <div class="card-body">
@@ -166,6 +166,7 @@
                                 <tr>
                                     <th scope="col">क्र.स.</th>
                                     <th scope="col">सिफारिसहरु</th>
+                                    <th scope="col">सिफारिस बुझ्ने व्यक्ति</th>
                                     <th scope="col"> #</th>
                                 </tr>
                                 <tr class="empty">
@@ -177,7 +178,8 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $recommendationCreate->recommendationDetail?->title ?? '' }}</td>
-                                     
+                                        <td>{{ $recommendationCreate->recive_name ?? '' }}</td>
+
                                         <td>
                                             <div class="d-flex gap-1">
                                                 <a class="btn btn-xs btn-outline-warning " href="{{ route('recommendationrecommendation.recommendationListshow',$recommendationCreate)}}">
