@@ -118,6 +118,7 @@
             </div>
         </div>
         <div class="container">
+            <a href="">hello</a>
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -189,7 +190,7 @@
                                                         <td>{{ $recommendationCreate->approved_status?->label() ?? '' }}
                                                         </td>
                                                         <td class="d-flex gap-1">
-                                                            
+
                                                                 <a class="btn btn-xs btn-outline-warning " href="{{ route('recommendationrecommendation.recommendationListshow',$recommendationCreate) }}">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                                         fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
@@ -202,13 +203,13 @@
                                                                 <form action="{{ route('recommendationrecommendation.destroySipharish', $recommendationCreate) }}" method="POST">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                    
+
                                                                     <button data-bs-type="delete" class="btn btn-xs btn-outline-danger"title="मेटाउनु होस्">
                                                                         <i class="fa fa-trash"></i>
                                                                     </button>
                                                                 </form>
-                
-                                                           
+
+
                                                         </td>
                                                     </tr>
                                                 @empty

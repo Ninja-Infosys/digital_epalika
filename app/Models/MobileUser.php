@@ -135,7 +135,7 @@ class MobileUser extends Authenticatable
 
     public function recommendationCreates(): HasMany
     {
-        return $this->hasMany(RecommendationCreate::class);
+        return $this->hasMany(RecommendationCreate::class,'mobile_user_id');
     }
 
     public function registrationDetails(): HasMany
@@ -147,3 +147,5 @@ class MobileUser extends Authenticatable
     //     return $this->hasMany(RecommendationValue::class);
     // }
 }
+
+

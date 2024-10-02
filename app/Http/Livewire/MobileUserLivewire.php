@@ -111,8 +111,8 @@ class MobileUserLivewire extends Component
 
     protected array $rules = [
         'form.name' => ['required'],
-        'form.email' => ['required'],
-        'form.phone' => ['required'],
+        'form.email' => ['nullable'],
+        'form.phone' => ['nullable'],
         'form.province_id' => ['required', 'exists:provinces,id'],
         'form.district_id' => ['required', 'exists:districts,id'],
         'form.local_body_id' => ['required', 'exists:local_bodies,id'],
@@ -123,7 +123,7 @@ class MobileUserLivewire extends Component
         'form.temporary_local_body_id' => ['required', 'exists:local_bodies,id'],
         'form.temporary_ward' => ['required'],
         'form.temporary_tole' => ['required'],
-        'form.citizenship_no' => ['required_if:form.is_minor,0'],
+        'form.citizenship_no' => ['nullable:form.is_minor,0'],
         'form.citizenship_issued_district' => ['required_if:form.is_minor,0'],
         'form.citizenship_issued_date' => ['required_if:form.is_minor,0'],
         'form.citizenship_front' => ['required_if:form.is_minor,0'],

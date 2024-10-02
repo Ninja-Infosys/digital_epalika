@@ -15,14 +15,14 @@
                         <div class="row">
                             <div class="col-md-4 mb-2">
                                 <label for="name" class="form-label">पुरा नाम *</label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    value="{{old('name')}}"
-                                    class="form-control"
-                                    id="name"
-                                    placeholder="पुरा नाम"
-                                />
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        value="{{old('name')}}"
+                                        class="form-control"
+                                        id="name"
+                                        placeholder="पुरा नाम"
+                                    />
                                 @error('name')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror

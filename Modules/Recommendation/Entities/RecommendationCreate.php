@@ -40,6 +40,7 @@ class RecommendationCreate extends Model
         'file',
         'mobile_user_id',
         'personal_detail_id',
+        'reciver_name',
         'status',
     ];
 
@@ -76,6 +77,8 @@ class RecommendationCreate extends Model
     {
         return $this->belongsTo(MobileUser::class, 'mobile_user_id');
     }
+
+
 
     public function personalDetail(): BelongsTo
     {

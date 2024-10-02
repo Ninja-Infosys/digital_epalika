@@ -21,7 +21,7 @@ class UpdatePersonalDetailRequest extends FormRequest
             'name' => ['required', 'string'],
             'phone_no' => ['nullable', 'string'],
             'is_minor' => ['nullable', 'boolean'],
-            'citizenship_no' => ['required', 'string'],
+            'citizenship_no' => ['nullable', 'string'],
             'gender' => ['required', new Enum(Gender::class)],
             'province_id' => ['required', Rule::exists('provinces', 'id')->withoutTrashed()],
             'district_id' => ['required', Rule::exists('districts', 'id')->withoutTrashed()],
