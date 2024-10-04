@@ -42,6 +42,7 @@ class RecommendationCreate extends Model
         'mobile_user_id',
         'personal_detail_id',
         'reciver_name',
+        'sifaris_fee',
         'status',
     ];
 

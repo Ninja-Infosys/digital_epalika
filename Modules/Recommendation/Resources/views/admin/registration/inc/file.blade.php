@@ -67,7 +67,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-4 mb-2">
+                            {{-- <div class="col-md-4 mb-2">
                                 <label for="citizenship_no" class="form-label">नागरिकता नं. *</label>
                                 <input
                                     type="text"
@@ -80,7 +80,7 @@
                                 @error('citizenship_no')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
-                            </div>
+                            </div> --}}
                         </div>
                     </fieldset>
                     <fieldset class="my-2">
