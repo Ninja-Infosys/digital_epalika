@@ -27,12 +27,12 @@
                         <h4 class="header-title mb-0">व्यक्तिगत विवरण सूची</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
-                            @can('personalDetail_delete')
+                            {{-- @can('personalDetail_delete')
                                 <a href="{{ route('admin.recommendation.setting.personalDetail.create') }}"
                                     class="btn btn-sm btn-outline-primary">
                                     <i class="fa fa-plus-circle"></i> नयाँ व्यक्तिगत विवरण थप्नुहोस
                                 </a>
-                            @endcan
+                            @endcan --}}
                         </div>
                     </div>
                 </div>

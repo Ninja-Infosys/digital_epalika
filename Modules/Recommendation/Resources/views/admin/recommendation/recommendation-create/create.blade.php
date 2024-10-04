@@ -47,42 +47,57 @@
                         </div>
                     @endif
                     {{--                    <livewire:recommendation::recommendation-apply-livewire />--}}
-                   
-
-
-
 
 
 
                     <form action="{{ route('admin.recommendation.recommendationCreate.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <div class="col-md-4 mb-2">
-                            <label for="recommendation_detail_id" class="form-label"> सिफरिस बुझ्ने व्यक्ति <span class="text-danger">*</span></label>
-                            <div class="d-flex gap-2 align-items-center">
-                                <label class="form-check">
-                                    <input type="radio" class="form-check-input personalDetail" name="reciver_name_option" value="self" checked>
-                                    आफै हो ?
+                        <div class="row">
+                            <div class="col-md-4 mb-2">
+                                <label for="recommendation_detail_id" class="form-label"> सिफरिस बुझ्ने व्यक्ति <span class="text-danger">*</span></label>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <label class="form-check">
+                                        <input type="radio" class="form-check-input personalDetail" name="reciver_name_option" value="self" checked>
+                                        आफै हो ?
+                                    </label>
+                                    <label class="gap-2">
+                                        <input type="radio" class="form-check-input personalDetail" name="reciver_name_option" value="no_self">
+                                        आफै होइन् ?
+                                    </label>
+                                </div>
+
+                                {{-- Input field for receiver name, shown only when 'आफै होइन् ?' is selected --}}
+                                <input
+                                    type="text"
+                                    name="reciver_name_input"
+                                    value="{{ old('reciver_name') }}"
+                                    class="form-control mt-2"
+                                    id="receiverNameInput"
+                                    placeholder="पुरा नाम"
+                                    style="display: none;" {{-- Initially hidden --}}
+                                />
+
+                                {{-- Hidden field that will hold the final value for reciver_name --}}
+                                <input type="hidden" name="reciver_name" id="reciverNameHidden" value="self">
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="recommendation_detail_id" class="form-label">
+                                    सिफरिसकलाई शुल्का पर्ने <span class="text-danger">*</span>
                                 </label>
-                                <label class="gap-2">
-                                    <input type="radio" class="form-check-input personalDetail" name="reciver_name_option" value="no_self">
-                                    आफै होइन् ?
-                                </label>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <label class="form-check">
+                                        <input type="radio" class="form-check-input Fee" name="sifaris_fee" value="fee">
+                                        हो ?
+                                    </label>
+                                    <label class="gap-2">
+                                        <input type="radio" class="form-check-input Fee" name="sifaris_fee" value="no_fee">
+                                        होइन् ?
+                                    </label>
+                                </div>
                             </div>
 
-                            {{-- Input field for receiver name, shown only when 'आफै होइन् ?' is selected --}}
-                            <input
-                                type="text"
-                                name="reciver_name_input"
-                                value="{{ old('reciver_name') }}"
-                                class="form-control mt-2"
-                                id="receiverNameInput"
-                                placeholder="पुरा नाम"
-                                style="display: none;" {{-- Initially hidden --}}
-                            />
-
-                            {{-- Hidden field that will hold the final value for reciver_name --}}
-                            <input type="hidden" name="reciver_name" id="reciverNameHidden" value="self">
                         </div>
+
 
                         @livewire('field', [
                             'mobile_user_id' => old('mobile_user_id'),
