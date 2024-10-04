@@ -107,7 +107,7 @@ class SipharishCreate extends Model
         $replaceableList->put('[@province]', officeSetting()->province?->province);
         $replaceableList->put('[@district]', officeSetting()->district?->district);
         $replaceableList->put('[@muncipal]', officeSetting()->localBody?->local_body);
-        $replaceableList->put('[@ward_no]', get_nepali_number(auth()->user()->ward_no));
+        $replaceableList->put('[@ward_no]', auth()->user()->ward_no);
         $replaceableList->put('[@today_date_bs]', get_nepali_number($this->get_today_nepali_date()));
         $replaceableList->put('[@today_date_ad]', today()->toDateString());
         $replaceableList->put('[@approver_signature]', '<img src="' . ($sipharisSetting->approver?->signature_photo_url ?? '') . '" width="100" height="100" alt="Signature Photo">');
