@@ -135,7 +135,15 @@
                                     </tbody>
                                 </table>
                             </div>
+
                         @endforeach
+
+
+
+                <div>
+                {{ $recommendationCreates->links() }}
+                </div>
+
                     </div>
                 </div>
             </div>
