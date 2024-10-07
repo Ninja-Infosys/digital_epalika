@@ -236,6 +236,7 @@
                             <div class="card-body " id="printBill">
                                 <div class="col-md-12">
                                     {!! letterHead() !!}
+
                                     <h4 class="text-center fw-bold mt-2">सिफारिस दस्तुर</h4>
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-sm mb-0 table-striped">
