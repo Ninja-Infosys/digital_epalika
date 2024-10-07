@@ -216,7 +216,7 @@
                 @if ($recommendationCreate->sifaris_fee !== 'no_fee')
                     @if ($recommendationCreate->approved_status->value > 1)
 
-                        <div class="row mt-3">
+                        <div class="row mt-3 px-4">
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="header-title mb-0">बिल प्रिन्ट</h4>
@@ -233,7 +233,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="card-body" id="printBill">
+                            <div class="card-body " id="printBill">
                                 <div class="col-md-12">
                                     {!! letterHead() !!}
                                     <h4 class="text-center fw-bold mt-2">सिफारिस दस्तुर</h4>
