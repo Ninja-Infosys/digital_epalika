@@ -34,7 +34,7 @@
                         <h4 class="header-title">प्रयोगकर्ताको विवरण</h4>
                     </div>
                     <div class="d-flex justify-content-between gap-1">
-                        @if ($recommendationCreate->approved_status !== 4)
+
                             <form method="POST"
                                 action="{{ route('admin.recommendation.recommendationCreate.updateStatus', [$recommendationCreate, Modules\Recommendation\Enums\RecommendationStatusEnum::REJECT]) }}">
                                 @csrf
@@ -42,13 +42,12 @@
                                 <button type="submit"
                                     class="btn btn-sm btn-outline-danger">{{ Modules\Recommendation\Enums\RecommendationStatusEnum::REJECT->label() }}</button>
                             </form>
-                        @endif
-                        @if ($recommendationCreate->approved_status !== 4)
+
                             <a href="{{ route('admin.recommendation.recommendationCreate.edit', $recommendationCreate) }}"
                                 class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-edit"></i> सम्पादन र समीक्षा गर्नुहोस्
                             </a>
-                        @endif
+
                         <div class="d-flex justify-content-between align-items-center">
                             <h4 class="header-title mb-0"></h4>
                             <button class="btn btn-sm btn-info"
