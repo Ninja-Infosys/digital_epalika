@@ -45,6 +45,7 @@ class RecommendationCreateController extends Controller
 
     public function index()
     {
+        
         $user = auth()->user();
 
         $recommendation = RecommendationCreate::with('recommendationDetail', 'mobileUser')
