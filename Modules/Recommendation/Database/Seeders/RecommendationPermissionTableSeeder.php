@@ -38,7 +38,36 @@ class RecommendationPermissionTableSeeder extends Seeder
             'recommendationSubCategory_access',
             'recommendationSubCategory_edit',
             'recommendationSubCategory_create',
-            'recommendationSubCategory_delete'
+            'recommendationSubCategory_delete',
+
+            'Recommendation_revenue_access',
+            'Recommendation_revenue_create',
+            'Recommendation_revenue_edit',
+            'Recommendation_revenue_delete',
+
+            'recommendation_template_access',
+            'recommendation_template_create',
+            'recommendation_template_edit',
+            'recommendation_template_delete',
+
+            'recommendation_document_access',
+            'recommendation_document_create',
+            'recommendation_document_edit',
+            'recommendation_document_delete',
+
+            'recommendation_detail_access',
+            'recommendation_detail_create',
+            'recommendation_detail_edit',
+            'recommendation_detail_delete',
+
+            'recommendation_setting_access',
+            'recommendation_signature_create',
+            'recommendation_signature_edit',
+            'recommendation_signature_delete',
+
+
+
+
 
         ];
 
