@@ -13,19 +13,21 @@ class RecommendationSignatureController extends Controller
 {
     public function index()
     {
-        $this->checkAuthorization('recommendation_setting_access');
+        $this->checkAuthorization('recommendation_signature_access');
         $recommendationSignatures = RecommendationSignature::all();
         return view('recommendation::admin.recommendation.setting.recommendation-signature.index',compact('recommendationSignatures'));
     }
 
     public function create()
     {
-        $this->checkAuthorization('recommendation_setting_create');
+        $this->checkAuthorization('recommendation_signature_create');
         return view('recommendation::admin.recommendation.setting.recommendation-signature.create');
     }
 
     public function store(StoreRecommendationSignatureRequest $request)
     {
+        $this->checkAuthorization('recommendation_signature_create');
+
         RecommendationSignature::create($request->validated()+[
             'created_by'=>auth()->id()
             ]);
@@ -35,17 +37,21 @@ class RecommendationSignatureController extends Controller
 
     public function show($id)
     {
+        $this->checkAuthorization('recommendation_signature_access');
+
         return view('recommendation::show');
     }
 
     public function edit(RecommendationSignature $recommendationSignature)
     {
-        $this->checkAuthorization('recommendation_setting_edit');
+        $this->checkAuthorization('recommendation_signature_edit');
         return view('recommendation::admin.recommendation.setting.recommendation-signature.edit',compact('recommendationSignature'));
     }
 
     public function update(UpdateRecommendationSignatureRequest $request, RecommendationSignature $recommendationSignature)
     {
+        $this->checkAuthorization('recommendation_signature_edit');
+
         if($request->hasFile('signature') && $recommendationSignature->getRawOriginal('signature'))
         {
             $this->deleteFile($recommendationSignature->getRawOriginal('signature'));
@@ -57,7 +63,7 @@ class RecommendationSignatureController extends Controller
 
     public function destroy(RecommendationSignature $recommendationSignature)
     {
-        $this->checkAuthorization('recommendation_setting_delete');
+        $this->checkAuthorization('recommendation_signature_delete');
         $recommendationSignature->delete();
         toast('हस्ताक्षर सफलतापूर्वक मेटियो', 'success');
         return back();
@@ -65,6 +71,8 @@ class RecommendationSignatureController extends Controller
 
     public function updateStatus(RecommendationSignature $recommendationSignature)
     {
+        $this->checkAuthorization('recommendation_signature_edit');
+
         $recommendationSignature->update([
             'status' => !$recommendationSignature->status
         ]);
