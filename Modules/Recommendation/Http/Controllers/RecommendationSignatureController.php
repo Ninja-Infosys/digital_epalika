@@ -13,12 +13,14 @@ class RecommendationSignatureController extends Controller
 {
     public function index()
     {
+        $this->checkAuthorization('recommendation_setting_access');
         $recommendationSignatures = RecommendationSignature::all();
         return view('recommendation::admin.recommendation.setting.recommendation-signature.index',compact('recommendationSignatures'));
     }
 
     public function create()
     {
+        $this->checkAuthorization('recommendation_setting_create');
         return view('recommendation::admin.recommendation.setting.recommendation-signature.create');
     }
 
@@ -38,6 +40,7 @@ class RecommendationSignatureController extends Controller
 
     public function edit(RecommendationSignature $recommendationSignature)
     {
+        $this->checkAuthorization('recommendation_setting_edit');
         return view('recommendation::admin.recommendation.setting.recommendation-signature.edit',compact('recommendationSignature'));
     }
 
@@ -54,6 +57,7 @@ class RecommendationSignatureController extends Controller
 
     public function destroy(RecommendationSignature $recommendationSignature)
     {
+        $this->checkAuthorization('recommendation_setting_delete');
         $recommendationSignature->delete();
         toast('हस्ताक्षर सफलतापूर्वक मेटियो', 'success');
         return back();
