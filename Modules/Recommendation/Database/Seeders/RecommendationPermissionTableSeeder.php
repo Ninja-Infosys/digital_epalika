@@ -60,7 +60,7 @@ class RecommendationPermissionTableSeeder extends Seeder
             'recommendation_detail_edit',
             'recommendation_detail_delete',
 
-            'recommendation_setting_access',
+            'recommendation_signature_access',
             'recommendation_signature_create',
             'recommendation_signature_edit',
             'recommendation_signature_delete',
