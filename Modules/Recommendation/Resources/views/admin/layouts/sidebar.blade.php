@@ -52,36 +52,36 @@
             </li>
             @endcan
 
-            @can('recommendation_document_access')
+            {{-- @can('recommendation_document_access') --}}
             <li class="{{request()->is('admin/recommendation/setting/recommendationDocument*') ? 'active' : ''}}">
                 <a href="{{route('admin.recommendation.setting.recommendationDocument.index')}}">
                     <span>कागजात</span>
                 </a>
             </li>
-            @endcan
+            {{-- @endcan --}}
 
-            @can('recommendation_detail_access')
+            {{-- @can('recommendation_detail_access') --}}
             <li class="{{request()->is('admin/recommendation/setting/recommendationDetail*') ? 'active' : ''}}">
                 <a href="{{route('admin.recommendation.setting.recommendationDetail.index')}}">
                     <span>सिफारिस विवरण</span>
                 </a>
             </li>
-            @endcan
-            @can('recommendation_signature_access')
+            {{-- @endcan --}}
+            {{-- @can('recommendation_signature_access') --}}
             <li class="{{request()->is('admin/recommendation/setting/recommendationSignature*') ? 'active' : ''}}">
                 <a href="{{route('admin.recommendation.setting.recommendationSignature.index')}}">
                     <span>हस्ताक्षर</span>
                 </a>
             </li>
-            @endcan
+            {{-- @endcan --}}
 
-            @can('recommendation_signature_access')
+            {{-- @can('recommendation_signature_access') --}}
             <li class="{{request()->is('admin/recommendation/setting/sipharisSetting*') ? 'active' : ''}}">
                 <a href="{{route('admin.recommendation.setting.recommendationSetting.index')}}">
                     <span>सिफारिस सेटिंग </span>
                 </a>
             </li>
-            @endcan
+            {{-- @endcan --}}
 
 
         </ul>
