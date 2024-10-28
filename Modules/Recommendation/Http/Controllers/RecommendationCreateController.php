@@ -45,7 +45,8 @@ class RecommendationCreateController extends Controller
 
     public function index()
     {
-        
+        $this->checkAuthorization('recommendation_access');
+
         $user = auth()->user();
 
         $recommendation = RecommendationCreate::with('recommendationDetail', 'mobileUser')
@@ -91,11 +92,14 @@ class RecommendationCreateController extends Controller
 
     public function create()
     {
+        $this->checkAuthorization('recommendation_create');
+
         return view('recommendation::admin.recommendation.recommendation-create.create');
     }
 
     public function store(StoreRecommendationCreateRequest $request)
     {
+        $this->checkAuthorization('recommendation_create');
 
         $recommendationCreate = DB::transaction(function () use ($request) {
 
@@ -143,6 +147,8 @@ class RecommendationCreateController extends Controller
 
     public function edit(RecommendationCreate $recommendationCreate)
     {
+        $this->checkAuthorization('recommendation_edit');
+
         $recommendationCreate->load('recommendationValues.recommendationFormField');
 
         return view('recommendation::admin.recommendation.recommendation-create.edit', compact('recommendationCreate'));
@@ -150,6 +156,8 @@ class RecommendationCreateController extends Controller
 
     public function update(UpdateRecommendationCreateRequest $request, RecommendationCreate $recommendationCreate)
     {
+        $this->checkAuthorization('recommendation_edit');
+
 
         $recommendationCreate = DB::transaction(function () use ($request, $recommendationCreate) {
             $recommendationCreate->update($request->validated() + [
@@ -201,6 +209,8 @@ class RecommendationCreateController extends Controller
 
     public function show(RecommendationCreate $recommendationCreate)
     {
+        $this->checkAuthorization('recommendation_access');
+
         $recommendationCreate->load(
             'recommendationValues.recommendationFormField',
             'recommendationFiles.recommendationDocument',
@@ -216,6 +226,8 @@ class RecommendationCreateController extends Controller
 
     public function updateStatus(RecommendationCreate $recommendationCreate, RecommendationStatusEnum $recommendationStatusEnum)
     {
+        $this->checkAuthorization('recommendation_edit');
+
         $recommendationCreate->update([
             'approved_status' => $recommendationStatusEnum->value,
         ]);
@@ -226,6 +238,8 @@ class RecommendationCreateController extends Controller
 
     public function fileUpload(Request $request, RecommendationCreate $recommendationCreate)
     {
+        $this->checkAuthorization('recommendation_create');
+
         $data = $request->validate([
             'file' => ['required', 'file'],
         ]);
@@ -237,6 +251,8 @@ class RecommendationCreateController extends Controller
 
     public function destroy(RecommendationCreate $recommendationCreate)
     {
+        $this->checkAuthorization('recommendation_delete');
+
 
         if ($recommendationCreate->approved_status !== 1) {
             toast('सक्रिय भएको सिफारिस प्रकार मेटाउन मनाहि छ', 'error');
@@ -252,6 +268,8 @@ class RecommendationCreateController extends Controller
 
     public function approvedStatus(RecommendationCreate $recommendationCreate)
     {
+        $this->checkAuthorization('recommendation_edit');
+
         $recommendationCreate->update([
             'approved_status' => 'approved',
         ]);

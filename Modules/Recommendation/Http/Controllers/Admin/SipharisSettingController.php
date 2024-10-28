@@ -13,6 +13,8 @@ class SipharisSettingController extends Controller
 {
     public function index()
     {
+
+
         $sipharisSetting = SipharisSetting::first();
         $users = User::get();
 
