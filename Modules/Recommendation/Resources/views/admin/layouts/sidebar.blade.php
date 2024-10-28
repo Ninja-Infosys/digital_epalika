@@ -13,7 +13,7 @@
 </li>
 @endcan
 
-@can('recommendationSetting_access')
+@can('recommendation_access')
 <li class="{{request()->is('admin/recommendation/recommendationCreate*') ? 'active' : ''}}">
     <a href="{{route('admin.recommendation.recommendationCreate.index')}}">
         <i class="fa fa-file"></i>
@@ -75,7 +75,7 @@
             </li>
             @endcan
 
-            @can('recommendation_setting_access')
+            @can('recommendation_signature_access')
             <li class="{{request()->is('admin/recommendation/setting/sipharisSetting*') ? 'active' : ''}}">
                 <a href="{{route('admin.recommendation.setting.recommendationSetting.index')}}">
                     <span>सिफारिस सेटिंग </span>
