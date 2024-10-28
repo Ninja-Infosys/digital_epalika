@@ -18,6 +18,8 @@ class RecommendationDetailController extends Controller
 {
     public function index()
     {
+        $this->checkAuthorization('recommendation_detail_access');
+
         $userWardNo = auth()->user()->ward_no;
 
         // Check if the user's ward number is null
@@ -35,6 +37,8 @@ class RecommendationDetailController extends Controller
 
     public function create()
     {
+        $this->checkAuthorization('recommendation_detail_create');
+
         $recommendationCategories = RecommendationCategory::all();
         $revenueHeaders = RevenueHeader::all();
         $recommendationDocuments = RecommendationDocument::all();
@@ -43,6 +47,8 @@ class RecommendationDetailController extends Controller
 
     public function store(StoreRecommendationDetailRequest $request)
     {
+        $this->checkAuthorization('recommendation_detail_create');
+
         DB::transaction(function () use ($request) {
             $recommendationDetail = RecommendationDetail::create($request->validated());
             $recommendationDetail->revenueHeaders()->attach($request->validated()['revenueHeaders']);
@@ -63,12 +69,16 @@ class RecommendationDetailController extends Controller
 
     public function show(RecommendationDetail $recommendationDetail)
     {
+        $this->checkAuthorization('recommendation_detail_access');
+
         $recommendationDetail->load('recommendationFormFields' );
         return view('recommendation::admin.recommendation.setting.recommendation-detail.show', compact('recommendationDetail'));
     }
 
     public function edit(RecommendationDetail $recommendationDetail)
     {
+        $this->checkAuthorization('recommendation_detail_edit');
+
         $recommendationDetail->load('revenueHeaders', 'recommendationDocuments', 'recommendationFormFields.recommendationFormFields');
         $revenueHeaders = RevenueHeader::all();
         $recommendationCategories = RecommendationCategory::all();
@@ -78,6 +88,8 @@ class RecommendationDetailController extends Controller
 
     public function update(UpdateRecommendationDetailRequest $request, RecommendationDetail $recommendationDetail)
     {
+        $this->checkAuthorization('recommendation_detail_edit');
+
         $validatedData = $request->validated();
         RecommendationFormField::whereNotIn('id', collect($validatedData['form'])->pluck('id')->toArray())
                ->where('recommendation_detail_id', $recommendationDetail->id)
@@ -129,6 +141,8 @@ class RecommendationDetailController extends Controller
 
     public function destroy(RecommendationDetail $recommendationDetail)
     {
+        $this->checkAuthorization('recommendation_detail_delete');
+
         $recommendationDetail->delete();
         toast('सिफारिस विवरण सफलतापूर्वक मेटियो', 'success');
         return back();
