@@ -13,7 +13,7 @@ class SipharisSettingController extends Controller
 {
     public function index()
     {
-        $this->checkAuthorization('recommendation_setting_access');
+
 
         $sipharisSetting = SipharisSetting::first();
         $users = User::get();
@@ -23,8 +23,6 @@ class SipharisSettingController extends Controller
 
     public function store(StoreSipharisSettingRequest $request)
     {
-        $this->checkAuthorization('recommendation_setting_create');
-
         DB::table('sipharis_settings')->truncate();
         $wardNo = auth()->user()->ward_no ?? '';
         SipharisSetting::create($request->validated() + ['ward' => $wardNo]);
