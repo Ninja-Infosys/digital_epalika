@@ -79,7 +79,8 @@ class RecommendationCreateController extends Controller
             });
         }
 
-        $recommendationCreates = $recommendation->paginate(10);
+        $recommendationCreates = $recommendation->latest()->paginate(10);
+
 
         return view('recommendation::admin.recommendation.recommendation-create.index', compact('recommendationCreates'));
     }

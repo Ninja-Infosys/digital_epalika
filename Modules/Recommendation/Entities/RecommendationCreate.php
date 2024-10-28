@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
@@ -40,6 +41,8 @@ class RecommendationCreate extends Model
         'file',
         'mobile_user_id',
         'personal_detail_id',
+        'reciver_name',
+        'sifaris_fee',
         'status',
     ];
 
@@ -77,6 +80,8 @@ class RecommendationCreate extends Model
         return $this->belongsTo(MobileUser::class, 'mobile_user_id');
     }
 
+
+
     public function personalDetail(): BelongsTo
     {
         return $this->belongsTo(PersonalDetail::class);
@@ -113,7 +118,7 @@ class RecommendationCreate extends Model
         $replaceableList->put('[@muncipal]', (string) officeSetting()->localBody?->local_body);
         $replaceableList->put('[@letterHead]', $this->getRecommendationHeader());
 
-        $replaceableList->put('[@ward_no]', (string) officeSetting()->ward_no);
+        $replaceableList->put('[@ward_no]', (string) get_nepali_number(Auth::user()->ward_no));
         $replaceableList->put('[@today_date_bs]', (string) get_nepali_number($this->get_today_nepali_date()));
         $replaceableList->put('[@today_date_ad]', (string) today()->toDateString());
         $replaceableList->put(

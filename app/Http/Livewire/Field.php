@@ -30,6 +30,7 @@ class Field extends Component
     public $formTypes = [];
 
     public $data = [];
+    public $isSelf = false;
 
     // public function mount($categorySubCategory = null): void
     // {
