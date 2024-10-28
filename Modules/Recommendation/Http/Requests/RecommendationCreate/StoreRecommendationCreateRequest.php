@@ -3,6 +3,7 @@
 namespace Modules\Recommendation\Http\Requests\RecommendationCreate;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 use Modules\Recommendation\Enums\RecommendationStatusEnum;
@@ -11,7 +12,8 @@ class StoreRecommendationCreateRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows(' recommendation_access');
+
     }
 
     public function rules(): array
