@@ -44,7 +44,7 @@
             </li>
             @endcan
 
-            @can('recommendation_template_access')
+            @can('recommendationCategory_access')
             <li class="{{request()->is('admin/recommendation/setting/recommendationCategory*') ? 'active' : ''}}">
                 <a href="{{route('admin.recommendation.setting.recommendationCategory.index')}}">
                     <span>सिफारिश वर्ग</span>
