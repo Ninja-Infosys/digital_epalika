@@ -70,7 +70,9 @@
             @can('recommendation_signature_access')
             <li class="{{request()->is('admin/recommendation/setting/recommendationSignature*') ? 'active' : ''}}">
                 <a href="{{route('admin.recommendation.setting.recommendationSignature.index')}}">
+                    
                     <span>हस्ताक्षर</span>
+
                 </a>
             </li>
             @endcan
