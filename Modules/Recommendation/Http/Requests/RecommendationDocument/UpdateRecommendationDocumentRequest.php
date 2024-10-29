@@ -3,6 +3,7 @@
 namespace Modules\Recommendation\Http\Requests\RecommendationDocument;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 use Modules\Recommendation\Entities\RecommendationDocument;
 
@@ -10,7 +11,7 @@ class UpdateRecommendationDocumentRequest extends FormRequest
 {
     public function authorize():bool
     {
-        return true;
+        return Gate::allows('recommendation_detail_edit');
     }
 
     public function rules():array

@@ -60,13 +60,13 @@
             </li>
             @endcan
 
-            @can('recommendation_detail_access')
+
             <li class="{{request()->is('admin/recommendation/setting/recommendationDetail*') ? 'active' : ''}}">
                 <a href="{{route('admin.recommendation.setting.recommendationDetail.index')}}">
                     <span>सिफारिस विवरण</span>
                 </a>
             </li>
-            @endcan
+
             @can('recommendation_signature_access')
             <li class="{{request()->is('admin/recommendation/setting/recommendationSignature*') ? 'active' : ''}}">
                 <a href="{{route('admin.recommendation.setting.recommendationSignature.index')}}">
