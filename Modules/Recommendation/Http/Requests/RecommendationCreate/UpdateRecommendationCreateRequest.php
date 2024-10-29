@@ -12,7 +12,7 @@ class UpdateRecommendationCreateRequest extends FormRequest
 {
     public function authorize():bool
     {
-        return Gate::allows(' recommendation_edit');
+        return Gate::allows('recommendation_edit');
     }
 
     public function rules():array
