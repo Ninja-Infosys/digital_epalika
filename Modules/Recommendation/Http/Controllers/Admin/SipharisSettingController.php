@@ -23,7 +23,7 @@ class SipharisSettingController extends Controller
 
     public function store(StoreSipharisSettingRequest $request)
     {
-        $this->checkAuthorization('recommendation_signature_edit');
+        $this->checkAuthorization('recommendation_signature_access');
         DB::table('sipharis_settings')->truncate();
         $wardNo = auth()->user()->ward_no ?? '';
         SipharisSetting::create($request->validated() + ['ward' => $wardNo]);
