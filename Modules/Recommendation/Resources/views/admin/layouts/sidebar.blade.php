@@ -77,7 +77,7 @@
             </li>
             @endcan
 
-            @can('recommendation_signature_access')
+            @can('recommendationTemplate_access')
             <li class="{{request()->is('admin/recommendation/setting/sipharisSetting*') ? 'active' : ''}}">
                 <a href="{{route('admin.recommendation.setting.recommendationSetting.index')}}">
                     <span>सिफारिस सेटिंग </span>
