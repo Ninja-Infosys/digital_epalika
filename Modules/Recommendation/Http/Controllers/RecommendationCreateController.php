@@ -254,11 +254,12 @@ class RecommendationCreateController extends Controller
         $this->checkAuthorization('recommendation_delete');
 
 
-        if ($recommendationCreate->approved_status !== 1) {
-            toast('सक्रिय भएको सिफारिस प्रकार मेटाउन मनाहि छ', 'error');
-
+        if (auth()->id() !== 1) {
+            toast('Only the super admin can delete recommendations', 'error');
             return back();
         }
+
+
         $recommendationCreate->delete();
         toast('सिफारिस सफलतापूर्वक मेटियो', 'success');
 
