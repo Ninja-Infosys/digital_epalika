@@ -18,7 +18,7 @@ class RecommendationDetailController extends Controller
 {
     public function index()
     {
-        $this->checkAuthorization('recommendation_detail_access');
+        $this->checkAuthorization('recommendationTemplate_access');
 
         $userWardNo = auth()->user()->ward_no;
 
@@ -37,7 +37,7 @@ class RecommendationDetailController extends Controller
 
     public function create()
     {
-        $this->checkAuthorization('recommendation_detail_create');
+        $this->checkAuthorization('recommendationTemplate_create');
 
         $recommendationCategories = RecommendationCategory::all();
         $revenueHeaders = RevenueHeader::all();
@@ -47,7 +47,7 @@ class RecommendationDetailController extends Controller
 
     public function store(StoreRecommendationDetailRequest $request)
     {
-        $this->checkAuthorization('recommendation_detail_create');
+        $this->checkAuthorization('recommendationTemplate_create');
 
         DB::transaction(function () use ($request) {
             $recommendationDetail = RecommendationDetail::create($request->validated());
@@ -69,7 +69,7 @@ class RecommendationDetailController extends Controller
 
     public function show(RecommendationDetail $recommendationDetail)
     {
-        $this->checkAuthorization('recommendation_detail_access');
+        $this->checkAuthorization('recommendationTemplate_access');
 
         $recommendationDetail->load('recommendationFormFields' );
         return view('recommendation::admin.recommendation.setting.recommendation-detail.show', compact('recommendationDetail'));
@@ -77,7 +77,7 @@ class RecommendationDetailController extends Controller
 
     public function edit(RecommendationDetail $recommendationDetail)
     {
-        $this->checkAuthorization('recommendation_detail_edit');
+        $this->checkAuthorization('recommendationTemplate_edit');
 
         $recommendationDetail->load('revenueHeaders', 'recommendationDocuments', 'recommendationFormFields.recommendationFormFields');
         $revenueHeaders = RevenueHeader::all();
@@ -88,7 +88,7 @@ class RecommendationDetailController extends Controller
 
     public function update(UpdateRecommendationDetailRequest $request, RecommendationDetail $recommendationDetail)
     {
-        $this->checkAuthorization('recommendation_detail_edit');
+        $this->checkAuthorization('recommendationTemplate_edit');
 
         $validatedData = $request->validated();
         RecommendationFormField::whereNotIn('id', collect($validatedData['form'])->pluck('id')->toArray())
@@ -141,7 +141,7 @@ class RecommendationDetailController extends Controller
 
     public function destroy(RecommendationDetail $recommendationDetail)
     {
-        $this->checkAuthorization('recommendation_detail_delete');
+        $this->checkAuthorization('recommendationTemplate_delete');
 
         $recommendationDetail->delete();
         toast('सिफारिस विवरण सफलतापूर्वक मेटियो', 'success');
