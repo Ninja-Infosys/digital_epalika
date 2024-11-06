@@ -189,9 +189,9 @@
                         <div class="row">
                             <div class="col-md-12 d-flex justify-content-between">
                                 @if (
-                                    $recommendationCreate->approved_status->value == 1 &&
+                                    $recommendationCreate?->approved_status?->value == 1 &&
                                         auth()->check() &&
-                                        (auth()->user()->id == $recommendationSetting->checker_id || auth()->user()->role_id == 1))
+                                        (auth()->user()->id == $recommendationSetting?->checker_id || auth()->user()->role_id == 1))
                                     @if ($recommendationCreate->sifaris_fee !== 'no_fee')
                                         <form method="POST"
                                             action="{{ route('admin.recommendation.recommendationCreate.updateStatus', [$recommendationCreate, Modules\Recommendation\Enums\RecommendationStatusEnum::SENT_TO_REVENUE]) }}">

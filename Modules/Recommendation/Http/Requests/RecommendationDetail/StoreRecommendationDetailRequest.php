@@ -12,7 +12,7 @@ class StoreRecommendationDetailRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Gate::allows('recommendation_detail_access');
+        return Gate::allows('recommendationTemplate_access');
     }
 
     public function rules(): array
