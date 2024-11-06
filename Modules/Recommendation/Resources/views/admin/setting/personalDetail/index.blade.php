@@ -80,6 +80,8 @@
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                             @endcan
+
+                                            @can('personalDetail_delete')
                                             <form
                                                 action="{{ route('admin.recommendation.setting.personalDetail.destroy', $MobileUser) }}"
                                                 method="post">
@@ -99,6 +101,7 @@
                                                     </button>
                                                 @endcan
                                             </form>
+                                            @endcan
                                         </td>
                                     </tr>
                                     <tr class="empty">

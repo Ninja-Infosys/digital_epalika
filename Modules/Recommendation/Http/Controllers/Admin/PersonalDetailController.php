@@ -109,11 +109,12 @@ class PersonalDetailController extends Controller
         return back();
     }
 
-    public function destroy(PersonalDetail $personalDetail)
+    public function destroy(MobileUser $personalDetail)
     {
         $this->checkAuthorization('personalDetail_delete');
         $personalDetail->delete();
         toast('व्यक्तिगत विवरण सफलतापूर्वक मेटियो', 'success');
         return back();
+
     }
 }
