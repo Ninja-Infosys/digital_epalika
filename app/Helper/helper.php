@@ -9,6 +9,7 @@ use App\Models\OfficeHeader;
 use App\Models\RevenueSetting;
 use App\Models\Settings\LetterHead;
 use App\Models\Settings\OfficeSetting;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
@@ -607,8 +608,20 @@ if (! function_exists('generateRandomRGBAColor')) {
         }
     }
 
+    if (!function_exists('adToBs')) {
+        function adToBs($date)
+        {
+            // Create an instance of a class that uses the NepaliDateConverter trait
+            $converter = new class {
+                use NepaliDateConverter;
+            };
 
- 
+            // Convert the date using the trait's method
+            return $converter->get_today_nepali_date($date);
+        }
+    }
+
+
 
 
 
