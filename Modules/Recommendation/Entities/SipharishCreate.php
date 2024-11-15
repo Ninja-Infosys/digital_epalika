@@ -114,6 +114,7 @@ class SipharishCreate extends Model
         $replaceableList->put('[@approver_signature]', '<img src="' . ($sipharisSetting->approver?->signature_photo_url ?? '') . '" width="100" height="100" alt="Signature Photo">');
         $replaceableList->put('[@checker_signature]', '<img src="' . ($sipharisSetting->checker?->signature_photo_url ?? '') . '" width="100" height="100" alt="Signature Photo">');
 
+        $replaceableList->put('[@created_at_bs]', get_nepali_number($this->adToBsDate($this->created_at->format('Y-m-d'))));
 
         return Str::replace($replaceableList->keys(), $replaceableList->values(), $content ?? '');
     }
