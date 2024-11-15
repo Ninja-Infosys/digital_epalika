@@ -93,8 +93,9 @@ class LandInvoiceController extends Controller
         }], 'total');
 
         $invoice->loadSum('invoiceParticulars', 'fine');
+        $nepaliDate = get_nepali_number(adToBs($invoice->created_at->format('Y-m-d')));
 
-        return view('revenue::admin.invoice.show', compact('invoice'));
+        return view('revenue::admin.invoice.show', compact('invoice','nepaliDate'));
     }
 
     public function edit(Invoice $invoice)
