@@ -616,10 +616,14 @@ if (! function_exists('generateRandomRGBAColor')) {
                 use NepaliDateConverter;
             };
 
-            // Convert the date using the trait's method
-            return $converter->get_today_nepali_date($date);
+            $dateParts = explode('-', $date);
+
+            $nepaliDate = $converter->get_nepali_date($dateParts[0], $dateParts[1], $dateParts[2]);
+
+            return "{$nepaliDate['y']}-{$nepaliDate['m']}-{$nepaliDate['d']}";
         }
     }
+
 
 
 
