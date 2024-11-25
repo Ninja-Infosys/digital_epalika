@@ -208,7 +208,7 @@
                                         <div class="card">
                                             <div class="card-header d-flex justify-content-around">
                                                 <p>नागरिकता (आगाडी)</p>
-                                                <a href="{{route('admin.file-url-download', ['file_url'=>$organization->userDetail->citizenship_front]??'')}}"
+                                                <a href="{{route('admin.file-urOl-download', ['file_url'=>$organization->userDetail->citizenship_front]??'')}}"
                                                    class="btn btn-xs ">
                                                     <i class="fa fa-download"></i>
                                                 </a>

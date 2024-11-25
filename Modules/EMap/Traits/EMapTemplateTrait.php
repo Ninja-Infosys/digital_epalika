@@ -212,6 +212,7 @@ trait EMapTemplateTrait
                 'निर्माण कार्यको किसिम' => '[@building_category]',
                 'भवन निर्माण भएको वर्ष' => '[@house_built_year]',
                 'भवनको कोठा संख्या' => '[@room]',
+                'भवनको उचाई' => '[@height]',
                 'तल्ला संख्या' => '[@current_storey]',
                 'भवनको प्लिनथको क्षेत्रफल' => '[@plinth_area]',
                 'जग्गाको साविक पालिका' => '[@former_local_body]',
@@ -265,6 +266,7 @@ trait EMapTemplateTrait
             'title' => 'भवन अभिलेखिकरण संधियारको विवरण',
             'data' => [
                 'संधियारको विवरण' => '[@buildingNeighbours]',
+                'चारकिल्ला विवरण' => '[@buildingSandhiyars]',
                 'तल्लाको विवरण' => '[@buildingStoreyDetails]',
                 'घरबाटोको विवरण'=> '[@buildingDescriptions]',
 
@@ -320,6 +322,7 @@ trait EMapTemplateTrait
             $this->getSupervisorDetailsReplacement(),
             $this->getContractorDetailsReplacement(),
             $this->getBuildingDocumentationReplacement(),
+            $this->getBuildingSandhiyarsReplacement(),
 
 
             $replace
@@ -578,6 +581,7 @@ trait EMapTemplateTrait
             '[@former_ward_no]' => $this->get_nepali_number($this->former_ward_no) ?? '',
             '[@land_ward_no]' => $this->get_nepali_number($this->land_ward_no) ?? '',
             '[@plot_no]' => $this->get_nepali_number($this->plot_no) ?? '',
+            '[@height]' => $this->get_nepali_number($this->height) ?? '',
             '[@land_area]' => $this->get_nepali_number($this->land_area) ?? '',
             '[@land_tole]' => $this->get_nepali_number($this->land_tole) ?? '',
             '[@consultancy_name]' => get_nepali_number($this->consultancy_name) ?? '',
@@ -602,6 +606,14 @@ trait EMapTemplateTrait
     {
         return [
             '[@buildingNeighbours]' => (string) View::make('emap::inc.building_neighbours', [
+                'neighbours' => $this->neighbours,
+            ])
+        ];
+    }
+    private function getBuildingSandhiyarsReplacement(): array
+    {
+        return [
+            '[@buildingSandhiyars]' => (string) View::make('emap::inc.building_sandhiyars', [
                 'neighbours' => $this->neighbours,
             ])
         ];

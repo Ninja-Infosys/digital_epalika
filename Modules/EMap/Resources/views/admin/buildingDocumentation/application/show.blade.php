@@ -747,6 +747,7 @@
                                 <form
                                     action="{{ route('emap.admin.buildingDocumentation.updateDocumentStatus', $buildingDocumentation) }}"
                                     method="post">
+                                    
                                     @csrf
                                     @method('put')
                                     <div class="input-group d-flex align-items-center">
