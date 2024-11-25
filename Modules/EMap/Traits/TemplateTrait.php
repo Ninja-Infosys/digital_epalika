@@ -231,6 +231,7 @@ trait TemplateTrait
             get_nepali_number($buildingDocumentation?->plot_no ?? ''),
             get_nepali_number($buildingDocumentation?->land_area ?? ''),
             get_nepali_number($buildingDocumentation?->land_tole ?? ''),
+            get_nepali_number($buildingDocumentation?->height ?? ''),
             get_nepali_number($buildingDocumentation?->organization?->name ?? ''),
             get_nepali_number($buildingDocumentation?->organization?->emapMuncipalRegistrations?->palika_reg_no ?? ''),
             get_nepali_number($buildingDocumentation?->consultant_engineer_name ?? ''),
@@ -244,6 +245,9 @@ trait TemplateTrait
             get_nepali_number($buildingDocumentation?->applicant_age ?? ''),
 
             (string) View::make('emap::inc.building_neighbours', [
+                'neighbours' => $buildingDocumentation?->neighbours,
+            ]),
+            (string) View::make('emap::inc.building_sandhiyars', [
                 'neighbours' => $buildingDocumentation?->neighbours,
             ]),
 
@@ -388,7 +392,6 @@ trait TemplateTrait
 
             //BuildingDetails
             '[@buildingDetails]',
-
             //DesignerDetails
             '[@designerDetail.name]',
             '[@designerDetail.phone]',
@@ -455,6 +458,7 @@ trait TemplateTrait
             '[@former_ward_no]',
             '[@land_ward_no]',
             '[@plot_no]',
+            '[@height]',
             '[@land_area]',
             '[@land_tole]',
             '[@consultancy_name]',
@@ -470,6 +474,7 @@ trait TemplateTrait
             '[@applicant_age]',
 
           '[@buildingNeighbours]',
+          '[@buildingSandhiyars]',
           '[@buildingStoreyDetails]',
           '[@buildingDescriptions]',
             '[@buildingContractorDetail.name]',
