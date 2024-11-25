@@ -101,7 +101,7 @@ class RegistrationForm extends Component
 
     private function assignBusinessDetailData()
     {
-        foreach (\Arr::except($this->form, ['photo', 'partners','files', 'registeredBusinesses', 'rent_agreement', 'land_ownership_certificate', 'ward_recommendation', 'embassy_document', 'registration_document', 'license', 'tax_document']) as $key => $data) {
+        foreach (\Arr::except($this->form, ['photo', 'partners', 'files', 'registeredBusinesses', 'rent_agreement', 'land_ownership_certificate', 'ward_recommendation', 'embassy_document', 'registration_document', 'license', 'tax_document']) as $key => $data) {
             $this->form[$key] = $this->businessDetail[$key];
         }
 
@@ -300,9 +300,9 @@ class RegistrationForm extends Component
         if (!empty($this->businessDetail)) {
             DB::transaction(function () {
                 $this->businessDetail->update(\Arr::except($this->form, ['working_capital', 'fixed_capital']) + [
-                        'working_capital' => is_null($this->form['working_capital']) ? 0 : $this->form['working_capital'],
-                        'fixed_capital' => is_null($this->form['fixed_capital']) ? 0 : $this->form['fixed_capital']
-                    ]);
+                    'working_capital' => is_null($this->form['working_capital']) ? 0 : $this->form['working_capital'],
+                    'fixed_capital' => is_null($this->form['fixed_capital']) ? 0 : $this->form['fixed_capital']
+                ]);
                 $this->saveBusinessDetailsData($this->businessDetail);
             });
             $this->dispatchBrowserEvent('alert_message', [
@@ -314,10 +314,10 @@ class RegistrationForm extends Component
 
         $businessDetail = DB::transaction(function () {
             $businessDetail = BusinessDetail::create(\Arr::except($this->form, ['working_capital', 'fixed_capital']) + [
-                    'submission_no' => time(),
-                    'working_capital' => is_null($this->form['working_capital']) ? 0 : $this->form['working_capital'],
-                    'fixed_capital' => is_null($this->form['fixed_capital']) ? 0 : $this->form['fixed_capital']
-                ]);
+                'submission_no' => time(),
+                'working_capital' => is_null($this->form['working_capital']) ? 0 : $this->form['working_capital'],
+                'fixed_capital' => is_null($this->form['fixed_capital']) ? 0 : $this->form['fixed_capital']
+            ]);
             $this->saveBusinessDetailsData($businessDetail);
             return $businessDetail;
         });
@@ -330,12 +330,35 @@ class RegistrationForm extends Component
         return redirect()->route('businessRegistration.detail.print', $businessDetail->id);
     }
 
+    // private function saveBusinessDetailsData($businessDetail)
+    // {
+    //     foreach ($this->form['partners'] as $partner) {
+    //         $partner = new Partner($partner);
+    //         $businessDetail->partners()->save($partner);
+    //     }
+    //     foreach ($this->form['other_document'] ?? [] as $document) {
+    //         $businessDetail->files()->create([
+    //             'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
+    //             'extension' => $document->getClientOriginalExtension(),
+    //             'file' => $document->store('otherDocument/', 'public')
+    //         ]);
+    //     }
+    // }
     private function saveBusinessDetailsData($businessDetail)
     {
-        foreach ($this->form['partners'] as $partner) {
-            $partner = new Partner($partner);
-            $businessDetail->partners()->save($partner);
+
+        foreach ($this->form['partners'] as $partnerData) {
+            if (isset($partnerData['id'])) {
+                $partner = Partner::find($partnerData['id']);
+                if ($partner) {
+                    $partner->update($partnerData);
+                }
+            } else {
+                $partner = new Partner($partnerData);
+                $businessDetail->partners()->save($partner);
+            }
         }
+
         foreach ($this->form['other_document'] ?? [] as $document) {
             $businessDetail->files()->create([
                 'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
@@ -344,6 +367,7 @@ class RegistrationForm extends Component
             ]);
         }
     }
+
 
     public function partnerArrayIncrement(): void
     {
