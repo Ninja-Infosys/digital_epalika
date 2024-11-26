@@ -86,8 +86,15 @@
                             </div>
                             <div class="d-flex justify-content-between mt-5">
                                 <p class="dashed">करवालाको हस्ताक्षर</p>
-                                <p class="dashed">स्वीकृत गर्नेको हस्ताक्षर</p>
+                                <p class="dashed text-center">
+                                    स्वीकृत गर्नेको हस्ताक्षर
+                                    <br>
+                                    <span style="display: inline-block; margin-top: 5px;">({{ $businessDetail->approver_name }})</span>
+                                </p>
                             </div>
+
+
+
                             <div class="mt-4">
                                 <p class="fw-bold">नोट:</p>
                                 <p>१. प्रत्येक आर्थिक वर्षको असार मसान्त भित्र नविकरण गराई सक्नु पर्नेछ । अन्यथा
