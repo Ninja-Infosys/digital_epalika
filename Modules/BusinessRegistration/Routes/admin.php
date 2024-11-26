@@ -45,6 +45,7 @@ Route::post('businessRegistration/{businessDetail}/{type}/editTemplate', [Busine
 Route::post('businessRegistration/{businessDetail}/customData', [BusinessRegistrationController::class, 'customData'])->name('businessRegistration.store.custom');
 Route::get('businessRegistration/{businessDetail}/{templateTypeEnum}/addData', [BusinessRegistrationController::class, 'addData'])->name('add-data.template');
 Route::get('businessDetail/{businessDetail}/print', [BusinessRegistrationController::class, 'print'])->name('businessRegistration.print');
+Route::post('businessDetail/{businessDetail}/approverName', [BusinessRegistrationController::class, 'approverName'])->name('businessRegistration.approverName');
 
 Route::resource('businessDetail.businessRenew', BusinessRenewController::class)->names('businessRegistration.businessRenew');
 Route::prefix('report')->as('report.')->controller(BusinessRegistrationReportController::class)->group(function () {

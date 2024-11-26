@@ -95,7 +95,7 @@
                             </button>
                         </div>
                         <a href="{{ route('admin.businessRegistration.registration.businessRegistration.create') }}"
-                           class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                            class="btn btn-sm btn-outline-primary waves-effect waves-light">
                             <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
 
                     </div>
@@ -165,7 +165,7 @@
                                                     <i class="fas fa-undo"></i>
                                                 </a>
                                             @endcan
-                                            @if (!is_null($businessDetail->registration_no))
+                                            {{-- @if (!is_null($businessDetail->registration_no))
                                                 @can('businessRegistration_access')
                                                     <a data-bs-type="edit"
                                                         href="{{ route('admin.businessRegistration.businessRegistration.print', $businessDetail) }}"
@@ -173,7 +173,61 @@
                                                         <i class="fa fa-print"></i>
                                                     </a>
                                                 @endcan
+                                            @endif --}}
+
+                                            @if (!is_null($businessDetail->registration_no))
+                                                @if (is_null($businessDetail->approver_name))
+                                                    <!-- Button to trigger popup -->
+                                                    <button type="button" class="btn btn-xs btn-outline-primary"
+                                                        data-bs-toggle="modal" data-bs-target="#approverModal">
+                                                        <i class="fa fa-print"></i>
+                                                    </button>
+
+                                                    <!-- Modal Popup -->
+                                                    <div class="modal fade" id="approverModal" tabindex="-1"
+                                                        aria-labelledby="approverModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content" style="height:20rem; widht:50rem;">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="approverModalLabel">Enter
+                                                                        Approver Name</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="Close"></button>
+                                                                </div>
+                                                                <form method="POST"
+                                                                    action="{{ route('admin.businessRegistration.businessRegistration.approverName', $businessDetail) }}">
+                                                                    @csrf
+                                                                    <div class="modal-body">
+                                                                        <div class="mb-3">
+                                                                            <label for="approver_name"
+                                                                                class="form-label">Approver Name</label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="approver_name" name="approver_name"
+                                                                                required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Close</button>
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary">Save</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    @can('businessRegistration_access')
+                                                        <a data-bs-type="edit"
+                                                            href="{{ route('admin.businessRegistration.businessRegistration.print', $businessDetail) }}"
+                                                            title="प्रिन्ट गर्नुहोस" class="btn btn-xs btn-outline-warning">
+                                                            <i class="fa fa-print"></i>
+                                                        </a>
+                                                    @endcan
+                                                @endif
                                             @endif
+
                                         </td>
                                     </tr>
                                     <tr class="empty">
