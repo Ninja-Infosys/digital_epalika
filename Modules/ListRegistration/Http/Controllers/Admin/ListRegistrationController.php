@@ -3,6 +3,7 @@
 namespace Modules\ListRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\OfficeHeader;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class ListRegistrationController extends Controller
         $this->checkAuthorization('listRegistration_access');
 
         $listRegistrations = ListRegistration::where(function (Builder $q) {
-            if (!is_null(request('search'))) {
+            if (! is_null(request('search'))) {
                 $q->whereLike(['name'], request('search'));
             }
         })
@@ -31,7 +32,7 @@ class ListRegistrationController extends Controller
     public function create()
     {
         $this->checkAuthorization('listRegistration_create');
-        $registration_no = 'R-' . Str::padLeft(DB::table('list_registrations')->max('id') + 1, 2, 0);
+        $registration_no = 'R-'.Str::padLeft(DB::table('list_registrations')->max('id') + 1, 2, 0);
 
         return view('listregistration::admin.list_registration.create', compact('registration_no'));
     }
@@ -42,10 +43,10 @@ class ListRegistrationController extends Controller
 
         DB::transaction(function () use ($request) {
             $listRegistration = ListRegistration::create($request->validated() + [
-                    'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id
-                ]);
+                'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
+            ]);
 
-            if (!empty($request->validated()['files'])) {
+            if (! empty($request->validated()['files'])) {
                 $this->uploadDocuments($request, $listRegistration);
             }
         });
@@ -92,7 +93,7 @@ class ListRegistrationController extends Controller
 
             $listRegistration->update($request->validated());
 
-            if (!empty($request->validated()['files'])) {
+            if (! empty($request->validated()['files'])) {
                 $this->uploadDocuments($request, $listRegistration);
             }
         });
@@ -137,7 +138,7 @@ class ListRegistrationController extends Controller
             $listRegistration->files()->create([
                 'file_name' => $file['file_name'] ?? pathinfo($file['file']->getClientOriginalName(), PATHINFO_FILENAME),
                 'extension' => $file['file']->getClientOriginalExtension(),
-                'file' => $file['file']->store('list_registration/' . Str::slug($listRegistration->main_person, '_') . '/files', 'public'),
+                'file' => $file['file']->store('list_registration/'.Str::slug($listRegistration->main_person, '_').'/files', 'public'),
             ]);
         }
     }
@@ -150,11 +151,21 @@ class ListRegistrationController extends Controller
             $this->deleteFile($file);
         }
         $data = $request->validate([
-            'file' => 'required |mimes:png,jpg,jpeg,pdf'
+            'file' => 'required |mimes:png,jpg,jpeg,pdf',
         ]);
 
         $listRegistration->update($data);
         toast('फाईल सफलतापूर्वक थपियो', 'success');
+
         return back();
+    }
+
+    public function print(ListRegistration $listRegistration)
+    {
+//        $officeHeaders = OfficeHeader::get();
+
+        $listRegistration->load('files');
+
+        return view('listregistration::admin.list_registration..print', compact( 'listRegistration'));
     }
 }

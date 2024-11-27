@@ -101,7 +101,12 @@
                                     </a>
                                     @endcan
                                     @include('listregistration::admin.list_registration.inc.file')
-
+                                        @if($listRegistration->file) <!-- Check if a file is uploaded -->
+                                        <a href="{{route('admin.listRegistrations.listRegistration.print', $listRegistration)}}"
+                                           class="btn btn-xs btn-outline-secondary" title="प्रिन्ट गर्नुहोस्">
+                                            <i class="fa fa-print"></i>
+                                        </a>
+                                        @endif
                                     @can('listRegistration_delete')
                                     <form
                                         action="{{route('admin.listRegistrations.listRegistration.destroy',$listRegistration)}}"

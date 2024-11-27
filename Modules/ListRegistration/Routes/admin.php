@@ -9,6 +9,7 @@ Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard')
 Route::get('dashboard/ajax', [DashboardController::class,'ajaxData'])->name('dashboard.ajax');
 Route::put('listRegistration/{listRegistration}/updateFile', [ListRegistrationController::class,'updateFile'])->name('listRegistration.updateFile');
 Route::resource('listRegistration', ListRegistrationController::class);
+Route::get('listRegistration/{listRegistration}/print', [ListRegistrationController::class, 'print'])->name('listRegistration.print');
 
 Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function () {
     Route::get('/', 'index')->name('index');
