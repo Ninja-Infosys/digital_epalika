@@ -175,17 +175,17 @@
                                     २. तपशिल कागजात अपलोड गर्नुहोस
                                 </strong>
                             </legend>
-                            <div class="row">
-                                <div class="col-md-4 mb-2">
-                                    <label for="application_photo" class="form-label">निबेदन/अनुसूची २ (क)</label>
-                                    <input type="file"
-                                           name="application_photo"
-                                           class="form-control @error('application_photo') is-invalid @enderror"
-                                           id="application_photo">
-                                    @error('application_photo')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
+{{--                            <div class="row">--}}
+{{--                                <div class="col-md-4 mb-2">--}}
+{{--                                    <label for="application_photo" class="form-label">निबेदन/अनुसूची २ (क)</label>--}}
+{{--                                    <input type="file"--}}
+{{--                                           name="application_photo"--}}
+{{--                                           class="form-control @error('application_photo') is-invalid @enderror"--}}
+{{--                                           id="application_photo">--}}
+{{--                                    @error('application_photo')--}}
+{{--                                    <div class="invalid-feedback">{{$message}}</div>--}}
+{{--                                    @enderror--}}
+{{--                                </div>--}}
                                 <div class="col-md-4 mb-2">
                                     <label for="registration_certificate" class="form-label">संस्था वा फार्म दर्ताको
                                         प्रमाण पत्र</label>
