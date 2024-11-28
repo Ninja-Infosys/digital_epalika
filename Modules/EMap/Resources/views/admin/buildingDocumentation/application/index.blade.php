@@ -111,8 +111,8 @@
 
 
         </div>
-        {{-- <div class="mt-2">
-            {{ $buildingDocumentations-->onEachSide(config('app.pagination_count'))->links() }}
-        </div> --}}
+        <div class="mt-2">
+            {{ $buildingDocumentations->onEachSide(config('app.pagination_count'))->links() }}
+        </div>
     </div>
 @endsection
