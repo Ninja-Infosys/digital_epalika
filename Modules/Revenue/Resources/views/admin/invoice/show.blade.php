@@ -84,8 +84,10 @@
                                     {{ $invoice->taxPayer->registration_no }}</p>
                                 <p class="d-inline ms-2"><strong>करदाताको नाम:</strong> {{ $invoice->name }}</p><br>
                                 <p class="d-inline"><strong>ठेगाना:</strong> {{ $invoice->address }}</p>
-                                <p class="d-inline ms-2"><strong>मिति:</strong> <x-ad-to-bs id="payment_date_customer"
-                                        :ad-date="$invoice->payment_date_ad"></x-ad-to-bs></p>
+                                <p class="d-inline ms-2"><strong>मिति:</strong> {{ $nepaliDate }}
+                                    {{-- <x-ad-to-bs id="payment_date_customer"
+                                        :ad-date="$invoice->payment_date_ad"></x-ad-to-bs> --}}
+                                    </p>
                             </div>
                             <div class="d-flex gap-2">
                                 <div class="col-8">
@@ -190,8 +192,10 @@
                                         {{ $invoice->taxPayer->registration_no }}</p>
                                     <p class="d-inline ms-2"><strong>करदाताको नाम:</strong> {{ $invoice->name }}</p><br>
                                     <p class="d-inline"><strong>ठेगाना:</strong> {{ $invoice->address }}</p>
-                                    <p class="d-inline ms-2"><strong>मिति:</strong> <x-ad-to-bs id="payment_date_office"
-                                            :ad-date="$invoice->payment_date_ad"></x-ad-to-bs></p>
+                                    <p class="d-inline ms-2"><strong>मिति:</strong> {{ $nepaliDate }}
+                                         {{-- <x-ad-to-bs id="payment_date_office"
+                                            :ad-date="$invoice->payment_date_ad"></x-ad-to-bs> --}}
+                                        </p>
                                 </div>
                                 <table class="table table-bordered table-sm">
                                     <thead>

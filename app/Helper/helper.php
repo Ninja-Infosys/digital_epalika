@@ -9,6 +9,7 @@ use App\Models\OfficeHeader;
 use App\Models\RevenueSetting;
 use App\Models\Settings\LetterHead;
 use App\Models\Settings\OfficeSetting;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
@@ -278,7 +279,7 @@ if (! function_exists('renderListData')) {
             if (is_array($value)) {
                 renderListData($value);
             } else {
-                echo '<td>'.$value.'</td>';
+                echo '<td>' . $value . '</td>';
             }
         }
     }
@@ -365,25 +366,25 @@ if (! function_exists('convertPathsToTree')) {
                 $childrenPaths = $parts->map(function ($parts) {
                     return array_slice($parts, 1);
                 })->filter();
-                $path = $parent.$key;
+                $path = $parent . $key;
                 $response = [
                     'label' => (string) $key,
                     'path' => $path,
                 ];
-                if ($isFile = File::isFile(public_path('storage/'.$path))) {
+                if ($isFile = File::isFile(public_path('storage/' . $path))) {
                     $response['isFile'] = $isFile;
                     $response['detail'] = [
-                        'size' => convert_to_highest_unit(File::size(public_path('storage/'.$path))),
-                        'icon' => getFileIconClass(File::mimeType(public_path('storage/'.$path))),
-                        'extension' => File::extension(public_path('storage/'.$path)),
-                        'name' => File::name(public_path('storage/'.$path)),
+                        'size' => convert_to_highest_unit(File::size(public_path('storage/' . $path))),
+                        'icon' => getFileIconClass(File::mimeType(public_path('storage/' . $path))),
+                        'extension' => File::extension(public_path('storage/' . $path)),
+                        'name' => File::name(public_path('storage/' . $path)),
                     ];
                 } else {
                     $response['isFile'] = false;
                     $response['children'] = convertPathsToTree(
                         $childrenPaths,
                         $separator,
-                        $path.$separator
+                        $path . $separator
                     );
                 }
 
@@ -397,13 +398,13 @@ if (! function_exists('convert_to_highest_unit')) {
     {
         $bytes = (int) $bytes;
         if ($bytes >= 1073741824) {
-            $bytes = number_format($bytes / 1073741824, 2).' GB';
+            $bytes = number_format($bytes / 1073741824, 2) . ' GB';
         } elseif ($bytes >= 1048576) {
-            $bytes = number_format($bytes / 1048576, 2).' MB';
+            $bytes = number_format($bytes / 1048576, 2) . ' MB';
         } elseif ($bytes >= 1024) {
-            $bytes = number_format($bytes / 1024, 2).' KB';
+            $bytes = number_format($bytes / 1024, 2) . ' KB';
         } elseif ($bytes >= 1) {
-            $bytes = $bytes.' bytes';
+            $bytes = $bytes . ' bytes';
         } else {
             $bytes = '0 bytes';
         }
@@ -606,4 +607,26 @@ if (! function_exists('generateRandomRGBAColor')) {
             return $matches[1] ?? null;
         }
     }
+
+    if (!function_exists('adToBs')) {
+        function adToBs($date)
+        {
+            // Create an instance of a class that uses the NepaliDateConverter trait
+            $converter = new class {
+                use NepaliDateConverter;
+            };
+
+            $dateParts = explode('-', $date);
+
+            $nepaliDate = $converter->get_nepali_date($dateParts[0], $dateParts[1], $dateParts[2]);
+
+            return "{$nepaliDate['y']}-{$nepaliDate['m']}-{$nepaliDate['d']}";
+        }
+    }
+
+
+
+
+
+
 }

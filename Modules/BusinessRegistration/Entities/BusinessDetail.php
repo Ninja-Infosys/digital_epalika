@@ -75,7 +75,8 @@ class BusinessDetail extends Model
         'taxpayer_number',
         'amount',
         'other_file',
-        'mobile_user_id'
+        'mobile_user_id',
+        'approver_name',
     ];
 
     protected $dates = [

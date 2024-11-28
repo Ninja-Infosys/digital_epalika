@@ -82,6 +82,7 @@ class RecommendationDetail extends Model
                 'अनुमोदनकर्ताको सहि' => '[@approver_signature]',
                 'परिक्षकको सहि' => '[@checker_signature]',
                'लेटरहेड' => '[@letterHead]',
+               'मिति' => '[@created_at_bs]',
             ],
         ]];
     }

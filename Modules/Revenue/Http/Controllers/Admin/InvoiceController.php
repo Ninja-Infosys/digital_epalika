@@ -89,9 +89,11 @@ class InvoiceController extends Controller
             $query->select(DB::raw('SUM((rate * quantity) + fine) as total'));
         }], 'total');
 
+        $nepaliDate = get_nepali_number(adToBs($invoice->created_at->format('Y-m-d')));
+
         $invoice->loadSum('invoiceParticulars', 'fine');
 
-        return view('revenue::admin.invoice.show', compact('invoice'));
+        return view('revenue::admin.invoice.show', compact('invoice','nepaliDate'));
     }
 
     public function edit(Invoice $invoice)

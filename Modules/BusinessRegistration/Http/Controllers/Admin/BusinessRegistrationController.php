@@ -180,4 +180,18 @@ class BusinessRegistrationController extends Controller
 
         return view('businessregistration::admin.businessRegistration.print', compact('businessDetail', 'officeHeaders'));
     }
+
+    public function approverName(Request $request, BusinessDetail $businessDetail)
+    {
+       $data= $request->validate([
+        'approver_name'=>'required',
+
+       ]);
+       $businessDetail->update($data);
+       toast('Approver Name Added  सफलतापूर्वक थपियो', 'success');
+
+        return back();
+    }
+
+
 }

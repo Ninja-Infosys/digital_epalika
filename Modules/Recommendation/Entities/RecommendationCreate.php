@@ -98,8 +98,8 @@ class RecommendationCreate extends Model
 
             if ($values->type == 'table') {
                 $value = (string) View::make('recommendation::admin.recommendation.recommendation-create.recommendation-table', compact('values'));
-            }elseif($values->type == 'image'){
-                $imagePath = asset('storage/'.$values->value);
+            } elseif ($values->type == 'image') {
+                $imagePath = asset('storage/' . $values->value);
                 $value = "<img src='$imagePath' style='width:100px;height:100px;object-fit: contain;'/>";
             } else {
                 $value = (string) $values->value;
@@ -129,6 +129,13 @@ class RecommendationCreate extends Model
             '[@approver_signature]',
             ($this->approved_status->value > 3 && $this->approved_status->value < 5) ? "<img src='{$recommendationSetting?->approver?->signature_photo_url}' width='100' height='100' alt='Signature Photo'>" : ''
         );
+
+
+        $replaceableList->put(
+            '[@created_at_bs]',
+            (string) get_nepali_number(($this->created_at ? $this->adToBsDate($this->created_at->format('Y-m-d')) : ''))
+        );
+
         $replaceableKeys = $replaceableList->keys()->toArray();
         $replaceableValues = $replaceableList->values()->toArray();
 
