@@ -74,7 +74,7 @@ class OrganizationLivewire extends Component
 
     private function assignOrganizationRegistrationData()
     {
-        foreach (\Arr::except($this->form, ['photo', 'committeeNames','files', 'ward_recommendation','statute']) as $key => $data) {
+        foreach (\Arr::except($this->form, ['photo', 'committeeNames', 'files', 'ward_recommendation', 'statute']) as $key => $data) {
             $this->form[$key] = $this->organizationRegistration[$key];
         }
 
@@ -231,8 +231,8 @@ class OrganizationLivewire extends Component
 
         $organizationRegistration = DB::transaction(function () {
             $organizationRegistration = OrganizationRegistration::create($this->form + [
-                    'submission_no' => time(),
-                ]);
+                'submission_no' => time(),
+            ]);
             $this->saveOrganizationRegistrationsData($organizationRegistration);
             return $organizationRegistration;
         });
@@ -248,8 +248,15 @@ class OrganizationLivewire extends Component
     private function saveOrganizationRegistrationsData($organizationRegistration): void
     {
         foreach ($this->form['committeeNames'] as $committeeName) {
-            $committee = new CommitteeName($committeeName);
-            $organizationRegistration->committeeNames()->save($committee);
+            if (isset($committeeName['id'])) {
+                $committee = CommitteeName::find($committeeName['id']);
+                if ($committee) {
+                    $committee->update($committeeName);
+                }
+            } else {
+                $committee = new CommitteeName($committeeName);
+                $organizationRegistration->committeeNames()->save($committee);
+            }
         }
 
         foreach ($this->form['other_document'] ?? [] as $document) {
@@ -275,11 +282,17 @@ class OrganizationLivewire extends Component
     public function committeeNameArrayDecrement($index): void
     {
         if (!empty($this->form['committeeNames'][$index]['id'])) {
-            Partner::find($this->form['committeeNames'][$index]['id'])->delete();
+            $partnerId = $this->form['committeeNames'][$index]['id'];
+            $partner = CommitteeName::find($partnerId);
+            // dd($partner, $partnerId);
+            if ($partner) {
+                $partner->forceDelete();
+            }
         }
         unset($this->form['committeeNames'][$index]);
         $this->form['committeeNames'] = array_values($this->form['committeeNames']);
     }
+
 
     public function render(): Factory|View|Application
     {
